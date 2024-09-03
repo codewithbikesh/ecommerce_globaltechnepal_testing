@@ -1,0 +1,1 @@
+This is a personal project. It includes dynamic website part and application where everything on the website can be changed through application module. 

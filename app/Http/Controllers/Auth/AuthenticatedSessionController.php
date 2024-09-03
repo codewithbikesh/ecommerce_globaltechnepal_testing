@@ -9,24 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\WebsiteData;
-use App\Services\ProductApiDataService;
 
 class AuthenticatedSessionController extends Controller
 {
     
-    protected $productApiDataService;
-
-    public function __construct(ProductApiDataService $productApiDataService)
-    {
-        $this->productApiDataService = $productApiDataService;
-    }
-
     /**
      * Display the login view.
      */
     public function create(): View
     {
-        $this->productApiDataService->fetchDataAndStore();
         $websitedata = WebsiteData::first();
         return view('auth.login', compact('websitedata'));
     }

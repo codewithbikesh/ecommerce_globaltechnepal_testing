@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\LoadProductsAPIController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     
     //Customers
     Route::get('/customers', [CustomerController::class, 'index'])->name('backend.customers.index');
+    
+    //Load Prodicts from OMS API
+    Route::get('/load-products-api', [LoadProductsAPIController::class, 'index'])->name('backend.loadproductsapi.index');
 
     //Inquiries
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('backend.inquiries.index');

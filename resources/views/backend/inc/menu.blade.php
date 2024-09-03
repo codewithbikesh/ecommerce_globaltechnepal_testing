@@ -42,6 +42,14 @@
         </li>
         
         <li>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.loadproductsapi.index') ? 'active' : '' }}" href="{{ route('backend.loadproductsapi.index') }}"><i class="fa fa-cog"></i>Load Products</a>
+          </li>
+  
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+        
+        <li>
         <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.setting') ? 'active' : '' }}" href="{{ route('backend.website.setting') }}"><i class="fa fa-cog"></i>Website Data</a>
         </li>
 

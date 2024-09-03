@@ -102,15 +102,19 @@
   </li>
   
   <li>
-        <a class="nav-link {{ request()->routeIs('backend.products.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.products.index') }}"><i class="fa fa-products"></i><span>Products</span></a>
+        <a class="nav-link {{ request()->routeIs('backend.products.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.products.index') }}"><i class="fa fa-list-alt"></i><span>Products</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i><span>Users</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.customers.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.customers.index') }}"><i class="fa fa-users"></i><span>Customers</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('backend.inquiries.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.inquiries.index') }}"><i class="fa fa-users"></i><span>Inquiries</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.inquiries.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.inquiries.index') }}"><i class="fa fa-question-circle"></i><span>Inquiries</span></a>
+  </li>
+  
+  <li>
+    <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i><span>System Users</span></a>
   </li>
 
 </ul>

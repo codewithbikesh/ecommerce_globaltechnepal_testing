@@ -16,17 +16,10 @@ return new class extends Migration
             $table->string('product_code')->nullable();
             $table->string('product_name');
             $table->string('category_id')->nullable();
-            $table->string('specification')->nullable();
             $table->decimal('actual_price', 8, 2);
             $table->decimal('sell_price', 8, 2);
             $table->decimal('stock_quantity', 8, 2);
-            $table->decimal('retailer_price', 8, 2);
-            $table->decimal('wholesaler_price', 8, 2);
-            $table->decimal('dealer_price', 8, 2);
-            $table->string('img_path');
             $table->binary('primary_image');
-            $table->binary('secondary_image');
-            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

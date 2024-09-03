@@ -1,6 +1,6 @@
 <footer id="footer" class="footer">
     <div class="copyright">
-    Copyright &copy; {{ now()->year }} <strong><a href="https://globaltech.com.np">Global Tech Nepal Pvt. Ltd.</a></strong>
+    Copyright &copy; {{ now()->year }} <strong><a href="https://globaltech.com.np" target="_blank">Global Tech Nepal Pvt. Ltd.</a></strong>
     </div>
 </footer><!-- End Footer -->
 

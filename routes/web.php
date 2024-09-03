@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ProfileController; 
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     
     //Products
     Route::get('/products', [ProductController::class, 'index'])->name('backend.products.index');
+    
+    //Customers
+    Route::get('/customers', [CustomerController::class, 'index'])->name('backend.customers.index');
 
     //Inquiries
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('backend.inquiries.index');

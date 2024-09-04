@@ -118,6 +118,18 @@
   </li>
   
   <li>
+    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+  </li>
+  
+  <li>
+    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-question-circle"></i><span>Faqs</span></a>
+  </li>
+  
+  <li>
+    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-star"></i><span>Reviews and Ratings</span></a>
+  </li>
+  
+  <li>
     <a class="nav-link {{ request()->routeIs('backend.inquiries.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.inquiries.index') }}"><i class="fa fa-question-circle"></i><span>Inquiries</span></a>
   </li>
   

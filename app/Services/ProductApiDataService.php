@@ -14,7 +14,7 @@ class ProductApiDataService
             $data = $response->json();
 
             // Check if 'data' key exists and is an array
-            if (!isset($data['data']) || !is_array($data['data'])) {
+            if ((!isset($data['data'])) || (!is_array($data['data']))) {
                 return;
             }
 
@@ -23,10 +23,10 @@ class ProductApiDataService
                 // Define default values if keys are missing or null
                 $productData = [
                     'product_code' => $item['PCode'] ?? null,
-                    'product_name' => $item['PDesc'] ?? null,
-                    'category_id' => $item['GroupName'] ?? null,
-                    'actual_price' => $item['BuyRate'] ?? null,
-                    'sell_price' => $item['SalesRate'] ?? null,
+                    'product_name' => $item['PDesc'] ?? ('Unknown'),
+                    'category_id' => $item['GroupName'] ?? ('Uncategorised'),
+                    'actual_price' => $item['BuyRate'] ?? 0,
+                    'sell_price' => $item['SalesRate'] ?? 0,
                     'stock_quantity' => $item['StockQty'] ?? null,
                     'primary_image' => $item['PImage'] ?? null
                 ];

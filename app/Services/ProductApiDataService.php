@@ -23,11 +23,11 @@ class ProductApiDataService
                 // Define default values if keys are missing or null
                 $productData = [
                     'product_code' => $item['PCode'] ?? null,
-                    'product_name' => trim($item['PDesc'] ?? 'Unknown'),
-                    'category_id' => trim($item['GroupName'] ?? 'Uncategorized'),
-                    'actual_price' => $item['BuyRate'] ?? 0,
-                    'sell_price' => $item['SalesRate'] ?? 0,
-                    'stock_quantity' => $item['StockQty'] !== null,
+                    'product_name' => $item['PDesc'] ?? null,
+                    'category_id' => $item['GroupName'] ?? null,
+                    'actual_price' => $item['BuyRate'] ?? null,
+                    'sell_price' => $item['SalesRate'] ?? null,
+                    'stock_quantity' => $item['StockQty'] ?? null,
                     'primary_image' => $item['PImage'] ?? null
                 ];
 

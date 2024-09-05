@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->country = $request->input('country');
-        $user->account_type = $user->getOriginal('account_type');
+        $user->account_type = $request->input('account_type');
 
         // Handle file uploads
         if ($request->hasFile('profile_photo_path')) {

@@ -9,7 +9,7 @@
 
           <div class="card mb-6">
             <div class="card-body">
-              <h5 class="card-title"><center><strong>Website Data</strong></center></h5>
+              <h5 class="card-title"><center><strong>E-commerce Website Data</strong></center></h5>
                     
                     
               <!-- Multi Columns Form -->

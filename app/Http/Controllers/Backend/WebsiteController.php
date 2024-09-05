@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WebsiteData;
+use App\Models\Carousel;
 
 class WebsiteController extends Controller
 {
@@ -17,6 +18,7 @@ class WebsiteController extends Controller
         }
         return view('backend.website.setting', compact('websitedata'));
     }
+
     
     public function update(Request $request, $id)
     {    
@@ -54,6 +56,53 @@ class WebsiteController extends Controller
         $websitedata->save();
 
         return redirect()->route('backend.website.setting')->with('success', 'Website Data updated successfully');
+    }
+
+    public function carousel_data()
+    {
+        $carouseldata = Carousel::first();
+        if (!$carouseldata) {
+            $carouseldata = new Carousel();
+        }
+        return view('backend.website.carousel', compact('carouseldata'));
+    }
+    
+    public function carousel_update(Request $request, $id)
+    {    
+        $carouseldata = Carousel::findOrFail($request->id);
+        
+        // Handle file uploads
+        if ($request->hasFile('carousel_image_1')) {
+            $image1 = $request->file('carousel_image_1');
+            $image1Name = time() . '_image1.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('storage/backend/carousel_images/'), $image1Name);
+            $carouseldata->image_1 = $image1Name;
+        } else {
+            $carouseldata->image_1 = $carouseldata->getOriginal('image_1');
+        }
+
+        if ($request->hasFile('carousel_image_2')) {
+            $image2 = $request->file('carousel_image_2');
+            $image2Name = time() . '_image2.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('storage/backend/carousel_images/'), $image2Name);
+            $carouseldata->image_2 = $image2Name;
+        } else {
+            $carouseldata->image_2 = $carouseldata->getOriginal('image_2');
+        }
+        
+        if ($request->hasFile('carousel_image_3')) {
+            $image3 = $request->file('carousel_image_3');
+            $image3Name = time() . '_image3.' . $image3->getClientOriginalExtension();
+            $image3->move(public_path('storage/backend/carousel_images/'), $image3Name);
+            $carouseldata->image_3 = $image3Name;
+        } else {
+            $carouseldata->image_3 = $carouseldata->getOriginal('image_3');
+        }
+
+        // Save the updated data
+        $carouseldata->save();
+
+        return redirect()->route('backend.website.carousel')->with('success', 'Carousel Images updated successfully');
     }
 
 }

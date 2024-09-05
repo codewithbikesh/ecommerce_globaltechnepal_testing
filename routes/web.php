@@ -9,6 +9,9 @@ use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\LoadProductsAPIController;
+use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\FAQSController;
+use App\Http\Controllers\Backend\ReviewRatingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +35,15 @@ Route::middleware('auth')->group(function () {
     //Customers
     Route::get('/customers', [CustomerController::class, 'index'])->name('backend.customers.index');
     
+    //FAQS
+    Route::get('/orders', [OrderController::class, 'index'])->name('backend.orders.index');
+    
+    //Reviews and Ratings
+    Route::get('/reviews-ratings', [ReviewRatingController::class, 'index'])->name('backend.ratings.index');
+    
+    //Orders
+    Route::get('/faqs', [FAQSController::class, 'index'])->name('backend.faqs.index');
+    
     //Load Prodicts from OMS API
     Route::get('/load-products-api', [LoadProductsAPIController::class, 'index'])->name('backend.loadproductsapi.index');
 
@@ -54,6 +66,8 @@ Route::middleware('auth')->group(function () {
     //Website Data
     Route::get('/website', [WebsiteController::class, 'data'])->name('backend.website.setting');
     Route::post('/website/{id}', [WebsiteController::class, 'update'])->name('backend.website.update');
+    Route::get('/website-carousel', [WebsiteController::class, 'carousel_data'])->name('backend.website.carousel');
+    Route::post('/website-carousel/{id}', [WebsiteController::class, 'carousel_update'])->name('backend.website.carousel_update');
 
 });
 

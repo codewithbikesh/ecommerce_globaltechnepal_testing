@@ -19,6 +19,6 @@ class LoadProductsAPIController extends Controller
     public function index()
     {
         $this->productApiDataService->fetchDataAndStore();
-        return view('backend.dashboard');
+        return redirect()->route('backend.products.index')->with('success', 'Products Fetched successfully');
     } 
 }

@@ -50,12 +50,21 @@
           </li>
         
         <li>
-        <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.setting') ? 'active' : '' }}" href="{{ route('backend.website.setting') }}"><i class="fa fa-cog"></i>Website Data</a>
+        <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.setting') ? 'active' : '' }}" href="{{ route('backend.website.setting') }}"><i class="fa fa-cog"></i>Ecommerce Settings</a>
         </li>
 
         <li>
           <hr class="dropdown-divider">
         </li>
+        
+        <li>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.carousel') ? 'active' : '' }}" href="{{ route('backend.website.carousel') }}"><i class="fa fa-cog"></i>Carousel</a>
+          </li>
+  
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
         
         <li>
         <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#logoutmodal"><i class="fa fa-sign-out"></i>Logout</a>                    
@@ -118,15 +127,15 @@
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-shopping-cart"></i><span>Cart</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.orders.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.orders.index') }}"><i class="fa fa-shopping-cart"></i><span>Orders</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-question-circle"></i><span>Faqs</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.faqs.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.faqs.index') }}"><i class="fa fa-question-circle"></i><span>Faqs</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('') ? '' : 'collapsed' }}" style="border:none" href=""><i class="fa fa-star"></i><span>Reviews and Ratings</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.ratings.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.ratings.index') }}"><i class="fa fa-star"></i><span>Reviews and Ratings</span></a>
   </li>
   
   <li>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\ProfileController; 
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
@@ -56,6 +57,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
+    // Frontend section 
+    Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
 
 require __DIR__.'/auth.php';
     

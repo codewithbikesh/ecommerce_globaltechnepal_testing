@@ -509,10 +509,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
+                                 @if ($categories->isNotEmpty())
                                 <div class="filter-category-container">
-                                    <div class="filter__category-wrapper">
-
-                                        <button class="btn filter__btn filter__btn--style-1 js-checked" type="button" data-filter="*">ALL</button></div>
+                                    {{-- <div class="filter__category-wrapper">
+                                    <button class="btn filter__btn filter__btn--style-1 js-checked" type="button" data-filter="*">ALL</button></div>
                                     <div class="filter__category-wrapper">
 
                                         <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".headphone">HEADPHONES</button></div>
@@ -521,13 +521,17 @@
                                         <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".smartphone">SMARTPHONES</button></div>
                                     <div class="filter__category-wrapper">
 
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".sportgadget">SPORT GADGETS</button></div>
-                                    <div class="filter__category-wrapper">
-
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".dslr">DSLR</button></div>
+                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".sportgadget">SPORT GADGETS</button></div> --}}
+                                        @foreach ($categories as  $category) 
+                                        <div class="filter__category-wrapper">
+                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter="{{ $category }}">{{ $category }}</button>
+                                        </div>
+                                        @endforeach
                                 </div>
+                                @endif
                                 <div class="filter__grid-wrapper u-s-m-t-30">
                                     <div class="row">
+                                        
                                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone">
                                             <div class="product-o product-o--hover-on product-o--radius">
                                                 <div class="product-o__wrap">
@@ -552,7 +556,6 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-
                                                 <span class="product-o__category">
 
                                                     <a href="shop-side-version-2.html">Electronics</a></span>
@@ -569,6 +572,17 @@
                                                     <span class="product-o__discount">$160.00</span></span>
                                             </div>
                                         </div>
+
+
+
+
+
+
+
+
+
+
+{{--                                         
                                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone">
                                             <div class="product-o product-o--hover-on product-o--radius">
                                                 <div class="product-o__wrap">
@@ -896,7 +910,7 @@
 
                                                     <span class="product-o__discount">$160.00</span></span>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Inquiry extends Model
 {
     use HasFactory;
-    protected $table = 'contact'; // specify the correct table name
-    protected $fillable = ['name', 'email', 'phone', 'message'];
+    protected $table = 'inquiries'; // specify the correct table name
+    protected $fillable = ['name', 'email', 'subject', 'message'];
 }

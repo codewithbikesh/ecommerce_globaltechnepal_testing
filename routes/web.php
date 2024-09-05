@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\LoadProductsAPIController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\FAQSController;
 use App\Http\Controllers\Backend\ReviewRatingController;
+use App\Http\Controllers\Backend\NewsletterController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,13 +35,13 @@ Route::middleware('auth')->group(function () {
     //Customers
     Route::get('/customers', [CustomerController::class, 'index'])->name('backend.customers.index');
     
-    //FAQS
+    //Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('backend.orders.index');
     
     //Reviews and Ratings
     Route::get('/reviews-ratings', [ReviewRatingController::class, 'index'])->name('backend.ratings.index');
     
-    //Orders
+    //FAQS
     Route::get('/faqs', [FAQSController::class, 'index'])->name('backend.faqs.index');
     
     //Load Prodicts from OMS API
@@ -49,9 +50,12 @@ Route::middleware('auth')->group(function () {
     //Inquiries
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('backend.inquiries.index');
     Route::post('/inquiries/view', [InquiryController::class, 'view'])->name('backend.inquiries.view');
-    Route::post('/inquiries/edit', [InquiryController::class, 'edit'])->name('backend.inquiries.edit');
-    Route::post('/inquiries/{id}', [InquiryController::class, 'update'])->name('backend.inquiries.update');
     Route::delete('/inquiries/{id}', [InquiryController::class, 'delete'])->name('backend.inquiries.delete');
+    
+    //Newsletter Subscribers
+    Route::get('/newsletter-subscribers', [NewsletterController::class, 'index'])->name('backend.newsletters.index');
+    Route::post('/newsletter-subscriber/view', [NewsletterController::class, 'view'])->name('backend.newsletters.view');
+    Route::delete('/newsletter-subscriber/{id}', [NewsletterController::class, 'delete'])->name('backend.newsletters.delete');
 
     //Users
     Route::get('/users', [UserController::class, 'index'])->name('backend.users.index');
@@ -62,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/{id}', [UserController::class, 'update'])->name('backend.users.update');
     Route::delete('/users/{id}', [UserController::class, 'delete'])->name('backend.users.delete');
         
-    //Website Data
+    //Website and Carousel Images Data
     Route::get('/website', [WebsiteController::class, 'data'])->name('backend.website.setting');
     Route::post('/website/{id}', [WebsiteController::class, 'update'])->name('backend.website.update');
     Route::get('/website-carousel', [WebsiteController::class, 'carousel_data'])->name('backend.website.carousel');

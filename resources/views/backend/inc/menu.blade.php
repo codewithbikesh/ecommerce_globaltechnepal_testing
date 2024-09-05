@@ -143,6 +143,10 @@
   </li>
   
   <li>
+    <a class="nav-link {{ request()->routeIs('backend.newsletters.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.newsletters.index') }}"><i class="fa fa-question-circle"></i><span>Newsletter Subscribers</span></a>
+  </li>
+  
+  <li>
     <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i><span>System Users</span></a>
   </li>
 

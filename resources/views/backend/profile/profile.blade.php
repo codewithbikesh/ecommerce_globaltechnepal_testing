@@ -81,7 +81,15 @@
                   
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Account Type</div>
-                    <div class="col-lg-9 col-md-8">{{ Auth::user()->account_type }}</div>
+                    <div class="col-lg-9 col-md-8">
+                      @if (Auth::user()->account_type == 'A')
+                          Admin
+                      @elseif (Auth::user()->account_type == 'U')
+                          Normal User
+                      @else
+                          Unknown
+                      @endif
+                    </div>
                   </div>
                   
                 </div>
@@ -142,9 +150,9 @@
                     <div class="row mb-3">
                     <label for="inputCity" class="col-md-4 col-lg-3 form-label">Account Type</label>
                     <div class="col-md-8 col-lg-9">
-                      <select class="form-select" name="account_type" aria-label="State">
-                        <option value="A">Admin</option>
-                        <option value="U">Normal User</option>
+                      <select class="form-select" name="account_type" aria-label="Account Type">
+                          <option value="A" {{ $user->account_type == 'A' ? 'selected' : '' }}>Admin</option>
+                          <option value="U" {{ $user->account_type == 'U' ? 'selected' : '' }}>Normal User</option>
                       </select>
                     </div>
                     </div>

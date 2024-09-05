@@ -1,8 +1,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="{{ asset('backend/images/logo/logo.png') }}" type="image/png type">
+    <link rel="icon" type="image/png" href="{{ asset('backend/images/logo/logo.png') }}">
     <title>Global Tech Nepal Pvt. Ltd.</title>
+    <meta name="description" content="Global Tech Nepal Pvt. Ltd. provides ecommerce services.">
+    <meta name="keywords" content="ecommerce, products, shopping, cart, checkouts, orders, shipping, billing, online shopping">
+    <meta name="author" content="Global Tech Nepal Pvt. Ltd.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts -->

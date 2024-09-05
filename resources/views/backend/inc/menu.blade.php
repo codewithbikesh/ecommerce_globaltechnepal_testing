@@ -42,7 +42,7 @@
         </li>
         
         <li>
-          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.loadproductsapi.index') ? 'active' : '' }}" href="{{ route('backend.loadproductsapi.index') }}"><i class="fa fa-cog"></i>Load Products</a>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.loadproductsapi.index') ? 'active' : '' }}" href="{{ route('backend.loadproductsapi.index') }}"><i class="fa fa-refresh"></i>Load Products</a>
           </li>
   
           <li>
@@ -58,7 +58,7 @@
         </li>
         
         <li>
-          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.carousel') ? 'active' : '' }}" href="{{ route('backend.website.carousel') }}"><i class="fa fa-cog"></i>Carousel</a>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.carousel') ? 'active' : '' }}" href="{{ route('backend.website.carousel') }}"><i class="fa fa-sliders"></i>Carousel</a>
           </li>
   
           <li>
@@ -139,15 +139,15 @@
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('backend.inquiries.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.inquiries.index') }}"><i class="fa fa-question-circle"></i><span>Inquiries</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.inquiries.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.inquiries.index') }}"><i class="fa fa-inbox"></i><span>Inquiries</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('backend.newsletters.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.newsletters.index') }}"><i class="fa fa-question-circle"></i><span>Newsletter Subscribers</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.newsletters.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.newsletters.index') }}"><i class="fa fa-bell"></i><span>Newsletter Subscribers</span></a>
   </li>
   
   <li>
-    <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i><span>System Users</span></a>
+    <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-user-circle"></i><span>System Users</span></a>
   </li>
 
 </ul>

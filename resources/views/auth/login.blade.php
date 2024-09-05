@@ -1,6 +1,6 @@
 
 <title>{{ $websitedata->company_name }}</title>
-<link rel="icon" href="{{ asset('storage/backend/company_logo/' . $websitedata->company_logo_header) }}" type="image/png type">
+<link rel="icon" href="{{ asset('storage/backend/company_logo/' . $websitedata->company_logo_header) }}" type="image/png">
 
 <x-guest-layout>
     <x-authentication-card>

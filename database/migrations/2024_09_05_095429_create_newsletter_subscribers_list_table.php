@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create('newsletter_subscribers_list', function (Blueprint $table) {
+            $table->bigInteger('id')->primary()->sutoIncrement();
+            $table->string('gender');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('message');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact');
+        Schema::dropIfExists('newsletter_subscribers_list');
     }
 };

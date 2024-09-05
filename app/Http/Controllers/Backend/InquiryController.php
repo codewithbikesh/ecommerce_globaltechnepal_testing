@@ -12,28 +12,15 @@ class InquiryController extends Controller
     
     public function index()
     {
-        $contacts = Inquiry::all();
-        return view('backend.inquiries.index', compact('contacts'));
+        $inquiries = Inquiry::all();
+        return view('backend.inquiries.index', compact('inquiries'));
     } 
     
     
     public function view(Request $request)
     {    
-        $contact = Inquiry::findOrFail($request->id);
-        return view('backend.inquiries.view', compact('contact'));
-    } 
-    
-    public function edit(Request $request)
-    {    
-        $contact = Inquiry::findOrFail($request->id);
-        return view('backend.inquiries.edit', compact('contact'));
-    } 
-
-    public function update(Request $request, $id)
-    {    
-        $contact = Inquiry::findOrFail($id);
-        $contact->update($request->all());
-        return redirect()->route('backend.inquiries.index')->with('success', 'Inquiries updated successfully');
+        $inquiry = Inquiry::findOrFail($request->id);
+        return view('backend.inquiries.view', compact('inquiry'));
     } 
 
     public function delete($id)

@@ -19,7 +19,7 @@
             <div class="card-header py-3">
                 <h4 class="card-title" style="display: inline-block;">Users
                 <form method="get" action="{{ route('backend.users.add') }}" enctype="multipart/form-data" style="display: inline-block;">
-                    <button class="btn btn-primary"><span style="color:white;">Add User</span></button>
+                    <button class="btn btn-primary"><span style="color:white;">Add System User</span></button>
                 </form>
                 </h4>
             </div>&nbsp;
@@ -45,7 +45,15 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>
-                    <td>{{ $user->account_type }}</td>
+                    <td>
+                      @if ($user->account_type == 'A')
+                          Admin
+                      @elseif ($user->account_type == 'U')
+                          Normal User
+                      @else
+                          Unknown
+                      @endif
+                    </td>
                     <td>
                         
                         <div style="display: flex; align-items: center;">

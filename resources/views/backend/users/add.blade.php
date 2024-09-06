@@ -9,7 +9,7 @@
 
           <div class="card mb-6">
             <div class="card-body">
-              <h5 class="card-title"><center>Add User</center></h5>
+              <h5 class="card-title"><center>Add System User</center></h5>
                     
                     
               <!-- Multi Columns Form -->
@@ -18,7 +18,7 @@
                   
                 <div class="col-md-6">
                   <label for="inputName5" class="form-label">Name</label>
-                  <input type="text" class="form-control" name="name"" required>
+                  <input type="text" class="form-control" name="name" required>
                 </div>
                 
                 <div class="col-md-6">
@@ -48,7 +48,10 @@
 
                 <div class="col-md-6">
                   <label for="inputZip" class="form-label">Account type</label>
-                  <input type="text" class="form-control" name="account_type" required>
+                  <select class="form-select" name="account_type" aria-label="Account Type">
+                      <option value="A">Admin</option>
+                      <option value="U">Normal User</option>
+                  </select>
                 </div>    
 
                 <table>

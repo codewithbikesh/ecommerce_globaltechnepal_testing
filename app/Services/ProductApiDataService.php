@@ -3,12 +3,23 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductApiDataService
 {
     public function fetchDataAndStore()
     {
-        $response = Http::get('https://myomsapi.globaltechsolution.com.np/api/MasterList/productlist?DbName=erpdemo101');
+        // Fetch the API URL from the database with a filter for api_name = 'P'
+        $apiUrl = DB::table('api')
+                ->where('api_name', 'P') // Filter based on api_name
+                ->value('api_value');
+
+        if (!$apiUrl) {
+            \Log::error('API URL not found in configuration for api_name = P.');
+            return;
+        }
+
+        $response = Http::get($apiUrl);
 
         if ($response->successful()) {
             $data = $response->json();

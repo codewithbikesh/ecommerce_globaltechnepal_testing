@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\FAQSController;
 use App\Http\Controllers\Backend\ReviewRatingController;
 use App\Http\Controllers\Backend\NewsletterController;
+use App\Http\Controllers\Backend\SetAPIController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('backend.profile.update');
     Route::post('/profile/change-password', [ProfileController::class, 'changepassword'])->name('backend.profile.change-password');
     
+    //SET API
+    Route::get('/set-api', [SetAPIController::class, 'index'])->name('backend.setapi.index');
+    Route::get('/set-api/add', [SetAPIController::class, 'add'])->name('backend.setapi.add');
+    Route::post('/set-api', [SetAPIController::class, 'store'])->name('backend.setapi.store');
+    Route::post('/set-api/edit', [SetAPIController::class, 'edit'])->name('backend.setapi.edit');
+    Route::post('/set-api/{id}', [SetAPIController::class, 'update'])->name('backend.setapi.update');
+    Route::delete('/set-api/{id}', [SetAPIController::class, 'delete'])->name('backend.setapi.delete');
+
     //Products
     Route::get('/products', [ProductController::class, 'index'])->name('backend.products.index');
     

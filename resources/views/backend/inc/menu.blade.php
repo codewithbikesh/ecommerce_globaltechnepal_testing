@@ -42,7 +42,7 @@
         </li>
         
         <li>
-          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('') ? 'active' : '' }}" href=""><i class="bi bi-code-slash"></i>Set API</a>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.setapi.index') ? 'active' : '' }}" href="{{ route('backend.setapi.index') }}"><i class="bi bi-code-slash"></i>Set API</a>
         </li>
 
         <li>

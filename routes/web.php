@@ -86,6 +86,23 @@ Route::middleware('auth')->group(function () {
 
     // Frontend section 
     Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
+    Route::get('/404', [DashboardController::class,'unexpectedError'])->name('frontend.404');  
+    Route::get('/about', [DashboardController::class,'about'])->name('frontend.about');  
+    Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale');  
+    Route::get('/cart', [DashboardController::class,'cart'])->name('frontend.cart');  
+    Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
+    Route::get('/contant', [DashboardController::class,'contant'])->name('frontend.contant');   
+    Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
+    Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');   
+    Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('frontend.dashboard');   
+    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
+    Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
+    Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
+    Route::get('/product-details', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
+    Route::get('/shop-list-full', [DashboardController::class,'shopListFull'])->name('frontend.shop-list-full');   
+    Route::get('/signin', [DashboardController::class,'signin'])->name('frontend.signin');   
+    Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   
+    Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew');   
 
 
 require __DIR__.'/auth.php';

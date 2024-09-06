@@ -12,7 +12,7 @@ class DashboardController extends Controller
   public  function index(){
         // $categories = Product::distinct()->pluck('category_id');
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
-        $products = Product::all();
+        $products = Product::limit(25)->get();
         $carousel = Carousel::all();
         // dd($products);
          return view("frontend.index",compact("categories","products","carousel"));

@@ -12,7 +12,7 @@
         <!-- fade css -->
         <div class="crousalUpper-myslide crousalUpper-fade">
           <div class="crousalUpper-txt">
-    <a href="{{ asset('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
+    <a href="{{ route('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
 
             <p>Web Devoloper<br />The code for this Slider is provided below</p>
           </div>
@@ -24,7 +24,7 @@
 
         <div class="crousalUpper-myslide crousalUpper-fade">
           <div class="crousalUpper-txt">
-    <a href="{{ asset('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
+    <a href="{{ route('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
 
             <p>Web Devoloper<br />The code for this Slider is provided below</p>
           </div>
@@ -36,7 +36,7 @@
 
         <div class="crousalUpper-myslide crousalUpper-fade">
           <div class="crousalUpper-txt">
-    <a href="{{ asset('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
+    <a href="{{ route('frontend.explore') }}"><button type="button" class="btn btn-light btn--e-brand">Shop Now !</button></a> 
 
 
             <p>Web Devoloper<br />The code for this Slider is provided below</p>
@@ -199,7 +199,7 @@
                                     <div class="product-o product-o--hover-on">
                                         <div class="product-o__wrap">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('frontend.product-detail') }}">
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ route('frontend.product-detail') }}">
 
                                                 <img class="aspect__img" src="images/product/electronic/product13.jpg" alt=""></a>
                                             <div class="product-o__action-wrap">

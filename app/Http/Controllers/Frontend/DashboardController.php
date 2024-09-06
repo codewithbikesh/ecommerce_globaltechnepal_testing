@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use App\Models\Product;
 use App\Models\WebsiteData;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -122,4 +123,22 @@ class DashboardController extends Controller
         $websitedata = WebsiteData::first();
          return view("frontend.whatsnew", compact("websitedata"));
     }
+
+    
+    public function newsletter_store(Request $request)
+    {
+        $request->validate([
+            'email' => 'required'
+        ]);
+        $newsletter = new Newsletter();
+        $newsletter->gender = $request->gender;
+        $newsletter->email = $request->email;
+        if ($newsletter->save()) {
+            session()->flash('success', 'Thank you for Subscription.');
+        } else {
+            session()->flash('error', 'Error !');
+        }
+        return redirect()->back();
+    }
+
 }

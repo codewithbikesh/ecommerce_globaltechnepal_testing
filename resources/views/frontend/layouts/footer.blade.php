@@ -87,21 +87,20 @@
                     <div class="outer-footer__content">
 
                         <span class="outer-footer__content-title">Join our Newsletter</span>
-                        <form class="newsletter">
+                        <form class="newsletter" method="POST" action="{{ route('frontend.newsletter.store') }}">
+                            @csrf
                             <div class="u-s-m-b-15">
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" id="male" name="gender">
+                                    <input type="radio" value="M" id="male" name="gender">
                                     <div class="radio-box__state radio-box__state--primary">
-
                                         <label class="radio-box__label" for="male">Male</label>
                                     </div>
                                 </div>
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" id="female" name="gender">
+                                    <input type="radio" value="F" id="female" name="gender"> 
                                     <div class="radio-box__state radio-box__state--primary">
-
                                         <label class="radio-box__label" for="female">Female</label>
                                     </div>
                                 </div>
@@ -111,7 +110,7 @@
                                 <label for="newsletter"></label>
 
                                 <input class="input-text input-text--only-white" type="text" id="newsletter"
-                                    placeholder="Enter your Email">
+                                    placeholder="Enter your Email" name="email">
 
                                 <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button>
                             </div>

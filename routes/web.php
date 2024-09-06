@@ -17,8 +17,8 @@ use App\Http\Controllers\Backend\SetAPIController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('login', [AuthenticatedSessionController::class, 'create'])
-->name('login');
+Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])
+->name('admin-login');
 
 Route::middleware('auth')->group(function () {
     
@@ -102,7 +102,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/shop-list-full', [DashboardController::class,'shopListFull'])->name('frontend.shop-list-full');   
     Route::get('/signin', [DashboardController::class,'signin'])->name('frontend.signin');   
     Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   
-    Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew');   
+    Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew'); 
+    
+    Route::post('/', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
 
 
 require __DIR__.'/auth.php';

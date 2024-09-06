@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="u-s-m-b-30">
 
-                                        <a class="gl-link" href="signin.html">Back to Login</a>
+                                        <a class="gl-link" href="{{ route('frontend.signin') }}">Back to Login</a>
                                     </div>
                                 </form>
                             </div>

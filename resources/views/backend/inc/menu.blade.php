@@ -36,6 +36,14 @@
         <button type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.profile.profile') ? 'active' : '' }}" ><i class="fa fa-user"></i>My profile</></button>
         </form>
         </li>
+        
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        
+        <li>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.setapi.index') ? 'active' : '' }}" href="{{ route('backend.setapi.index') }}"><i class="bi bi-code-slash"></i>Set API</a>
+        </li>
 
         <li>
           <hr class="dropdown-divider">
@@ -43,7 +51,7 @@
         
         <li>
           <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.loadproductsapi.index') ? 'active' : '' }}" href="{{ route('backend.loadproductsapi.index') }}"><i class="fa fa-refresh"></i>Load Products</a>
-          </li>
+        </li>
   
           <li>
             <hr class="dropdown-divider">

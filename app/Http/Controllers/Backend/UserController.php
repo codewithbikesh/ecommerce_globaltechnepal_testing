@@ -39,9 +39,9 @@ class UserController extends Controller
         $user->country = $request->country;
         $user->account_type = $request->account_type;
         if ($user->save()) {
-            session()->flash('success-msg', 'User Added Successfully !');
+            session()->flash('success', 'System User Added Successfully !');
         } else {
-            session()->flash('error-msg', 'Error !');
+            session()->flash('error', 'Error occured while adding system user!');
         }
         return redirect()->route('backend.users.index');
     }
@@ -62,14 +62,14 @@ class UserController extends Controller
     {    
         $user = User::findOrFail($id);
         $user->update($request->all());
-        return redirect()->route('backend.users.index')->with('success', 'User Details updated successfully');
+        return redirect()->route('backend.users.index')->with('success', 'System User Details updated successfully');
     } 
     
     public function delete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('backend.users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('backend.users.index')->with('success', 'System User deleted successfully');
     }
 
 }

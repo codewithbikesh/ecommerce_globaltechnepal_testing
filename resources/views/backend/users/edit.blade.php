@@ -9,7 +9,7 @@
 
           <div class="card mb-6">
             <div class="card-body">
-              <h5 class="card-title"><center>Update User</center></h5>
+              <h5 class="card-title"><center>Update System User Details</center></h5>
                     
                     
               <!-- Multi Columns Form -->
@@ -43,7 +43,10 @@
 
                 <div class="col-md-6">
                   <label for="inputZip" class="form-label">Account type</label>
-                  <input type="text" class="form-control" value="{{ $user->account_type }}" name="account_type" required>
+                  <select class="form-select" name="account_type" aria-label="Account Type">
+                      <option value="A" {{ $user->account_type == 'A' ? 'selected' : '' }}>Admin</option>
+                      <option value="U" {{ $user->account_type == 'U' ? 'selected' : '' }}>Normal User</option>
+                  </select>
                 </div>    
 
                 <table>

@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="u-s-m-b-30">
 
-                                            <a class="gl-link" href="lost-password.html">Lost Your Password?</a>
+                                            <a class="gl-link" href="{{ route('frontend.lost-password') }}">Lost Your Password?</a>
                                         </div>
                                     </div>
                                     <div class="u-s-m-b-30">

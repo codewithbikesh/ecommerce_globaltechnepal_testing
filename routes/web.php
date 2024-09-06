@@ -22,7 +22,7 @@ Route::get('login', [AuthenticatedSessionController::class, 'create'])
 
 Route::middleware('auth')->group(function () {
     
-    Route::get('/dashboard', function () {
+    Route::get('/admin-dashboard', function () {
     return view('backend.dashboard');
     })->middleware(['auth', 'verified'])->name('backend.dashboard');
 

@@ -15,7 +15,7 @@ class ProductApiDataService
                 ->value('api_value');
 
         if (!$apiUrl) {
-            \Log::error('API URL not found in configuration for api_name = P.');
+            \Log::error('API URL not found.');
             return;
         }
 

@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\ProfileController; 
+use App\Http\Controllers\Backend\ProfileController; 
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CustomerController;

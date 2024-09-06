@@ -9,15 +9,15 @@
                         <span class="outer-footer__content-title">Contact Us</span>
                         <div class="outer-footer__text-wrap"><i class="fas fa-home"></i>
 
-                            <span>4247 Ashford Drive Virginia VA-20006 USA</span>
+                            <span>{{ $websitedata->address }}</span>
                         </div>
                         <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume"></i>
 
-                            <span>(+0) 900 901 904</span>
+                            <span>{{ $websitedata->primary_phone }}</span>
                         </div>
                         <div class="outer-footer__text-wrap"><i class="far fa-envelope"></i>
 
-                            <span>contact@domain.com</span>
+                            <span>{{ $websitedata->primary_email }}</span>
                         </div>
                         <div class="outer-footer__social">
                             <ul>
@@ -54,24 +54,11 @@
                                 <div class="outer-footer__list-wrap">
                                     <ul>
                                         <li>
-
-                                            <a href="cart.html">Cart</a>
+                                            <a href="{{ route('frontend.cart') }}">Cart</a>
                                         </li>
                                         <li>
 
-                                            <a href="dashboard.html">Account</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Manufacturer</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="dash-payment-option.html">Finance</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Shop</a>
+                                            <a href="{{ route('frontend.dashboard') }}">Account</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -84,24 +71,11 @@
                                     <span class="outer-footer__content-title">Our Company</span>
                                     <ul>
                                         <li>
-
-                                            <a href="about.html">About us</a>
+                                            <a href="{{ route('frontend.about') }}">About us</a>
                                         </li>
                                         <li>
 
-                                            <a href="contact.html">Contact Us</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="index.html">Sitemap</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="dash-my-order.html">Delivery</a>
-                                        </li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Store</a>
+                                            <a href="{{ route('frontend.contact') }}">Contact Us</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -157,9 +131,9 @@
                     <div class="lower-footer__content">
                         <div class="lower-footer__copyright">
 
-                            <span>Copyright © 2018</span>
+                            <span>Copyright &copy; {{ now()->year }}</span>
 
-                            <a href="index.html">Reshop</a>
+                            <a href="index.html">{{ $websitedata->company_name }}</a>
 
                             <span>All Right Reserved</span>
                         </div>

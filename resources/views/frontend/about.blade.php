@@ -14,11 +14,11 @@
                         <ul class="breadcrumb__list">
                             <li class="has-separator">
 
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('frontend.index') }}">Home</a>
                             </li>
                             <li class="is-marked">
 
-                                <a href="about.html">About</a>
+                                <a href="{{ route('frontend.about') }}">About</a>
                             </li>
                         </ul>
                     </div>
@@ -53,7 +53,7 @@
                                             Ipsum.</p>
                                     </div>
 
-                                    <a class="about__link btn--e-secondary" href="index.html" target="_blank">Shop
+                                    <a class="about__link btn--e-secondary" href="{{ route('frontend.index') }}" target="_blank">Shop
                                         Now</a>
                                 </div>
                             </div>

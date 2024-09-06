@@ -4,15 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('client-side/images/favicon.png') }}" rel="shortcut icon">
-    <title>globaltech</title>
+    <link href="{{ asset('storage/backend/company_logo/' . $websitedata->company_logo_footer) }}" rel="shortcut icon">
+    <title>{{ $websitedata->company_name }}</title>
 
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('client-side/css/navbar.css') }}">
 
-    <!-- crousal asset cdn   -->
+    <!-- carousal asset cdn   -->
     <link rel="stylesheet" href="{{ asset('client-side/css/crousal.css') }}">
     <!--=============== BOXICONS ===============-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />

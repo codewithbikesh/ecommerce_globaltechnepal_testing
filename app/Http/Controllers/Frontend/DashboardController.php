@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use App\Models\Product;
+use App\Models\WebsiteData;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,93 +15,111 @@ class DashboardController extends Controller
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
         $products = Product::limit(25)->get();
         $carousel = Carousel::all();
+        $websitedata = WebsiteData::first();
         // dd($products);
-         return view("frontend.index",compact("categories","products","carousel"));
+        return view("frontend.index", compact("categories","products","carousel", "websitedata"));
     }
 
 
     // 404
     public function unexpectedError(){
-         return view("frontend.404");
+        $websitedata = WebsiteData::first();
+        return view("frontend.404", compact("websitedata"));
     }
 
     // about 
     public function about(){
-         return view("frontend.about");
+        $websitedata = WebsiteData::first();
+        return view("frontend.about", compact("websitedata"));
     }
 
     // Best Sale 
     public function bestSale(){
-         return view("frontend.bestSale");
+        $websitedata = WebsiteData::first();
+        return view("frontend.bestSale", compact("websitedata"));
     }
  
     // cart
     public function cart(){
-         return view("frontend.cart");
+        $websitedata = WebsiteData::first();
+        return view("frontend.cart", compact("websitedata"));
     }
 
     // checkout 
     public function checkout(){
-        return view("frontend.checkout");
+        $websitedata = WebsiteData::first();
+        return view("frontend.checkout", compact("websitedata"));
     }
 
     // contact 
     public function contact(){
-         return view("frontend.contact");
+        $websitedata = WebsiteData::first();
+        return view("frontend.contact", compact("websitedata"));
     }
 
     // dash-cancellation 
         public function dashCancellation(){
-            return  view("frontend.dash-cancellation");
+            $websitedata = WebsiteData::first();
+            return  view("frontend.dash-cancellation", compact("websitedata"));
         }
 
     //  dash-my-order 
     public function dashMyOrder(){
-        return view("frontend.dash-my-order");
+        $websitedata = WebsiteData::first();
+        return view("frontend.dash-my-order", compact("websitedata"));
     }
 
     // dashboard 
     public function dashboard(){
-        return view("frontend.dashboard");
+        $websitedata = WebsiteData::first();
+        return view("frontend.dashboard", compact("websitedata"));
     }
 
     // explore 
     public function explore(){
-        return view("frontend.explore");
+        $websitedata = WebsiteData::first();
+        return view("frontend.explore", compact("websitedata"));
     }
 
     // lost-password 
     public function lostPassword(){
-        return view("frontend.lost-password");
+        $websitedata = WebsiteData::first();
+        return view("frontend.lost-password", compact("websitedata"));
     }
 
     // newarrival
     public function newarrival(){
-         return view("frontend.newarrival");
+        $websitedata = WebsiteData::first();
+        return view("frontend.newarrival", compact("websitedata"));
     }
 
     // product-detail 
     public function productDetails(){
-        return view("frontend.product-detail");
+        $websitedata = WebsiteData::first();
+        return view("frontend.product-detail", compact("websitedata"));
     }
 
     // shop list full 
     public function shopListFull(){
-        return view("frontend.shop-list-full");
+        $websitedata = WebsiteData::first();
+        return view("frontend.shop-list-full", compact("websitedata"));
     }
 
     //  signin
     public function signin(){
-         return view("frontend.signin");
+        $websitedata = WebsiteData::first();
+        return view("frontend.signin", compact("websitedata"));
     }
 
     // signup 
     public function signup(){
-        return view("frontend.signup");
+        $websitedata = WebsiteData::first();
+        return view("frontend.signup", compact("websitedata"));
     }
 
     // whatsnew 
     public function whatsnew(){
-         return view("frontend.whatsnew");
+        $websitedata = WebsiteData::first();
+         return view("frontend.whatsnew", compact("websitedata"));
     }
 }

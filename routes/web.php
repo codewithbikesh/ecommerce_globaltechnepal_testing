@@ -91,7 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale');  
     Route::get('/cart', [DashboardController::class,'cart'])->name('frontend.cart');  
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
-    Route::get('/contant', [DashboardController::class,'contant'])->name('frontend.contant');   
+    Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');   
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('frontend.dashboard');   

@@ -19,18 +19,15 @@
                                     <span class="dash__text u-s-m-b-16 userName">Hello, John Doe</span>
                                     <ul class="dash__f-list pageUl">
                                         <li>
-
-                                            <a class="dash-active" href="dashboard.html">Manage My Account</a>
+                                            <a class="dash-active" href="{{ route('frontend.dashboard') }}">Manage My Account</a>
                                         </li>
 
                                         <li>
-
-                                            <a href="dash-my-order.html">My Orders</a>
+                                            <a href="{{ route('frontend.dash-my-order') }}">My Orders</a>
                                         </li>
 
                                         <li>
-
-                                            <a href="dash-cancellation.html">My Returns & Cancellations</a>
+                                            <a href="{{ route('frontend.dash-cancellation') }}">My Returns & Cancellations</a>
                                         </li>
                                     </ul>
                                 </div>

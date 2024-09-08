@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
     Route::post('/signup', [DashboardController::class, 'customer_signup'])->name('frontend.customer.signup');
+    Route::post('/contact', [DashboardController::class, 'inquiry_store'])->name('frontend.inquiry_store');
 
 
 require __DIR__.'/auth.php';

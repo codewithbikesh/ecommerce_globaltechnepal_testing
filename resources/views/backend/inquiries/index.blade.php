@@ -63,7 +63,7 @@
           </tr>
 
           <!-- Delete Modal -->
-          <div class="modal fade" id="deleteModal{{ $contact->id }}" tabindex="-1">
+          <div class="modal fade" id="deleteModal{{ $inquiry->id }}" tabindex="-1">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">

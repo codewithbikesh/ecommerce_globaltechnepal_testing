@@ -18,6 +18,11 @@ class ProductController extends Controller
     public function view(Request $request)
     {    
         $product = Product::findOrFail($request->product_code);
+        
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
+
         return view('backend.products.view', compact('product'));
     } 
 

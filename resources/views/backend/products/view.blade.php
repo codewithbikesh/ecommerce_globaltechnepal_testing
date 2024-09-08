@@ -49,7 +49,15 @@
                                     
                   <div class="row">
                     <div class="col-lg-6 col-md-6 label">Image</div>
-                    <div class="col-lg-6 col-md-6">{{ $product->primary_image }}</div>
+                    <div class="col-lg-6 col-md-6">
+                      
+                    @if($product->primary_image)
+                      <img src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="Product Image" style="max-width: 100%; height: auto;">
+                    @else
+                      <p>No image available</p>
+                    @endif
+
+                    </div>
                   </div>
                   
                     <div class="text-center">

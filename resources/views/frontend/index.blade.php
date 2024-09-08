@@ -224,7 +224,7 @@
                                             <li>
 
                                                 <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                    data-placement="top" title="Quick View"><i
+                                                    data-placement="top" title="Quick View" id="quickView"><i
                                                         class="fas fa-search-plus"></i></a>
                                             </li>
                                             <li>
@@ -1432,4 +1432,14 @@
 <!--====== End - App Content ======-->
 
 
+@endsection
+@section('constumJs')
+<script type="text/javascript">
+ //   Get Quick View Details using jquery 
+ $(document).ready(function() {
+        $('a, #quickView').on(click, function {
+            alert('Quick View');
+        });
+    });
+</script>
 @endsection

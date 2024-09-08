@@ -502,7 +502,7 @@
 <script src="{{ asset('client-side/js/crousal.js') }}"></script>
 <!--====== App ======-->
 <script src="{{ asset('client-side/js/app.js') }}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function toggleDropdown(id) {
         const dropdown = document.getElementById(id);
@@ -515,8 +515,8 @@
         // Toggle the clicked dropdown
         dropdown.style.display = isVisible ? 'none' : 'block';
     }
-
 </script>
+    @yield('costomJs')
 </body>
 
 </html>

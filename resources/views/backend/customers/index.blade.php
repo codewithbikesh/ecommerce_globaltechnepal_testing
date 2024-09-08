@@ -29,7 +29,6 @@
             <th scope="col">S.N.</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Address</th>
             <th scope="col">Phone</th>
             <th scope="col">Action</th>
           </tr>
@@ -38,13 +37,12 @@
           @foreach ($customers as $index => $customers)
           <tr>
             <th scope="row">{{ $index + 1 }}</th>
-            <td>{{ $customers->name }}</td>
+            <td>{{ $customers->full_name }}</td>
             <td>{{ $customers->email }}</td>
-            <td>{{ $customers->address }}</td>
             <td>{{ $customers->phone }}</td>
             <td>
               <div style="display: flex; align-items: center;">
-                <form method="post" action="" style="margin-right: 10px;">
+                <form method="post" action="{{ route('backend.customers.view') }}" style="margin-right: 10px;">
                 @csrf
                   <input type="hidden" name="id" value="{{ $customers->id }}"></button>
                   <button style="background-color: transparent; border: none;">

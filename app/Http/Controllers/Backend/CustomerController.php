@@ -14,4 +14,11 @@ class CustomerController extends Controller
         $customers = Customer::all();
         return view('backend.customers.index', compact('customers'));
     } 
+    
+    public function view(Request $request)
+    {    
+        $customer = Customer::findOrFail($request->id);
+        return view('backend.customers.view', compact('customer'));
+    } 
+
 }

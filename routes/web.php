@@ -17,14 +17,13 @@ use App\Http\Controllers\Backend\SetAPIController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])
-->name('admin-login');
+Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])->name('admin-login');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     
-    Route::get('/admin-dashboard', function () {
-    return view('backend.dashboard');
-    })->middleware(['auth', 'verified'])->name('backend.dashboard');
+    Route::get('/dashboard', function () {
+        return view('backend.dashboard');
+    })->name('backend.dashboard');
 
     //Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('backend.profile.profile');
@@ -87,6 +86,8 @@ Route::middleware('auth')->group(function () {
 });
 
     // Frontend section 
+Route::group([], function() {
+    
     Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
     Route::get('/404', [DashboardController::class,'unexpectedError'])->name('frontend.404');  
     Route::get('/about', [DashboardController::class,'about'])->name('frontend.about');  
@@ -96,7 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');   
-    Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('frontend.dashboard');   
+    Route::get('/account', [DashboardController::class,'account'])->name('frontend.account');   
     Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
@@ -110,6 +111,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/signup', [DashboardController::class, 'customer_signup'])->name('frontend.customer.signup');
     Route::post('/contact', [DashboardController::class, 'inquiry_store'])->name('frontend.inquiry_store');
 
+});
 
 require __DIR__.'/auth.php';
     

@@ -74,9 +74,9 @@ class DashboardController extends Controller
     }
 
     // dashboard 
-    public function dashboard(){
+    public function account(){
         $websitedata = WebsiteData::first();
-        return view("frontend.dashboard", compact("websitedata"));
+        return view("frontend.account", compact("websitedata"));
     }
 
     // explore 

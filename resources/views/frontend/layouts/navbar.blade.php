@@ -23,7 +23,7 @@
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
                 <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"></div>
                 <div class="fas fa-user" id="ecomNav-login-btn"></div>
-                <a href="{{ route('frontend.dashboard') }}">
+                <a href="{{ route('frontend.account') }}">
                     <div class="fas fa-tachometer-alt" id="ecomNav-cart-btn"></div>
                 </a>
 

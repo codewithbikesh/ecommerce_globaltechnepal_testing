@@ -37,7 +37,15 @@
           @foreach ($newsletters as $index => $newsletter)
           <tr>
             <th scope="row">{{ $index + 1 }}</th>
-            <td>{{ $newsletter->gender }}</td>
+            <td>
+              @if ($newsletter->gender == 'M')
+                  Male
+              @elseif ($newsletter->gender == 'F')
+                  Female
+              @else
+                  Unknown
+              @endif
+            </td>
             <td>{{ $newsletter->email }}</td>
             <td>{{ $newsletter->created_at->format('Y-m-d') }}</td>
             <td>

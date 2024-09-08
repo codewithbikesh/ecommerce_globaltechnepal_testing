@@ -17,12 +17,12 @@ use App\Http\Controllers\Backend\SetAPIController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('login', [AuthenticatedSessionController::class, 'create'])
-->name('login');
+Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])
+->name('admin-login');
 
 Route::middleware('auth')->group(function () {
     
-    Route::get('/dashboard', function () {
+    Route::get('/admin-dashboard', function () {
     return view('backend.dashboard');
     })->middleware(['auth', 'verified'])->name('backend.dashboard');
 
@@ -91,7 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale');  
     Route::get('/cart', [DashboardController::class,'cart'])->name('frontend.cart');  
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
-    Route::get('/contant', [DashboardController::class,'contant'])->name('frontend.contant');   
+    Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');   
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('frontend.dashboard');   
@@ -102,7 +102,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/shop-list-full', [DashboardController::class,'shopListFull'])->name('frontend.shop-list-full');   
     Route::get('/signin', [DashboardController::class,'signin'])->name('frontend.signin');   
     Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   
-    Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew');   
+    Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew'); 
+    
+    Route::post('/', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
 
 
 require __DIR__.'/auth.php';

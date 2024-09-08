@@ -9,30 +9,38 @@
                         <span class="outer-footer__content-title">Contact Us</span>
                         <div class="outer-footer__text-wrap"><i class="fas fa-home"></i>
 
-                            <span>4247 Ashford Drive Virginia VA-20006 USA</span></div>
+                            <span>{{ $websitedata->address }}</span>
+                        </div>
                         <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume"></i>
 
-                            <span>(+0) 900 901 904</span></div>
+                            <span>{{ $websitedata->primary_phone }}</span>
+                        </div>
                         <div class="outer-footer__text-wrap"><i class="far fa-envelope"></i>
 
-                            <span>contact@domain.com</span></div>
+                            <span>{{ $websitedata->primary_email }}</span>
+                        </div>
                         <div class="outer-footer__social">
                             <ul>
                                 <li>
 
-                                    <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a>
+                                </li>
                                 <li>
 
-                                    <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a>
+                                </li>
                                 <li>
 
-                                    <a class="s-youtube--color-hover" href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <a class="s-youtube--color-hover" href="#"><i class="fab fa-youtube"></i></a>
+                                </li>
                                 <li>
 
-                                    <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a>
+                                </li>
                                 <li>
 
-                                    <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -46,20 +54,12 @@
                                 <div class="outer-footer__list-wrap">
                                     <ul>
                                         <li>
-
-                                            <a href="cart.html">Cart</a></li>
+                                            <a href="{{ route('frontend.cart') }}">Cart</a>
+                                        </li>
                                         <li>
 
-                                            <a href="dashboard.html">Account</a></li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Manufacturer</a></li>
-                                        <li>
-
-                                            <a href="dash-payment-option.html">Finance</a></li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Shop</a></li>
+                                            <a href="{{ route('frontend.dashboard') }}">Account</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -71,20 +71,12 @@
                                     <span class="outer-footer__content-title">Our Company</span>
                                     <ul>
                                         <li>
-
-                                            <a href="about.html">About us</a></li>
+                                            <a href="{{ route('frontend.about') }}">About us</a>
+                                        </li>
                                         <li>
 
-                                            <a href="contact.html">Contact Us</a></li>
-                                        <li>
-
-                                            <a href="index.html">Sitemap</a></li>
-                                        <li>
-
-                                            <a href="dash-my-order.html">Delivery</a></li>
-                                        <li>
-
-                                            <a href="shop-side-version-2.html">Store</a></li>
+                                            <a href="{{ route('frontend.contact') }}">Contact Us</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -95,32 +87,36 @@
                     <div class="outer-footer__content">
 
                         <span class="outer-footer__content-title">Join our Newsletter</span>
-                        <form class="newsletter">
+                        <form class="newsletter" method="POST" action="{{ route('frontend.newsletter.store') }}">
+                            @csrf
                             <div class="u-s-m-b-15">
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" id="male" name="gender">
+                                    <input type="radio" value="M" id="male" name="gender">
                                     <div class="radio-box__state radio-box__state--primary">
-
-                                        <label class="radio-box__label" for="male">Male</label></div>
+                                        <label class="radio-box__label" for="male">Male</label>
+                                    </div>
                                 </div>
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" id="female" name="gender">
+                                    <input type="radio" value="F" id="female" name="gender"> 
                                     <div class="radio-box__state radio-box__state--primary">
-
-                                        <label class="radio-box__label" for="female">Female</label></div>
+                                        <label class="radio-box__label" for="female">Female</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="newsletter__group">
 
                                 <label for="newsletter"></label>
 
-                                <input class="input-text input-text--only-white" type="text" id="newsletter" placeholder="Enter your Email">
+                                <input class="input-text input-text--only-white" type="text" id="newsletter"
+                                    placeholder="Enter your Email" name="email">
 
-                                <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button></div>
+                                <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button>
+                            </div>
 
-                            <span class="newsletter__text">Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.</span>
+                            <span class="newsletter__text">Subscribe to the mailing list to receive updates on
+                                promotions, new arrivals, discount and coupons.</span>
                         </form>
                     </div>
                 </div>
@@ -134,11 +130,12 @@
                     <div class="lower-footer__content">
                         <div class="lower-footer__copyright">
 
-                            <span>Copyright © 2018</span>
+                            <span>Copyright &copy; {{ now()->year }}</span>
 
-                            <a href="index.html">Reshop</a>
+                            <a href="index.html">{{ $websitedata->company_name }}</a>
 
-                            <span>All Right Reserved</span></div>
+                            <span>All Right Reserved</span>
+                        </div>
                         <div class="lower-footer__payment">
                             <ul>
                                 <li><i class="fab fa-cc-stripe"></i></li>
@@ -174,16 +171,20 @@
                             <ul class="pd-breadcrumb__list">
                                 <li class="has-separator">
 
-                                    <a href="index.hml">Home</a></li>
+                                    <a href="index.hml">Home</a>
+                                </li>
                                 <li class="has-separator">
 
-                                    <a href="shop-side-version-2.html">Electronics</a></li>
+                                    <a href="shop-side-version-2.html">Electronics</a>
+                                </li>
                                 <li class="has-separator">
 
-                                    <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                    <a href="shop-side-version-2.html">DSLR Cameras</a>
+                                </li>
                                 <li class="is-marked">
 
-                                    <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                    <a href="shop-side-version-2.html">Nikon Cameras</a>
+                                </li>
                             </ul>
                         </div>
                         <!--====== End - Product Breadcrumb ======-->
@@ -195,38 +196,48 @@
                                 <div id="js-product-detail-modal">
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="u-s-m-t-15">
                                 <div id="js-product-detail-modal-thumbnail">
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt="">
+                                    </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt=""></div>
+                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -238,31 +249,42 @@
                         <div class="pd-detail">
                             <div>
 
-                                <span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span></div>
+                                <span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span>
+                            </div>
                             <div>
                                 <div class="pd-detail__inline">
 
                                     <span class="pd-detail__price">$6.99</span>
 
-                                    <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                    <span class="pd-detail__discount">(76% OFF)</span><del
+                                        class="pd-detail__del">$28.97</del>
+                                </div>
                             </div>
                             <div class="u-s-m-b-15">
-                                <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i>
 
                                     <span class="pd-detail__review u-s-m-l-4">
 
-                                        <a href="product-detail.html">23 Reviews</a></span></div>
+                                        <a href="product-detail.html">23 Reviews</a></span>
+                                </div>
                             </div>
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail__inline">
 
                                     <span class="pd-detail__stock">200 in stock</span>
 
-                                    <span class="pd-detail__left">Only 2 left</span></div>
+                                    <span class="pd-detail__left">Only 2 left</span>
+                                </div>
                             </div>
                             <div class="u-s-m-b-15">
 
-                                <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing
+                                    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+                                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                                    to make a type specimen book.</span>
+                            </div>
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail__inline">
 
@@ -270,7 +292,8 @@
 
                                         <a href="signin.html">Add to Wishlist</a>
 
-                                        <span class="pd-detail__click-count">(222)</span></span></div>
+                                        <span class="pd-detail__click-count">(222)</span></span>
+                                </div>
                             </div>
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail__inline">
@@ -279,25 +302,32 @@
 
                                         <a href="signin.html">Email me When the price drops</a>
 
-                                        <span class="pd-detail__click-count">(20)</span></span></div>
+                                        <span class="pd-detail__click-count">(20)</span></span>
+                                </div>
                             </div>
                             <div class="u-s-m-b-15">
                                 <ul class="pd-social-list">
                                     <li>
 
-                                        <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                        <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a>
+                                    </li>
                                     <li>
 
-                                        <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <a class="s-gplus--color-hover" href="#"><i
+                                                class="fab fa-google-plus-g"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="u-s-m-b-15">
@@ -310,14 +340,17 @@
 
                                                 <span class="input-counter__minus fas fa-minus"></span>
 
-                                                <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
+                                                <input class="input-counter__text input-counter--text-primary-style"
+                                                    type="text" value="1" data-min="1" data-max="1000">
 
-                                                <span class="input-counter__plus fas fa-plus"></span></div>
+                                                <span class="input-counter__plus fas fa-plus"></span>
+                                            </div>
                                             <!--====== End - Input Counter ======-->
                                         </div>
                                         <div class="u-s-m-b-15">
 
-                                            <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                            <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -327,13 +360,16 @@
                                 <ul class="pd-detail__policy-list">
                                     <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                        <span>Buyer Protection.</span></li>
+                                        <span>Buyer Protection.</span>
+                                    </li>
                                     <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                        <span>Full Refund if you don't receive your order.</span></li>
+                                        <span>Full Refund if you don't receive your order.</span>
+                                    </li>
                                     <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                        <span>Returns accepted if product not as described.</span></li>
+                                        <span>Returns accepted if product not as described.</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -359,17 +395,20 @@
                         <div class="success u-s-m-b-30">
                             <div class="success__text-wrap"><i class="fas fa-check"></i>
 
-                                <span>Item is added successfully!</span></div>
+                                <span>Item is added successfully!</span>
+                            </div>
                             <div class="success__img-wrap">
 
-                                <img class="u-img-fluid" src="images/product/electronic/product1.jpg" alt=""></div>
+                                <img class="u-img-fluid" src="images/product/electronic/product1.jpg" alt="">
+                            </div>
                             <div class="success__info-wrap">
 
                                 <span class="success__name">Beats Bomb Wireless Headphone</span>
 
                                 <span class="success__quantity">Quantity: 1</span>
 
-                                <span class="success__price">$170.00</span></div>
+                                <span class="success__price">$170.00</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
@@ -378,11 +417,14 @@
                             <span class="s-option__text">1 item (s) in your cart</span>
                             <div class="s-option__link-box">
 
-                                <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
+                                <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE
+                                    SHOPPING</a>
 
                                 <a class="s-option__link btn--e-white-brand-shadow" href="cart.html">VIEW CART</a>
 
-                                <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO CHECKOUT</a></div>
+                                <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO
+                                    CHECKOUT</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -399,13 +441,14 @@
         <div class="modal-content modal--shadow">
 
             <button class="btn new-l__dismiss fas fa-times" type="button" data-dismiss="modal">X</button>
-            <div class="modal-body popup" >
+            <div class="modal-body popup">
                 <div class="row u-s-m-x-0">
                     <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
 
                         <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
 
-                            <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a></div>
+                            <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a>
+                    </div>
                     <div class="col-lg-6 new-l__col-2">
                         <div class="new-l__section u-s-m-t-30">
                             <div class="u-s-m-b-8 new-l--center">
@@ -416,18 +459,20 @@
                             </div>
                             <form class="new-l__form">
                                 <div class="u-s-m-b-15">
-                                <div class="u-s-m-b-15">
-                                    <a href="signin.html">
-                                    <button class="btn btn--e-brand-b-2" type="button">Sign In!</button>
-                                </a>
-                            </div>
+                                    <div class="u-s-m-b-15">
+                                        <a href="signin.html">
+                                            <button class="btn btn--e-brand-b-2" type="button">Sign In!</button>
+                                        </a>
+                                    </div>
                             </form>
                             <div class="u-s-m-b-15 new-l--center">
-                                <p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions and other commercial messages. You may unsubscribe at any time.</p>
+                                <p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions
+                                    and other commercial messages. You may unsubscribe at any time.</p>
                             </div>
                             <div class="u-s-m-b-15 new-l--center">
 
-                                <a class="new-l__link" data-dismiss="modal">No Thanks</a></div>
+                                <a class="new-l__link" data-dismiss="modal">No Thanks</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -439,11 +484,12 @@
 <!--====== End - Modal Section ======-->
 </div>
 <!--====== End - Main App ======-->
-{{-- <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+{{--
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
 <script>
-(function () {
-const locomotiveScroll = new LocomotiveScroll();
-})();
+    (function () {
+        const locomotiveScroll = new LocomotiveScroll();
+    })();
 </script> --}}
 
 <script src="{{ asset('client-side/js/navbar.js') }}"></script>
@@ -459,17 +505,18 @@ const locomotiveScroll = new LocomotiveScroll();
 
 <script>
     function toggleDropdown(id) {
-    const dropdown = document.getElementById(id);
-    const isVisible = dropdown.style.display === 'block';
-    
-    // Hide all dropdowns
-    const dropdowns = document.querySelectorAll('.filter-dropdown');
-    dropdowns.forEach(dd => dd.style.display = 'none');
-    
-    // Toggle the clicked dropdown
-    dropdown.style.display = isVisible ? 'none' : 'block';
-}
+        const dropdown = document.getElementById(id);
+        const isVisible = dropdown.style.display === 'block';
+
+        // Hide all dropdowns
+        const dropdowns = document.querySelectorAll('.filter-dropdown');
+        dropdowns.forEach(dd => dd.style.display = 'none');
+
+        // Toggle the clicked dropdown
+        dropdown.style.display = isVisible ? 'none' : 'block';
+    }
 
 </script>
 </body>
+
 </html>

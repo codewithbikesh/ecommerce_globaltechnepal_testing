@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('newsletter_subscribers_list', function (Blueprint $table) {
-            $table->bigInteger('id')->primary()->sutoIncrement();
+            $table->bigInteger('id')->primary()->autoIncrement();
             $table->string('gender');
             $table->string('email')->unique();
             $table->timestamps();

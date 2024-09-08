@@ -19,7 +19,15 @@
 
                   <div class="row">
                     <div class="col-lg-6 col-md-6 label ">Gender</div>
-                    <div class="col-lg-6 col-md-6">{{ $newsletter->name }}</div>
+                    <div class="col-lg-6 col-md-6">
+                      @if ($newsletter->gender == 'M')
+                          Male
+                      @elseif ($newsletter->gender == 'F')
+                          Female
+                      @else
+                          Unknown
+                      @endif
+                    </div>
                   </div>
 
 
@@ -29,7 +37,7 @@
                   </div>
                                     
                   <div class="row">
-                    <div class="col-lg-6 col-md-6 label">Account Created Date</div>
+                    <div class="col-lg-6 col-md-6 label">Subscribed Date</div>
                     <div class="col-lg-6 col-md-6">{{ $newsletter->created_at }}</div>
                   </div>
                   

@@ -187,7 +187,7 @@ class DashboardController extends Controller
         if ($inquiry->save()) {
             return redirect()->route('frontend.contact')->with('success', 'Thank you for contacting with us. We will connect with you shortly.');
         } else {
-            session()->flash('error', 'Error !');
+            return redirect()->route('frontend.contact')->with('error', 'Error in submitting Form. Please try again later.');
         }
     }
 

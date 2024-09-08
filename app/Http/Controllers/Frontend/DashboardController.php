@@ -151,11 +151,11 @@ class DashboardController extends Controller
     // whatsnew 
     public function whatsnew(){
         $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
-        // $whatsnewproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
+        $whatsnewproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $websitedata = WebsiteData::first();
         $cart = session()->get('cart', []);
         $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
-         return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories"));
+         return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories","whatsnewproducts"));
     }
 
     

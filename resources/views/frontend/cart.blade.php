@@ -1,5 +1,29 @@
 @extends('frontend.layouts.master')
 @section('content')
+<style>
+    /* Style adjustments to make the button look like a link */
+    .route-box__link {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0 5px; /* Adjust spacing between buttons */
+    }
+    .route-box__link i {
+        margin-right: 5px;
+    }
+    .route-box__link span {
+        margin-left: 5px;
+    }
+    .route-box__g2 {
+        display: flex; /* Use flexbox for horizontal alignment */
+        gap: 10px; /* Space between buttons */
+    }
+</style>
+
 <!--====== App Content ======-->
 <div class="app-content">
 
@@ -13,12 +37,10 @@
                     <div class="breadcrumb__wrap">
                         <ul class="breadcrumb__list">
                             <li class="has-separator">
-
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('frontend.index') }}">Home</a>
                             </li>
                             <li class="is-marked">
-
-                                <a href="cart.html">Cart</a>
+                                <a href="{{ route('frontend.cart') }}">Cart</a>
                             </li>
                         </ul>
                     </div>
@@ -51,58 +73,40 @@
         <div class="section__content">
             <div class="container">
                 <div class="row">
+                    <form action="{{ route('cart.update') }}" method="POST">
+                        @csrf
                     <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
                         <div class="table-responsive">
                             <table class="table-p">
                                 <tbody>
 
+                                    @foreach($cartproducts as $product)
                                     <!--====== Row ======-->
                                     <tr>
                                         <td>
                                             <div class="table-p__box">
                                                 <div class="table-p__img-wrap">
-
-                                                    <img class="u-img-fluid"
-                                                        src="images/product/electronic/product3.jpg" alt="">
+                                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                                 </div>
                                                 <div class="table-p__info">
-
                                                     <span class="table-p__name">
-
-                                                        <a href="product-detail.html">Yellow Wireless
-                                                            Headphone</a></span>
-
+                                                        <a href="product-detail.html">{{ $product->product_name }}</a></span>
                                                     <span class="table-p__category">
-
-                                                        <a href="shop-side-version-2.html">Electronics</a></span>
-                                                    <ul class="table-p__variant-list">
-                                                        <li>
-
-                                                            <span>Size: 22</span>
-                                                        </li>
-                                                        <li>
-
-                                                            <span>Color: Red</span>
-                                                        </li>
-                                                    </ul>
+                                                        <a href="shop-side-version-2.html">{{ $product->category_id}}</a></span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-
-                                            <span class="table-p__price">$125.00</span>
+                                            <span class="table-p__price">{{ ($product->sell_price * $cart[$product->product_code]) }}</span>
                                         </td>
                                         <td>
                                             <div class="table-p__input-counter-wrap">
 
                                                 <!--====== Input Counter ======-->
                                                 <div class="input-counter">
-
                                                     <span class="input-counter__minus fas fa-minus"></span>
-
                                                     <input class="input-counter__text input-counter--text-primary-style"
-                                                        type="text" value="1" data-min="1" data-max="1000">
-
+                                                        type="text" value="{{ $cart[$product->product_code] }}" name="quantities[{{ $product->product_code }}]" data-min="1" data-max="1000">
                                                     <span class="input-counter__plus fas fa-plus"></span>
                                                 </div>
                                                 <!--====== End - Input Counter ======-->
@@ -110,136 +114,13 @@
                                         </td>
                                         <td>
                                             <div class="table-p__del-wrap">
-
-                                                <a class="far fa-trash-alt table-p__delete-link" href="#"></a>
+                                                <button type="submit" class="far fa-trash-alt table-p__delete-link" name="remove_product" value="{{ $product->product_code }}" style="background: none; border: none; cursor: pointer;"></button>
                                             </div>
                                         </td>
                                     </tr>
                                     <!--====== End - Row ======-->
+                                    @endforeach
 
-
-                                    <!--====== Row ======-->
-                                    <tr>
-                                        <td>
-                                            <div class="table-p__box">
-                                                <div class="table-p__img-wrap">
-
-                                                    <img class="u-img-fluid" src="images/product/women/product8.jpg"
-                                                        alt="">
-                                                </div>
-                                                <div class="table-p__info">
-
-                                                    <span class="table-p__name">
-
-                                                        <a href="product-detail.html">New Dress D Nice
-                                                            Elegant</a></span>
-
-                                                    <span class="table-p__category">
-
-                                                        <a href="shop-side-version-2.html">Women Clothing</a></span>
-                                                    <ul class="table-p__variant-list">
-                                                        <li>
-
-                                                            <span>Size: 22</span>
-                                                        </li>
-                                                        <li>
-
-                                                            <span>Color: Red</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-
-                                            <span class="table-p__price">$125.00</span>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__input-counter-wrap">
-
-                                                <!--====== Input Counter ======-->
-                                                <div class="input-counter">
-
-                                                    <span class="input-counter__minus fas fa-minus"></span>
-
-                                                    <input class="input-counter__text input-counter--text-primary-style"
-                                                        type="text" value="1" data-min="1" data-max="1000">
-
-                                                    <span class="input-counter__plus fas fa-plus"></span>
-                                                </div>
-                                                <!--====== End - Input Counter ======-->
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__del-wrap">
-
-                                                <a class="far fa-trash-alt table-p__delete-link" href="#"></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--====== End - Row ======-->
-
-
-                                    <!--====== Row ======-->
-                                    <tr>
-                                        <td>
-                                            <div class="table-p__box">
-                                                <div class="table-p__img-wrap">
-
-                                                    <img class="u-img-fluid" src="images/product/men/product8.jpg"
-                                                        alt="">
-                                                </div>
-                                                <div class="table-p__info">
-
-                                                    <span class="table-p__name">
-
-                                                        <a href="product-detail.html">New Fashion D Nice
-                                                            Elegant</a></span>
-
-                                                    <span class="table-p__category">
-
-                                                        <a href="shop-side-version-2.html">Men Clothing</a></span>
-                                                    <ul class="table-p__variant-list">
-                                                        <li>
-
-                                                            <span>Size: 22</span>
-                                                        </li>
-                                                        <li>
-
-                                                            <span>Color: Red</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-
-                                            <span class="table-p__price">$125.00</span>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__input-counter-wrap">
-
-                                                <!--====== Input Counter ======-->
-                                                <div class="input-counter">
-
-                                                    <span class="input-counter__minus fas fa-minus"></span>
-
-                                                    <input class="input-counter__text input-counter--text-primary-style"
-                                                        type="text" value="1" data-min="1" data-max="1000">
-
-                                                    <span class="input-counter__plus fas fa-plus"></span>
-                                                </div>
-                                                <!--====== End - Input Counter ======-->
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__del-wrap">
-
-                                                <a class="far fa-trash-alt table-p__delete-link" href="#"></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--====== End - Row ======-->
                                 </tbody>
                             </table>
                         </div>
@@ -248,23 +129,30 @@
                         <div class="route-box">
                             <div class="route-box__g1">
 
-                                <a class="route-box__link" href="shop-side-version-2.html"><i
+                                <a class="route-box__link" href="{{ route('frontend.index') }}"><i
                                         class="fas fa-long-arrow-alt-left"></i>
 
                                     <span>CONTINUE SHOPPING</span></a>
                             </div>
                             <div class="route-box__g2">
 
-                                <a class="route-box__link" href="cart.html"><i class="fas fa-trash"></i>
+                                
+                                    <form action="{{ route('cart.clear') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="route-box__link">
+                                            <i class="fas fa-trash"></i>
+                                            <span>CLEAR CART</span>
+                                        </button>
+                                    </form>
 
-                                    <span>CLEAR CART</span></a>
-
-                                <a class="route-box__link" href="cart.html"><i class="fas fa-sync"></i>
-
-                                    <span>UPDATE CART</span></a>
+                                    <button type="submit" class="route-box__link">
+                                        <i class="fas fa-sync"></i>
+                                        <span>UPDATE CART</span>
+                                    </button>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>

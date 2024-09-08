@@ -30,52 +30,26 @@
             </div>
 
             <div class="ecomNav-shopping-cart">
+                
+                @foreach($cartproducts as $product)
                 <div class="ecomNav-box">
                     <i class="fas fa-trash"></i>
                     <img src="{{ asset('client-side/photos/cart-img-1.png') }}" alt="">
                     <div class="ecomNav-content">
                         <div class="cartImgHeading">
-                            <img src="{{ asset('client-side/images/brand/b1.png') }}" class="cartImg" alt="">
-                            <h3>watermelon</h3>
+                            <img src="data:image/jpeg;base64,{{ $product->primary_image }}" class="cartImg" alt="">
+                            <h3>{{ $product->product_name }}</h3>
                         </div>
                         <div class="cartItemDets">
-                            <span class="ecomNav-price">$4.99/-</span>
-                            <span class="ecomNav-quantity">qty : 1</span>
+                            <span class="ecomNav-price">{{ ($product->sell_price * $cart[$product->product_code]) }}</span>
+                            <span class="ecomNav-quantity">Qty: {{ $cart[$product->product_code] }}</span>
                         </div>
                     </div>
                 </div>
+                @endforeach
 
-                <div class="ecomNav-box">
-                    <i class="fas fa-trash"></i>
-                    <img src="photos/cart-img-1.png" alt="">
-                    <div class="ecomNav-content">
-                        <div class="cartImgHeading">
-                            <img src="{{ asset('client-side/images/brand/b1.png') }}" class="cartImg" alt="">
-                            <h3>watermelon</h3>
-
-                        </div>
-                        <div class="cartItemDets">
-                            <span class="ecomNav-price">$4.99/-</span>
-                            <span class="ecomNav-quantity">qty : 1</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ecomNav-box">
-                    <i class="fas fa-trash"></i>
-                    <img src="{{ asset('client-side/photos/cart-img-1.png') }}" alt="">
-                    <div class="ecomNav-content">
-                        <div class="cartImgHeading">
-                            <img src="{{ asset('client-side/images/brand/b1.png') }}" class="cartImg" alt="">
-                            <h3>watermelon</h3>
-                        </div>
-                        <div class="cartItemDets">
-                            <span class="ecomNav-price">$4.99/-</span>
-                            <span class="ecomNav-quantity">qty : 1</span>
-                        </div>
-                    </div>
-                </div>
                 <div class="ecomNav-total">total : $19.69/-</div>
-                <a href="{{ route('frontend.checkout') }}" class="ecomNav-btn">checkout</a>
+                <a href="{{ route('frontend.cart') }}" class="ecomNav-btn">Cart Page</a>
             </div>
 
             <form action="" class="ecomNav-login-form">

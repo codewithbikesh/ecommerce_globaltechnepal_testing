@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\Frontend\FrontendCartController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Backend\ProfileController; 
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\ProductController;
@@ -91,8 +92,7 @@ Route::group([], function() {
     Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
     Route::get('/404', [DashboardController::class,'unexpectedError'])->name('frontend.404');  
     Route::get('/about', [DashboardController::class,'about'])->name('frontend.about');  
-    Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale');  
-    Route::get('/cart', [DashboardController::class,'cart'])->name('frontend.cart');  
+    Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale'); 
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
@@ -107,9 +107,15 @@ Route::group([], function() {
     Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   
     Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew'); 
     
-    Route::post('/', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
+    Route::post('/newsletter', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
     Route::post('/signup', [DashboardController::class, 'customer_signup'])->name('frontend.customer.signup');
     Route::post('/contact', [DashboardController::class, 'inquiry_store'])->name('frontend.inquiry_store');
+ 
+    Route::get('/cart', [FrontendCartController::class,'cart'])->name('frontend.cart');
+    Route::post('/cart-add', [FrontendCartController::class, 'addItem'])->name('cart.add');  
+    Route::post('/cart/update', [FrontendCartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
+    Route::post('/cart/clear', [FrontendCartController::class, 'clear'])->name('cart.clear');
 
 });
 

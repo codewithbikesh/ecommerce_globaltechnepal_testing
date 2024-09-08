@@ -246,7 +246,8 @@
                                 </div>
                             </div>
                             <div class="u-s-m-b-15">
-                                <form class="pd-detail__form">
+                                <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
+                                    @csrf
                                     <div class="pd-detail-inline-2">
                                         <div class="u-s-m-b-15">
 
@@ -256,7 +257,7 @@
                                                 <span class="input-counter__minus fas fa-minus"></span>
 
                                                 <input class="input-counter__text input-counter--text-primary-style"
-                                                    type="text" value="1" data-min="1" data-max="1000">
+                                                    type="text" value="1" name="quantity" data-min="1" data-max="1000">
 
                                                 <span class="input-counter__plus fas fa-plus"></span>
                                             </div>
@@ -264,6 +265,7 @@
                                         </div>
                                         <div class="u-s-m-b-15">
 
+                                            <input type="hidden" name="product_id" value="{{ $product->product_code }}">
                                             <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
                                         </div>
                                     </div>

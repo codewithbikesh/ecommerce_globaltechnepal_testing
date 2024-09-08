@@ -20,112 +20,141 @@ class DashboardController extends Controller
         $products = Product::limit(25)->get();
         $carousel = Carousel::all();
         $websitedata = WebsiteData::first();
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         // dd($products);
-        return view("frontend.index", compact("categories","products","carousel", "websitedata"));
+        return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts"));
     }
 
 
     // 404
     public function unexpectedError(){
         $websitedata = WebsiteData::first();
-        return view("frontend.404", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.404", compact("websitedata", "cart", "cartproducts"));
     }
 
     // about 
     public function about(){
         $websitedata = WebsiteData::first();
-        return view("frontend.about", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.about", compact("websitedata", "cart", "cartproducts"));
     }
 
     // Best Sale 
     public function bestSale(){
         $websitedata = WebsiteData::first();
-        return view("frontend.bestSale", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.bestSale", compact("websitedata", "cart", "cartproducts"));
     }
  
-    // cart
-    public function cart(){
-        $websitedata = WebsiteData::first();
-        return view("frontend.cart", compact("websitedata"));
-    }
 
     // checkout 
     public function checkout(){
         $websitedata = WebsiteData::first();
-        return view("frontend.checkout", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts"));
     }
 
     // contact 
     public function contact(){
         $websitedata = WebsiteData::first();
-        return view("frontend.contact", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.contact", compact("websitedata", "cart", "cartproducts"));
     }
 
     // dash-cancellation 
         public function dashCancellation(){
             $websitedata = WebsiteData::first();
-            return  view("frontend.dash-cancellation", compact("websitedata"));
+            $cart = session()->get('cart', []);
+            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            return  view("frontend.dash-cancellation", compact("websitedata", "cart", "cartproducts"));
         }
 
     //  dash-my-order 
     public function dashMyOrder(){
         $websitedata = WebsiteData::first();
-        return view("frontend.dash-my-order", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.dash-my-order", compact("websitedata", "cart", "cartproducts"));
     }
 
     // dashboard 
     public function account(){
         $websitedata = WebsiteData::first();
-        return view("frontend.account", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.account", compact("websitedata", "cart", "cartproducts"));
     }
 
     // explore 
     public function explore(){
         $websitedata = WebsiteData::first();
-        return view("frontend.explore", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.explore", compact("websitedata", "cart", "cartproducts"));
     }
 
     // lost-password 
     public function lostPassword(){
         $websitedata = WebsiteData::first();
-        return view("frontend.lost-password", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.lost-password", compact("websitedata", "cart", "cartproducts"));
     }
 
     // newarrival
     public function newarrival(){
         $websitedata = WebsiteData::first();
-        return view("frontend.newarrival", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.newarrival", compact("websitedata", "cart", "cartproducts"));
     }
 
     // product-detail 
     public function productDetails($id){
         $productDetails = Product::find($id);
         $websitedata = WebsiteData::first();
-        return view("frontend.product-detail", compact("websitedata","productDetails"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.product-detail", compact("websitedata","productDetails", "cart", "cartproducts"));
     }
 
     // shop list full 
     public function shopListFull(){
         $websitedata = WebsiteData::first();
-        return view("frontend.shop-list-full", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts"));
     }
 
     //  signin
     public function signin(){
         $websitedata = WebsiteData::first();
-        return view("frontend.signin", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.signin", compact("websitedata", "cart", "cartproducts"));
     }
 
     // signup 
     public function signup(){
         $websitedata = WebsiteData::first();
-        return view("frontend.signup", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+        return view("frontend.signup", compact("websitedata", "cart", "cartproducts"));
     }
 
     // whatsnew 
     public function whatsnew(){
         $websitedata = WebsiteData::first();
-         return view("frontend.whatsnew", compact("websitedata"));
+        $cart = session()->get('cart', []);
+        $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+         return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts"));
     }
 
     

@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
-use App\Models\Inquiry;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -74,9 +73,9 @@ class DashboardController extends Controller
     }
 
     // dashboard 
-    public function account(){
+    public function dashboard(){
         $websitedata = WebsiteData::first();
-        return view("frontend.account", compact("websitedata"));
+        return view("frontend.dashboard", compact("websitedata"));
     }
 
     // explore 
@@ -138,10 +137,11 @@ class DashboardController extends Controller
         $newsletter->gender = $request->gender;
         $newsletter->email = $request->email;
         if ($newsletter->save()) {
-            return redirect()->back()->with('success', 'Thank you for subscription.');
+            session()->flash('success', 'Thank you for Subscription.');
         } else {
-            return redirect()->back()->with('error', 'Error occured while subscribing newsletter. Please try again later.');
+            session()->flash('error', 'Error !');
         }
+        return redirect()->back();
     }
     
     public function customer_signup(Request $request)
@@ -164,30 +164,11 @@ class DashboardController extends Controller
         $customer->city = $request->city;
         $customer->street_address = $request->street_address;
         if ($customer->save()) {
-            return redirect()->route('frontend.signup')->with('success', 'Your Account have been successfully created. Please check your mail for verification.');
+            session()->flash('success', 'Your Account have been successfully created.');
         } else {
-            return redirect()->route('frontend.signup')->with('error', 'Error occured while creating account. Try again later.');
+            session()->flash('error', 'Error !');
         }
-    }
-    
-    public function inquiry_store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required',
-            'message' => 'required'
-        ]);
-        $inquiry = new Inquiry();
-        $inquiry->name = $request->name;
-        $inquiry->email = $request->email;
-        $inquiry->subject = $request->subject;
-        $inquiry->message = $request->message;
-        if ($inquiry->save()) {
-            return redirect()->route('frontend.contact')->with('success', 'Thank you for contacting with us. We will connect with you shortly.');
-        } else {
-            return redirect()->route('frontend.contact')->with('error', 'Error in submitting Form. Please try again later.');
-        }
+        return redirect()->back();
     }
 
 }

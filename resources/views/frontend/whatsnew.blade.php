@@ -28,475 +28,173 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                        @if ($newcategories->isNotEmpty())
                         <div class="filter-category-container">
                             <div class="filter__category-wrapper">
 
                                 <button class="btn filter__btn filter__btn--style-2 js-checked" type="button"
                                     data-filter="*">ALL</button>
                             </div>
+                            @foreach ($newcategories as $category)
                             <div class="filter__category-wrapper">
 
                                 <button class="btn filter__btn filter__btn--style-2" type="button"
-                                    data-filter=".outwear">OUTWEAR</button>
+                                    data-filter=".{{ $category }}">{{ $category }}</button>
                             </div>
-                            <div class="filter__category-wrapper">
-
-                                <button class="btn filter__btn filter__btn--style-2" type="button"
-                                    data-filter=".bottom">BOTTOM</button>
-                            </div>
-                            <div class="filter__category-wrapper">
-
-                                <button class="btn filter__btn filter__btn--style-2" type="button"
-                                    data-filter=".footwear">FOOTWEAR</button>
-                            </div>
-                            <div class="filter__category-wrapper">
-
-                                <button class="btn filter__btn filter__btn--style-2" type="button"
-                                    data-filter=".accessories">ACCESSORIES</button>
-                            </div>
+                            @endforeach
                         </div>
+                        @endif
                         <div class="filter__grid-wrapper u-s-m-t-30">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item outwear">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
+                               @if ($whatsnewproducts->isNotEmpty())
+                                   @foreach ($whatsnewproducts as $whatsnewproduct)
+                                   <div
+                                   class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item {{ $whatsnewproduct->category_id }}">
+                                   <div class="product-o product-o--hover-on product-o--radius">
+                                       <div class="product-o__wrap">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
+                                           <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                               href="{{ route('frontend.product-detail',$whatsnewproduct->id) }}">
 
-                                                    <img class="aspect__img" src="images/product/men/product11.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
+                                               <img class="aspect__img"
+                                                   src="data:image/jpeg;base64,{{$whatsnewproduct->primary_image}}" alt=""></a>
+                                           <div class="product-o__action-wrap">
+                                               <ul class="product-o__action-list">
+                                                   <li>
 
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
+                                                       <a id="quick-view-link" data-modal="modal" data-modal-id="#quick-look{{ $whatsnewproduct->id }}"
+                                                           data-tooltip="tooltip" data-placement="top"
+                                                           title="Quick View" value="{{ $whatsnewproduct->id }}"><i class="fas fa-search-plus"></i></a>
+                                                   </li>
+                                                   <li>
 
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
+                                                       <a data-modal="modal" data-modal-id="#add-to-cart"
+                                                           data-tooltip="tooltip" data-placement="top"
+                                                           title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                                   </li>
+                                                   <li>
 
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
+                                                       <a href="signin.html" data-tooltip="tooltip"
+                                                           data-placement="top" title="Add to Wishlist"><i
+                                                               class="fas fa-heart"></i></a>
+                                                   </li>
+                                                   <li>
 
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                                       <a href="signin.html" data-tooltip="tooltip"
+                                                           data-placement="top"
+                                                           title="Email me When the price drops"><i
+                                                               class="fas fa-envelope"></i></a>
+                                                   </li>
+                                               </ul>
+                                           </div>
+                                       </div>
+                                       <span class="product-o__category">
 
-                                            <span class="product-bs__category">
+                                           <a href="shop-side-version-2.html">{{ $whatsnewproduct->product_name }}</a></span>
 
-                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
+                                       <span class="product-o__name">
 
-                                            <span class="product-bs__name">
+                                           <a
+                                               href="{{ route('frontend.product-detail',$whatsnewproduct->id) }}">{{ $whatsnewproduct->product_name }}</a></span>
+                                       <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
+                                               class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                               class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
 
-                                                <a href="product-detail.html">Black &amp; White Sweater</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
+                                           <span class="product-o__review">(23)</span>
+                                       </div>
 
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
+                                       <span class="product-o__price">{{ $whatsnewproduct->actual_price }}
 
-                                            <span class="product-bs__price">$125.00
+                                           <span class="product-o__discount">{{ $whatsnewproduct->sell_price }}</span></span>
+                                   </div>
+                               </div>                                       
+<!--====== Quick Look Modal ======-->
+<div class="modal fade" id="quick-look{{ $whatsnewproduct->id }}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal--shadow">
 
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
+            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <!--====== Product Detail ======-->
+                        <div class="pd u-s-m-b-30">
+                            <div class="pd-wrap">
+                                <div id="js-product-detail-modal">
+                                    <div>
+
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $whatsnewproduct->primary_image }}" alt="">
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item outwear">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
+                            </div>
+                        </div>
+                        <!--====== End - Product Detail ======-->
+                    </div>
+                    <div class="col-lg-7">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
+                        <!--====== Product Right Side Details ======-->
+                        <div class="pd-detail">
+                            <div>
 
-                                                    <img class="aspect__img" src="images/product/women/product15.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
+                                <span class="pd-detail__name">{{ $whatsnewproduct->product_name }}</span>
+                            </div>
+                            <div>
+                                <div class="pd-detail__inline">
 
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
+                                    <span class="pd-detail__price">{{ $whatsnewproduct->sell_price }}</span>
+                                    @php
+                                $actualPrice = $whatsnewproduct->actual_price;
+                                $sellPrice = $whatsnewproduct->sell_price;
+                            
+                               
+                                $discountPercentage = $actualPrice > 0 
+                                    ? round(((($actualPrice - $sellPrice) / $actualPrice) * 100), 2) 
+                                    : 0;
+                                   @endphp
+                                    <span class="pd-detail__discount">({{  $discountPercentage }}% OFF)</span><del
+                                        class="pd-detail__del">{{ $whatsnewproduct->actual_price }}</del>
+                                </div>
+                            </div>
+                            <div class="u-s-m-b-15">
+                                <div class="pd-detail__inline">
+                                    <span class="pd-detail__stock">{{ $whatsnewproduct->stock_quantity }} in stock</span>
+                                </div>
+                            </div>
+                            <div class="u-s-m-b-15">
+                                <form class="pd-detail__form">
+                                    <div class="pd-detail-inline-2">
+                                        <div class="u-s-m-b-15">
 
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
+                                            <!--====== Input Counter ======-->
+                                            <div class="input-counter">
 
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
+                                                <span class="input-counter__minus fas fa-minus"></span>
 
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <input class="input-counter__text input-counter--text-primary-style"
+                                                    type="text" value="1" data-min="1" data-max="1000">
+
+                                                <span class="input-counter__plus fas fa-plus"></span>
                                             </div>
+                                            <!--====== End - Input Counter ======-->
+                                        </div>
+                                        <div class="u-s-m-b-15">
 
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Color Yellow Modest A Fashion</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
+                                            <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item bottom">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/men/product2.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">White Full Men Underwear</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item bottom">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/women/product3.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Color Yellow Modest B Fashion</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item accessories">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/men/product3.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Blown Sunglasses For Deux</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item accessories">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/women/product4.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Ladies Black Bag</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item footwear">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/men/product13.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Casual Shoes Independence</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item footwear">
-                                    <div class="product-bs">
-                                        <div class="product-bs__container">
-                                            <div class="product-bs__wrap">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="images/product/men/product14.jpg"
-                                                        alt=""></a>
-                                                <div class="product-bs__action-wrap">
-                                                    <ul class="product-bs__action-list">
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#quick-look"><i
-                                                                    class="fas fa-search-plus"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a data-modal="modal" data-modal-id="#add-to-cart"><i
-                                                                    class="fas fa-plus-circle"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-heart"></i></a>
-                                                        </li>
-                                                        <li>
-
-                                                            <a href="signin.html"><i class="fas fa-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <span class="product-bs__category">
-
-                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                            <span class="product-bs__name">
-
-                                                <a href="product-detail.html">Men Casual Shoes Charcoal</a></span>
-                                            <div class="product-bs__rating gl-rating-style"><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                    class="far fa-star"></i>
-
-                                                <span class="product-bs__review">(23)</span>
-                                            </div>
-
-                                            <span class="product-bs__price">$125.00
-
-                                                <span class="product-bs__discount">$160.00</span></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--====== End - Product Right Side Details ======-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--====== End - Quick Look Modal ======-->
+                               @endforeach
+                               @endif
                             </div>
                         </div>
                     </div>

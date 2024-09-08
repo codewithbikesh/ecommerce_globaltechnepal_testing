@@ -19,7 +19,7 @@
                                     <span class="dash__text u-s-m-b-16 userName">Hello, John Doe</span>
                                     <ul class="dash__f-list pageUl">
                                         <li>
-                                            <a class="dash-active" href="{{ route('frontend.dashboard') }}">Manage My Account</a>
+                                            <a class="dash-active" href="{{ route('frontend.account') }}">Manage My Account</a>
                                         </li>
 
                                         <li>

@@ -58,7 +58,7 @@
                                         </li>
                                         <li>
 
-                                            <a href="{{ route('frontend.dashboard') }}">Account</a>
+                                            <a href="{{ route('frontend.account') }}">Account</a>
                                         </li>
                                     </ul>
                                 </div>

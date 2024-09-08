@@ -120,9 +120,9 @@
                                                         <ul class="product-o__action-list">
                                                             <li>
 
-                                                                <a data-modal="modal" data-modal-id="#quick-look"
+                                                                <a id="quick-view-link" data-modal="modal" data-modal-id="#quick-look"
                                                                     data-tooltip="tooltip" data-placement="top"
-                                                                    title="Quick View"><i class="fas fa-search-plus"></i></a>
+                                                                    title="Quick View" value="{{ $product->id }}"><i class="fas fa-search-plus"></i></a>
                                                             </li>
                                                             <li>
 
@@ -224,7 +224,7 @@
                                             <li>
 
                                                 <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                    data-placement="top" title="Quick View" id="quickView"><i
+                                                    data-placement="top" title="Quick View"><i
                                                         class="fas fa-search-plus"></i></a>
                                             </li>
                                             <li>
@@ -1433,13 +1433,13 @@
 
 
 @endsection
-@section('constumJs')
-<script type="text/javascript">
- //   Get Quick View Details using jquery 
- $(document).ready(function() {
-        $('a, #quickView').on(click, function {
-            alert('Quick View');
+@section('costomJs')
+<script>
+    $(document).ready(function() {
+        $('#quick-view-link').on('click', function() {
+        var value = $(this).attr('value');
+        alert('Value attribute: ' + value);
         });
     });
-</script>
+    </script>
 @endsection

@@ -26,12 +26,12 @@ class DashboardController extends Controller
     }
 
 
-    // 404
+    // account
     public function account(){
         $websitedata = WebsiteData::first();
         $cart = session()->get('cart', []);
         $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
-        return view("frontend.404", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.account", compact("websitedata", "cart", "cartproducts"));
     }
 
     // about 

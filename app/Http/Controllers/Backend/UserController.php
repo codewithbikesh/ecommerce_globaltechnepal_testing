@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->password= $request->password;
+        $user->password= Hash::make($request->password);
         $user->address = $request->address;
         $user->country = $request->country;
         $user->account_type = $request->account_type;

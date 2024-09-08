@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Carousel;
 use App\Models\Product;
 use App\Models\WebsiteData;
 use App\Models\Newsletter;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -135,6 +137,33 @@ class DashboardController extends Controller
         $newsletter->email = $request->email;
         if ($newsletter->save()) {
             session()->flash('success', 'Thank you for Subscription.');
+        } else {
+            session()->flash('error', 'Error !');
+        }
+        return redirect()->back();
+    }
+    
+    public function customer_signup(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required',
+            'email' => 'required|email|unique:customers',
+            'phone' => 'required',
+            'password' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'street_address' => 'required'
+        ]);
+        $customer = new Customer();
+        $customer->full_name = $request->full_name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->password = Hash::make($request->password);
+        $customer->province = $request->province;
+        $customer->city = $request->city;
+        $customer->street_address = $request->street_address;
+        if ($customer->save()) {
+            session()->flash('success', 'Your Account have been successfully created.');
         } else {
             session()->flash('error', 'Error !');
         }

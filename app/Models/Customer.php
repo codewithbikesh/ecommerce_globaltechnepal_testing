@@ -9,5 +9,5 @@ class Customer extends Model
 {
     use HasFactory;
     protected $table = 'customers'; // specify the correct table name
-    protected $fillable = ['name', 'email', 'address', 'phone', 'password'];
+    protected $fillable = ['full_name', 'email', 'password', 'phone', 'province', 'city', 'street_address', 'postal_code'];
 }

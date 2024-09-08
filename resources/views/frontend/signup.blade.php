@@ -32,56 +32,72 @@
                             <div class="l-f-o">
                                 <div class="l-f-o__pad-box">
                                     <h1 class="gl-h1">PERSONAL INFORMATION</h1>
-                                    <form class="l-f-o__form">
+                                    <form class="l-f-o__form" method="POST" action="{{ route('frontend.customer.signup') }}">
+                                        @csrf
                                         <div class="gl-s-api">
                                             <div class="u-s-m-b-15">
 
                                                 <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i
                                                         class="fab fa-facebook-f"></i>
-
                                                     <span>Signup with Facebook</span></button>
                                             </div>
                                             <div class="u-s-m-b-30">
 
                                                 <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i
                                                         class="fab fa-google"></i>
-
                                                     <span>Signup with Google</span></button>
                                             </div>
                                         </div>
                                         <div class="u-s-m-b-30">
 
-                                            <label class="gl-label" for="reg-fname">FIRST NAME *</label>
-
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="reg-fname" placeholder="First Name">
+                                            <label class="gl-label" for="reg-fname">FULL NAME *</label>
+                                            <input class="input-text input-text--primary-style" name="full_name" type="text"
+                                                 placeholder="Full Name" required>
                                         </div>
                                         <div class="u-s-m-b-30">
 
-                                            <label class="gl-label" for="reg-lname">LAST NAME *</label>
-
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="reg-lname" placeholder="Last Name">
+                                            <label class="gl-label" for="reg-lname">PHONE *</label>
+                                            <input class="input-text input-text--primary-style" name="phone" type="text"
+                                                 placeholder="Phone" required>
                                         </div>
 
                                         <div class="u-s-m-b-30">
 
-                                            <label class="gl-label" for="reg-email">E-MAIL *</label>
-
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="reg-email" placeholder="Enter E-mail">
+                                            <label class="gl-label" for="reg-email">EMAIL *</label>
+                                            <input class="input-text input-text--primary-style" name="email" type="text"
+                                                 placeholder="Enter Email" required>
                                         </div>
                                         <div class="u-s-m-b-30">
 
                                             <label class="gl-label" for="reg-password">PASSWORD *</label>
+                                            <input class="input-text input-text--primary-style" name="password" type="password"
+                                                 placeholder="Enter Password" required>
+                                        </div>
+                                        
+                                        <div class="u-s-m-b-30">
 
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="reg-password" placeholder="Enter Password">
+                                            <label class="gl-label" for="reg-lname">PROVINCE *</label>
+                                            <input class="input-text input-text--primary-style" name="province" type="text"
+                                                 placeholder="Province" required>
+                                        </div>
+                                        
+                                        <div class="u-s-m-b-30">
+
+                                            <label class="gl-label" for="reg-lname">CITY *</label>
+                                            <input class="input-text input-text--primary-style" name="city" type="text"
+                                                 placeholder="City" required>
+                                        </div>
+                                        
+                                        <div class="u-s-m-b-30">
+
+                                            <label class="gl-label" for="reg-lname">STREET *</label>
+                                            <input class="input-text input-text--primary-style" name="street_address" type="text"
+                                                 placeholder="Street" required>
                                         </div>
                                         <div class="u-s-m-b-15">
 
                                             <button class="btn btn--e-transparent-brand-b-2"
-                                                type="submit">CREATE</button>
+                                                type="submit">CREATE ACCOUNT</button>
                                         </div>
 
                                     </form>

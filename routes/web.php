@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/whatsnew', [DashboardController::class,'whatsnew'])->name('frontend.whatsnew'); 
     
     Route::post('/', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
+    Route::post('/signup', [DashboardController::class, 'customer_signup'])->name('frontend.customer.signup');
 
 
 require __DIR__.'/auth.php';

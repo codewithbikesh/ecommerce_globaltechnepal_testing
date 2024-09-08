@@ -210,23 +210,23 @@
                                 <div id="js-product-detail-modal">
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -234,23 +234,23 @@
                                 <div id="js-product-detail-modal-thumbnail">
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-4.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-5.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -268,10 +268,18 @@
                             <div>
                                 <div class="pd-detail__inline">
 
-                                    <span class="pd-detail__price">$6.99</span>
-
-                                    <span class="pd-detail__discount">(76% OFF)</span><del
-                                        class="pd-detail__del">$28.97</del>
+                                    <span class="pd-detail__price">{{ $product->sell_price }}</span>
+                                    @php
+                                $actualPrice = $product->actual_price;
+                                $sellPrice = $product->sell_price;
+                            
+                               
+                                $discountPercentage = $actualPrice > 0 
+                                    ? round(((($actualPrice - $sellPrice) / $actualPrice) * 100), 2) 
+                                    : 0;
+                                   @endphp
+                                    <span class="pd-detail__discount">({{  $discountPercentage }}% OFF)</span><del
+                                        class="pd-detail__del">{{ $product->actual_price }}</del>
                                 </div>
                             </div>
                             <div class="u-s-m-b-15">
@@ -287,7 +295,7 @@
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail__inline">
 
-                                    <span class="pd-detail__stock">200 in stock</span>
+                                    <span class="pd-detail__stock">{{ $product->stock_quantity }} in stock</span>
 
                                     <span class="pd-detail__left">Only 2 left</span>
                                 </div>
@@ -395,13 +403,6 @@
     </div>
 </div>
 <!--====== End - Quick Look Modal ======-->
-
-
-
-
-
-
-
                                     @endforeach
                                 @endif
                             </div>

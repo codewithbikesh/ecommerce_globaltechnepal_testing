@@ -155,7 +155,6 @@
 
 <!--====== Modal Section ======-->
 
-
 {{-- <!--====== Quick Look Modal ======-->
 <div class="modal fade" id="quick-look">
     <div class="modal-dialog modal-dialog-centered">

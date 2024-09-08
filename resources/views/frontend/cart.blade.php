@@ -1,28 +1,6 @@
 @extends('frontend.layouts.master')
 @section('content')
-<style>
-    /* Style adjustments to make the button look like a link */
-    .route-box__link {
-        display: inline-flex;
-        align-items: center;
-        text-decoration: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px 20px;
-        margin: 0 5px; /* Adjust spacing between buttons */
-    }
-    .route-box__link i {
-        margin-right: 5px;
-    }
-    .route-box__link span {
-        margin-left: 5px;
-    }
-    .route-box__g2 {
-        display: flex; /* Use flexbox for horizontal alignment */
-        gap: 10px; /* Space between buttons */
-    }
-</style>
+
 
 <!--====== App Content ======-->
 <div class="app-content">
@@ -75,84 +53,99 @@
                 <div class="row">
                     <form action="{{ route('cart.update') }}" method="POST">
                         @csrf
-                    <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                        <div class="table-responsive">
-                            <table class="table-p">
-                                <tbody>
+                        <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                            <div class="table-responsive">
+                                <table class="table-p">
+                                    <tbody>
 
-                                    @foreach($cartproducts as $product)
-                                    <!--====== Row ======-->
-                                    <tr>
-                                        <td>
-                                            <div class="table-p__box">
-                                                <div class="table-p__img-wrap">
-                                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
-                                                </div>
-                                                <div class="table-p__info">
-                                                    <span class="table-p__name">
-                                                        <a href="product-detail.html">{{ $product->product_name }}</a></span>
-                                                    <span class="table-p__category">
-                                                        <a href="shop-side-version-2.html">{{ $product->category_id}}</a></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="table-p__price">{{ ($product->sell_price * $cart[$product->product_code]) }}</span>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__input-counter-wrap">
+                                        @php
+                                            $total = 0;
+                                        @endphp
+                                        @foreach($cartproducts as $product)
+                                            <!--====== Row ======-->
+                                            <tr>
+                                                <td>
+                                                    <div class="table-p__box">
+                                                        <div class="table-p__img-wrap">
+                                                            <img class="u-img-fluid"
+                                                                src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="table-p__info">
+                                                            <span class="table-p__name">
+                                                                <a
+                                                                    href="product-detail.html">{{ $product->product_name }}</a></span>
+                                                            <span class="table-p__category">
+                                                                <a
+                                                                    href="shop-side-version-2.html">{{ $product->category_id}}</a></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                          
+                                            @php
+                                                $subtotal = $product->sell_price * $cart[$product->product_code];
+                                                $total += $subtotal;
+                                            @endphp
 
-                                                <!--====== Input Counter ======-->
-                                                <div class="input-counter">
-                                                    <span class="input-counter__minus fas fa-minus"></span>
-                                                    <input class="input-counter__text input-counter--text-primary-style"
-                                                        type="text" value="{{ $cart[$product->product_code] }}" name="quantities[{{ $product->product_code }}]" data-min="1" data-max="1000">
-                                                    <span class="input-counter__plus fas fa-plus"></span>
-                                                </div>
-                                                <!--====== End - Input Counter ======-->
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-p__del-wrap">
-                                                <button type="submit" class="far fa-trash-alt table-p__delete-link" name="remove_product" value="{{ $product->product_code }}" style="background: none; border: none; cursor: pointer;"></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--====== End - Row ======-->
-                                    @endforeach
+                                                <td>
+                                                    <span
+                                                        class="table-p__price">{{ $product->sell_price }}</span>
+                                                </td>
+                                                <td>
+                                                    <div class="table-p__input-counter-wrap">
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="route-box">
-                            <div class="route-box__g1">
+                                                        <!--====== Input Counter ======-->
+                                                        <div class="input-counter">
+                                                            <span class="input-counter__minus fas fa-minus"></span>
+                                                            <input
+                                                                class="input-counter__text input-counter--text-primary-style"
+                                                                type="text" value="{{ $cart[$product->product_code] }}"
+                                                                name="quantities[{{ $product->product_code }}]" data-min="1"
+                                                                data-max="1000">
+                                                            <span class="input-counter__plus fas fa-plus"></span>
+                                                        </div>
+                                                        <!--====== End - Input Counter ======-->
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="table-p__del-wrap">
+                                                        <button type="submit" class="far fa-trash-alt table-p__delete-link"
+                                                            name="remove_product" value="{{ $product->product_code }}"
+                                                            style="background: none; border: none; cursor: pointer;"></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!--====== End - Row ======-->
+                                        @endforeach
 
-                                <a class="route-box__link" href="{{ route('frontend.index') }}"><i
-                                        class="fas fa-long-arrow-alt-left"></i>
-
-                                    <span>CONTINUE SHOPPING</span></a>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="route-box__g2">
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="route-box">
+                                <div class="route-box__g1">
 
-                                
-                                    <form action="{{ route('cart.clear') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="route-box__link">
+                                    <a class="route-box__link" href="{{ route('frontend.index') }}"><i
+                                            class="fas fa-long-arrow-alt-left"></i>
+
+                                        <span>CONTINUE SHOPPING</span></a>
+                                </div>
+                                <div class="route-box__g2">
+
+                                        <button type="submit" name="clear_cart" class="route-box__link">
                                             <i class="fas fa-trash"></i>
                                             <span>CLEAR CART</span>
                                         </button>
-                                    </form>
 
-                                    <button type="submit" class="route-box__link">
+                                    <button type="submit" name="update_cart" class="route-box__link">
                                         <i class="fas fa-sync"></i>
                                         <span>UPDATE CART</span>
                                     </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -233,6 +226,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                            @php
+                                                $shipping = 100;
+                                                $amount_before_tax = $shipping + $total;
+                                                $tax = 13/100 * $amount_before_tax;
+                                                $grand_total = $amount_before_tax + $tax;
+                                            @endphp
+
                                 <div class="col-lg-4 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">
                                         <div class="u-s-m-b-30">
@@ -240,19 +241,19 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>SHIPPING</td>
-                                                        <td>$4.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>TAX</td>
-                                                        <td>$0.00</td>
+                                                        <td>{{ number_format($shipping, 2) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>SUBTOTAL</td>
-                                                        <td>$379.00</td>
+                                                        <td>{{ number_format($total, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TAX</td>
+                                                        <td>{{ number_format($tax, 2) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>GRAND TOTAL</td>
-                                                        <td>$379.00</td>
+                                                        <td>{{ number_format($grand_total, 2)}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

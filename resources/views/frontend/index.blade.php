@@ -120,15 +120,15 @@
                                                         <ul class="product-o__action-list">
                                                             <li>
 
-                                                                <a id="quick-view-link" data-modal="modal" data-modal-id="#quick-look{{ $product->id }}"
+                                                                <a id="quick-view-link" data-modal="modal" data-modal-id="#quick-look{{ $product->product_code }}"
                                                                     data-tooltip="tooltip" data-placement="top"
-                                                                    title="Quick View" value="{{ $product->id }}"><i class="fas fa-search-plus"></i></a>
+                                                                    title="Quick View" value="{{ $product->product_code }}"><i class="fas fa-search-plus"></i></a>
                                                             </li>
                                                             <li>
 
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart"
-                                                                    data-tooltip="tooltip" data-placement="top"
-                                                                    title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                                                <a data-modal="modal" data-modal-id="#add-to-cart{{ $product->product_code }}"
+                                                                    data-tooltip="tooltip" data-placement="top" value="{{ $product->product_code }}"
+                                                                    title="Add to Cart"><i class="fas fa-shopping-cart"></i></a>
                                                             </li>
                                                             <li>
 
@@ -153,7 +153,7 @@
                                                 <span class="product-o__name">
 
                                                     <a
-                                                        href="{{ route('frontend.product-detail',$product->id) }}">{{ $product->product_name }}</a></span>
+                                                        href="{{ route('frontend.product-detail',$product->product_code) }}">{{ $product->product_name }}</a></span>
                                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                         class="fas fa-star"></i><i class="fas fa-star"></i><i
                                                         class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -171,7 +171,7 @@
 
                                         
 <!--====== Quick Look Modal ======-->
-<div class="modal fade" id="quick-look{{ $product->id }}">
+<div class="modal fade" id="quick-look{{ $product->product_code }}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal--shadow">
 
@@ -265,7 +265,7 @@
                                         </div>
                                         <div class="u-s-m-b-15">
 
-                                            <input type="hidden" name="product_id" value="{{ $product->product_code }}">
+                                            <input type="hidden" name="product_code" value="{{ $product->product_code }}">
                                             <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
                                         </div>
                                     </div>
@@ -280,6 +280,65 @@
     </div>
 </div>
 <!--====== End - Quick Look Modal ======-->
+
+<!--====== Add to Cart Modal ======-->
+<div class="modal fade" id="add-to-cart{{ $product->product_code }}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-radius modal-shadow">
+
+            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+            <div class="modal-body">
+                
+            <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
+            @csrf
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="success u-s-m-b-30">
+                            <div class="success__img-wrap">
+                                <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
+                            </div>
+                            
+                            <div class="success__info-wrap">
+
+                                <span class="success__name">{{ $product->product_name }}</span>
+
+                                <div class="input-counter">
+                                <span class="input-counter__minus fas fa-minus"></span>
+                                <input class="input-counter__text input-counter--text-primary-style"
+                                type="text" value="1" name="quantity" data-min="1" data-max="1000">
+                                <span class="input-counter__plus fas fa-plus"></span>
+                                </div>
+
+                                <span class="success__price">{{ $product->sell_price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="s-option">
+
+                            <div class="s-option__link-box">
+
+                                <a class="s-option__link btn--e-white-brand-shadow" href="frontend.index">CONTINUE
+                                    SHOPPING</a>
+
+                                <a class="s-option__link btn--e-white-brand-shadow" href="frontend.cart">GO TO CART PAGE</a>
+
+                                <input type="hidden" name="product_code" value="{{ $product->product_code }}">
+                                <button class="s-option__link btn--e-brand-shadow" type="submit">ADD TO CART</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--====== End - Add to Cart Modal ======-->
+
+
+
+
                                     @endforeach
                                 @endif
                             </div>

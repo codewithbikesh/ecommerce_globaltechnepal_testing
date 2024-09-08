@@ -446,7 +446,7 @@
 
                         <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
 
-                            <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a>
+                            <img class="u-img-fluid u-d-block" src="{{ asset('client-side/images/newsletter/newsletter.jpg') }}" alt=""></a>
                     </div>
                     <div class="col-lg-6 new-l__col-2">
                         <div class="new-l__section u-s-m-t-30">

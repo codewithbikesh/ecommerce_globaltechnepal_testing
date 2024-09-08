@@ -120,7 +120,7 @@
                                                         <ul class="product-o__action-list">
                                                             <li>
 
-                                                                <a id="quick-view-link" data-modal="modal" data-modal-id="#quick-look"
+                                                                <a class="quick-view-link" data-modal="modal" data-modal-id="#quick-look"
                                                                     data-tooltip="tooltip" data-placement="top"
                                                                     title="Quick View" value="{{ $product->id }}"><i class="fas fa-search-plus"></i></a>
                                                             </li>
@@ -1436,7 +1436,7 @@
 @section('costomJs')
 <script>
     $(document).ready(function() {
-        $('#quick-view-link').on('click', function() {
+        $('.quick-view-link').on('click', function() {
         var value = $(this).attr('value');
         alert('Value attribute: ' + value);
         });

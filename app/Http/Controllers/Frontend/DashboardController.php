@@ -97,9 +97,10 @@ class DashboardController extends Controller
     }
 
     // product-detail 
-    public function productDetails(){
+    public function productDetails($id){
+        $productDetails = Product::find($id);
         $websitedata = WebsiteData::first();
-        return view("frontend.product-detail", compact("websitedata"));
+        return view("frontend.product-detail", compact("websitedata","productDetails"));
     }
 
     // shop list full 

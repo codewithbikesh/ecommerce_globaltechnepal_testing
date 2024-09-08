@@ -12,20 +12,20 @@
                     <div class="pd u-s-m-b-30">
                         <div class="slider-fouc pd-wrap">
                             <div id="pd-o-initiate">
-                                <div class="pd-o-img-wrap" data-src="images/product/product-d-1.jpg">
+                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
 
-                                    <img class="u-img-fluid" src="images/product/product-d-1.jpg"
-                                        data-zoom-image="images/product/product-d-1.jpg" alt="">
+                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
+                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                 </div>
-                                <div class="pd-o-img-wrap" data-src="images/product/product-d-2.jpg">
+                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
 
-                                    <img class="u-img-fluid" src="images/product/product-d-2.jpg"
-                                        data-zoom-image="images/product/product-d-2.jpg" alt="">
+                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
+                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                 </div>
-                                <div class="pd-o-img-wrap" data-src="images/product/product-d-3.jpg">
+                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
 
-                                    <img class="u-img-fluid" src="images/product/product-d-3.jpg"
-                                        data-zoom-image="images/product/product-d-3.jpg" alt="">
+                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
+                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                 </div>
 
                             </div>
@@ -37,15 +37,15 @@
                                 <div id="pd-o-thumbnail">
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-2.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                     </div>
                                     <div>
 
-                                        <img class="u-img-fluid" src="images/product/product-d-3.jpg" alt="">
+                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
                                     </div>
 
                                 </div>
@@ -60,15 +60,23 @@
                     <div class="pd-detail">
                         <div>
 
-                            <span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span>
+                            <span class="pd-detail__name">{{ $productDetails->product_name }}</span>
                         </div>
                         <div>
                             <div class="pd-detail__inline">
 
-                                <span class="pd-detail__price">$6.99</span>
-
-                                <span class="pd-detail__discount">(76% OFF)</span><del
-                                    class="pd-detail__del">$28.97</del>
+                                <span class="pd-detail__price">{{ $productDetails->sell_price }}</span>
+                                @php
+                                $actualPrice = $productDetails->actual_price;
+                                $sellPrice = $productDetails->sell_price;
+                            
+                                // Avoid division by zero and negative percentages
+                                $discountPercentage = $actualPrice > 0 
+                                    ? round(((($actualPrice - $sellPrice) / $actualPrice) * 100), 2) 
+                                    : 0;
+                            @endphp
+                                <span class="pd-detail__discount">({{ $discountPercentage }}% OFF)</span><del
+                                    class="pd-detail__del">{{ $productDetails->actual_price }}</del>
                             </div>
                         </div>
                         <div class="u-s-m-b-15">
@@ -84,7 +92,7 @@
                         <div class="u-s-m-b-15">
                             <div class="pd-detail__inline">
 
-                                <span class="pd-detail__stock">200 in stock</span>
+                                <span class="pd-detail__stock">{{ $productDetails->stock_quantity }} in stock</span>
 
                                 <span class="pd-detail__left">Only 2 left</span>
                             </div>

@@ -112,7 +112,7 @@
                                                 <div class="product-o__wrap">
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                        href="product-detail.html">
+                                                        href="{{ route('frontend.product-detail',$product->id) }}">
 
                                                         <img class="aspect__img"
                                                             src="data:image/jpeg;base64,{{$product->primary_image}}" alt=""></a>
@@ -153,7 +153,7 @@
                                                 <span class="product-o__name">
 
                                                     <a
-                                                        href="{{ route('frontend.product-detail') }}">{{ $product->product_name }}</a></span>
+                                                        href="{{ route('frontend.product-detail',$product->id) }}">{{ $product->product_name }}</a></span>
                                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                         class="fas fa-star"></i><i class="fas fa-star"></i><i
                                                         class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -215,7 +215,7 @@
                                 <div class="product-o__wrap">
 
                                     <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                        href="{{ route('frontend.product-detail') }}">
+                                        href="{{ route('frontend.product-detail',$product->id) }}">
 
                                         <img class="aspect__img" src="images/product/electronic/product13.jpg"
                                             alt=""></a>
@@ -425,7 +425,7 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="{{ route('frontend.product-detail') }}">Sony DSLR 2K Camera</a></span>
+                                    <a href="{{ route('frontend.product-detail',$product->id) }}">Sony DSLR 2K Camera</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i
                                         class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
                                         class="far fa-star"></i>
@@ -629,7 +629,7 @@
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail') }}">
+                                    href="{{ route('frontend.product-detail',$product->id) }}">
 
                                     <img class="aspect__img" src="images/product/electronic/product19.jpg" alt=""></a>
                                 <div class="product-o__action-wrap">
@@ -667,7 +667,7 @@
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail') }}">Tablet 14inch Screen</a></span>
+                                <a href="{{ route('frontend.product-detail',$product->id) }}">Tablet 14inch Screen</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i>
@@ -685,7 +685,7 @@
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail') }}">
+                                    href="{{ route('frontend.product-detail',$product->id) }}">
 
                                     <img class="aspect__img" src="images/product/electronic/product20.jpg" alt=""></a>
                                 <div class="product-o__action-wrap">
@@ -723,7 +723,7 @@
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail') }}">Tablet 18inch Screen</a></span>
+                                <a href="{{ route('frontend.product-detail',$product->id) }}">Tablet 18inch Screen</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i>
@@ -741,7 +741,7 @@
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail') }}">
+                                    href="{{ route('frontend.product-detail',$product->id) }}">
 
                                     <img class="aspect__img" src="images/product/electronic/product21.jpg" alt=""></a>
                                 <div class="product-o__action-wrap">
@@ -779,7 +779,7 @@
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail') }}">Tablet 13inch Screen Ram
+                                <a href="{{ route('frontend.product-detail',$product->id) }}">Tablet 13inch Screen Ram
                                     16GB</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -798,7 +798,7 @@
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail') }}">
+                                    href="{{ route('frontend.product-detail',$product->id) }}">
 
                                     <img class="aspect__img" src="images/product/electronic/product22.jpg" alt=""></a>
                                 <div class="product-o__action-wrap">
@@ -836,7 +836,7 @@
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail') }}">Tablet 12inch Screen Ram
+                                <a href="{{ route('frontend.product-detail',$product->id) }}">Tablet 12inch Screen Ram
                                     16GB</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -957,7 +957,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product23.jpg"
                                                 alt=""></a>
@@ -970,7 +970,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 15 Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15 Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>
@@ -982,7 +982,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product24.jpg"
                                                 alt=""></a>
@@ -995,7 +995,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 13 Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 13 Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>
@@ -1007,7 +1007,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product25.jpg"
                                                 alt=""></a>
@@ -1020,7 +1020,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 15 Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15 Ram
                                                 8GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>
@@ -1040,7 +1040,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product26.jpg"
                                                 alt=""></a>
@@ -1053,7 +1053,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 10 Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 10 Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00
@@ -1067,7 +1067,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product27.jpg"
                                                 alt=""></a>
@@ -1093,7 +1093,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product28.jpg"
                                                 alt=""></a>
@@ -1106,7 +1106,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 15 Ultra Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15 Ultra Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00
@@ -1128,7 +1128,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product29.jpg"
                                                 alt=""></a>
@@ -1144,7 +1144,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 20 Ultra Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 20 Ultra Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>
@@ -1156,7 +1156,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product30.jpg"
                                                 alt=""></a>
@@ -1172,7 +1172,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 11 Ultra Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 11 Ultra Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>
@@ -1184,7 +1184,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail') }}">
+                                            href="{{ route('frontend.product-detail',$product->id) }}">
 
                                             <img class="aspect__img" src="images/product/electronic/product31.jpg"
                                                 alt=""></a>
@@ -1200,7 +1200,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail') }}">Razor Gear 10 Ultra Ram
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 10 Ultra Ram
                                                 16GB</a></span>
 
                                         <span class="product-l__price">$125.00</span>

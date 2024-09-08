@@ -48,9 +48,9 @@
             <td>{{ $product->stock_quantity }}</td>
             <td>
               <div style="display: flex; align-items: center;">
-                <form method="post" action="" style="margin-right: 10px;">
+                <form method="post" action="{{ route('backend.products.view') }}" style="margin-right: 10px;">
                 @csrf
-                  <input type="hidden" name="id" value="{{ $product->product_id }}"></button>
+                  <input type="hidden" name="product_code" value="{{ $product->product_code }}"></button>
                   <button style="background-color: transparent; border: none;">
                     <i title="View Details" class="fa fa-info-circle" style="font-size:35px;color:#24a0ed"></i>
                   </button>

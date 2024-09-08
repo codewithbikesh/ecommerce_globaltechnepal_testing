@@ -41,9 +41,11 @@ Route::middleware('auth')->group(function () {
 
     //Products
     Route::get('/products', [ProductController::class, 'index'])->name('backend.products.index');
+    Route::post('/products/view', [ProductController::class, 'view'])->name('backend.products.view');
     
     //Customers
     Route::get('/customers', [CustomerController::class, 'index'])->name('backend.customers.index');
+    Route::post('/customers/view', [CustomerController::class, 'view'])->name('backend.customers.view');
     
     //Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('backend.orders.index');

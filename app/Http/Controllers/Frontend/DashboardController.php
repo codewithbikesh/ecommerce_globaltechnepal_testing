@@ -137,11 +137,10 @@ class DashboardController extends Controller
         $newsletter->gender = $request->gender;
         $newsletter->email = $request->email;
         if ($newsletter->save()) {
-            session()->flash('success', 'Thank you for Subscription.');
+            return redirect()->back()->with('success', 'Thank you for subscription.');
         } else {
-            session()->flash('error', 'Error !');
+            return redirect()->back()->with('error', 'Error occured while subscribing newsletter. Please try again later.');
         }
-        return redirect()->back();
     }
     
     public function customer_signup(Request $request)
@@ -164,11 +163,10 @@ class DashboardController extends Controller
         $customer->city = $request->city;
         $customer->street_address = $request->street_address;
         if ($customer->save()) {
-            session()->flash('success', 'Your Account have been successfully created.');
+            return redirect()->route('frontend.signup')->with('success', 'Your Account have been successfully created. Please check your mail for verification.');
         } else {
-            session()->flash('error', 'Error !');
+            return redirect()->route('frontend.signup')->with('error', 'Error occured while creating account. Try again later.');
         }
-        return redirect()->back();
     }
     
     public function inquiry_store(Request $request)

@@ -16,7 +16,7 @@
                             <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30 ">
                                 <div class="dash__pad-1 pageLinkParent">
 
-                                    <span class="dash__text u-s-m-b-16 userName">Hello, John Doe</span>
+                                    <span class="dash__text u-s-m-b-16 userName">Welcome, {{ Auth::guard('customer')->user()->full_name }}!</span>
                                     <ul class="dash__f-list pageUl">
                                         <li>
                                             <a class="dash-active" href="{{ route('frontend.account') }}">Manage My Account</a>

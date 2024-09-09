@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\FrontendLoginController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendCartController;
+use App\Http\Controllers\Frontend\FrontendAccountController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController; 
@@ -17,6 +19,7 @@ use App\Http\Controllers\Backend\NewsletterController;
 use App\Http\Controllers\Backend\SetAPIController;
 use App\Http\Controllers\Backend\ShippingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\FrontendShareUserData;
 
 
 Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])->name('admin-login');
@@ -97,7 +100,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 });
 
     // Frontend section 
-Route::group([], function() {
+Route::middleware([])->group(function () {
     
     Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
     Route::get('/404', [DashboardController::class,'unexpectedError'])->name('frontend.404');  
@@ -105,9 +108,6 @@ Route::group([], function() {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale'); 
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
-    Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
-    Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');   
-    Route::get('/account', [DashboardController::class,'account'])->name('frontend.account');   
     Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
@@ -127,7 +127,17 @@ Route::group([], function() {
     Route::post('/cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/clear', [FrontendCartController::class, 'clear'])->name('cart.clear');
     Route::get('/getCities/{province_id}', [FrontendCartController::class, 'getCities']);
+    
+    Route::post('/signin', [FrontendLoginController::class, 'signin'])->name('customer.signin');
 
+});
+
+Route::middleware('auth:customer')->group(function () {   
+    Route::get('/account', [DashboardController::class,'account'])->name('frontend.account'); 
+    Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
+    Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
+
+    
 });
 
 require __DIR__.'/auth.php';

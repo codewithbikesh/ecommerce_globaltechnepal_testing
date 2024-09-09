@@ -24,9 +24,12 @@
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
                 <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"></div>
                 <div class="fas fa-user" id="ecomNav-login-btn"></div>
+                
+                @if (Auth::check())
                 <a href="{{ route('frontend.account') }}">
                     <div class="fas fa-tachometer-alt" id="ecomNav-cart-btn"></div>
                 </a>
+                @endif
 
             </div>
 
@@ -68,11 +71,24 @@
                 <a href="{{ route('frontend.cart') }}" class="ecomNav-btn">Cart Page</a>
             </div>
 
+            
+            @if (Auth::check())
+            
+            <form action="{{ route('frontend.logout') }}" method="POST" style="display:inline;" class="ecomNav-login-form">
+                @csrf
+                <a href="{{ route('frontend.account') }}">My Account</a>
+                <button type="submit">Logout</button>
+            </form>
+        
+            @else
+
             <form action="" class="ecomNav-login-form">
                 <h3>Be Our Member</h3>
                 <a href="{{ route('frontend.signin') }}" class="ecomNav-btn">Login</a>
                 <a href="{{ route('frontend.signup') }}" class="ecomNav-btn">I am New</a>
             </form>
+
+            @endif
         </div>
         <div class="">
             <div class="input-group">

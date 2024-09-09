@@ -334,11 +334,11 @@
                                                                 <div class="s-option__link-box">
 
                                                                     <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="frontend.index">CONTINUE
+                                                                        href="{{ route('frontend.index') }}">CONTINUE
                                                                         SHOPPING</a>
 
                                                                     <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="frontend.cart">GO TO CART PAGE</a>
+                                                                        href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
 
                                                                     <input type="hidden" name="product_code"
                                                                         value="{{ $product->product_code }}">

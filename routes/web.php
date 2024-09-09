@@ -19,7 +19,6 @@ use App\Http\Controllers\Backend\NewsletterController;
 use App\Http\Controllers\Backend\SetAPIController;
 use App\Http\Controllers\Backend\ShippingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\FrontendShareUserData;
 
 
 Route::get('admin-login', [AuthenticatedSessionController::class, 'create'])->name('admin-login');

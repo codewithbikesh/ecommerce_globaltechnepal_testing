@@ -6,16 +6,32 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteData;
 use App\Models\Product;
+use App\Models\Shipping;
 
 class FrontendCartController extends Controller
 {
     
     // cart
-    public function cart(){
+    public function cart(Request $request){
         $websitedata = WebsiteData::first();
         $cart = session()->get('cart', []);
         $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
-        return view("frontend.cart", compact("websitedata", "cart", "cartproducts"));
+        
+        $shippingCost = null;
+        $selectedCity = null;
+        $selectedProvince = null;
+        if ($request->has('getshippingcost')) {
+            $request->validate([
+                'province' => 'required',
+                'city' => 'required|string'
+            ]);
+
+            $selectedCity = $request->input('city');
+            $selectedProvince = $request->input('province');
+            $shippingCost = Shipping::where('id', $selectedCity)->first();
+        }
+
+        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "shippingCost", "selectedCity", "selectedProvince"));
     }
     
     public function addItem(Request $request)
@@ -93,6 +109,17 @@ class FrontendCartController extends Controller
         }
 
     }
-
+    
+    public function getCities($province_id)
+    {
+        // Check if the Shipping model is correctly set up
+        try {
+            $cities = Shipping::where('province', $province_id)
+                              ->pluck('city', 'id');
+            return response()->json($cities);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unable to fetch cities'], 500);
+        }
+    }
 
 }

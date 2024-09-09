@@ -155,6 +155,10 @@
   </li>
   
   <li>
+    <a class="nav-link {{ request()->routeIs('backend.setshipping.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.setshipping.index') }}"><i class="fa fa-truck"></i><span>Set Shipping</span></a>
+  </li>
+  
+  <li>
     <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-user-circle"></i><span>System Users</span></a>
   </li>
 

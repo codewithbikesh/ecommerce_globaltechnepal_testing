@@ -2,6 +2,7 @@
 @section('content')
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--====== App Content ======-->
 <div class="app-content">
 
@@ -168,46 +169,46 @@
                                     <div class="f-cart__pad-box">
                                         <h1 class="gl-h1">ESTIMATE SHIPPING AND TAXES</h1>
 
+                                        <form action="{{ route('frontend.cart') }}" method="post" id="shipping-form">
                                         <span class="gl-text u-s-m-b-30">Enter your destination to get a shipping
                                             estimate.</span>
+
                                         <div class="u-s-m-b-30">
-
-                                            <!--====== Select Box ======-->
-
-                                            <label class="gl-label" for="shipping-country">COUNTRY *</label><select
-                                                class="select-box select-box--primary-style" id="shipping-country">
-                                                <option selected value="">Choose Country</option>
-                                                <option value="uae">United Arab Emirate (UAE)</option>
-                                                <option value="uk">United Kingdom (UK)</option>
-                                                <option value="us">United States (US)</option>
+                                            <label class="gl-label" for="shipping-state">PROVINCE </label>
+                                            <select class="select-box select-box--primary-style" name="province">
+                                                <option selected value="" disabled>Choose Province</option>
+                                                <option value="1" {{ $selectedProvince == '1' ? 'selected' : '' }}>Province 1</option>
+                                                <option value="2" {{ $selectedProvince == '2' ? 'selected' : '' }}>Madhesh</option>
+                                                <option value="3" {{ $selectedProvince == '3' ? 'selected' : '' }}>Bagmati</option>
+                                                <option value="4" {{ $selectedProvince == '4' ? 'selected' : '' }}>Gandaki</option>
+                                                <option value="5" {{ $selectedProvince == '5' ? 'selected' : '' }}>Lumbini</option>
+                                                <option value="6" {{ $selectedProvince == '6' ? 'selected' : '' }}>Karnali</option>
+                                                <option value="7" {{ $selectedProvince == '7' ? 'selected' : '' }}>Sudurpaschim</option>
                                             </select>
-                                            <!--====== End - Select Box ======-->
                                         </div>
+
                                         <div class="u-s-m-b-30">
-
-                                            <!--====== Select Box ======-->
-
-                                            <label class="gl-label" for="shipping-state">STATE/PROVINCE *</label><select
-                                                class="select-box select-box--primary-style" id="shipping-state">
-                                                <option selected value="">Choose State/Province</option>
-                                                <option value="al">Alabama</option>
-                                                <option value="al">Alaska</option>
-                                                <option value="ny">New York</option>
+                                            <label class="gl-label" for="shipping-zip">Select City</label>
+                                            <select class="select-box select-box--primary-style" id="city" name="city">
+                                                <option selected value="" disabled>Choose City</option>
                                             </select>
-                                            <!--====== End - Select Box ======-->
                                         </div>
-                                        <div class="u-s-m-b-30">
+                                        
+                                        
+{{-- 
+        <div class="u-s-m-b-30">
+            <a class="f-cart__ship-link btn--e-transparent-brand-b-2" href="javascript:void(0);" id="calculate-shipping">CALCULATE SHIPPING</a>
+        </div> --}}
 
-                                            <label class="gl-label" for="shipping-zip">ZIP/POSTAL CODE *</label>
+            
+            <div class="u-s-m-b-30">
+                <button type="submit" name="getshippingcost" class="f-cart__ship-link btn--e-transparent-brand-b-2">
+                    CALCULATE SHIPPING
+                </button>
+            </div>
+        </form>
 
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="shipping-zip" placeholder="Zip/Postal Code">
-                                        </div>
-                                        <div class="u-s-m-b-30">
 
-                                            <a class="f-cart__ship-link btn--e-transparent-brand-b-2"
-                                                href="cart.html">CALCULATE SHIPPING</a>
-                                        </div>
 
                                         <span class="gl-text">Note: There are some countries where free shipping is
                                             available otherwise our flat rate charges or country delivery charges will
@@ -227,8 +228,12 @@
                                     </div>
                                 </div>
                                 
-                                            @php
-                                                $shipping = 100;
+                                            @php    
+                                                if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
+                                                    $shipping = $shippingCost->shipping_cost;
+                                                } else {
+                                                    $shipping = 0;
+                                                }
                                                 $amount_before_tax = $shipping + $total;
                                                 $tax = 13/100 * $amount_before_tax;
                                                 $grand_total = $amount_before_tax + $tax;
@@ -276,4 +281,48 @@
     <!--====== End - Section 3 ======-->
 </div>
 <!--====== End - App Content ======-->
+
+
+
+ 
+<script>
+    $(document).ready(function() {
+        var selectedCity = @json($selectedCity); // Get the selected city from Blade
+
+        // Function to update city options based on province
+        $('select[name="province"]').on('change', function() {
+            var province_id = $(this).val();
+            if (province_id) {
+                $.ajax({
+                    url: "/getCities/" + province_id, // Use relative URL
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("Cities data:", data);
+                        var $citySelect = $('select[name="city"]');
+                        $citySelect.empty();
+
+                        // Populate city options
+                        $.each(data, function(key, value) {
+                            var isSelected = (key === selectedCity) ? ' selected' : ''; // Check if this city should be selected
+                            $citySelect.append('<option value="' + key + '"' + isSelected + '>' + value + '</option>');
+                        });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX Error: ", textStatus, errorThrown);
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
+
+        // Trigger change event on load to populate cities based on initially selected province
+        var initialProvince = $('select[name="province"]').val();
+        if (initialProvince) {
+            $('select[name="province"]').trigger('change');
+        }
+    });
+</script>
+
 @endsection

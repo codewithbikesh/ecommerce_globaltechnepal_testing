@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart', function (Blueprint $table) {
+        Schema::create('set_shipping', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
-            $table->bigInteger('customer_id')->nullable();
-            $table->string('session_id')->nullable();
-            $table->string('status')->nullable();
-            $table->decimal('tax', 10, 2)->nullable();
-            $table->decimal('shipping_cost', 10, 2)->nullable();
-            $table->decimal('subtotal', 10, 2)->nullable();
+            $table->bigInteger('province');
+            $table->string('city');
+            $table->decimal('shipping_cost', 10, 2)->default(0);
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart');
+        Schema::dropIfExists('set_shipping');
     }
 };

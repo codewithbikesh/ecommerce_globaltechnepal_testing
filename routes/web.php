@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\FAQSController;
 use App\Http\Controllers\Backend\ReviewRatingController;
 use App\Http\Controllers\Backend\NewsletterController;
 use App\Http\Controllers\Backend\SetAPIController;
+use App\Http\Controllers\Backend\ShippingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -55,6 +56,15 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     
     //FAQS
     Route::get('/faqs', [FAQSController::class, 'index'])->name('backend.faqs.index');
+    
+    //Set Shipping
+    Route::get('/set-shipping', [ShippingController::class, 'index'])->name('backend.setshipping.index');
+    Route::post('/set-shipping/view', [ShippingController::class, 'view'])->name('backend.setshipping.view');
+    Route::get('/set-shipping/add', [ShippingController::class, 'add'])->name('backend.setshipping.add');
+    Route::post('/set-shipping', [ShippingController::class, 'store'])->name('backend.setshipping.store');
+    Route::post('/set-shipping/edit', [ShippingController::class, 'edit'])->name('backend.setshipping.edit');
+    Route::post('/set-shipping/{id}', [ShippingController::class, 'update'])->name('backend.setshipping.update');
+    Route::delete('/set-shipping/{id}', [ShippingController::class, 'delete'])->name('backend.setshipping.delete');
     
     //Load Prodicts from OMS API
     Route::get('/load-products-api', [LoadProductsAPIController::class, 'index'])->name('backend.loadproductsapi.index');
@@ -116,6 +126,7 @@ Route::group([], function() {
     Route::post('/cart/update', [FrontendCartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/clear', [FrontendCartController::class, 'clear'])->name('cart.clear');
+    Route::get('/getCities/{province_id}', [FrontendCartController::class, 'getCities']);
 
 });
 

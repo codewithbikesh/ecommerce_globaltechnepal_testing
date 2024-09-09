@@ -100,7 +100,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 });
 
     // Frontend section 
-Route::middleware([])->group(function () {
     
     Route::get('/', [DashboardController::class,'index'])->name('frontend.index');  
     Route::get('/404', [DashboardController::class,'unexpectedError'])->name('frontend.404');  
@@ -130,7 +129,6 @@ Route::middleware([])->group(function () {
     
     Route::post('/signin', [FrontendLoginController::class, 'signin'])->name('customer.signin');
 
-});
 
 Route::middleware('auth:customer')->group(function () {   
     Route::get('/account', [DashboardController::class,'account'])->name('frontend.account'); 

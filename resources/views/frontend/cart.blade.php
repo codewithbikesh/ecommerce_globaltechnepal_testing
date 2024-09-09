@@ -2,6 +2,7 @@
 @section('content')
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--====== App Content ======-->
 <div class="app-content">
 
@@ -170,39 +171,56 @@
 
                                         <span class="gl-text u-s-m-b-30">Enter your destination to get a shipping
                                             estimate.</span>
+
                                         <div class="u-s-m-b-30">
-
-                                            <!--====== Select Box ======-->
-
-                                            <label class="gl-label" for="shipping-country">COUNTRY *</label><select
-                                                class="select-box select-box--primary-style" id="shipping-country">
-                                                <option selected value="">Choose Country</option>
-                                                <option value="uae">United Arab Emirate (UAE)</option>
-                                                <option value="uk">United Kingdom (UK)</option>
-                                                <option value="us">United States (US)</option>
+                                            <label class="gl-label" for="shipping-state">PROVINCE </label>
+                                            <select class="select-box select-box--primary-style" name="province">
+                                                <option selected value="" disabled>Choose Province</option>
+                                                <option value="1">Province 1</option>
+                                                <option value="2">Madhesh</option>
+                                                <option value="3">Bagmati</option>
+                                                <option value="4">Gandaki</option>
+                                                <option value="5">Lumbini</option>
+                                                <option value="6">Karnali</option>
+                                                <option value="7">Sudurpaschim</option>
                                             </select>
-                                            <!--====== End - Select Box ======-->
                                         </div>
+
                                         <div class="u-s-m-b-30">
-
-                                            <!--====== Select Box ======-->
-
-                                            <label class="gl-label" for="shipping-state">STATE/PROVINCE *</label><select
-                                                class="select-box select-box--primary-style" id="shipping-state">
-                                                <option selected value="">Choose State/Province</option>
-                                                <option value="al">Alabama</option>
-                                                <option value="al">Alaska</option>
-                                                <option value="ny">New York</option>
+                                            <label class="gl-label" for="shipping-zip">Select City</label>
+                                            <select class="select-box select-box--primary-style" name="city">
+                                                <option selected value="" disabled>Choose City</option>
                                             </select>
-                                            <!--====== End - Select Box ======-->
                                         </div>
-                                        <div class="u-s-m-b-30">
+                                        
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('select[name="province"]').on('change', function() {
+                                                    var province_id = $(this).val();
+                                                    if (province_id) {
+                                                        $.ajax({
+                                                            url: "/getCities/" + province_id, // Use relative URL
+                                                            type: "GET",
+                                                            dataType: "json",
+                                                            success: function(data) {
+                                                                console.log("Cities data:", data);
+                                                                $('select[name="city"]').empty();
+                                                                $.each(data, function(key, value) {
+                                                                    $('select[name="city"]').append('<option value="' + key + '">' + value + '</option>');
+                                                                });
+                                                            },
+                                                            error: function(jqXHR, textStatus, errorThrown) {
+                                                                console.log("AJAX Error: ", textStatus, errorThrown);
+                                                            }
+                                                        });
+                                                    } else {
+                                                        $('select[name="city"]').empty();
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        
 
-                                            <label class="gl-label" for="shipping-zip">ZIP/POSTAL CODE *</label>
-
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="shipping-zip" placeholder="Zip/Postal Code">
-                                        </div>
                                         <div class="u-s-m-b-30">
 
                                             <a class="f-cart__ship-link btn--e-transparent-brand-b-2"

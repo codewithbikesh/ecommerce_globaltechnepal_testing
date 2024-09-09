@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteData;
 use App\Models\Product;
+use App\Models\Shipping;
 
 class FrontendCartController extends Controller
 {
@@ -92,6 +93,18 @@ class FrontendCartController extends Controller
             return redirect()->route('frontend.cart')->with('status', 'Cart has been cleared!');
         }
 
+    }
+    
+    public function getCities($province_id)
+    {
+        // Check if the Shipping model is correctly set up
+        try {
+            $cities = Shipping::where('province', $province_id)
+                              ->pluck('city', 'id');
+            return response()->json($cities);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unable to fetch cities'], 500);
+        }
     }
 
 

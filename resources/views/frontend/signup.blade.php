@@ -34,20 +34,7 @@
                                     <h1 class="gl-h1">PERSONAL INFORMATION</h1>
                                     <form class="l-f-o__form" method="POST" action="{{ route('frontend.customer.signup') }}">
                                         @csrf
-                                        <div class="gl-s-api">
-                                            <div class="u-s-m-b-15">
 
-                                                <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i
-                                                        class="fab fa-facebook-f"></i>
-                                                    <span>Signup with Facebook</span></button>
-                                            </div>
-                                            <div class="u-s-m-b-30">
-
-                                                <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i
-                                                        class="fab fa-google"></i>
-                                                    <span>Signup with Google</span></button>
-                                            </div>
-                                        </div>
                                         <div class="u-s-m-b-30">
 
                                             <label class="gl-label" for="reg-fname">FULL NAME *</label>
@@ -101,6 +88,24 @@
                                         </div>
 
                                     </form>
+                                                                    <strong class="gl-text u-s-m-b-30 signwithgoogleText">OR</strong>
+
+                                    <div class="gl-s-api">
+                                        <div class="u-s-m-b-15">
+
+                                            <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i
+                                                    class="fab fa-facebook-f"></i>
+
+                                                <span>Sign up with Facebook</span></button>
+                                        </div>
+                                        <div class="u-s-m-b-15">
+
+                                            <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i
+                                                    class="fab fa-google"></i>
+
+                                                <span>Sign up with Google</span></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

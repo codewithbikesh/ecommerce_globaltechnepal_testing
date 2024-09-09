@@ -32,19 +32,24 @@ body {
 }
 /* ------------------ */
 .ecomNav-header {
-        left: 0; right: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 9%;
-    background: #fff;
+    padding: 4px 0 12px 0;
     align-items: center;
-      position: fixed;
-      top: 0;
-      flex-direction: column;
-  width: 100%;
-  z-index: 1000; /* Adjust as needed to ensure it stays on top */
+    position: fixed;
+    top: 0;
+    flex-direction: column;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0px -1px 0px 0px;
+    /* border-bottom: 1px solid; */
+    background: #000000c2;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 /* ----------------------------- */
@@ -80,7 +85,7 @@ body {
 .ecomNav-header .ecomNav-navbar a {
     font-size: 1.3rem;
     margin: 0 1rem;
-    color: var(--black);
+    color: #e7e7e7;
 }
 .ecomNav-header .ecomNav-navbar a:hover {
     color: var(--orange);
@@ -201,11 +206,12 @@ border-bottom: 1px solid;
     padding: 0.3rem 1rem;
     font-size: 1.7rem;
     border-radius: .5rem;
-    border: .2rem solid #FF5722;
+box-shadow: 0px 0px 6px 0px;
     cursor: pointer;
     background: none;
     width: 50%;
     margin: 0 auto;
+    color: orangered;
 }
 .ecomNav-btn:hover {
     background: var(--orange);
@@ -280,8 +286,12 @@ gap: 11px;
     justify-content: center;
     align-items: center;
 }
-/* media queries */
+.btn-outline-primary{
+    color: orangered !important;
+}
 
+
+/* media queries */
 @media (max-width: 991px) {
     html {
         font-size: 55%;
@@ -324,6 +334,7 @@ gap: 11px;
         font-size: 2rem;
         margin: 2rem 2.5rem;
         display: block;
+        color: rgb(0, 0, 0);
     }
 
 }

@@ -334,11 +334,11 @@
                                                                 <div class="s-option__link-box">
 
                                                                     <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="frontend.index">CONTINUE
+                                                                        href="{{ route('frontend.index') }}">CONTINUE
                                                                         SHOPPING</a>
 
                                                                     <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="frontend.cart">GO TO CART PAGE</a>
+                                                                        href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
 
                                                                     <input type="hidden" name="product_code"
                                                                         value="{{ $product->product_code }}">
@@ -677,87 +677,39 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
                     <div class="column-product">
 
+
                         <span class="column-product__title u-c-secondary u-s-m-b-25">SPECIAL PRODUCTS</span>
                         <ul class="column-product__list">
+                            @if ($specialproducts->isNotEmpty())
+                            @foreach ($specialproducts as $specialproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
+                                            href="{{ route('frontend.product-detail',$specialproduct->id) }}">
 
-                                            <img class="aspect__img" src="images/product/electronic/product23.jpg"
+                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
+                                            <a href="shop-side-version-2.html">{{ $specialproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15
-                                                Ram
-                                                16GB</a></span>
+                                            <a href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
 
-                                        <span class="product-l__price">$125.00</span>
+                                        <span class="product-l__price">{{ $specialproduct->sell_price }}</span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product24.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 13
-                                                Ram
-                                                16GB</a></span>
-
-                                        <span class="product-l__price">$125.00</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product25.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15
-                                                Ram
-                                                8GB</a></span>
-
-                                        <span class="product-l__price">$125.00</span>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach   
+                            @endif
                         </ul>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
@@ -765,88 +717,36 @@
 
                         <span class="column-product__title u-c-secondary u-s-m-b-25">WEEKLY PRODUCTS</span>
                         <ul class="column-product__list">
+                            @if ($weeklyproducts->isNotEmpty())
+                                @foreach ($weeklyproducts as $weeklyproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
+                                            href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">
 
-                                            <img class="aspect__img" src="images/product/electronic/product26.jpg"
+                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
+                                            <a href="shop-side-version-2.html">{{ $weeklyproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 10
-                                                Ram
-                                                16GB</a></span>
+                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{ $weeklyproduct->product_name }}</a></span>
 
-                                        <span class="product-l__price">$125.00
+                                        <span class="product-l__price">{{ $weeklyproduct->sell_price }}
 
-                                            <span class="product-l__discount">$160</span></span>
+                                            <span class="product-l__discount">{{ $weeklyproduct->actual_price }}</span></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product27.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="product-detail.html">Razor Gear 15 Ram 8GB</a></span>
-
-                                        <span class="product-l__price">$125.00
-
-                                            <span class="product-l__discount">$160</span></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product28.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 15
-                                                Ultra Ram
-                                                16GB</a></span>
-
-                                        <span class="product-l__price">$125.00
-
-                                            <span class="product-l__discount">$160</span></span>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -855,14 +755,16 @@
 
                         <span class="column-product__title u-c-secondary u-s-m-b-25">FLASH PRODUCTS</span>
                         <ul class="column-product__list">
+                               @if ($flashproducts->isNotEmpty())
+                                   @foreach ($flashproducts as $flashproduct)                                
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
+                                            href="{{ route('frontend.product-detail',$flashproduct->id) }}">
 
-                                            <img class="aspect__img" src="images/product/electronic/product29.jpg"
+                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
@@ -872,76 +774,18 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
+                                            <a href="shop-side-version-2.html">{{ $flashproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 20
-                                                Ultra Ram
-                                                16GB</a></span>
+                                            <a href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{ $flashproduct->product_name }}</a></span>
 
-                                        <span class="product-l__price">$125.00</span>
+                                        <span class="product-l__price">{{ $flashproduct->sell_price }}</span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product30.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-                                        <div class="product-l__rating gl-rating-style"><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="far fa-star"></i><i class="far fa-star"></i></div>
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 11
-                                                Ultra Ram
-                                                16GB</a></span>
-
-                                        <span class="product-l__price">$125.00</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="column-product__item">
-                                <div class="product-l">
-                                    <div class="product-l__img-wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$product->id) }}">
-
-                                            <img class="aspect__img" src="images/product/electronic/product31.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="product-l__info-wrap">
-                                        <div class="product-l__rating gl-rating-style"><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="far fa-star"></i><i class="far fa-star"></i></div>
-
-                                        <span class="product-l__category">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                        <span class="product-l__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">Razor Gear 10
-                                                Ultra Ram
-                                                16GB</a></span>
-
-                                        <span class="product-l__price">$125.00</span>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

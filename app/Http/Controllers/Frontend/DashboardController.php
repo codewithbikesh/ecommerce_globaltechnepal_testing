@@ -18,14 +18,17 @@ class DashboardController extends Controller
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
         $products = Product::limit(25)->get();
-        $newarriveproducts = Product::limit(9)->get();
+        $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
+        $specialproducts = Product::limit(3)->get();
+        $weeklyproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(3)->get();
+        $flashproducts = Product::whereNotNull('primary_image')->inRandomOrder()->limit(3)->get();
         $carousel = Carousel::all();
         $websitedata = WebsiteData::first();
         $cart = session()->get('cart', []);
         $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         // dd($products);
-        return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts","newarriveproducts","featureproducts"));
+        return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts","newarriveproducts","featureproducts","specialproducts","weeklyproducts","flashproducts"));
     }
 
 

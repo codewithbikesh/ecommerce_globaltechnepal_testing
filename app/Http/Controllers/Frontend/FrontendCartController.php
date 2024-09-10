@@ -206,14 +206,30 @@ class FrontendCartController extends Controller
         $validatedData = $request->validate([
             'product_code' => 'required|integer|exists:products,product_code',
         ]);
-        $cart = session()->get('cart', []);
 
         $productId = $validatedData['product_code'];
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]);
+        
+        if (auth('customer')->check()) {
+            // For authenticated users
+            $cart = Cart::where('customer_id', auth('customer')->id())->first();
+            if ($cart) {
+                $cartItem = $cart->items()->where('product_code', $productId)->first();
+                if ($cartItem) {
+                    $cartItem->delete();
+                    
+                    // Optionally update cart totals after removal
+                    $this->updateCartTotals($cart);
+                }
+            }
+        } else {
+            // For guest users
+            $cart = session()->get('cart', []);
+            if (isset($cart[$productCode])) {
+                unset($cart[$productCode]);
+                session()->put('cart', $cart);
+            }
         }
 
-        session()->put('cart', $cart);
         return redirect()->route('frontend.cart')->with('status', 'Item removed from cart!');
     }
 

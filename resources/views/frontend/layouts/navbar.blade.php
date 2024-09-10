@@ -25,11 +25,11 @@
                 <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"></div>
                 <div class="fas fa-user" id="ecomNav-login-btn"></div>
                 
-                @if (Auth::check())
+            @auth('customer')
                 <a href="{{ route('frontend.account') }}">
                     <div class="fas fa-tachometer-alt" id="ecomNav-cart-btn"></div>
                 </a>
-                @endif
+            @endauth
 
             </div>
 
@@ -72,7 +72,7 @@
             </div>
 
             
-            @if (Auth::check())
+            @auth('customer')
             
             <form action="{{ route('frontend.logout') }}" method="POST" style="display:inline;" class="ecomNav-login-form">
                 @csrf
@@ -88,7 +88,7 @@
                 <a href="{{ route('frontend.signup') }}" class="ecomNav-btn">I am New</a>
             </form>
 
-            @endif
+            @endauth
         </div>
         <div class="">
             <div class="input-group">

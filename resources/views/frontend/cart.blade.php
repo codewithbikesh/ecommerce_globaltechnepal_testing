@@ -165,7 +165,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
                         <form class="f-cart">
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                <div class="col-lg-6 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">
                                         <h1 class="gl-h1">ESTIMATE SHIPPING AND TAXES</h1>
 
@@ -215,18 +215,6 @@
                                             be apply.</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                    <div class="f-cart__pad-box">
-                                        <h1 class="gl-h1">NOTE</h1>
-
-                                        <span class="gl-text u-s-m-b-30">Add Special Note About Your Product</span>
-                                        <div>
-
-                                            <label for="f-cart-note"></label><textarea
-                                                class="text-area text-area--primary-style" id="f-cart-note"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
                                 
                                             @php    
                                                 if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
@@ -239,7 +227,7 @@
                                                 $grand_total = $amount_before_tax + $tax;
                                             @endphp
 
-                                <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                <div class="col-lg-6 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">
                                         <div class="u-s-m-b-30">
                                             <table class="f-cart__table">

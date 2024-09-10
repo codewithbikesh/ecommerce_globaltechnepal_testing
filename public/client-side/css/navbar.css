@@ -46,17 +46,24 @@ body {
     width: 100%;
     z-index: 1000;
     box-shadow: 0px -1px 0px 0px;
-    /* border-bottom: 1px solid; */
-    background: #000000c2;
+    background: orangered;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }
 
 /* ----------------------------- */
 .searchBar{
-    width: 37vw !important;
+    width: 55vw !important;
+ height: 45px;
+ font-size: 1.6rem !important;
 }
-
+.searchBarIcin{
+    width: 76px;
+    font-size: 2.8rem !important;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
 .searchBar, .serchbtn {
   border: none;
   outline: none;
@@ -99,6 +106,7 @@ body {
     font-size: 2rem;
     margin-left: .3rem;
     cursor: pointer;
+    position: relative;
     text-align: center;
 }
 .ecomNav-header .ecomNav-icons div:hover {
@@ -266,6 +274,7 @@ a button{
     display: flex;
     justify-content: space-around;
     align-items: center;
+
 }
  .ecomNav-quantity, .ecomNav-price{
     font-size: 13px;
@@ -289,7 +298,20 @@ gap: 11px;
 .btn-outline-primary{
     color: orangered !important;
 }
-
+.cartNum{
+    position: absolute;
+    top: -3px;
+    right: 28px;
+    color: #ffffff;
+    font-size: 23px;
+    opacity: 80%;
+    background:#001d33;
+    display: inline-block;
+    border-radius: 31px;
+    width: 26px;
+    height: 26px;
+    line-height: 1;
+}
 
 /* media queries */
 @media (max-width: 991px) {
@@ -309,6 +331,9 @@ gap: 11px;
 .ecomNav-header {
         padding: .7rem 0;
     }
+    .upperOptionsNav{
+        margin-bottom: 12px;
+}
 }
 
 @media (max-width: 768px) {

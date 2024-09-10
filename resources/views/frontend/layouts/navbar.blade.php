@@ -12,7 +12,7 @@
         <div class="upperOptionsNav">
             <a href="/" class="ecomNav-logo"><img
                     src="{{ asset('storage/backend/company_logo/' . $websitedata->company_logo_header) }}"
-                    style="width: 150px;" alt="{{ $websitedata->company_name }}"></a>
+              alt="{{ $websitedata->company_name }}"></a>
             <nav class="ecomNav-navbar">
                 <a href="/">HOME</a>
                 <a href="{{ route('frontend.newarrival') }}">NEW ARRIVAL</a>
@@ -22,7 +22,7 @@
 
             <div class="ecomNav-icons">
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
-                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"></div>
+                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"> <span class="cartNum">1</span> </div>
                 <div class="fas fa-user" id="ecomNav-login-btn"></div>
                 
             @auth('customer')
@@ -84,8 +84,8 @@
 
             <form action="" class="ecomNav-login-form">
                 <h3>Be Our Member</h3>
-                <a href="{{ route('frontend.signin') }}" class="ecomNav-btn">Login</a>
-                <a href="{{ route('frontend.signup') }}" class="ecomNav-btn">I am New</a>
+                <a href="{{ route('frontend.signin') }}" class="ecomNav-btn">Signin</a>
+                <a href="{{ route('frontend.signup') }}" class="ecomNav-btn">Signup</a>
             </form>
 
             @endauth
@@ -95,7 +95,9 @@
                 <div class="input-group serchParent">
                     <input type="search" class="form-control searchBar rounded"
                         placeholder="Feel Free to Search here..." aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-primary serchbtn" data-mdb-ripple-init>search</button>
+                       <span class="input-group-text border-0 searchBarIcin" id="search-addon">
+    <i class="fas fa-search"></i>
+  </span>
                 </div>
             </div>
         </div>

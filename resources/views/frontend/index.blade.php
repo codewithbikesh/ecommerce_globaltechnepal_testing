@@ -106,126 +106,117 @@
                             <div class="row">
                                 @if($products->isNotEmpty())
                                 @foreach ($products as $product)
+
                                 <div
                                     class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item {{ $product->category_id }}">
-                                    <div class="product-o product-o--hover-on product-o--radius">
-                                        <div class="product-o__wrap">
+                                    <a class="product-o-link"
+                                        href="{{ route('frontend.product-detail', $product->id) }}">
+                                        <div class="product-o product-o--hover-on product-o--radius">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                href="{{ route('frontend.product-detail',$product->id) }}">
+                                            <div class="product-o__wrap">
+                                                <div class="aspect aspect--bg-grey aspect--square u-d-block">
+                                                    <img class="aspect__img"
+                                                        src="data:image/jpeg;base64,{{$product->primary_image}}" alt="">
+                                                </div>
 
-                                                <img class="aspect__img"
-                                                    src="data:image/jpeg;base64,{{$product->primary_image}}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
-
-                                                        <a id="quick-view-link" data-modal="modal"
-                                                            data-modal-id="#quick-look{{ $product->product_code }}"
-                                                            data-tooltip="tooltip" data-placement="top"
-                                                            title="Quick View" value="{{ $product->product_code }}"><i
-                                                                class="fas fa-search-plus"></i></a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a data-modal="modal"
-                                                            data-modal-id="#add-to-cart{{ $product->product_code }}"
-                                                            data-tooltip="tooltip" data-placement="top"
-                                                            value="{{ $product->product_code }}" title="Add to Cart"><i
-                                                                class="fas fa-shopping-cart"></i></a>
-                                                    </li>
-                                                </ul>
                                             </div>
-                                        </div>
-                                        <span class="product-o__category">
-
-                                            <a href="shop-side-version-2.html">{{ $product->product_name }}</a></span>
-
-                                        <span class="product-o__name">
-
-                                            <a href="{{ route('frontend.product-detail',$product->product_code) }}">{{
-                                                $product->product_name }}</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                            <span class="product-o__review">(23)</span>
-                                        </div>
-
-                                        <span class="product-o__price">{{ $product->actual_price }}
-
-                                            <span class="product-o__discount">{{ $product->sell_price }}</span></span>
+                                            <!-- <span class="product-o__category">{{ $product->product_name }}</span> -->
+                                            <span class="product-o__name productName">{{ $product->product_name }}</span>
+                                  
+                                    </a>
+                                    <div class="product-o__rating gl-rating-style">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star-half-alt"></i>
+                                        <span class="product-o__review">(23)</span>
                                     </div>
+                                    <span class="product-o__price">{{ $product->actual_price }} <span
+                                            class="product-o__discount">{{ $product->sell_price }}</span></span>
+                                            <div class="quickvewandAddtocart">
+                                   <!-- quick view button    -->
+                                    <button id="quick-view-link" class="Productoption quickViewBtnHompepage" data-modal="modal"
+                                        data-modal-id="#quick-look{{ $product->product_code }}" data-tooltip="tooltip"
+                                        data-placement="top" title="Quick View" value="{{ $product->product_code }}"><i
+                                            class="fas fa-search-plus">Quick View</i>
+                                        </button>
+
+         <button data-modal="modal" class="Productoption addtoCartBtnHompepage" data-modal-id="#add-to-cart{{ $product->product_code }}" data-tooltip="tooltip" data-placement="top" value="{{ $product->product_code }}" title="Add to Cart"><i class="fas fa-shopping-cart">Add to Cart</i></div>
+                       </button>
+
                                 </div>
-                                <!--====== Quick Look Modal ======-->
-                                <div class="modal fade" id="quick-look{{ $product->product_code }}">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content modal--shadow">
+                            </div>
 
-            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-5">
+                            <!-- ---------------------------------------- -->
+                            <!--====== Quick Look Modal ======-->
+                            <div class="modal fade" id="quick-look{{ $product->product_code }}">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content modal--shadow">
 
-                                                        <!--====== End - Product Breadcrumb ======-->
+                                        <button class="btn dismiss-button fas" type="button"
+                                            data-dismiss="modal">X</button>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+
+                                                    <!--====== End - Product Breadcrumb ======-->
 
 
-                                                        <!--====== Product Detail ======-->
-                                                        <div class="pd u-s-m-b-30">
-                                                            <div class="pd-wrap">
-                                                                <div id="js-product-detail-modal">
-                                                                    <div>
+                                                    <!--====== Product Detail ======-->
+                                                    <div class="pd u-s-m-b-30">
+                                                        <div class="pd-wrap">
+                                                            <div id="js-product-detail-modal">
+                                                                <div>
 
-                                                                        <img class="u-img-fluid"
-                                                                            src="data:image/jpeg;base64,{{ $product->primary_image }}"
-                                                                            alt="">
-                                                                    </div>
+                                                                    <img class="u-img-fluid"
+                                                                        src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                                        alt="">
                                                                 </div>
                                                             </div>
-                                                            {{-- <div class="u-s-m-t-15">
+                                                        </div>
+                                                        {{-- <div class="u-s-m-t-15">
                                                                 <div id="js-product-detail-modal-thumbnail">
                                                                     <div>
 
                                                                         <img class="u-img-fluid"
                                                                             src="data:image/jpeg;base64,{{ $product->primary_image }}"
-                                                                            alt="">
-                                                                    </div>
-                                                                </div>
-                                                            </div> --}}
-                                                        </div>
-                                                        <!--====== End - Product Detail ======-->
+                                                        alt="">
                                                     </div>
-                                                    <div class="col-lg-7">
+                                                </div>
+                                            </div> --}}
+                                        </div>
+                                        <!--====== End - Product Detail ======-->
+                                    </div>
+                                    <div class="col-lg-7">
 
-                                                        <!--====== Product Right Side Details ======-->
-                                                        <div class="pd-detail">
-                                                            <div>
+                                        <!--====== Product Right Side Details ======-->
+                                        <div class="pd-detail">
+                                            <div>
 
-                                                                <span class="pd-detail__name">{{ $product->product_name
+                                                <span class="pd-detail__name">{{ $product->product_name
                                                                     }}</span>
-                                                            </div>
-                                                            <div>
-                                                                <div class="pd-detail__inline">
+                                            </div>
+                                            <div>
+                                                <div class="pd-detail__inline">
 
-                                                                    <span class="pd-detail__price">{{
+                                                    <span class="pd-detail__price">{{
                                                                         $product->sell_price }}</span>
-                                                                    @php
-                                                                    $actualPrice = $product->actual_price;
-                                                                    $sellPrice = $product->sell_price;
+                                                    @php
+                                                    $actualPrice = $product->actual_price;
+                                                    $sellPrice = $product->sell_price;
 
 
-                                                                    $discountPercentage = $actualPrice > 0
-                                                                    ? round(((($actualPrice - $sellPrice) /
-                                                                    $actualPrice) * 100), 2)
-                                                                    : 0;
-                                                                    @endphp
-                                                                    <span class="pd-detail__discount">({{
+                                                    $discountPercentage = $actualPrice > 0
+                                                    ? round(((($actualPrice - $sellPrice) /
+                                                    $actualPrice) * 100), 2)
+                                                    : 0;
+                                                    @endphp
+                                                    <span class="pd-detail__discount">({{
                                                                         $discountPercentage }}% OFF)</span><del
-                                                                        class="pd-detail__del">{{ $product->actual_price
+                                                        class="pd-detail__del">{{ $product->actual_price
                                                                         }}</del>
-                                                                </div>
-                                                            </div>
-                                                            {{-- <div class="u-s-m-b-15">
+                                                </div>
+                                            </div>
+                                            {{-- <div class="u-s-m-b-15">
                                                                 <div class="pd-detail__rating gl-rating-style"><i
                                                                         class="fas fa-star"></i><i
                                                                         class="fas fa-star"></i><i
@@ -239,165 +230,166 @@
                                                                             Reviews</a></span>
                                                                 </div>
                                                             </div> --}}
-                                                            <div class="u-s-m-b-15">
-                                                                <div class="pd-detail__inline">
+                                            <div class="u-s-m-b-15">
+                                                <div class="pd-detail__inline">
 
-                                                                    <span class="pd-detail__stock">{{
+                                                    <span class="pd-detail__stock">{{
                                                                         $product->stock_quantity }} in stock</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="u-s-m-b-15">
-                                                                <form class="pd-detail__form" method="POST"
-                                                                    action="{{ route('cart.add') }}">
-                                                                    @csrf
-                                                                    <div class="pd-detail-inline-2">
-                                                                        <div class="u-s-m-b-15">
-
-                                                                            <!--====== Input Counter ======-->
-                                                                            <div class="input-counter">
-
-                                                                                <span
-                                                                                    class="input-counter__minus fas fa-minus"></span>
-
-                                                                                <input
-                                                                                    class="input-counter__text input-counter--text-primary-style"
-                                                                                    type="text" value="1"
-                                                                                    name="quantity" data-min="1"
-                                                                                    data-max="1000">
-
-                                                                                <span
-                                                                                    class="input-counter__plus fas fa-plus"></span>
-                                                                            </div>
-                                                                            <!--====== End - Input Counter ======-->
-                                                                        </div>
-                                                                        <div class="u-s-m-b-15">
-
-                                                                            <input type="hidden" name="product_code"
-                                                                                value="{{ $product->product_code }}">
-                                                                            <button class="btn btn--e-brand-b-2"
-                                                                                type="submit">Add to Cart</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        <!--====== End - Product Right Side Details ======-->
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--====== End - Quick Look Modal ======-->
+                                            <div class="u-s-m-b-15">
+                                                <form class="pd-detail__form" method="POST"
+                                                    action="{{ route('cart.add') }}">
+                                                    @csrf
+                                                    <div class="pd-detail-inline-2">
+                                                        <div class="u-s-m-b-15">
 
-                                <!--====== Add to Cart Modal ======-->
-                                <div class="modal fade" id="add-to-cart{{ $product->product_code }}">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content modal-radius modal-shadow">
+                                                            <!--====== Input Counter ======-->
+                                                            <div class="input-counter">
 
-            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-            <div class="modal-body">
-                
-            <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
-            @csrf
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="success u-s-m-b-30">
-                            <div class="success__img-wrap">
-                                <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
-                            </div>
-                            
-                            <div class="success__info-wrap">
+                                                                <span class="input-counter__minus fas fa-minus"></span>
 
-                                                                    <span class="success__name">{{
-                                                                        $product->product_name }}</span>
+                                                                <input
+                                                                    class="input-counter__text input-counter--text-primary-style"
+                                                                    type="text" value="1" name="quantity" data-min="1"
+                                                                    data-max="1000">
 
-                                                                    <div class="input-counter">
-                                                                        <span
-                                                                            class="input-counter__minus fas fa-minus"></span>
-                                                                        <input
-                                                                            class="input-counter__text input-counter--text-primary-style"
-                                                                            type="text" value="1" name="quantity"
-                                                                            data-min="1" data-max="1000">
-                                                                        <span
-                                                                            class="input-counter__plus fas fa-plus"></span>
-                                                                    </div>
-
-                                                                    <span class="success__price">{{ $product->sell_price
-                                                                        }}</span>
-                                                                </div>
+                                                                <span class="input-counter__plus fas fa-plus"></span>
                                                             </div>
+                                                            <!--====== End - Input Counter ======-->
                                                         </div>
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <div class="s-option">
+                                                        <div class="u-s-m-b-15 ">
 
-                                                                <div class="s-option__link-box">
-
-                                                                    <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="{{ route('frontend.index') }}">CONTINUE
-                                                                        SHOPPING</a>
-
-                                                                    <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
-
-                                                                    <input type="hidden" name="product_code"
-                                                                        value="{{ $product->product_code }}">
-                                                                    <button class="s-option__link btn--e-brand-shadow"
-                                                                        type="submit">ADD TO CART</button>
-                                                                </div>
-                                                            </div>
+                                                            <input type="hidden" name="product_code"
+                                                                value="{{ $product->product_code }}">
+                                                            <button class="btn btn--e-brand-b-2" type="submit">Add to
+                                                                Cart</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
+                                        <!--====== End - Product Right Side Details ======-->
                                     </div>
                                 </div>
-                                <!--====== End - Add to Cart Modal ======-->
-
-                                @endforeach
-                                @endif
                             </div>
                         </div>
                     </div>
+                </div>
+                <!--====== End - Quick Look Modal ======-->
 
+                <!--====== Add to Cart Modal ======-->
+                <div class="modal fade" id="add-to-cart{{ $product->product_code }}">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content modal-radius modal-shadow">
 
-@auth('customer')
+                            <button class="btn dismiss-button fas" type="button" data-dismiss="modal">X</button>
+                            <div class="modal-body">
 
-@else
-        <!--====== Newsletter Subscribe Modal ======-->
-        <div class="modal fade new-l" id="newsletter-modal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal--shadow">
+                                <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="success u-s-m-b-30">
+                                                <div class="success__img-wrap">
+                                                    <img class="u-img-fluid"
+                                                        src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                        alt="">
+                                                </div>
 
-                    <button class="btn new-l__dismiss fas fa-times" type="button" data-dismiss="modal">X</button>
-                    <div class="modal-body popup" >
-                        <div class="row u-s-m-x-0">
-                            <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
+                                                <div class="success__info-wrap">
 
-                                <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
+                                                    <span class="success__name">{{
+                                                                        $product->product_name }}</span>
 
-                                    <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a></div>
-                            <div class="col-lg-6 new-l__col-2">
-                                <div class="new-l__section u-s-m-t-30">
-                                    <div class="u-s-m-b-8 new-l--center">
-                                        <h3 class="new-l__h3">Explore More Product</h3>
+                                                    <div class="input-counter">
+                                                        <span class="input-counter__minus fas fa-minus"></span>
+                                                        <input
+                                                            class="input-counter__text input-counter--text-primary-style"
+                                                            type="text" value="1" name="quantity" data-min="1"
+                                                            data-max="1000">
+                                                        <span class="input-counter__plus fas fa-plus"></span>
+                                                    </div>
+
+                                                    <span class="success__price">{{ $product->sell_price
+                                                                        }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="s-option">
+
+                                                <div class="s-option__link-box">
+
+                                                    <a class="s-option__link btn--e-white-brand-shadow"
+                                                        href="{{ route('frontend.index') }}">CONTINUE
+                                                        SHOPPING</a>
+
+                                                    <a class="s-option__link btn--e-white-brand-shadow"
+                                                        href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
+
+                                                    <input type="hidden" name="product_code"
+                                                        value="{{ $product->product_code }}">
+                                                    <button class="s-option__link btn--e-brand-shadow" type="submit">ADD
+                                                        TO CART</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="u-s-m-b-30 new-l--center">
-                                        <p class="new-l__p1">Be Our Member by Signing In righ now. </p>
-                                    </div>
-                                    <form class="new-l__form" action="{{ route('frontend.signin') }}">
-                                        <div class="u-s-m-b-15">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Add to Cart Modal ======-->
+
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+
+
+
+    @auth('customer')
+
+    @else
+    <!--====== Newsletter Subscribe Modal ======-->
+    <!-- <div class="modal fade new-l" id="newsletter-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal--shadow">
+
+                <button class="btn new-l__dismiss fas" type="button" data-dismiss="modal">X</button>
+                <div class="modal-body popup">
+                    <div class="row u-s-m-x-0">
+                        <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
+
+                            <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
+
+                                <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a>
+                        </div>
+                        <div class="col-lg-6 new-l__col-2">
+                            <div class="new-l__section u-s-m-t-30">
+                                <div class="u-s-m-b-8 new-l--center">
+                                    <h3 class="new-l__h3">Explore More Product</h3>
+                                </div>
+                                <div class="u-s-m-b-30 new-l--center">
+                                    <p class="new-l__p1">Be Our Member by Signing In righ now. </p>
+                                </div>
+                                <form class="new-l__form" action="{{ route('frontend.signin') }}">
+                                    <div class="u-s-m-b-15">
                                         <div class="u-s-m-b-15">
                                             <button class="btn btn--e-brand-b-2" type="submit">Sign In!</button>
-                                    </div>
-                                    </form>
-                                    <div class="u-s-m-b-15 new-l--center">
-                                        <p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions and other commercial messages. You may unsubscribe at any time.</p>
-                                    </div>
-                                    <div class="u-s-m-b-15 new-l--center">
+                                        </div>
+                                </form>
+                                <div class="u-s-m-b-15 new-l--center">
+                                    <p class="new-l__p2">By Signing up, you agree to receive Reshop
+                                        offers,<br />promotions and other commercial messages. You may unsubscribe at
+                                        any time.</p>
+                                </div>
+                                <div class="u-s-m-b-15 new-l--center">
 
-                                        <a class="new-l__link" data-dismiss="modal">No Thanks</a></div>
+                                    <a class="new-l__link" data-dismiss="modal">No Thanks</a>
                                 </div>
                             </div>
                         </div>
@@ -405,193 +397,76 @@
                 </div>
             </div>
         </div>
-        <!--====== End - Newsletter Subscribe Modal ======-->
-@endauth
+    </div> -->
+    <!--====== End - Newsletter Subscribe Modal ======-->
+    @endauth
 
-                    <div class="col-lg-12">
-                        <div class="load-more">
-                            <button class="btn btn--e-brand" type="button">Load More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="col-lg-12">
+        <div class="load-more">
+            <button class="btn btn--e-brand" type="button">Load More</button>
         </div>
-        <!--====== End - Section Content ======-->
-
     </div>
-    <!--====== End - Section 2 ======-->
+</div>
+</div>
+</div>
+<!--====== End - Section Content ======-->
+
+</div>
+<!--====== End - Section 2 ======-->
 
 
 
-    <!--====== Section 4 ======-->
-    <div class="u-s-p-b-60">
-        <!--====== Section Intro ======-->
-        <div class="section__intro u-s-m-b-46">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section__text-wrap">
-                            <h1 class="section__heading u-c-secondary u-s-m-b-12">NEW ARRIVALS</h1>
+<!--====== Section 4 ======-->
+<div class="u-s-p-b-60">
+    <!--====== Section Intro ======-->
+    <div class="section__intro u-s-m-b-46">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__text-wrap">
+                        <h1 class="section__heading u-c-secondary u-s-m-b-12">NEW ARRIVALS</h1>
 
-                            <span class="section__span u-c-silver">GET UP FOR NEW ARRIVALS</span>
-                        </div>
+                        <span class="section__span u-c-silver">GET UP FOR NEW ARRIVALS</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!--====== End - Section Intro ======-->
-
-        <!--====== Section Content ======-->
-        <div class="section__content">
-            <div class="container">
-                <div class="slider-fouc">
-                    <div class="owl-carousel product-slider" data-item="4">
-
-                        @if ($newarriveproducts->isNotEmpty())
-                        @foreach ($newarriveproducts as $newarriveproduct)
-                        <div class="u-s-m-b-30">
-                            <div class="product-o product-o--hover-on">
-                                <div class="product-o__wrap">
-
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                        href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">
-
-                                        <img class="aspect__img"
-                                            src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}"
-                                            alt=""></a>
-                                    <div class="product-o__action-wrap">
-                                        <ul class="product-o__action-list">
-                                            <li>
-
-                                                <a class="quick-view-link" data-modal="modal"
-                                                    data-modal-id="#quick-look{{ $newarriveproduct->product_code }}"
-                                                    data-tooltip="tooltip" data-placement="top" title="Quick View"
-                                                    value="{{ $newarriveproduct->product_code }}"><i
-                                                        class="fas fa-search-plus"></i></a>
-                                            </li>
-                                            <li>
-
-                                                <a data-modal="modal"
-                                                    data-modal-id="#add-to-cart{{ $newarriveproduct->product_code }}"
-                                                    data-tooltip="tooltip" data-placement="top"
-                                                    value="{{ $newarriveproduct->product_code }}" title="Add to Cart"><i
-                                                        class="fas fa-shopping-cart"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <span class="product-o__category">
-
-                                    <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
-
-                                <span class="product-o__name">
-                                    <a href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">{{
-                                        $newarriveproduct->product_name }}</a></span>
-
-                                <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
-
-                                    <span class="product-o__discount">Rs.{{ $newarriveproduct->actual_price
-                                        }}</span></span>
-                            </div>
-                        </div>
-                    <!--======End- Section Content ======--> 
-                        @endforeach
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Section Content ======-->
     </div>
-    <!--====== End - Section 4 ======-->
+    <!--====== End - Section Intro ======-->
 
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="slider-fouc">
+                <div class="owl-carousel product-slider" data-item="4">
 
-    <!--====== Section 5 ======-->
-    <div class="banner-bg">
-
-        <!--====== Section Content ======-->
-        <div class="section__content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="banner-bg__countdown">
-                            <div class="countdown countdown--style-banner" data-countdown="2020/05/01"></div>
-                        </div>
-                        <div class="banner-bg__wrap">
-                            <div class="banner-bg__text-1">
-
-                                <span class="u-c-white">Global</span>
-
-                                <span class="u-c-secondary">Offers</span>
-                            </div>
-                            <div class="banner-bg__text-2">
-
-                                <span class="u-c-secondary">Official Launch</span>
-
-                                <span class="u-c-white">Don't Miss!</span>
-                            </div>
-
-                            <span class="banner-bg__text-block banner-bg__text-3 u-c-secondary">Enjoy Free Shipping when
-                                you buy 2 items and above!</span>
-
-                            <a class="banner-bg__shop-now btn--e-secondary" href="shop-side-version-2.html">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Section Content ======-->
-    </div>
-    <!--====== End - Section 5 ======-->
-
-
-    <!--====== Section 6 ======-->
-    <div class="u-s-p-y-60">
-
-        <!--====== Section Intro ======-->
-        <div class="section__intro u-s-m-b-46">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section__text-wrap">
-                            <h1 class="section__heading u-c-secondary u-s-m-b-12">FEATURED PRODUCTS</h1>
-
-                            <span class="section__span u-c-silver">FIND NEW FEATURED PRODUCTS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Section Intro ======-->
-
-
-        <!--====== Section Content ======-->
-        <div class="section__content">
-            <div class="container">
-                <div class="row">
-                    @if($featureproducts->isNotEmpty())
-                    @foreach ($featureproducts as $featureproduct)
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                        <div class="product-o product-o--hover-on u-h-100">
+                    @if ($newarriveproducts->isNotEmpty())
+                    @foreach ($newarriveproducts as $newarriveproduct)
+                    <div class="u-s-m-b-30">
+                        <div class="product-o product-o--hover-on">
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail',$featureproduct->id) }}">
+                                    href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">
 
-                                    <img class="aspect__img" src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
+                                    <img class="aspect__img"
+                                        src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}" alt=""></a>
                                 <div class="product-o__action-wrap">
                                     <ul class="product-o__action-list">
                                         <li>
 
-                                            <a data-modal="modal" data-modal-id="#quick-look{{ $featureproduct->product_code }}" data-tooltip="tooltip"
-                                                data-placement="top" title="Quick View" value="{{ $featureproduct->product_code }}"><i
+                                            <a class="quick-view-link" data-modal="modal"
+                                                data-modal-id="#quick-look{{ $newarriveproduct->product_code }}"
+                                                data-tooltip="tooltip" data-placement="top" title="Quick View"
+                                                value="{{ $newarriveproduct->product_code }}"><i
                                                     class="fas fa-search-plus"></i></a>
                                         </li>
                                         <li>
 
-                                            <a data-modal="modal" data-modal-id="#add-to-cart{{ $featureproduct->product_code }}" data-tooltip="tooltip"
-                                                data-placement="top" title="Add to Cart" value="{{ $featureproduct->product_code }}"><i
+                                            <a data-modal="modal"
+                                                data-modal-id="#add-to-cart{{ $newarriveproduct->product_code }}"
+                                                data-tooltip="tooltip" data-placement="top"
+                                                value="{{ $newarriveproduct->product_code }}" title="Add to Cart"><i
                                                     class="fas fa-shopping-cart"></i></a>
                                         </li>
                                     </ul>
@@ -600,116 +475,242 @@
 
                             <span class="product-o__category">
 
-                                <a href="shop-side-version-2.html">{{ $featureproduct->category_id }}</a></span>
+                                <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
 
                             <span class="product-o__name">
+                                <a href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">{{
+                                        $newarriveproduct->product_name }}</a></span>
 
-                                <a href="{{ route('frontend.product-detail',$featureproduct->id) }}">{{ $featureproduct->product_name }}</a></span>
-                            <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
-                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star-half-alt"></i>
+                            <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
 
-                                <span class="product-o__review">(23)</span>
-                            </div>
-
-                            <span class="product-o__price">Rs.{{ $featureproduct->sell_price }}
-
-                                <span class="product-o__discount">Rs.{{ $featureproduct->actual_price }}</span></span>
+                                <span class="product-o__discount">Rs.{{ $newarriveproduct->actual_price
+                                        }}</span></span>
                         </div>
                     </div>
+                    <!--======End- Section Content ======-->
                     @endforeach
                     @endif
                 </div>
             </div>
         </div>
-        <!--====== End - Section Content ======-->
     </div>
-    <!--====== End - Section 6 ======-->
+    <!--====== End - Section Content ======-->
+</div>
+<!--====== End - Section 4 ======-->
 
 
-    <!--====== Section 7 ======-->
-    <div class="u-s-p-b-60">
+<!--====== Section 5 ======-->
+<div class="banner-bg">
 
-        <!--====== Section Content ======-->
-        <div class="section__content">
-            <div class="container">
-                <div class="row">
-                        @if($carousel->isNotEmpty())
-                        @foreach ($carousel as $carouselItem)
-                    <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="banner-bg__countdown">
+                        <div class="countdown countdown--style-banner" data-countdown="2020/05/01"></div>
+                    </div>
+                    <div class="banner-bg__wrap">
+                        <div class="banner-bg__text-1">
 
-                        <a class="promotion" href="{{ route('frontend.explore') }}">
-                            <div class="aspect aspect--bg-grey aspect--square">
+                            <span class="u-c-white">Global</span>
 
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_1) }}" alt="">
+                            <span class="u-c-secondary">Offers</span>
+                        </div>
+                        <div class="banner-bg__text-2">
+
+                            <span class="u-c-secondary">Official Launch</span>
+
+                            <span class="u-c-white">Don't Miss!</span>
+                        </div>
+
+                        <span class="banner-bg__text-block banner-bg__text-3 u-c-secondary">Enjoy Free Shipping when
+                            you buy 2 items and above!</span>
+
+                        <a class="banner-bg__shop-now btn--e-secondary" href="shop-side-version-2.html">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Content ======-->
+</div>
+<!--====== End - Section 5 ======-->
+
+
+<!--====== Section 6 ======-->
+<div class="u-s-p-y-60">
+
+    <!--====== Section Intro ======-->
+    <div class="section__intro u-s-m-b-46">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__text-wrap">
+                        <h1 class="section__heading u-c-secondary u-s-m-b-12">FEATURED PRODUCTS</h1>
+
+                        <span class="section__span u-c-silver">FIND NEW FEATURED PRODUCTS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Intro ======-->
+
+
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="row">
+                @if($featureproducts->isNotEmpty())
+                @foreach ($featureproducts as $featureproduct)
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
+                    <div class="product-o product-o--hover-on u-h-100">
+                        <div class="product-o__wrap">
+
+                            <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                href="{{ route('frontend.product-detail',$featureproduct->id) }}">
+
+                                <img class="aspect__img"
+                                    src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
+                            <div class="product-o__action-wrap">
+                                <ul class="product-o__action-list">
+                                    <li>
+
+                                        <a data-modal="modal"
+                                            data-modal-id="#quick-look{{ $featureproduct->product_code }}"
+                                            data-tooltip="tooltip" data-placement="top" title="Quick View"
+                                            value="{{ $featureproduct->product_code }}"><i
+                                                class="fas fa-search-plus"></i></a>
+                                    </li>
+                                    <li>
+
+                                        <a data-modal="modal"
+                                            data-modal-id="#add-to-cart{{ $featureproduct->product_code }}"
+                                            data-tooltip="tooltip" data-placement="top" title="Add to Cart"
+                                            value="{{ $featureproduct->product_code }}"><i
+                                                class="fas fa-shopping-cart"></i></a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="promotion__content">
-                                <div class="promotion__text-wrap">
-                                    <div class="promotion__text-1">
+                        </div>
 
-                                        <span class="u-c-secondary">EXPLORE OUR</span>
-                                    </div>
-                                    <div class="promotion__text-2">
-                                        <span class="u-c-brand">GENUINE</span>
-                                    </div>
+                        <span class="product-o__category">
+
+                            <a href="shop-side-version-2.html">{{ $featureproduct->category_id }}</a></span>
+
+                        <span class="product-o__name">
+
+                            <a
+                                href="{{ route('frontend.product-detail',$featureproduct->id) }}">{{ $featureproduct->product_name }}</a></span>
+                        <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star-half-alt"></i>
+
+                            <span class="product-o__review">(23)</span>
+                        </div>
+
+                        <span class="product-o__price">Rs.{{ $featureproduct->sell_price }}
+
+                            <span class="product-o__discount">Rs.{{ $featureproduct->actual_price }}</span></span>
+                    </div>
+                </div>
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Content ======-->
+</div>
+<!--====== End - Section 6 ======-->
+
+
+<!--====== Section 7 ======-->
+<div class="u-s-p-b-60">
+
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="row">
+                @if($carousel->isNotEmpty())
+                @foreach ($carousel as $carouselItem)
+                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+
+                    <a class="promotion" href="{{ route('frontend.explore') }}">
+                        <div class="aspect aspect--bg-grey aspect--square">
+
+                            <img class="aspect__img promotion__img"
+                                src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_1) }}" alt="">
+                        </div>
+                        <div class="promotion__content">
+                            <div class="promotion__text-wrap">
+                                <div class="promotion__text-1">
+
+                                    <span class="u-c-secondary">EXPLORE OUR</span>
+                                </div>
+                                <div class="promotion__text-2">
+                                    <span class="u-c-brand">GENUINE</span>
+                                </div>
+                                <span class="u-c-secondary">PRODUCTS</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+
+                    <a class="promotion" href="{{ route('frontend.newarrival') }}">
+                        <div class="aspect aspect--bg-grey aspect--square">
+
+                            <img class="aspect__img promotion__img"
+                                src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_2) }}" alt="">
+                        </div>
+                        <div class="promotion__content">
+                            <div class="promotion__text-wrap">
+                                <div class="promotion__text-1">
+
                                     <span class="u-c-secondary">PRODUCTS</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
 
-                        <a class="promotion" href="{{ route('frontend.newarrival') }}">
-                            <div class="aspect aspect--bg-grey aspect--square">
-
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_2) }}" alt="">
-                            </div>
-                            <div class="promotion__content">
-                                <div class="promotion__text-wrap">
-                                    <div class="promotion__text-1">
-
-                                        <span class="u-c-secondary">PRODUCTS</span>
-
-                                        <span class="u-c-brand">2024</span>
-                                    </div>
-                                    <div class="promotion__text-2">
-
-                                        <span class="u-c-secondary">NEW ARRIVALS</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-
-                        <a class="promotion" href="{{ route('frontend.whatsnew') }}">
-                            <div class="aspect aspect--bg-grey aspect--square">
-
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_3) }}" alt="">
-                            </div>
-                            <div class="promotion__content">
-                                <div class="promotion__text-wrap">
-                                    <div class="promotion__text-1">
-
-                                        <span class="u-c-secondary">WHAT"S NEW IN</span> <span class="u-c-brand">IN THIS
-                                            YEAR?</span>
-                                    </div>
+                                    <span class="u-c-brand">2024</span>
                                 </div>
                                 <div class="promotion__text-2">
 
-                                    <span class="u-c-brand">GET UP TO 10% OFF</span>
+                                    <span class="u-c-secondary">NEW ARRIVALS</span>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     </a>
-                    @endforeach
-                    @endif
                 </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+
+                    <a class="promotion" href="{{ route('frontend.whatsnew') }}">
+                        <div class="aspect aspect--bg-grey aspect--square">
+
+                            <img class="aspect__img promotion__img"
+                                src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_3) }}" alt="">
+                        </div>
+                        <div class="promotion__content">
+                            <div class="promotion__text-wrap">
+                                <div class="promotion__text-1">
+
+                                    <span class="u-c-secondary">WHAT"S NEW IN</span> <span class="u-c-brand">IN THIS
+                                        YEAR?</span>
+                                </div>
+                            </div>
+                            <div class="promotion__text-2">
+
+                                <span class="u-c-brand">GET UP TO 10% OFF</span>
+                            </div>
+                        </div>
+                </div>
+                </a>
+                @endforeach
+                @endif
             </div>
         </div>
-
     </div>
-    <!--====== End - Section Content ======-->
+
+</div>
+<!--====== End - Section Content ======-->
 </div>
 <!--====== End - Section 7 ======-->
 
@@ -736,24 +737,27 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$specialproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $specialproduct->category_id }}</a></span>
+                                            <a
+                                                href="shop-side-version-2.html">{{ $specialproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
+                                            <a
+                                                href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
 
                                         <span class="product-l__price">{{ $specialproduct->sell_price }}</span>
                                     </div>
                                 </div>
                             </li>
-                            @endforeach   
+                            @endforeach
                             @endif
                         </ul>
 
@@ -765,7 +769,7 @@
                         <span class="column-product__title u-c-secondary u-s-m-b-25">WEEKLY PRODUCTS</span>
                         <ul class="column-product__list">
                             @if ($weeklyproducts->isNotEmpty())
-                                @foreach ($weeklyproducts as $weeklyproduct)
+                            @foreach ($weeklyproducts as $weeklyproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
@@ -773,22 +777,26 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $weeklyproduct->category_id }}</a></span>
+                                            <a
+                                                href="shop-side-version-2.html">{{ $weeklyproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{ $weeklyproduct->product_name }}</a></span>
+                                            <a
+                                                href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{ $weeklyproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $weeklyproduct->sell_price }}
 
-                                            <span class="product-l__discount">{{ $weeklyproduct->actual_price }}</span></span>
+                                            <span
+                                                class="product-l__discount">{{ $weeklyproduct->actual_price }}</span></span>
                                     </div>
                                 </div>
                             </li>
@@ -802,8 +810,8 @@
 
                         <span class="column-product__title u-c-secondary u-s-m-b-25">FLASH PRODUCTS</span>
                         <ul class="column-product__list">
-                               @if ($flashproducts->isNotEmpty())
-                                   @foreach ($flashproducts as $flashproduct)                                
+                            @if ($flashproducts->isNotEmpty())
+                            @foreach ($flashproducts as $flashproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
@@ -811,7 +819,8 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$flashproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
@@ -821,11 +830,13 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $flashproduct->category_id }}</a></span>
+                                            <a
+                                                href="shop-side-version-2.html">{{ $flashproduct->category_id }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{ $flashproduct->product_name }}</a></span>
+                                            <a
+                                                href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{ $flashproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $flashproduct->sell_price }}</span>
                                     </div>

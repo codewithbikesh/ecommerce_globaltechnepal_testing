@@ -685,4 +685,3 @@
         RESHOP.shopSideFilter();
 })(jQuery);
 
-

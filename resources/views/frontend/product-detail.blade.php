@@ -187,9 +187,9 @@
                                         </div>
                                         <!--====== End - Input Counter ======-->
                                     </div>
-                                    <div class="u-s-m-b-15">
+                                    <div class="u-s-m-b-15 addToCartandBuyNow">
 
-                                        <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
+                                        <button class="btn btn--e-brand-b-2 addtocartBTN" type="submit">Add to Cart</button>
 
                                         <button class="btn btn--e-brand-b-2" type="submit">Buy Now</button>
                                     </div>

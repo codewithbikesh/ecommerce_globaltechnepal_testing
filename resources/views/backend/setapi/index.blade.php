@@ -45,7 +45,9 @@
           <tr>
             <th scope="row">{{ $index + 1 }}</th>
             <td>
-              @if ($api->api_name == 'P')
+              @if ($api->api_name == 'T')
+                  Token
+              @elseif ($api->api_name == 'P')
                   Products
               @elseif ($api->api_name == 'O')
                   Orders

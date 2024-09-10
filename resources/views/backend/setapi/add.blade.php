@@ -19,6 +19,7 @@
                 <div class="col-md-6">
                   <label for="inputName5" class="form-label">API Name</label>
                   <select class="form-select" name="api_name" aria-label="Account Type">
+                      <option value="T">Token</option>
                       <option value="P">Products</option>
                       <option value="O">Orders</option>
                       <option value="OC">Order Cancel</option>

@@ -19,6 +19,7 @@
                 <div class="col-md-6">
                   <label for="inputName5" class="form-label">API Name</label>
                   <select class="form-select" name="api_name" aria-label="Account Type">
+                      <option value="T" {{ $api->api_name == 'T' ? 'selected' : '' }}>Token</option>
                       <option value="P" {{ $api->api_name == 'P' ? 'selected' : '' }}>Products</option>
                       <option value="O" {{ $api->api_name == 'O' ? 'selected' : '' }}>Orders</option>
                       <option value="OC" {{ $api->api_name == 'OC' ? 'selected' : '' }}>Order Cancel</option>

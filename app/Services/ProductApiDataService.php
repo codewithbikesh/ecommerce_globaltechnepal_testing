@@ -11,162 +11,125 @@ class ProductApiDataService
     public function fetchDataAndStore()
     {
 
-        // Fetch the API URL from the database with a filter for api_name = 'P'
-// Fetch API configuration for token generation
-$authConfig = DB::table('api')
-                ->where('api_name', 'P') // Assuming 'Auth' is the identifier for auth config
-                ->first(['api_value as token_url', 'api_username', 'api_password', 'api_granttype']);
+        // Fetch API configuration for token generation
+        $authConfig = DB::table('api')
+            ->where('api_name', 'T') // Assuming 'P' is the identifier for auth config
+            ->first(['api_value as token_url', 'api_username', 'api_password', 'api_granttype']);
 
-if (!$authConfig || !$authConfig->token_url || !$authConfig->api_username || !$authConfig->api_password || !$authConfig->api_granttype) {
-    \Log::error('Auth credentials not found.');
-    return;
-}
-//dd($authConfig);
-
-// Generate the token
-try {
-// Generate the token
-        $tokenResponse = Http::asForm()->post($authConfig->token_url, [
-    'grant_type' => $authConfig->api_granttype,
-    'username' => $authConfig->api_username,
-    'password' => $authConfig->api_password
-]);
-
-//dd($tokenResponse);
-
-if ($tokenResponse->failed()) {
-    \Log::error('Token generation failed', ['status' => $tokenResponse->status(), 'body' => $tokenResponse->body()]);
-    return;
-}
-
-$tokenData = $tokenResponse->json();
-$accessToken = $tokenData['access_token'] ?? null;
-
-if (!$accessToken) {
-    \Log::error('Access token not found.');
-    return;
-}
-} catch (\Exception $e) {
-    Log::error('Exception occurred while generating token', ['error' => $e->getMessage()]);
-    return;
-}
-
-// Fetch API configuration for product fetch
-$apiConfig = DB::table('api')
-                ->where('api_name', 'P') // Assuming 'P' is the identifier for product config
-                ->first(['api_value as api_url']);
-
-if (!$apiConfig || !$apiConfig->api_url) {
-    \Log::error('API URL not found.');
-    return;
-}
-
-try {
-// Fetch products using the generated token
-$response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $accessToken
-])->get($apiConfig->api_url);
-
-if ($response->successful()) {
-    $data = $response->json();
-
-    // Check if 'data' key exists and is an array
-    if (!isset($data['data']) || !is_array($data['data'])) {
-        return;
-    }
-
-    foreach ($data['data'] as $item) {
-        // Define default values if keys are missing or null
-        $productData = [
-            'product_code' => $item['sku'] ?? null,
-            'product_name' => $item['productName'] ?? 'Unknown',
-            'product_description' => $item['description'] ?? 'Unknown',
-            'category_id' => $item['categoryCode'] ?? 'NoCategoryCode',
-            'category_name' => $item['category'] ?? 'NoCategory',
-            'subcategory_id' => $item['subCategoryCode'] ?? 'NoSubCategoryCode',
-            'subcategory_name' => $item['subCategory'] ?? 'NoSubCategory',
-            'delivery_target_days' => $item['deliveryTargetDays'] ?? 0,
-            'discount' => $item['discount'] ?? 0,
-            'actual_price' => $item['purchasePrice'] ?? 0,
-            'sell_price' => $item['price'] ?? 0,
-            'available_quantity' => $item['availableQty'] ?? null,
-            'stock_quantity' => $item['stockQuantity'] ?? null,
-            'brand_id' => $item['brandCode'] ?? null,
-            'brand_name' => $item['brand'] ?? null
-        ];
-
-        try {
-            Product::updateOrCreate(
-                ['product_code' => $productData['product_code']],
-                $productData
-            );
-        } catch (\Exception $e) {
-            \Log::error('Error updating or creating product', ['error' => $e->getMessage(), 'item' => $item]);
+        if (!$authConfig || !$authConfig->token_url || !$authConfig->api_username || !$authConfig->api_password || !$authConfig->api_granttype) {
+            Log::error('Auth credentials not found.');
+            return;
         }
-    }
-} else {
-    \Log::error('API request failed', ['status' => $response->status(), 'body' => $response->body()]);
-}
-} catch (\Exception $e) {
-    Log::error('Exception occurred while fetching products', ['error' => $e->getMessage()]);
-}
 
+        // Generate the token
+        try {
+            $tokenResponse = Http::asForm()->post($authConfig->token_url, [
+                'username' => $authConfig->api_username,
+                'password' => $authConfig->api_password,
+                'grant_type' => $authConfig->api_granttype
+            ]);
 
+            // Log the response status and body for debugging
+            Log::info('Token Response Status: ' . $tokenResponse->status());
+            Log::info('Token Response Body: ' . $tokenResponse->body());
 
+            if ($tokenResponse->failed()) {
+                Log::error('Token generation failed', [
+                    'status' => $tokenResponse->status(),
+                    'body' => $tokenResponse->body()
+                ]);
+                return;
+            }
 
-        // Fetch the API URL from the database with a filter for api_name = 'P'
-        // $apiUrl = DB::table('api')
-        //         ->where('api_name', 'P') // Filter based on api_name
-        //         ->value('api_value');
+            $tokenData = $tokenResponse->json();
 
-        // if (!$apiUrl) {
-        //     \Log::error('API URL not found.');
-        //     return;
-        // }
+            if (isset($tokenData['access_token'])) {
+                $accessToken = $tokenData['access_token'];
+            } else {
+                Log::error('Access token not found in response.', ['response' => $tokenData]);
+                return;
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception occurred while generating token', ['error' => $e->getMessage()]);
+            return;
+        }
 
-        // $response = Http::get($apiUrl);
+        // Fetch API configuration for product fetch
+        $apiConfig = DB::table('api')
+            ->where('api_name', 'P') // Assuming 'P' is the identifier for product config
+            ->first(['api_value as api_url']);
 
-        // if ($response->successful()) {
-        //     $data = $response->json();
+        if (!$apiConfig || !$apiConfig->api_url) {
+            Log::error('API URL not found.');
+            return;
+        }
 
-        //     // Check if 'data' key exists and is an array
-        //     if ((!isset($data['data'])) || (!is_array($data['data']))) {
-        //         return;
-        //     }
+        // Fetch products using the generated token
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken
+            ])->get($apiConfig->api_url);
 
-        //     foreach ($data['data'] as $item) {
+            // Log the response status and body for debugging
+            Log::info('Product API Response Status: ' . $response->status());
+            Log::info('Product API Response Body: ' . $response->body());
 
-        //         // Define default values if keys are missing or null
-        //         $productData = [
-        //             'product_code' => $item['PCode'] ?? null,
-        //             'product_name' => $item['PDesc'] ?? ('Unknown'),
-        //             'category_id' => $item['GroupName'] ?? ('Uncategorised'),
-        //             'actual_price' => $item['BuyRate'] ?? 0,
-        //             'sell_price' => $item['SalesRate'] ?? 0,
-        //             'stock_quantity' => $item['StockQty'] ?? null,
-        //             'primary_image' => $item['PImage'] ?? null
-        //         ];
+            if ($response->failed()) {
+                Log::error('API request failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body()
+                ]);
+                return;
+            }
 
-        //         try {
+            $data = $response->json();
 
-        //             Product::updateOrCreate(
-        //                 ['product_code' => $productData['product_code']],
-        //                 $productData
-        //             );
-        //         } catch (\Exception $e) {
-        //             \Log::error('Error updating or creating product', ['error' => $e->getMessage(), 'item' => $item]);
-        //         }
-        //     }
-        // } else {
-        //     \Log::error('API request failed', ['status' => $response->status(), 'body' => $response->body()]);
-        // }
+            // Check for JSON decoding errors
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                Log::error('JSON decoding error', [
+                    'error' => json_last_error_msg(),
+                    'body' => $response->body()
+                ]);
+                return;
+            }
 
+            // Ensure 'data' key exists and is an array
+            if (!isset($data['data']) || !is_array($data['data'])) {
+                Log::error('Invalid data format', ['response' => $data]);
+                return;
+            }
 
+            foreach ($data['data'] as $item) {
+                $productData = [
+                    'product_code' => $item['sku'] ?? null,
+                    'product_name' => $item['productName'] ?? 'Unknown',
+                    'product_description' => $item['description'] ?? 'Unknown',
+                    'category_id' => $item['categoryCode'] ?? 'NoCategoryCode',
+                    'category_name' => $item['category'] ?? 'NoCategory',
+                    'subcategory_id' => $item['subCategoryCode'] ?? 'NoSubCategoryCode',
+                    'subcategory_name' => $item['subCategory'] ?? 'NoSubCategory',
+                    'delivery_target_days' => $item['deliveryTargetDays'] ?? 0,
+                    'discount' => $item['discount'] ?? 0,
+                    'actual_price' => $item['purchasePrice'] ?? 0,
+                    'sell_price' => $item['price'] ?? 0,
+                    'available_quantity' => $item['availableQty'] ?? null,
+                    'stock_quantity' => $item['stockQuantity'] ?? null,
+                    'brand_id' => $item['brandCode'] ?? null,
+                    'brand_name' => $item['brand'] ?? null
+                ];
 
-
-
-
-
+                try {
+                    Product::updateOrCreate(
+                        ['product_code' => $productData['product_code']],
+                        $productData
+                    );
+                } catch (\Exception $e) {
+                    Log::error('Error updating or creating product', ['error' => $e->getMessage(), 'item' => $item]);
+                }
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception occurred while fetching products', ['error' => $e->getMessage()]);
+        }
 
     }
 }

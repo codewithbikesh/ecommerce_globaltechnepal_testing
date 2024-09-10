@@ -113,9 +113,9 @@
 
                                             <a class="aspect aspect--bg-grey aspect--square u-d-block"
                                                 href="{{ route('frontend.product-detail',$product->id) }}">
-
                                                 <img class="aspect__img"
-                                                    src="data:image/jpeg;base64,{{$product->primary_image}}" alt=""></a>
+                                                    src="data:image/jpeg;base64,{{$product->primary_image}}" alt="">
+                                            </a>
                                             <div class="product-o__action-wrap">
                                                 <ul class="product-o__action-list">
                                                     <li>
@@ -139,11 +139,12 @@
                                         </div>
                                         <span class="product-o__category">
 
-                                            <a href="shop-side-version-2.html">{{ $product->product_name }}</a></span>
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">{{
+                                                $product->category_id }}</a></span>
 
                                         <span class="product-o__name">
 
-                                            <a href="{{ route('frontend.product-detail',$product->product_code) }}">{{
+                                            <a href="{{ route('frontend.product-detail',$product->id) }}">{{
                                                 $product->product_name }}</a></span>
                                         <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                 class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -152,20 +153,22 @@
                                             <span class="product-o__review">(23)</span>
                                         </div>
 
-                                        <span class="product-o__price">{{ $product->actual_price }}
+                                        <span class="product-o__price">{{ $product->sell_price }}
 
-                                            <span class="product-o__discount">{{ $product->sell_price }}</span></span>
+                                            <span class="product-o__discount">{{ $product->actual_price }}</span></span>
                                     </div>
                                 </div>
+
                                 <!--====== Quick Look Modal ======-->
                                 <div class="modal fade" id="quick-look{{ $product->product_code }}">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content modal--shadow">
 
-            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-5">
+                                            <button class="btn dismiss-button fas fa-times" type="button"
+                                                data-dismiss="modal"></button>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-lg-5">
 
                                                         <!--====== End - Product Breadcrumb ======-->
 
@@ -295,19 +298,23 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content modal-radius modal-shadow">
 
-            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-            <div class="modal-body">
-                
-            <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
-            @csrf
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="success u-s-m-b-30">
-                            <div class="success__img-wrap">
-                                <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
-                            </div>
-                            
-                            <div class="success__info-wrap">
+                                            <button class="btn dismiss-button fas fa-times" type="button"
+                                                data-dismiss="modal"></button>
+                                            <div class="modal-body">
+
+                                                <form class="pd-detail__form" method="POST"
+                                                    action="{{ route('cart.add') }}">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-12">
+                                                            <div class="success u-s-m-b-30">
+                                                                <div class="success__img-wrap">
+                                                                    <img class="u-img-fluid"
+                                                                        src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                                        alt="">
+                                                                </div>
+
+                                                                <div class="success__info-wrap">
 
                                                                     <span class="success__name">{{
                                                                         $product->product_name }}</span>
@@ -338,7 +345,8 @@
                                                                         SHOPPING</a>
 
                                                                     <a class="s-option__link btn--e-white-brand-shadow"
-                                                                        href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
+                                                                        href="{{ route('frontend.cart') }}">GO TO CART
+                                                                        PAGE</a>
 
                                                                     <input type="hidden" name="product_code"
                                                                         value="{{ $product->product_code }}">
@@ -362,51 +370,58 @@
                     </div>
 
 
-@auth('customer')
+                    @auth('customer')
 
-@else
-        <!--====== Newsletter Subscribe Modal ======-->
-        <div class="modal fade new-l" id="newsletter-modal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal--shadow">
+                    @else
+                    <!--====== Newsletter Subscribe Modal ======-->
+                    <div class="modal fade new-l" id="newsletter-modal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content modal--shadow">
 
-                    <button class="btn new-l__dismiss fas fa-times" type="button" data-dismiss="modal">X</button>
-                    <div class="modal-body popup" >
-                        <div class="row u-s-m-x-0">
-                            <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
+                                <button class="btn new-l__dismiss fas fa-times" type="button"
+                                    data-dismiss="modal">X</button>
+                                <div class="modal-body popup">
+                                    <div class="row u-s-m-x-0">
+                                        <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
 
-                                <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
+                                            <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
 
-                                    <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a></div>
-                            <div class="col-lg-6 new-l__col-2">
-                                <div class="new-l__section u-s-m-t-30">
-                                    <div class="u-s-m-b-8 new-l--center">
-                                        <h3 class="new-l__h3">Explore More Product</h3>
+                                                <img class="u-img-fluid u-d-block"
+                                                    src="images/newsletter/newsletter.jpg" alt=""></a>
+                                        </div>
+                                        <div class="col-lg-6 new-l__col-2">
+                                            <div class="new-l__section u-s-m-t-30">
+                                                <div class="u-s-m-b-8 new-l--center">
+                                                    <h3 class="new-l__h3">Explore More Product</h3>
+                                                </div>
+                                                <div class="u-s-m-b-30 new-l--center">
+                                                    <p class="new-l__p1">Be Our Member by Signing In righ now. </p>
+                                                </div>
+                                                <form class="new-l__form" action="{{ route('frontend.signin') }}">
+                                                    <div class="u-s-m-b-15">
+                                                        <div class="u-s-m-b-15">
+                                                            <button class="btn btn--e-brand-b-2" type="submit">Sign
+                                                                In!</button>
+                                                        </div>
+                                                </form>
+                                                <div class="u-s-m-b-15 new-l--center">
+                                                    <p class="new-l__p2">By Signing up, you agree to receive Reshop
+                                                        offers,<br />promotions and other commercial messages. You may
+                                                        unsubscribe at any time.</p>
+                                                </div>
+                                                <div class="u-s-m-b-15 new-l--center">
+
+                                                    <a class="new-l__link" data-dismiss="modal">No Thanks</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="u-s-m-b-30 new-l--center">
-                                        <p class="new-l__p1">Be Our Member by Signing In righ now. </p>
-                                    </div>
-                                    <form class="new-l__form" action="{{ route('frontend.signin') }}">
-                                        <div class="u-s-m-b-15">
-                                        <div class="u-s-m-b-15">
-                                            <button class="btn btn--e-brand-b-2" type="submit">Sign In!</button>
-                                    </div>
-                                    </form>
-                                    <div class="u-s-m-b-15 new-l--center">
-                                        <p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions and other commercial messages. You may unsubscribe at any time.</p>
-                                    </div>
-                                    <div class="u-s-m-b-15 new-l--center">
-
-                                        <a class="new-l__link" data-dismiss="modal">No Thanks</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Newsletter Subscribe Modal ======-->
-@endauth
+                    <!--====== End - Newsletter Subscribe Modal ======-->
+                    @endauth
 
                     <div class="col-lg-12">
                         <div class="load-more">
@@ -495,7 +510,75 @@
                                         }}</span></span>
                             </div>
                         </div>
-                    <!--======End- Section Content ======--> 
+                        <!--======End- Section Content ======-->
+
+                        <!--====== Add to Cart Modal ======-->
+                        <div class="modal fade" id="add-to-cart{{ $newarriveproduct->product_code }}">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content modal-radius modal-shadow">
+
+                                    <button class="btn dismiss-button fas fa-times" type="button"
+                                        data-dismiss="modal"></button>
+                                    <div class="modal-body">
+
+                                        {{-- <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}"> --}}
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="success u-s-m-b-30">
+                                                        <div class="success__img-wrap">
+                                                            <img class="u-img-fluid"
+                                                                src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}"
+                                                                alt="">
+                                                        </div>
+
+                                                        <div class="success__info-wrap">
+
+                                                            <span class="success__name">{{
+                                                                $newarriveproduct->product_name }}</span>
+
+                                                            <div class="input-counter">
+                                                                <span class="input-counter__minus fas fa-minus"></span>
+                                                                <input
+                                                                    class="input-counter__text input-counter--text-primary-style"
+                                                                    type="text" value="1" name="quantity" data-min="1"
+                                                                    data-max="1000">
+                                                                <span class="input-counter__plus fas fa-plus"></span>
+                                                            </div>
+
+                                                            <span class="success__price">{{
+                                                                $newarriveproduct->sell_price
+                                                                }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="s-option">
+
+                                                        <div class="s-option__link-box">
+
+                                                            <a class="s-option__link btn--e-white-brand-shadow"
+                                                                href="{{ route('frontend.index') }}">CONTINUE
+                                                                SHOPPING</a>
+
+                                                            <a class="s-option__link btn--e-white-brand-shadow"
+                                                                href="{{ route('frontend.cart') }}">GO TO CART PAGE</a>
+
+                                                            {{-- <input type="hidden" name="product_code"
+                                                                value="{{ $newarriveproduct->product_code }}"> --}}
+                                                            <button class="s-option__link btn--e-brand-shadow"
+                                                                type="submit">ADD TO CART</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{-- </form> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--====== End - Add to Cart Modal ======-->
+
                         @endforeach
                         @endif
                     </div>
@@ -503,6 +586,7 @@
             </div>
         </div>
         <!--====== End - Section Content ======-->
+
     </div>
     <!--====== End - Section 4 ======-->
 
@@ -579,19 +663,24 @@
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
                                     href="{{ route('frontend.product-detail',$featureproduct->id) }}">
 
-                                    <img class="aspect__img" src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
+                                    <img class="aspect__img"
+                                        src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
                                 <div class="product-o__action-wrap">
                                     <ul class="product-o__action-list">
                                         <li>
 
-                                            <a data-modal="modal" data-modal-id="#quick-look{{ $featureproduct->product_code }}" data-tooltip="tooltip"
-                                                data-placement="top" title="Quick View" value="{{ $featureproduct->product_code }}"><i
+                                            <a data-modal="modal"
+                                                data-modal-id="#quick-look{{ $featureproduct->product_code }}"
+                                                data-tooltip="tooltip" data-placement="top" title="Quick View"
+                                                value="{{ $featureproduct->product_code }}"><i
                                                     class="fas fa-search-plus"></i></a>
                                         </li>
                                         <li>
 
-                                            <a data-modal="modal" data-modal-id="#add-to-cart{{ $featureproduct->product_code }}" data-tooltip="tooltip"
-                                                data-placement="top" title="Add to Cart" value="{{ $featureproduct->product_code }}"><i
+                                            <a data-modal="modal"
+                                                data-modal-id="#add-to-cart{{ $featureproduct->product_code }}"
+                                                data-tooltip="tooltip" data-placement="top" title="Add to Cart"
+                                                value="{{ $featureproduct->product_code }}"><i
                                                     class="fas fa-shopping-cart"></i></a>
                                         </li>
                                     </ul>
@@ -604,7 +693,8 @@
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail',$featureproduct->id) }}">{{ $featureproduct->product_name }}</a></span>
+                                <a href="{{ route('frontend.product-detail',$featureproduct->id) }}">{{
+                                    $featureproduct->product_name }}</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i>
@@ -634,14 +724,16 @@
         <div class="section__content">
             <div class="container">
                 <div class="row">
-                        @if($carousel->isNotEmpty())
-                        @foreach ($carousel as $carouselItem)
+                    @if($carousel->isNotEmpty())
+                    @foreach ($carousel as $carouselItem)
                     <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
 
                         <a class="promotion" href="{{ route('frontend.explore') }}">
                             <div class="aspect aspect--bg-grey aspect--square">
 
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_1) }}" alt="">
+                                <img class="aspect__img promotion__img"
+                                    src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_1) }}"
+                                    alt="">
                             </div>
                             <div class="promotion__content">
                                 <div class="promotion__text-wrap">
@@ -662,7 +754,9 @@
                         <a class="promotion" href="{{ route('frontend.newarrival') }}">
                             <div class="aspect aspect--bg-grey aspect--square">
 
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_2) }}" alt="">
+                                <img class="aspect__img promotion__img"
+                                    src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_2) }}"
+                                    alt="">
                             </div>
                             <div class="promotion__content">
                                 <div class="promotion__text-wrap">
@@ -685,7 +779,9 @@
                         <a class="promotion" href="{{ route('frontend.whatsnew') }}">
                             <div class="aspect aspect--bg-grey aspect--square">
 
-                                <img class="aspect__img promotion__img" src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_3) }}" alt="">
+                                <img class="aspect__img promotion__img"
+                                    src="{{ asset('storage/backend/carousel_images/' . $carouselItem->image_3) }}"
+                                    alt="">
                             </div>
                             <div class="promotion__content">
                                 <div class="promotion__text-wrap">
@@ -736,24 +832,27 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$specialproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $specialproduct->category_id }}</a></span>
+                                            <a href="shop-side-version-2.html">{{ $specialproduct->category_id
+                                                }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
+                                            <a
+                                                href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
 
                                         <span class="product-l__price">{{ $specialproduct->sell_price }}</span>
                                     </div>
                                 </div>
                             </li>
-                            @endforeach   
+                            @endforeach
                             @endif
                         </ul>
 
@@ -765,7 +864,7 @@
                         <span class="column-product__title u-c-secondary u-s-m-b-25">WEEKLY PRODUCTS</span>
                         <ul class="column-product__list">
                             @if ($weeklyproducts->isNotEmpty())
-                                @foreach ($weeklyproducts as $weeklyproduct)
+                            @foreach ($weeklyproducts as $weeklyproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
@@ -773,22 +872,26 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $weeklyproduct->category_id }}</a></span>
+                                            <a href="shop-side-version-2.html">{{ $weeklyproduct->category_id
+                                                }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{ $weeklyproduct->product_name }}</a></span>
+                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{
+                                                $weeklyproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $weeklyproduct->sell_price }}
 
-                                            <span class="product-l__discount">{{ $weeklyproduct->actual_price }}</span></span>
+                                            <span class="product-l__discount">{{ $weeklyproduct->actual_price
+                                                }}</span></span>
                                     </div>
                                 </div>
                             </li>
@@ -802,8 +905,8 @@
 
                         <span class="column-product__title u-c-secondary u-s-m-b-25">FLASH PRODUCTS</span>
                         <ul class="column-product__list">
-                               @if ($flashproducts->isNotEmpty())
-                                   @foreach ($flashproducts as $flashproduct)                                
+                            @if ($flashproducts->isNotEmpty())
+                            @foreach ($flashproducts as $flashproduct)
                             <li class="column-product__item">
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
@@ -811,7 +914,8 @@
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
                                             href="{{ route('frontend.product-detail',$flashproduct->id) }}">
 
-                                            <img class="aspect__img" src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
+                                            <img class="aspect__img"
+                                                src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
                                                 alt=""></a>
                                     </div>
                                     <div class="product-l__info-wrap">
@@ -821,11 +925,13 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $flashproduct->category_id }}</a></span>
+                                            <a href="shop-side-version-2.html">{{ $flashproduct->category_id
+                                                }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{ $flashproduct->product_name }}</a></span>
+                                            <a href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{
+                                                $flashproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $flashproduct->sell_price }}</span>
                                     </div>

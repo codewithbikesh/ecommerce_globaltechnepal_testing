@@ -19,7 +19,7 @@ class DashboardController extends Controller
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
-        $products = Product::limit(25)->get();
+        $products = Product::limit(40)->get();
         $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
         $specialproducts = Product::limit(3)->get();
@@ -196,8 +196,8 @@ class DashboardController extends Controller
     }
 
     // product-detail 
-    public function productDetails($id){
-        $productDetails = Product::find($id);
+    public function productDetails($product_code){
+        $productDetails = Product::where('product_code', $product_code)->first();
         $websitedata = WebsiteData::first();
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();

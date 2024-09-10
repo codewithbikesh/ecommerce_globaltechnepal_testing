@@ -112,7 +112,7 @@
                                         <div class="product-o__wrap">
 
                                             <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                href="{{ route('frontend.product-detail',$product->id) }}">
+                                                href="{{ route('frontend.product-detail',$product->product_code) }}">
                                                 <img class="aspect__img"
                                                     src="data:image/jpeg;base64,{{$product->primary_image}}" alt="">
                                             </a>
@@ -139,12 +139,12 @@
                                         </div>
                                         <span class="product-o__category">
 
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">{{
+                                            <a href="{{ route('frontend.product-detail',$product->product_code) }}">{{
                                                 $product->category_id }}</a></span>
 
                                         <span class="product-o__name">
 
-                                            <a href="{{ route('frontend.product-detail',$product->id) }}">{{
+                                            <a href="{{ route('frontend.product-detail',$product->product_code) }}">{{
                                                 $product->product_name }}</a></span>
                                         <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                 class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -469,7 +469,7 @@
                                 <div class="product-o__wrap">
 
                                     <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                        href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">
+                                        href="{{ route('frontend.product-detail',$newarriveproduct->product_code) }}">
 
                                         <img class="aspect__img"
                                             src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}"
@@ -498,10 +498,10 @@
 
                                 <span class="product-o__category">
 
-                                    <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
+                                    <a href="{{ route('frontend.product-detail',$newarriveproduct->product_code) }}">{{ $newarriveproduct->category_id }}</a></span>
 
                                 <span class="product-o__name">
-                                    <a href="{{ route('frontend.product-detail',$newarriveproduct->id) }}">{{
+                                    <a href="{{ route('frontend.product-detail',$newarriveproduct->product_code) }}">{{
                                         $newarriveproduct->product_name }}</a></span>
 
                                 <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
@@ -593,7 +593,7 @@
                             <div class="product-o__wrap">
 
                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail',$featureproduct->id) }}">
+                                    href="{{ route('frontend.product-detail',$featureproduct->product_code) }}">
 
                                     <img class="aspect__img"
                                         src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
@@ -621,11 +621,11 @@
 
                             <span class="product-o__category">
 
-                                <a href="shop-side-version-2.html">{{ $featureproduct->category_id }}</a></span>
+                                <a href="{{ route('frontend.product-detail',$featureproduct->product_code) }}">{{ $featureproduct->category_id }}</a></span>
 
                             <span class="product-o__name">
 
-                                <a href="{{ route('frontend.product-detail',$featureproduct->id) }}">{{
+                                <a href="{{ route('frontend.product-detail',$featureproduct->product_code) }}">{{
                                     $featureproduct->product_name }}</a></span>
                             <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -751,8 +751,6 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
                     <div class="column-product">
-
-
                         <span class="column-product__title u-c-secondary u-s-m-b-25">SPECIAL PRODUCTS</span>
                         <ul class="column-product__list">
                             @if ($specialproducts->isNotEmpty())
@@ -762,7 +760,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$specialproduct->id) }}">
+                                            href="{{ route('frontend.product-detail',$specialproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
@@ -772,13 +770,13 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $specialproduct->category_id
+                                            <a href="{{ route('frontend.product-detail',$specialproduct->product_code) }}">{{ $specialproduct->category_id
                                                 }}</a></span>
 
                                         <span class="product-l__name">
 
                                             <a
-                                                href="{{ route('frontend.product-detail',$specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
+                                                href="{{ route('frontend.product-detail',$specialproduct->product_code) }}">{{$specialproduct->product_name}}</a></span>
 
                                         <span class="product-l__price">{{ $specialproduct->sell_price }}</span>
                                     </div>
@@ -802,7 +800,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">
+                                            href="{{ route('frontend.product-detail',$weeklyproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
@@ -812,12 +810,12 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $weeklyproduct->category_id
+                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->product_code) }}">{{ $weeklyproduct->category_id
                                                 }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->id) }}">{{
+                                            <a href="{{ route('frontend.product-detail',$weeklyproduct->product_code) }}">{{
                                                 $weeklyproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $weeklyproduct->sell_price }}
@@ -844,7 +842,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail',$flashproduct->id) }}">
+                                            href="{{ route('frontend.product-detail',$flashproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
@@ -857,12 +855,12 @@
 
                                         <span class="product-l__category">
 
-                                            <a href="shop-side-version-2.html">{{ $flashproduct->category_id
+                                            <a href="{{ route('frontend.product-detail',$flashproduct->product_code) }}">{{ $flashproduct->category_id
                                                 }}</a></span>
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ route('frontend.product-detail',$flashproduct->id) }}">{{
+                                            <a href="{{ route('frontend.product-detail',$flashproduct->product_code) }}">{{
                                                 $flashproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $flashproduct->sell_price }}</span>

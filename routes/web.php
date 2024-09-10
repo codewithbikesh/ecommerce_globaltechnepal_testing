@@ -109,7 +109,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
-    Route::get('/product-details/{id}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
+    Route::get('/product-details/{product_code}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
     Route::get('/shop-list-full', [DashboardController::class,'shopListFull'])->name('frontend.shop-list-full');   
     Route::get('/signin', [DashboardController::class,'signin'])->name('frontend.signin');   
     Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   

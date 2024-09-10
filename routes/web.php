@@ -133,8 +133,7 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/account', [DashboardController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
-
-    
+ 
 });
 
 require __DIR__.'/auth.php';

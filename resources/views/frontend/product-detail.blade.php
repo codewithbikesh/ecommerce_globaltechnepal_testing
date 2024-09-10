@@ -30,7 +30,7 @@
 
                             </div>
 
-                            <span class="pd-text">Click for larger zoom</span>
+                            {{-- <span class="pd-text">Click for larger zoom</span> --}}
                         </div>
                         <div class="u-s-m-t-15">
                             <div class="slider-fouc">
@@ -94,7 +94,7 @@
 
                                 <span class="pd-detail__stock">{{ $productDetails->stock_quantity }} in stock</span>
 
-                                <span class="pd-detail__left">Only 2 left</span>
+                                {{-- <span class="pd-detail__left">Only 2 left</span> --}}
                             </div>
                         </div>
                         <div class="u-s-m-b-15">
@@ -130,7 +130,8 @@
                             </ul>
                         </div>
                         <div class="u-s-m-b-15">
-                            <form class="pd-detail__form">
+                                <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
+                                    @csrf
                                 <div class="u-s-m-b-15">
                                     <span class="pd-detail__label u-s-m-b-8">Size:</span>
                                     <div class="pd-detail__size">
@@ -187,14 +188,12 @@
                                         </div>
                                         <!--====== End - Input Counter ======-->
                                     </div>
-                                    <div class="u-s-m-b-15 addToCartandBuyNow">
+                                    <div class="u-s-m-b-15">
 
-                                        <button class="btn btn--e-brand-b-2 addtocartBTN" type="submit">Add to Cart</button>
+                                        <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button>
 
                                         <button class="btn btn--e-brand-b-2" type="submit">Buy Now</button>
                                     </div>
-
-
                                 </div>
                             </form>
                         </div>

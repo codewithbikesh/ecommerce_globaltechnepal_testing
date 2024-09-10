@@ -55,12 +55,23 @@
                                         </div>
                                         <div class="cartItemDets">
 
-                                            @php
-                                                $subtotal = $product->sell_price * $cart[$product->product_code];
+                                        @php
+                                            if (auth('customer')->check()) {
+                                                // For authenticated users
+                                                $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+                                                $quantity = $cartItem ? $cartItem->quantity : 0;
+                                                $subtotal = $product->sell_price * $quantity;
                                                 $total += $subtotal;
-                                            @endphp
+                                            } else {
+                                                // For guest users
+                                                $quantity = $cart[$product->product_code];
+                                                $subtotal = $product->sell_price * $quantity;
+                                                $total += $subtotal;
+                                            }
+                                        @endphp
+
                                             <span class="ecomNav-price">{{ $product->sell_price }}</span>
-                                            <span class="ecomNav-quantity">Qty: {{ $cart[$product->product_code] }}</span>
+                                            <span class="ecomNav-quantity">Qty: {{ $quantity }}</span>
                                         </div>
                                     </div>
                                 </div>

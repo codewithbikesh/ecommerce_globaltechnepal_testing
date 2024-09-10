@@ -109,7 +109,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
-    Route::get('/product-details/{id}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
+    Route::get('/product-details/{product_code}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
     Route::get('/shop-list-full', [DashboardController::class,'shopListFull'])->name('frontend.shop-list-full');   
     Route::get('/signin', [DashboardController::class,'signin'])->name('frontend.signin');   
     Route::get('/signup', [DashboardController::class,'signup'])->name('frontend.signup');   
@@ -133,8 +133,7 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/account', [DashboardController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
-
-    
+ 
 });
 
 require __DIR__.'/auth.php';

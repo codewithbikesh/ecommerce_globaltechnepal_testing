@@ -33,6 +33,8 @@
             <th scope="col">S.N.</th>
             <th scope="col">API Name</th>
             <th scope="col">API Value</th>
+            <th scope="col">Username</th>
+            <th scope="col">Grant Type</th>
             <th scope="col">Remarks</th>
             <th scope="col">Date</th>
             <th scope="col">Action</th>
@@ -54,6 +56,8 @@
               @endif
             </td>
             <td>{{ $api->api_value }}</td>
+            <td>{{ $api->api_username }}</td>
+            <td>{{ $api->api_granttype }}</td>
             <td>{{ $api->remarks }}</td>
             <td>{{ $api->created_at->format('Y-m-d') }}</td>
             <td>

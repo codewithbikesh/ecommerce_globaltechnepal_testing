@@ -31,6 +31,21 @@
                 </div>
                 
                 <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">API Username</label>
+                  <input type="text" class="form-control" name="api_username" value="{{ $api->api_username }}">
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">API Password</label>
+                  <input type="text" class="form-control" name="api_password" value="{{ $api->api_password }}">
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">API Grant Type</label>
+                  <input type="text" class="form-control" name="api_granttype" value="{{ $api->api_granttype }}">
+                </div>
+                
+                <div class="col-md-6">
                   <label for="inputPassword5" class="form-label">Remarks</label>
                   <input type="text" class="form-control" value="{{ $api->remarks }}" name="remarks">
                 </div>

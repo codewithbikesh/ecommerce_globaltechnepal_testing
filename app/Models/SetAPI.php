@@ -9,5 +9,5 @@ class SetAPI extends Model
 {
     use HasFactory;
     protected $table = 'api'; // specify the correct table name
-    protected $fillable = ['api_name', 'api_value', 'remarks'];
+    protected $fillable = ['api_name', 'api_value', 'api_username', 'api_password', 'api_granttype', 'remarks'];
 }

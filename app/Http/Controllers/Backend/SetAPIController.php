@@ -29,6 +29,9 @@ class SetAPIController extends Controller
         $api = new SetAPI();
         $api->api_name = $request->api_name;
         $api->api_value = $request->api_value;
+        $api->api_username = $request->api_username;
+        $api->api_password = $request->api_password;
+        $api->api_granttype = $request->api_granttype;
         $api->remarks = $request->remarks;
         if ($api->save()) {
             session()->flash('success', 'API Added Successfully.');

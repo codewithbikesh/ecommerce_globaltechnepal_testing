@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('cart', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->bigInteger('customer_id')->nullable();
+            $table->bigInteger('province')->nullable();
+            $table->bigInteger('city')->nullable();
             $table->string('session_id')->nullable();
             $table->string('status')->nullable();
             $table->decimal('tax', 10, 2)->nullable();

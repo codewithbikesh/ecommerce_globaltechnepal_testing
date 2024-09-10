@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->bigInteger('cart_id');
-            $table->bigInteger('product_id');
+            $table->string('product_code')->index();
             $table->bigInteger('quantity')->default(0);
             $table->decimal('price', 10, 2)->default(0);
             $table->decimal('subtotal', 10, 2)->default(0);
             $table->timestamps();
+
+            // Defining the foreign key constraint
+            $table->foreign('product_code')
+                  ->references('product_code')
+                  ->on('products')
+                  ->onDelete('cascade');
         });
     }
 

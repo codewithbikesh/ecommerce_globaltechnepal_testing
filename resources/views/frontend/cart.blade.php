@@ -59,65 +59,77 @@
                                 <table class="table-p">
                                     <tbody>
 
+                                        {{-- {{ route('product.detail', ['product_code' => $product->product_code]) }}
+                                        {{ route('shop.category', ['category_id' => $product->category_id]) }} --}}
+
                                         @php
                                             $total = 0;
                                         @endphp
-                                        @foreach($cartproducts as $product)
-                                            <!--====== Row ======-->
-                                            <tr>
-                                                <td>
-                                                    <div class="table-p__box">
-                                                        <div class="table-p__img-wrap">
-                                                            <img class="u-img-fluid"
-                                                                src="data:image/jpeg;base64,{{ $product->primary_image }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="table-p__info">
-                                                            <span class="table-p__name">
-                                                                <a
-                                                                    href="product-detail.html">{{ $product->product_name }}</a></span>
-                                                            <span class="table-p__category">
-                                                                <a
-                                                                    href="shop-side-version-2.html">{{ $product->category_id}}</a></span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                          
-                                            @php
-                                                $subtotal = $product->sell_price * $cart[$product->product_code];
-                                                $total += $subtotal;
-                                            @endphp
+@foreach($cartproducts as $product)
+    <!--====== Row ======-->
+    <tr>
+        <td>
+            <div class="table-p__box">
+                <div class="table-p__img-wrap">
+                    <img class="u-img-fluid"
+                        src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                        alt="">
+                </div>
+                <div class="table-p__info">
+                    <span class="table-p__name">
+                        <a href="">{{ $product->product_name }}</a>
+                    </span>
+                    <span class="table-p__category">
+                        <a href="">{{ $product->category_id }}</a>
+                    </span>
+                </div>
+            </div>
+        </td>
 
-                                                <td>
-                                                    <span
-                                                        class="table-p__price">{{ $product->sell_price }}</span>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__input-counter-wrap">
+    @php
+        if (auth('customer')->check()) {
+            // For authenticated users
+            $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+            $quantity = $cartItem ? $cartItem->quantity : 0;
+        } else {
+            // For guest users
+            $quantity = $cart[$product->product_code];
+            $subtotal = $product->sell_price * $quantity;
+            $total += $subtotal;
+        }
+    @endphp
 
-                                                        <!--====== Input Counter ======-->
-                                                        <div class="input-counter">
-                                                            <span class="input-counter__minus fas fa-minus"></span>
-                                                            <input
-                                                                class="input-counter__text input-counter--text-primary-style"
-                                                                type="text" value="{{ $cart[$product->product_code] }}"
-                                                                name="quantities[{{ $product->product_code }}]" data-min="1"
-                                                                data-max="1000">
-                                                            <span class="input-counter__plus fas fa-plus"></span>
-                                                        </div>
-                                                        <!--====== End - Input Counter ======-->
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__del-wrap">
-                                                        <button type="submit" class="far fa-trash-alt table-p__delete-link"
-                                                            name="remove_product" value="{{ $product->product_code }}"
-                                                            style="background: none; border: none; cursor: pointer;"></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!--====== End - Row ======-->
-                                        @endforeach
+        <td>
+            <span class="table-p__price">${{ number_format($product->sell_price, 2) }}</span>
+        </td>
+        <td>
+            <div class="table-p__input-counter-wrap">
+                <!--====== Input Counter ======-->
+                <div class="input-counter">
+                    <span class="input-counter__minus fas fa-minus"></span>
+                    <input
+                        class="input-counter__text input-counter--text-primary-style"
+                        type="text" value="{{ $quantity }}"
+                        name="quantities[{{ $product->product_code }}]" data-min="1"
+                        data-max="1000">
+                    <span class="input-counter__plus fas fa-plus"></span>
+                </div>
+                <!--====== End - Input Counter ======-->
+            </div>
+        </td>
+        <td>
+            <div class="table-p__del-wrap">
+                <form method="POST" action="{{ route('cart.remove') }}">
+                    @csrf
+                    <button type="submit" class="far fa-trash-alt table-p__delete-link"
+                        name="remove_product" value="{{ $product->product_code }}"
+                        style="background: none; border: none; cursor: pointer;"></button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    <!--====== End - Row ======-->
+@endforeach
 
                                     </tbody>
                                 </table>
@@ -215,17 +227,49 @@
                                             be apply.</span>
                                     </div>
                                 </div>
-                                
-                                            @php    
-                                                if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
-                                                    $shipping = $shippingCost->shipping_cost;
-                                                } else {
-                                                    $shipping = 0;
-                                                }
-                                                $amount_before_tax = $shipping + $total;
-                                                $tax = 13/100 * $amount_before_tax;
-                                                $grand_total = $amount_before_tax + $tax;
-                                            @endphp
+
+@php
+    // Initialize variables for authenticated users
+    if (auth('customer')->check()) {
+        $customerId = auth('customer')->id();
+        $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
+
+        if ($cart) {
+            $shipping = $cart->shipping_cost;
+            $total = $cart->subtotal;
+            $amount_before_tax = $shipping + $total;
+            $tax = 13/100 * $amount_before_tax;
+            $grand_total = $amount_before_tax + $tax;
+        } else {
+            // Default values if cart does not exist
+            $shipping = 0;
+            $total = 0;
+            $amount_before_tax = $shipping + $total;
+            $tax = 13/100 * $amount_before_tax;
+            $grand_total = $amount_before_tax + $tax;
+        }
+    } else {
+        // For guest users, use session values
+        $cart = session()->get('cart', []);
+        $total = 0;
+        foreach ($cart as $productCode => $quantity) {
+            $product = \App\Models\Product::where('product_code', $productCode)->first();
+            if ($product) {
+                $total += $product->sell_price * $quantity;
+            }
+        }
+ 
+        if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
+            $shipping = $shippingCost->shipping_cost;
+        } else {
+            $shipping = 0;
+        }
+        
+        $amount_before_tax = $shipping + $total;
+        $tax = 13/100 * $amount_before_tax;
+        $grand_total = $amount_before_tax + $tax;
+    }
+@endphp
 
                                 <div class="col-lg-6 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">

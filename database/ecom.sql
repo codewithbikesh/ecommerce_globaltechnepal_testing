@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 06:33 AM
+-- Generation Time: Sep 10, 2024 at 10:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -875,6 +875,8 @@ INSERT INTO `carousel_images` (`id`, `image_1`, `image_2`, `image_3`, `created_a
 CREATE TABLE `cart` (
   `id` bigint(20) NOT NULL,
   `customer_id` bigint(20) DEFAULT NULL,
+  `province` bigint(20) DEFAULT NULL,
+  `city` bigint(20) DEFAULT NULL,
   `session_id` varchar(255) DEFAULT NULL,
   `tax` decimal(10,2) DEFAULT NULL,
   `shipping_cost` decimal(10,2) DEFAULT NULL,
@@ -883,6 +885,13 @@ CREATE TABLE `cart` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `customer_id`, `province`, `city`, `session_id`, `tax`, `shipping_cost`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 3, 1, NULL, 52.03, 160.00, 400.20, NULL, '2024-09-10 00:01:26', '2024-09-10 02:08:46');
 
 -- --------------------------------------------------------
 
@@ -893,12 +902,19 @@ CREATE TABLE `cart` (
 CREATE TABLE `cart_items` (
   `id` bigint(20) NOT NULL,
   `cart_id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
+  `product_code` varchar(255) NOT NULL,
   `quantity` bigint(20) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(4, 1, '33', 2, 200.10, '2024-09-10 02:08:46', '2024-09-10 02:08:46');
 
 -- --------------------------------------------------------
 
@@ -1957,7 +1973,8 @@ ALTER TABLE `cart`
 -- Indexes for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_code` (`product_code`);
 
 --
 -- Indexes for table `customers`
@@ -2035,7 +2052,8 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_code` (`product_code`);
 
 --
 -- Indexes for table `sessions`
@@ -2084,13 +2102,13 @@ ALTER TABLE `carousel_images`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -2169,6 +2187,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `website_data`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  ADD CONSTRAINT `cart_items_fk_1` FOREIGN KEY (`product_code`) REFERENCES `products` (`product_code`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

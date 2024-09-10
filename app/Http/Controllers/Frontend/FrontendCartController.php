@@ -224,8 +224,8 @@ class FrontendCartController extends Controller
         } else {
             // For guest users
             $cart = session()->get('cart', []);
-            if (isset($cart[$productCode])) {
-                unset($cart[$productCode]);
+            if (isset($cart[$productId])) {
+                unset($cart[$productId]);
                 session()->put('cart', $cart);
             }
         }

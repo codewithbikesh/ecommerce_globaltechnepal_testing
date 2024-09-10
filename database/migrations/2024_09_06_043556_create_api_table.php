@@ -15,6 +15,9 @@ return new class extends Migration
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->string('api_name');
             $table->string('api_value');
+            $table->string('api_username')->nullable();
+            $table->string('api_password')->nullable();
+            $table->string('api_granttype')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

@@ -69,7 +69,7 @@
         <div class="row">
         @if ($explores->isNotEmpty())
             @foreach ($explores as $explore)
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone"
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item" id="product-list-filter"
                 style="position: absolute; left: 0px; top: 0px;">
                 <div class="product-o product-o--hover-on product-o--radius">
                     <a class="product-o__wrap" href="{{ route('frontend.product-detail', $explore->product_code) }}">
@@ -151,9 +151,7 @@
                                         <div class="pd-detail">
                                             <div>
 
-                                                <span
-                                                    class="pd-detail__name">{{ $explore->product_name
-                                                                                                                            }}</span>
+                                                <span class="pd-detail__name">{{ $explore->product_name }}</span>
                                             </div>
                                             <div>
                                                 <div class="pd-detail__inline">
@@ -290,23 +288,28 @@
                 </div>
                 <!--====== End - Add to Cart Modal ======-->
             @endforeach
+            @else
+            <p>No products found in this price range.</p>
             @endif
         </div>
     </div>
     @endsection
     @section('costomJs')
     <script>
-        document.getElementById('price-filter').addEventListener('change', function() {
-            var selectedValue = this.value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', `/filter-products?price_range=${encodeURIComponent(selectedValue)}`, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Handle the response, e.g., update the product list on the page
-                    document.getElementById('product-list').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        });
+        $('#price-filter').on('change', function() {
+    var selectedValue = $(this).val();
+    $.ajax({
+        url: "{{ route('frontend.explore') }}",
+        type: 'GET',
+        data: { price_range: selectedValue },
+        success: function(response) {
+            $('#product-list-filter').html(response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);  
+        }
+        
+    });
+});
         </script>
     @endsection

@@ -4,7 +4,7 @@
 <div class="app-content">
 
     <!-- crousal  -->
-    <div class="crousalUpper-containerP">
+    <div class="crousalUpper-containerP container">
 
         <div class="crousalUpper-slider">
             @if ($carousel->isNotEmpty())

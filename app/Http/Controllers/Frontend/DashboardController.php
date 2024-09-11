@@ -309,13 +309,13 @@ class DashboardController extends Controller
         $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
-            $cartItemCount = $cart->items()->count();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
-            $cartItemCount = count($cart); // Count items in the guest cart
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
          return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories","whatsnewproducts", "cartItemCount"));

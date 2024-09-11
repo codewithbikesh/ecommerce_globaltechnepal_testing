@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
   public  function index(){
+    $cartItemCount = 0;
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
@@ -31,151 +32,180 @@ class DashboardController extends Controller
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
         // dd($products);
-        return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts","newarriveproducts","featureproducts","specialproducts","weeklyproducts","flashproducts"));
+        return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts", "cartItemCount","newarriveproducts","featureproducts","specialproducts","weeklyproducts","flashproducts"));
     }
 
 
     // account
     public function account(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.account", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.account", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // about 
     public function about(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.about", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.about", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // Best Sale 
     public function bestSale(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.bestSale", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.bestSale", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
  
 
     // checkout 
     public function checkout(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // contact 
     public function contact(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.contact", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.contact", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // dash-cancellation 
         public function dashCancellation(){
             $websitedata = WebsiteData::first();
+            $cartItemCount = 0;
             if (auth('customer')->check()) {
                 $customerId = auth('customer')->id();
                 $cart = Cart::where('customer_id', $customerId)->first();
+                $cartItemCount = $cart->items()->count();
                 $cartData = $cart->items()->get();
                 $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
             } else {
                 $cart = session()->get('cart', []);
+                $cartItemCount = count($cart); // Count items in the guest cart
                 $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             }
-            return  view("frontend.dash-cancellation", compact("websitedata", "cart", "cartproducts"));
+            return  view("frontend.dash-cancellation", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
         }
 
     //  dash-my-order 
     public function dashMyOrder(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.dash-my-order", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.dash-my-order", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // explore 
     public function explore(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.explore", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // lost-password 
     public function lostPassword(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.lost-password", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.lost-password", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // newarrival
@@ -183,77 +213,92 @@ class DashboardController extends Controller
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $newarriveproducts = Product::limit(25)->get();
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.newarrival", compact("websitedata", "cart", "cartproducts","newarriveproducts"));
+        return view("frontend.newarrival", compact("websitedata", "cart", "cartproducts","newarriveproducts", "cartItemCount"));
     }
 
     // product-detail 
     public function productDetails($product_code){
         $productDetails = Product::where('product_code', $product_code)->first();
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.product-detail", compact("websitedata","productDetails", "cart", "cartproducts"));
+        return view("frontend.product-detail", compact("websitedata","productDetails", "cart", "cartproducts", "cartItemCount"));
     }
 
     // shop list full 
     public function shopListFull(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     //  signin
     public function signin(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.signin", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.signin", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // signup 
     public function signup(){
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.signup", compact("websitedata", "cart", "cartproducts"));
+        return view("frontend.signup", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // whatsnew 
@@ -261,16 +306,19 @@ class DashboardController extends Controller
         $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
         $whatsnewproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $websitedata = WebsiteData::first();
+        $cartItemCount = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
+            $cartItemCount = $cart->items()->count();
             $cart = Cart::where('customer_id', $customerId)->first();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
         } else {
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cart = session()->get('cart', []);
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-         return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories","whatsnewproducts"));
+         return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories","whatsnewproducts", "cartItemCount"));
     }
 
     

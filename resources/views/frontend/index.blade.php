@@ -455,14 +455,13 @@
 
                     <div class="u-s-m-b-30">
                         <div class="product-o product-o--hover-on">
-                            <div class="product-o__wrap">
+                            <a class="product-o__wrap" href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">
 
-                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">
-
-                                    <img class="aspect__img"
-                                        src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}" alt=""></a>
-                            </div>
+                                <div class="aspect aspect--bg-grey aspect--square u-d-block">
+                                <img class="aspect__img" src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}" alt="">
+                                </div>
+                                
+                            </a>
                             <span class="product-o__category">
 
                                 <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
@@ -576,14 +575,13 @@
                 @foreach ($featureproducts as $featureproduct)
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
                     <div class="product-o product-o--hover-on u-h-100">
-                        <div class="product-o__wrap">
+                        <a class="product-o__wrap" href="{{ route('frontend.product-detail', $featureproduct->product_code) }}">
 
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                href="{{ route('frontend.product-detail', $featureproduct->product_code) }}">
+                            <div class="aspect aspect--bg-grey aspect--square u-d-block">
 
                                 <img class="aspect__img"
-                                    src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
-                        </div>
+                                    src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></div>
+                        </a>
 
                         <span class="product-o__category">
 
@@ -621,15 +619,6 @@
                             </div>
                     </div>
                 </div>
-
-{{-- ------------------------------ --}}
-
-
-
-
-
-
-
                 @endforeach
                 @endif
             </div>

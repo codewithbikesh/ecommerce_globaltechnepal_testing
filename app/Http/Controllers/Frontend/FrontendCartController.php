@@ -20,6 +20,7 @@ class FrontendCartController extends Controller
         $selectedCity = null;
         $selectedProvince = null;
         $shippingCost = 0;
+        $cartItemCount = 0;
     
         if (auth('customer')->check()) {
             // For authenticated users
@@ -27,6 +28,8 @@ class FrontendCartController extends Controller
             $cart = Cart::where('customer_id', $customerId)->first();
             
             if ($cart) {
+                
+            $cartItemCount = $cart->items()->count();
                 
             if ($request->has('getshippingcost')) {
                 $request->validate([
@@ -71,6 +74,7 @@ class FrontendCartController extends Controller
         } else {
             // For guest users
             $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             $cartData = [];
     
@@ -88,7 +92,7 @@ class FrontendCartController extends Controller
             }
         }
     
-        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "shippingCost", "selectedCity", "selectedProvince"));
+        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince"));
     }
     
 

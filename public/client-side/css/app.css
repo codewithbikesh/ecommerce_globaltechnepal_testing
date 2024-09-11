@@ -1000,7 +1000,7 @@ input::-ms-clear {
 padding: 20px;
     padding: 20px;
     margin: 0 6px;
-    border-radius: 50px;
+    border-radius: 14px;
     background: #e8e5e5;
     box-shadow: 3px 6px 4px #bbbbbb, 0px 5px 7px #ffffff;
 }

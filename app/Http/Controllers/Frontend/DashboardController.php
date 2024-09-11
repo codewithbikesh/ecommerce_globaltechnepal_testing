@@ -174,6 +174,7 @@ class DashboardController extends Controller
 
     // explore 
     public function explore(){
+        $explores = Product::limit(10)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         if (auth('customer')->check()) {
@@ -187,7 +188,7 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
+        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount","explores"));
     }
 
     // lost-password 
@@ -304,7 +305,7 @@ class DashboardController extends Controller
     // whatsnew 
     public function whatsnew(){
         $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
-        $whatsnewproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
+        $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->limit(9)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         if (auth('customer')->check()) {
@@ -364,5 +365,41 @@ class DashboardController extends Controller
         }
         return redirect()->back();
     }
+
+
+    // filter price range wise 
+    public function filterProducts(Request $request)
+{
+    $priceRange = $request->input('price_range');
+
+    $productsQuery = Product::query();
+
+    if ($priceRange) {
+        switch ($priceRange) {
+            case '500 to 1K':
+                $productsQuery->whereBetween('sell_price', [500, 1000]);
+                break;
+            case '2K to 5K':
+                $productsQuery->whereBetween('sell_price', [2000, 5000]);
+                break;
+            case '5K to 10K':
+                $productsQuery->whereBetween('sell_price', [5000, 10000]);
+                break;
+            case '10K and Above':
+                $productsQuery->where('sell_price', '>=', 10000);
+                break;
+            default:
+                // Handle default case or no filtering
+                break;
+        }
+    }
+
+    // Fetch the filtered products
+    $products = $productsQuery->get();
+
+    // Return a view or JSON response
+    return view('frontend.explore', ['products' => $products]);
+}
+
 
 }

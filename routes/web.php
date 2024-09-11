@@ -129,6 +129,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/getCities/{province_id}', [FrontendCartController::class, 'getCities']);
     
     Route::post('/delivery-information', [FrontendDeliveryInformationController::class, 'add_delivery_information'])->name('frontend.delivery.information');  
+    Route::post('/place-order', [FrontendDeliveryInformationController::class, 'create_order'])->name('frontend.place.order'); 
     
     Route::post('/signin', [FrontendLoginController::class, 'signin'])->name('customer.signin');
 

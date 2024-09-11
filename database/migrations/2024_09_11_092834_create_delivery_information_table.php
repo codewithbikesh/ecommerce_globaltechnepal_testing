@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('delivery_information', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->bigInteger('customer_id')->nullable();
+            $table->string('default_billing')->nullable();
             $table->string('full_name');
             $table->string('email');
             $table->string('phone');

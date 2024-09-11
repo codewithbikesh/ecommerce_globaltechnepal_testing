@@ -15,16 +15,15 @@ return new class extends Migration
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->bigInteger('customer_id');
             $table->bigInteger('delivery_information_id');
-            $table->bigInteger('cart_id');
-            $table->string('shipping_address');
+            $table->string('shipping_address')->nullable();
             $table->string('billing_address')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('shipping_method')->nullable();  //Standard, Express
             $table->decimal('subtotal', 10, 2)->default(0);
             $table->decimal('tax', 10, 2)->default(0);
             $table->decimal('shipping_cost', 10, 2)->default(0);
-            $table->decimal('discount', 10, 2)->default(0);
-            $table->decimal('total_amount', 10, 2)->default(0);
+            $table->decimal('discount', 10, 2)->default(0)->nullable();
+            $table->decimal('total_amount', 10, 2)->default(0)->nullable();
             $table->string('order_status')->default('Pending');
             $table->string('payment_status')->default('Pending');
             $table->timestamps();

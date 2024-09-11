@@ -40,7 +40,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
-                            <form class="checkout-f__delivery">
+                            <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
+                                @csrf
                                 <div class="u-s-m-b-30">
                                     <div class="u-s-m-b-15">
                                     
@@ -48,7 +49,7 @@
                                         <!--====== Check Box ======-->
                                         <div class="check-box">
 
-                                            <input type="checkbox" id="get-address">
+                                            <input type="checkbox" id="get-address" name="default_address">
                                             <div class="check-box__state check-box__state--primary">
 
                                                 <label class="check-box__label" for="get-address">Use default shipping
@@ -66,8 +67,8 @@
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
 
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="billing-fname" data-bill="">
+                                            <input class="input-text input-text--primary-style" name="full_name" type="text"
+                                                id="billing-fname" data-bill="" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -78,8 +79,8 @@
 
                                         <label class="gl-label" for="billing-email">E-MAIL *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-email" data-bill="">
+                                        <input class="input-text input-text--primary-style" name="email" type="text"
+                                            id="billing-email" data-bill="" required>
                                     </div>
                                     <!--====== End - E-MAIL ======-->
 
@@ -89,8 +90,8 @@
 
                                         <label class="gl-label" for="billing-phone">PHONE *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-phone" data-bill="">
+                                        <input class="input-text input-text--primary-style" name="phone" type="text"
+                                            id="billing-phone" data-bill="" required>
                                     </div>
                                     <!--====== End - PHONE ======-->
 
@@ -101,15 +102,7 @@
                                         <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
 
                                         <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street" placeholder="House name and street name" data-bill="">
-                                    </div>
-                                    <div class="u-s-m-b-15">
-
-                                        <label for="billing-street-optional"></label>
-
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street-optional"
-                                            placeholder="Apartment, suite unit etc. (optional)" data-bill="">
+                                            id="billing-street" name="street_address" placeholder="House name and street name" data-bill="" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
 
@@ -119,8 +112,8 @@
 
                                         <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-town-city" data-bill="">
+                                        <input class="input-text input-text--primary-style" name="city" type="text"
+                                            id="billing-town-city" data-bill="" required>
                                     </div>
                                     <!--====== End - Town / City ======-->
 
@@ -131,12 +124,16 @@
                                         <!--====== Select Box ======-->
 
                                         <label class="gl-label" for="billing-state">STATE/PROVINCE *</label><select
-                                            class="select-box select-box--primary-style" id="billing-state"
-                                            data-bill="">
-                                            <option selected value="">Choose State/Province</option>
-                                            <option value="al">Alabama</option>
-                                            <option value="al">Alaska</option>
-                                            <option value="ny">New York</option>
+                                            class="select-box select-box--primary-style" name="province" id="billing-state"
+                                            data-bill="" required>
+                                            <option selected value="" disabled>Choose Province</option>
+                                            <option value="1">Province 1</option>
+                                            <option value="2">Madhesh</option>
+                                            <option value="3">Bagmati</option>
+                                            <option value="4">Gandaki</option>
+                                            <option value="5">Lumbini</option>
+                                            <option value="6">Karnali</option>
+                                            <option value="7">Sudurpaschim</option>
                                         </select>
                                         <!--====== End - Select Box ======-->
                                     </div>
@@ -148,7 +145,7 @@
 
                                         <label class="gl-label" for="billing-zip">ZIP/POSTAL CODE *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-zip"
+                                        <input class="input-text input-text--primary-style" type="text" name="postal_code" id="billing-zip"
                                             placeholder="Zip/Postal Code" data-bill="">
                                     </div>
                                     <!--====== End - ZIP/POSTAL ======-->
@@ -156,7 +153,7 @@
                                     <div class="u-s-m-b-10">
 
                                         <label class="gl-label" for="order-note">ORDER NOTE</label><textarea
-                                            class="text-area text-area--primary-style" id="order-note"></textarea>
+                                            class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
                                     </div>
                                     <div>
 

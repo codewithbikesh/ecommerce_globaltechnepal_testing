@@ -93,14 +93,44 @@ class FrontendDeliveryInformationController extends Controller
         // Begin a transaction to ensure data consistency
         try {
 
+            // Generate the current date    
+            $prefix = '#ORD-';
+            $timestamp = now()->format('Ymd');
+
+            // Get the latest order based on the created_at date and the order_id
+            $latestOrder = Order::whereDate('created_at', now()->toDateString())->latest('id')->first();
+
+            // Determine the latest order ID or start from 0 if no orders exist
+            if ($latestOrder) {
+                // Extract the numeric part of the latest order ID
+                $latestOrderId = intval(substr($latestOrder->order_id, -4));
+            } else {
+                // If no orders exist, start at 0
+                $latestOrderId = 0;
+            }
+
+            // Increment the latest order ID to generate the new ID
+            $newOrderIdNumeric = $latestOrderId + 1;
+
+            // Format the new order ID with leading zeros
+            $newOrderId = $prefix . $timestamp . '-' . str_pad($newOrderIdNumeric, 4, '0', STR_PAD_LEFT);
+
+            $ordersubtotal = $cart->subtotal;
+            $ordershippingcost = $cart->shipping_cost;
+            $total_before_tax = $ordersubtotal + $ordershippingcost;
+            $tax_amount = 13/100 * $total_before_tax;
+            $total_amount = $tax_amount + $total_before_tax;
+
             // Create the order
             $order = Order::create([
+                'order_id' => $newOrderId,
                 'customer_id' => auth('customer')->check() ? $customerId : null,
                 'delivery_information_id' => $deliveryInformationId,
                 'payment_method' => $request->input('payment_method'),
-                'subtotal' => $cart->subtotal,
-                'tax' => $cart->tax,
-                'shipping_cost' => $cart->shipping_cost,
+                'subtotal' => $ordersubtotal,
+                'tax' => $tax_amount,
+                'shipping_cost' => $ordershippingcost,
+                'total_amount' => $total_amount,
                 'order_status' => 'Pending', 
                 'payment_status' => 'Pending', 
             ]);
@@ -109,29 +139,39 @@ class FrontendDeliveryInformationController extends Controller
             $cartItems = $cart->items; // If using Eloquent relationship, otherwise fetch manually
 
             foreach ($cartItems as $cartItem) {
+                $order_id = $order->order_id;
+                $product_code = $cartItem->product_code;
+                $quantity = $cartItem->quantity;
+                $price = $cartItem->price;
+                $subtotal = $quantity * $price;
                 // Create order items
                 $orderitems = OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $cartItem->product_code,
-                    'quantity' => $cartItem->quantity,
-                    'price' => $cartItem->price, // Assuming you store price in cart item
+                    'order_id' => $order_id,
+                    'product_id' => $product_code,
+                    'quantity' => $quantity,
+                    'price' => $price,
+                    'subtotal' => $subtotal
                 ]);
                 
             }
 
             // Clear the cart
             if (auth('customer')->check()) {
-                $cart->delete(); // Delete cart if using database
+                $cart->update([
+                    'subtotal' => 0,
+                    'tax' => 0
+                ]);
+                $cart->items()->delete();
+                $request->session()->forget('delivery_information_id');
             } else {
                 session()->forget('cart'); // Clear session cart
+                $request->session()->forget('delivery_information_id');
             }
 
             return redirect()->route('frontend.account')
                              ->with('success', 'Order placed successfully.');
 
         } catch (\Exception $e) {
-            // Rollback the transaction on error
-            \DB::rollback();
             return redirect()->route('frontend.checkout')->withErrors('Failed to place the order. Please try again.');
         }
     }

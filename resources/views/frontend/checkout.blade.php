@@ -95,28 +95,7 @@
                                     </div>
                                     <!--====== End - PHONE ======-->
 
-
-                                    <!--====== Street Address ======-->
-                                    <div class="u-s-m-b-15">
-
-                                        <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
-
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street" name="street_address" placeholder="House name and street name" data-bill="" required>
-                                    </div>
-                                    <!--====== End - Street Address ======-->
-
-
-                                    <!--====== Town / City ======-->
-                                    <div class="u-s-m-b-15">
-
-                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
-
-                                        <input class="input-text input-text--primary-style" name="city" type="text"
-                                            id="billing-town-city" data-bill="" required>
-                                    </div>
-                                    <!--====== End - Town / City ======-->
-
+                                    
 
                                     <!--====== STATE/PROVINCE ======-->
                                     <div class="u-s-m-b-15">
@@ -138,6 +117,28 @@
                                         <!--====== End - Select Box ======-->
                                     </div>
                                     <!--====== End - STATE/PROVINCE ======-->
+
+
+                                    <!--====== Town / City ======-->
+                                    <div class="u-s-m-b-15">
+
+                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
+
+                                        <input class="input-text input-text--primary-style" name="city" type="text"
+                                            id="billing-town-city" data-bill="" required>
+                                    </div>
+                                    <!--====== End - Town / City ======-->
+
+
+                                    <!--====== Street Address ======-->
+                                    <div class="u-s-m-b-15">
+
+                                        <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
+
+                                        <input class="input-text input-text--primary-style" type="text"
+                                            id="billing-street" name="street_address" placeholder="House name and street name" data-bill="" required>
+                                    </div>
+                                    <!--====== End - Street Address ======-->
 
 
                                     <!--====== ZIP/POSTAL ======-->
@@ -209,7 +210,13 @@
                                                 </div>
                                             </div>
 
-                                            <a class="o-card__del far fa-trash-alt"></a>
+                                            <form action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}" method="POST" class="remove-form">
+                                            @csrf
+                                                <button type="submit" class="remove-btn">
+                                                    <a class="o-card__del far fa-trash-alt"></a>
+                                                </button>
+                                            </form>
+
                                         </div>
                                         @endforeach
                                         
@@ -329,28 +336,9 @@ if (auth('customer')->check()) {
                                                 </div>
                                                 <!--====== End - Radio Box ======-->
 
-                                                <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery. (This service
-                                                    is only available for some countries)</span>
+                                                <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery.</span>
                                             </div>
 
-
-
-                                            <div class="u-s-m-b-15">
-
-                                                <!--====== Check Box ======-->
-                                                <div class="check-box">
-
-                                                    <input type="checkbox" name="term_condition" id="term-and-condition">
-                                                    <div class="check-box__state check-box__state--primary">
-
-                                                        <label class="check-box__label" for="term-and-condition">I
-                                                            consent to the</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Check Box ======-->
-
-                                                <a class="gl-link">Terms of Service.</a>
-                                            </div>
                                             <div>
 
                                                 <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>

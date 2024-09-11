@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
+            $table->string('order_id');
             $table->bigInteger('customer_id');
             $table->bigInteger('delivery_information_id');
             $table->string('shipping_address')->nullable();

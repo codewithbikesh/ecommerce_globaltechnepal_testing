@@ -363,8 +363,7 @@ class FrontendCartController extends Controller
                     $cart->items()->delete(); // Delete all cart items
                     $cart->update([
                         'subtotal' => 0,
-                        'tax' => 0,
-                        'shipping_cost' => 0
+                        'tax' => 0
                     ]);
                 }
             } else {

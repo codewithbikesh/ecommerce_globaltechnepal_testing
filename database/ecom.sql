@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2024 at 02:19 PM
+-- Generation Time: Sep 11, 2024 at 07:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -894,7 +894,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `province`, `city`, `session_id`, `tax`, `shipping_cost`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
-(2, 2, 3, 1, NULL, 52.03, 160.00, 400.20, NULL, '2024-09-11 06:31:22', '2024-09-11 06:31:40');
+(3, 2, NULL, NULL, NULL, 1587.30, 0.00, 12210.00, NULL, '2024-09-11 08:21:45', '2024-09-11 08:21:45'),
+(7, 3, 3, 1, NULL, 78.00, 160.00, 600.00, NULL, '2024-09-11 10:00:19', '2024-09-11 11:54:16');
 
 -- --------------------------------------------------------
 
@@ -917,9 +918,7 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(8, 1, '17', 2, 47250.00, '2024-09-11 01:29:32', '2024-09-11 01:29:32'),
-(9, 1, '21', 2, 300.00, '2024-09-11 01:37:00', '2024-09-11 01:37:00'),
-(10, 2, '33', 2, 200.10, '2024-09-11 06:31:22', '2024-09-11 06:31:22');
+(3, 7, '21', 2, 300.00, '2024-09-11 11:54:16', '2024-09-11 11:54:16');
 
 -- --------------------------------------------------------
 
@@ -946,7 +945,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `full_name`, `email`, `password`, `phone`, `street_address`, `city`, `province`, `postal_code`, `created_at`, `updated_at`) VALUES
-(2, 'Milan Devkota', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9871263612', 'Teku', 'Kathmandu', 'Bagmati', NULL, '2024-09-07 23:34:34', '2024-09-07 23:34:34');
+(2, 'Milan Devkota', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9871263612', 'Teku', 'Kathmandu', 'Bagmati', NULL, '2024-09-07 23:34:34', '2024-09-07 23:34:34'),
+(3, 'Dipak Nyaupane', 'dipak@gmail.com', '$2y$12$zYFm77InBevzDOH4flq3aOocCimWWRueYqikDTZYKMbPdlNVgw0uK', '78326478126', 'seshmati', 'Kathmandu', 'Bagmati', NULL, '2024-09-11 08:24:50', '2024-09-11 08:24:50');
 
 -- --------------------------------------------------------
 
@@ -978,7 +978,12 @@ INSERT INTO `delivery_information` (`id`, `customer_id`, `default_billing`, `ful
 (1, 2, NULL, 'Bikesh Gupta', 'bikesh@gmail.com', '98263541265', '3', 'qhwdabhd', 'jwdhGASJAHDH', '32561', 'Hello Test', '2024-09-11 04:25:02', '2024-09-11 04:25:02'),
 (2, 2, NULL, 'Test', 'test@gmail.com', '87126327165', '4', 'fgdvdsvsd', 'hdjabsdvshshv', '343231', 'dfvfxc', '2024-09-11 04:29:15', '2024-09-11 04:29:15'),
 (3, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Hello', '2024-09-11 05:23:19', '2024-09-11 05:23:19'),
-(4, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Test', '2024-09-11 05:31:29', '2024-09-11 05:31:29');
+(4, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Test', '2024-09-11 05:31:29', '2024-09-11 05:31:29'),
+(5, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Hello Test', '2024-09-11 08:10:26', '2024-09-11 08:10:26'),
+(6, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Its dipak.', '2024-09-11 08:26:29', '2024-09-11 08:26:29'),
+(7, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, '2024-09-11 09:15:00', '2024-09-11 09:15:00'),
+(8, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Its Dipak and dipak test.', '2024-09-11 09:59:23', '2024-09-11 09:59:23'),
+(9, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Hello hello hello hello', '2024-09-11 10:37:20', '2024-09-11 10:37:20');
 
 -- --------------------------------------------------------
 
@@ -1120,6 +1125,7 @@ INSERT INTO `newsletter_subscribers_list` (`id`, `gender`, `email`, `created_at`
 
 CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
   `customer_id` bigint(20) NOT NULL,
   `delivery_information_id` bigint(20) NOT NULL,
   `shipping_address` varchar(255) DEFAULT NULL,
@@ -1141,11 +1147,12 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `delivery_information_id`, `shipping_address`, `billing_address`, `payment_method`, `shipping_method`, `subtotal`, `tax`, `shipping_cost`, `discount`, `total_amount`, `order_status`, `payment_status`, `created_at`, `updated_at`) VALUES
-(1, 2, 4, NULL, NULL, 'C', NULL, 95100.00, 12363.00, 160.00, 0.00, 0.00, 'Pending', 'Pending', '2024-09-11 06:17:29', '2024-09-11 06:17:29'),
-(2, 2, 4, NULL, NULL, 'C', NULL, 95100.00, 12363.00, 160.00, 0.00, 0.00, 'Pending', 'Pending', '2024-09-11 06:17:55', '2024-09-11 06:17:55'),
-(3, 2, 4, NULL, NULL, 'C', NULL, 95100.00, 12363.00, 160.00, 0.00, 0.00, 'Pending', 'Pending', '2024-09-11 06:18:40', '2024-09-11 06:18:40'),
-(4, 2, 4, NULL, NULL, 'C', NULL, 95100.00, 12363.00, 160.00, 0.00, 0.00, 'Pending', 'Pending', '2024-09-11 06:19:20', '2024-09-11 06:19:20');
+INSERT INTO `orders` (`id`, `order_id`, `customer_id`, `delivery_information_id`, `shipping_address`, `billing_address`, `payment_method`, `shipping_method`, `subtotal`, `tax`, `shipping_cost`, `discount`, `total_amount`, `order_status`, `payment_status`, `created_at`, `updated_at`) VALUES
+(1, '#ORD-20240911-0001', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:37:32', '2024-09-11 10:37:32'),
+(2, '#ORD-20240911-0002', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:40:07', '2024-09-11 10:40:07'),
+(3, '#ORD-20240911-0003', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:41:25', '2024-09-11 10:41:25'),
+(4, '#ORD-20240911-0004', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:42:04', '2024-09-11 10:42:04'),
+(5, '#ORD-20240911-0005', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:45:59', '2024-09-11 10:45:59');
 
 -- --------------------------------------------------------
 
@@ -1155,7 +1162,7 @@ INSERT INTO `orders` (`id`, `customer_id`, `delivery_information_id`, `shipping_
 
 CREATE TABLE `order_items` (
   `id` bigint(20) NOT NULL,
-  `order_id` bigint(20) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `quantity` bigint(20) NOT NULL DEFAULT 0,
   `price` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -1169,9 +1176,8 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, 3, 17, 2, 47250.00, 0.00, '2024-09-11 06:18:40', '2024-09-11 06:18:40'),
-(2, 4, 17, 2, 47250.00, 0.00, '2024-09-11 06:19:20', '2024-09-11 06:19:20'),
-(3, 4, 21, 2, 300.00, 0.00, '2024-09-11 06:19:20', '2024-09-11 06:19:20');
+(1, '#ORD-20240911-0005', 56, 1, 100.50, 100.50, '2024-09-11 10:45:59', '2024-09-11 10:45:59'),
+(2, '#ORD-20240911-0005', 55, 2, 1077.00, 2154.00, '2024-09-11 10:45:59', '2024-09-11 10:45:59');
 
 -- --------------------------------------------------------
 
@@ -2174,25 +2180,25 @@ ALTER TABLE `carousel_images`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `delivery_information`
 --
 ALTER TABLE `delivery_information`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2228,13 +2234,13 @@ ALTER TABLE `newsletter_subscribers_list`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

@@ -14,11 +14,11 @@
                         <ul class="breadcrumb__list">
                             <li class="has-separator">
 
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('frontend.index') }}">Home</a>
                             </li>
                             <li class="is-marked">
 
-                                <a href="checkout.html">Checkout</a>
+                                <a href="{{ route('frontend.checkout') }}">Checkout</a>
                             </li>
                         </ul>
                     </div>
@@ -43,7 +43,8 @@
                             <form class="checkout-f__delivery">
                                 <div class="u-s-m-b-30">
                                     <div class="u-s-m-b-15">
-
+                                    
+                                    @auth('customer')
                                         <!--====== Check Box ======-->
                                         <div class="check-box">
 
@@ -55,6 +56,8 @@
                                             </div>
                                         </div>
                                         <!--====== End - Check Box ======-->
+                                    @endauth
+
                                     </div>
 
                                     <!--====== First Name, Last Name ======-->
@@ -149,20 +152,6 @@
                                             placeholder="Zip/Postal Code" data-bill="">
                                     </div>
                                     <!--====== End - ZIP/POSTAL ======-->
-                                    <div class="u-s-m-b-10">
-
-                                        <!--====== Check Box ======-->
-                                        <div class="check-box">
-
-                                            <input type="checkbox" id="make-default-address" data-bill="">
-                                            <div class="check-box__state check-box__state--primary">
-
-                                                <label class="check-box__label" for="make-default-address">Make default
-                                                    shipping and billing address</label>
-                                            </div>
-                                        </div>
-                                        <!--====== End - Check Box ======-->
-                                    </div>
 
                                     <div class="u-s-m-b-10">
 
@@ -183,93 +172,50 @@
                             <div class="o-summary">
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__item-wrap gl-scroll">
+                                        
+                                        @php
+                                            $subtotal = 0;
+                                            $total = 0;
+                                        @endphp
+                                        @foreach($cartproducts as $product)
+
                                         <div class="o-card">
                                             <div class="o-card__flex">
                                                 <div class="o-card__img-wrap">
 
                                                     <img class="u-img-fluid"
-                                                        src="images/product/electronic/product3.jpg" alt="">
+                                                        src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
                                                 </div>
                                                 <div class="o-card__info-wrap">
 
                                                     <span class="o-card__name">
 
-                                                        <a href="product-detail.html">Yellow Wireless
-                                                            Headphone</a></span>
+                                                        <a href="product-detail.html">Y{{ $product->product_name }}</a></span>
 
-                                                    <span class="o-card__quantity">Quantity x 1</span>
+                                                        @php
+                                                        if (auth('customer')->check()) {
+                                                            // For authenticated users
+                                                            $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+                                                            $quantity = $cartItem ? $cartItem->quantity : 0;
+                                                            $subtotal = $product->sell_price * $quantity;
+                                                        } else {
+                                                            // For guest users
+                                                            $quantity = $cart[$product->product_code];
+                                                            $subtotal = $product->sell_price * $quantity;
+                                                            $total += $subtotal;
+                                                        }
+                                                    @endphp
 
-                                                    <span class="o-card__price">$150.00</span>
+                                                    <span class="o-card__quantity">Quantity x {{ $quantity }}</span>
+
+                                                    <span class="o-card__price">{{ number_format($subtotal, 2) }}</span>
                                                 </div>
                                             </div>
 
                                             <a class="o-card__del far fa-trash-alt"></a>
                                         </div>
-                                        <div class="o-card">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
-
-                                                    <img class="u-img-fluid"
-                                                        src="images/product/electronic/product18.jpg" alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-
-                                                    <span class="o-card__name">
-
-                                                        <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
-
-                                                    <span class="o-card__quantity">Quantity x 1</span>
-
-                                                    <span class="o-card__price">$150.00</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="o-card__del far fa-trash-alt"></a>
-                                        </div>
-                                        <div class="o-card">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
-
-                                                    <img class="u-img-fluid" src="images/product/women/product8.jpg"
-                                                        alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-
-                                                    <span class="o-card__name">
-
-                                                        <a href="product-detail.html">New Dress D Nice
-                                                            Elegant</a></span>
-
-                                                    <span class="o-card__quantity">Quantity x 1</span>
-
-                                                    <span class="o-card__price">$150.00</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="o-card__del far fa-trash-alt"></a>
-                                        </div>
-                                        <div class="o-card">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
-
-                                                    <img class="u-img-fluid" src="images/product/men/product8.jpg"
-                                                        alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-
-                                                    <span class="o-card__name">
-
-                                                        <a href="product-detail.html">New Fashion D Nice
-                                                            Elegant</a></span>
-
-                                                    <span class="o-card__quantity">Quantity x 1</span>
-
-                                                    <span class="o-card__price">$150.00</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="o-card__del far fa-trash-alt"></a>
-                                        </div>
+                                        @endforeach
+                                        
                                     </div>
                                 </div>
                                 <div class="o-summary__section u-s-m-b-30">
@@ -289,25 +235,71 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                
+@php
+// Initialize variables for authenticated users
+if (auth('customer')->check()) {
+    $customerId = auth('customer')->id();
+    $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
+
+    if ($cart) {
+        $shipping = $cart->shipping_cost;
+        $total = $cart->subtotal;
+        $amount_before_tax = $shipping + $total;
+        $tax = 13/100 * $amount_before_tax;
+        $grand_total = $amount_before_tax + $tax;
+    } else {
+        // Default values if cart does not exist
+        $shipping = 0;
+        $total = 0;
+        $amount_before_tax = $shipping + $total;
+        $tax = 13/100 * $amount_before_tax;
+        $grand_total = $amount_before_tax + $tax;
+    }
+} else {
+    // For guest users, use session values
+    $cart = session()->get('cart', []);
+    $total = 0;
+    foreach ($cart as $productCode => $quantity) {
+        $product = \App\Models\Product::where('product_code', $productCode)->first();
+        if ($product) {
+            $total += $product->sell_price * $quantity;
+        }
+    }
+
+    if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
+        $shipping = $shippingCost->shipping_cost;
+    } else {
+        $shipping = 0;
+    }
+    
+    $amount_before_tax = $shipping + $total;
+    $tax = 13/100 * $amount_before_tax;
+    $grand_total = $amount_before_tax + $tax;
+}
+@endphp
+
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <table class="o-summary__table">
                                             <tbody>
                                                 <tr>
                                                     <td>SHIPPING</td>
-                                                    <td>$4.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>TAX</td>
-                                                    <td>$0.00</td>
+                                                    <td>{{ number_format($shipping, 2) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>SUBTOTAL</td>
-                                                    <td>$379.00</td>
+                                                    <td>{{ number_format($total, 2)}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TAX</td>
+                                                    <td>{{ number_format($tax, 2) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>GRAND TOTAL</td>
-                                                    <td>$379.00</td>
+                                                    <td>{{ number_format($grand_total, 2)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

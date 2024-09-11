@@ -91,6 +91,7 @@
             // For authenticated users
             $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
             $quantity = $cartItem ? $cartItem->quantity : 0;
+            $subtotal = $product->sell_price * $quantity;
         } else {
             // For guest users
             $quantity = $cart[$product->product_code];
@@ -100,7 +101,7 @@
     @endphp
 
         <td>
-            <span class="table-p__price">${{ number_format($product->sell_price, 2) }}</span>
+            <span class="table-p__price">{{ number_format($subtotal, 2) }}</span>
         </td>
         <td>
             <div class="table-p__input-counter-wrap">
@@ -175,13 +176,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                        <form class="f-cart">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">
                                         <h1 class="gl-h1">ESTIMATE SHIPPING AND TAXES</h1>
 
-                                        <form action="{{ route('frontend.cart') }}" method="post" id="shipping-form">
+                                        <form action="{{ route('frontend.cart.getshippingcost') }}" method="post" id="shipping-form">
+                                            @csrf
                                         <span class="gl-text u-s-m-b-30">Enter your destination to get a shipping
                                             estimate.</span>
 
@@ -295,15 +296,16 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div>
 
-                                            <button class="btn btn--e-brand-b-2" type="submit"> PROCEED TO
+                                        <form class="f-cart" action="{{ route('frontend.checkout') }}">
+                                        <div>
+                                            <button class="btn btn--e-brand-b-2" type="submit" {{ $isCartEmpty ? 'disabled' : '' }}> PROCEED TO
                                                 CHECKOUT</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -110,7 +110,7 @@
                                 <div
                                     class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item {{ $product->category_id }}">
                                     <a class="product-o-link"
-                                        href="{{ route('frontend.product-detail', $product->id) }}">
+                                        href="{{ route('frontend.product-detail', $product->product_code) }}">
                                         <div class="product-o product-o--hover-on product-o--radius">
 
                                             <div class="product-o__wrap">
@@ -147,10 +147,11 @@
                                             data-tooltip="tooltip" data-placement="top"
                                             value="{{ $product->product_code }}" title="Add to Cart"><i
                                                 class="fas fa-shopping-cart">Add to Cart</i>
+                                            </button>
                                     </div>
-                                    </button>
 
                                 </div>
+
                             </div>
 
                             <!-- ---------------------------------------- -->
@@ -451,51 +452,47 @@
 
                     @if ($newarriveproducts->isNotEmpty())
                     @foreach ($newarriveproducts as $newarriveproduct)
+
                     <div class="u-s-m-b-30">
                         <div class="product-o product-o--hover-on">
-                            <div class="product-o__wrap">
+                            <a class="product-o__wrap" href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">
 
-                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                    href="{{ route('frontend.product-detail', $newarriveproduct->id) }}">
-
-                                    <img class="aspect__img"
-                                        src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}" alt=""></a>
-                                <div class="product-o__action-wrap">
-                                    <ul class="product-o__action-list">
-                                        <li>
-
-                                            <a class="quick-view-link" data-modal="modal"
-                                                data-modal-id="#quick-look{{ $newarriveproduct->product_code }}"
-                                                data-tooltip="tooltip" data-placement="top" title="Quick View"
-                                                value="{{ $newarriveproduct->product_code }}"><i
-                                                    class="fas fa-search-plus"></i></a>
-                                        </li>
-                                        <li>
-
-                                            <a data-modal="modal"
-                                                data-modal-id="#add-to-cart{{ $newarriveproduct->product_code }}"
-                                                data-tooltip="tooltip" data-placement="top"
-                                                value="{{ $newarriveproduct->product_code }}" title="Add to Cart"><i
-                                                    class="fas fa-shopping-cart"></i></a>
-                                        </li>
-                                    </ul>
+                                <div class="aspect aspect--bg-grey aspect--square u-d-block">
+                                <img class="aspect__img" src="data:image/jpeg;base64,{{ $newarriveproduct->primary_image }}" alt="">
                                 </div>
-                            </div>
-
+                                
+                            </a>
                             <span class="product-o__category">
 
                                 <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
 
                             <span class="product-o__name">
-                                <a href="{{ route('frontend.product-detail', $newarriveproduct->id) }}">{{
+                                <a href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">{{
                                     $newarriveproduct->product_name }}</a></span>
 
                             <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
 
                                 <span class="product-o__discount">Rs.{{ $newarriveproduct->actual_price
                                                                 }}</span></span>
+                                                                 <div class="quickvewandAddtocart">
+                                                                    <!-- quick view button    -->
+                                                                    <button id="quick-view-link" class="Productoption quickViewBtnHompepage"
+                                                                        data-modal="modal" data-modal-id="#quick-look{{ $newarriveproduct->product_code }}"
+                                                                        data-tooltip="tooltip" data-placement="top" title="Quick View"
+                                                                        value="{{ $newarriveproduct->product_code }}"><i class="fas fa-search-plus">Quick
+                                                                            View</i>
+                                                                    </button>
+                                
+                                                                    <button data-modal="modal" class="Productoption addtoCartBtnHompepage"
+                                                                        data-modal-id="#add-to-cart{{ $newarriveproduct->product_code }}"
+                                                                        data-tooltip="tooltip" data-placement="top"
+                                                                        value="{{ $newarriveproduct->product_code }}" title="Add to Cart"><i
+                                                                            class="fas fa-shopping-cart">Add to Cart</i>
+                                                                        </button>
+                                                                </div>
                         </div>
                     </div>
+
                     <!--======End- Section Content ======-->
 
 
@@ -578,34 +575,13 @@
                 @foreach ($featureproducts as $featureproduct)
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
                     <div class="product-o product-o--hover-on u-h-100">
-                        <div class="product-o__wrap">
+                        <a class="product-o__wrap" href="{{ route('frontend.product-detail', $featureproduct->product_code) }}">
 
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                href="{{ route('frontend.product-detail', $featureproduct->id) }}">
+                            <div class="aspect aspect--bg-grey aspect--square u-d-block">
 
                                 <img class="aspect__img"
-                                    src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></a>
-                            <div class="product-o__action-wrap">
-                                <ul class="product-o__action-list">
-                                    <li>
-
-                                        <a data-modal="modal"
-                                            data-modal-id="#quick-look{{ $featureproduct->product_code }}"
-                                            data-tooltip="tooltip" data-placement="top" title="Quick View"
-                                            value="{{ $featureproduct->product_code }}"><i
-                                                class="fas fa-search-plus"></i></a>
-                                    </li>
-                                    <li>
-
-                                        <a data-modal="modal"
-                                            data-modal-id="#add-to-cart{{ $featureproduct->product_code }}"
-                                            data-tooltip="tooltip" data-placement="top" title="Add to Cart"
-                                            value="{{ $featureproduct->product_code }}"><i
-                                                class="fas fa-shopping-cart"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                                    src="data:image/jpeg;base64,{{ $featureproduct->primary_image }}" alt=""></div>
+                        </a>
 
                         <span class="product-o__category">
 
@@ -614,7 +590,7 @@
                         <span class="product-o__name">
 
                             <a
-                                href="{{ route('frontend.product-detail', $featureproduct->id) }}">{{ $featureproduct->product_name }}</a></span>
+                                href="{{ route('frontend.product-detail', $featureproduct->product_code) }}">{{ $featureproduct->product_name }}</a></span>
                         <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star-half-alt"></i>
@@ -625,6 +601,22 @@
                         <span class="product-o__price">Rs.{{ $featureproduct->sell_price }}
 
                             <span class="product-o__discount">Rs.{{ $featureproduct->actual_price }}</span></span>
+                            <div class="quickvewandAddtocart">
+                                <!-- quick view button    -->
+                                <button id="quick-view-link" class="Productoption quickViewBtnHompepage"
+                                    data-modal="modal" data-modal-id="#quick-look{{ $featureproduct->product_code }}"
+                                    data-tooltip="tooltip" data-placement="top" title="Quick View"
+                                    value="{{ $featureproduct->product_code }}"><i class="fas fa-search-plus">Quick
+                                        View</i>
+                                </button>
+
+                                <button data-modal="modal" class="Productoption addtoCartBtnHompepage"
+                                    data-modal-id="#add-to-cart{{ $featureproduct->product_code }}"
+                                    data-tooltip="tooltip" data-placement="top"
+                                    value="{{ $featureproduct->product_code }}" title="Add to Cart"><i
+                                        class="fas fa-shopping-cart">Add to Cart</i>
+                                    </button>
+                            </div>
                     </div>
                 </div>
                 @endforeach
@@ -747,7 +739,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail', $specialproduct->id) }}">
+                                            href="{{ route('frontend.product-detail', $specialproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $specialproduct->primary_image }}"
@@ -763,7 +755,7 @@
                                         <span class="product-l__name">
 
                                             <a
-                                                href="{{ route('frontend.product-detail', $specialproduct->id) }}">{{$specialproduct->product_name}}</a></span>
+                                                href="{{ route('frontend.product-detail', $specialproduct->product_code) }}">{{$specialproduct->product_name}}</a></span>
 
                                         <span class="product-l__price">{{ $specialproduct->sell_price }}</span>
                                     </div>
@@ -787,7 +779,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail', $weeklyproduct->id) }}">
+                                            href="{{ route('frontend.product-detail', $weeklyproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $weeklyproduct->primary_image }}"
@@ -803,7 +795,7 @@
                                         <span class="product-l__name">
 
                                             <a
-                                                href="{{ route('frontend.product-detail', $weeklyproduct->id) }}">{{ $weeklyproduct->product_name }}</a></span>
+                                                href="{{ route('frontend.product-detail', $weeklyproduct->product_code) }}">{{ $weeklyproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $weeklyproduct->sell_price }}
 
@@ -829,7 +821,7 @@
                                     <div class="product-l__img-wrap">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link"
-                                            href="{{ route('frontend.product-detail', $flashproduct->id) }}">
+                                            href="{{ route('frontend.product-detail', $flashproduct->product_code) }}">
 
                                             <img class="aspect__img"
                                                 src="data:image/jpeg;base64,{{ $flashproduct->primary_image }}"
@@ -848,7 +840,7 @@
                                         <span class="product-l__name">
 
                                             <a
-                                                href="{{ route('frontend.product-detail', $flashproduct->id) }}">{{ $flashproduct->product_name }}</a></span>
+                                                href="{{ route('frontend.product-detail', $flashproduct->product_code) }}">{{ $flashproduct->product_name }}</a></span>
 
                                         <span class="product-l__price">{{ $flashproduct->sell_price }}</span>
                                     </div>

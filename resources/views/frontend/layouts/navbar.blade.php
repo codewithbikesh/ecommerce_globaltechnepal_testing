@@ -22,7 +22,7 @@
 
             <div class="ecomNav-icons">
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
-                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"> <span class="cartNum">1</span> </div>
+                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"> <span class="cartNum">{{ $cartItemCount }}</span> </div>
                 <div class="fas fa-user" id="ecomNav-login-btn"></div>
                 
             @auth('customer')

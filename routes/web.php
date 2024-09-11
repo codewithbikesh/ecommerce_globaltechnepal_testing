@@ -124,6 +124,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::post('/cart/update', [FrontendCartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/clear', [FrontendCartController::class, 'clear'])->name('cart.clear');
+    Route::post('/cart', [FrontendCartController::class,'cart_shippingcost'])->name('frontend.cart.getshippingcost');
     Route::get('/getCities/{province_id}', [FrontendCartController::class, 'getCities']);
     
     Route::post('/signin', [FrontendLoginController::class, 'signin'])->name('customer.signin');

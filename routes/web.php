@@ -106,7 +106,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale'); 
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
-    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
+    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');  
+    Route::get('/filter-products', [DashboardController::class, 'filterProducts']);    
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
     Route::get('/product-details/{product_code}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   

@@ -104,6 +104,7 @@ class DashboardController extends Controller
     public function checkout(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $shippingCost = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
@@ -114,8 +115,12 @@ class DashboardController extends Controller
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            $checkoutData = session()->get('checkout', [
+                'shipping_cost' => 0
+            ]);
+            $shippingCost = $checkoutData['shipping_cost'];
         }
-        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
+        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost"));
     }
 
     // contact 

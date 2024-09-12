@@ -6045,6 +6045,7 @@ box-shadow:  20px 20px 60px #bebebe,
   .ah-list--design2 > li > a:hover {
        border-color: orangered;
   }
+  
   .moreBtn{
         border: 1px solid orangered;
     padding: 5px 14px;
@@ -6076,13 +6077,7 @@ color: #ff4500;
 .quickvewandAddtocart button i{
 color:whitesmoke !important;
 }
-.ecomNav-logo{
-margin-left: 20px;
-}
-.ecomNav-icons{
-  margin-right: 20px;
-  display: flex;
-}
+
 @media (max-width: 991px) {
 .pageUl{
  flex-direction: column;

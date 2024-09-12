@@ -4,7 +4,7 @@
 <div class="app-content">
 
     <!-- crousal  -->
-    <div class="crousalUpper-containerP">
+    <div class="crousalUpper-containerP container" >
 
         <div class="crousalUpper-slider">
             @if ($carousel->isNotEmpty())
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section__text-wrap">
-                            <h1 class="section__heading u-c-secondary u-s-m-b-12">TOP TRENDING</h1>
+                            <h1 class="section__heading u-c-secondary u-s-m-b-12 headiiing">TOP TRENDING</h1>
 
                             <span class="section__span u-c-silver">CHOOSE CATEGORY</span>
                         </div>
@@ -213,30 +213,44 @@
                                                                 $sellPrice = $product->sell_price;
 
 
-                                                                $discountPercentage = $actualPrice > 0
-                                                                ? round(((($actualPrice - $sellPrice) /
-                                                                $actualPrice) * 100), 2)
-                                                                : 0;
-                                                                @endphp
-                                                                <span class="pd-detail__discount">({{
+                                                    $discountPercentage = $actualPrice > 0
+                                                    ? round(((($actualPrice - $sellPrice) /
+                                                    $actualPrice) * 100), 2)
+                                                    : 0;
+                                                    @endphp
+                                                    <span class="pd-detail__discount">({{
                                                                     $discountPercentage }}% OFF)</span><del
-                                                                    class="pd-detail__del">{{ $product->actual_price
-                                                                    }}</del>
-                                                            </div>
-                                                        </div>
-                                                        <div class="u-s-m-b-15">
-                                                            <div class="pd-detail__inline">
+                                                        class="pd-detail__del">{{ $product->actual_price
+                                                                                                                                }}</del>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="u-s-m-b-15">
+                                                                                                                        <div class="pd-detail__rating gl-rating-style"><i
+                                                                                                                                class="fas fa-star"></i><i
+                                                                                                                                class="fas fa-star"></i><i
+                                                                                                                                class="fas fa-star"></i><i
+                                                                                                                                class="fas fa-star"></i><i
+                                                                                                                                class="fas fa-star-half-alt"></i>
 
-                                                                <span class="pd-detail__stock">{{
+                                                                                                                            <span class="pd-detail__review u-s-m-l-4">
+
+                                                                                                                                <a href="product-detail.html">23
+                                                                                                                                    Reviews</a></span>
+                                                                                                                        </div>
+                                                                                                                    </div> --}}
+                                            <div class="u-s-m-b-15">
+                                                <div class="pd-detail__inline">
+
+                                                    <span class="pd-detail__stock">{{
                                                                     $product->stock_quantity }} in stock</span>
-                                                            </div>
-                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="u-s-m-b-15">
+                                                <form class="pd-detail__form" method="POST"
+                                                    action="{{ route('cart.add') }}">
+                                                    @csrf
+                                                    <div class="pd-detail-inline-2">
                                                         <div class="u-s-m-b-15">
-                                                            <form class="pd-detail__form" method="POST"
-                                                                action="{{ route('cart.add') }}">
-                                                                @csrf
-                                                                <div class="pd-detail-inline-2">
-                                                                    <div class="u-s-m-b-15">
 
                                                                         <!--====== Input Counter ======-->
                                                                         <div class="input-counter">
@@ -298,7 +312,7 @@
 
                                                             <div class="success__info-wrap">
 
-                                                                <span class="success__name">{{
+                                                    <span class="success__name">{{
                                                                     $product->product_name }}</span>
 
                                                                 <div class="input-counter">
@@ -458,7 +472,7 @@
 
                             <span class="product-o__name">
                                 <a href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">{{
-                                    $newarriveproduct->product_name }}</a></span>
+            $newarriveproduct->product_name }}</a></span>
 
                             <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
 

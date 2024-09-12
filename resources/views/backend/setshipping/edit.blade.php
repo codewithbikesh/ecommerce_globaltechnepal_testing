@@ -20,13 +20,11 @@
                   <label for="inputName5" class="form-label">Province</label>
                   <select class="form-select" name="province" aria-label="Account Type">
                       <option value="" selected disabled>Select</option>
-                      <option value="1" {{ $shipping->province == '1' ? 'selected' : '' }}>Province 1</option>
-                      <option value="2" {{ $shipping->province == '2' ? 'selected' : '' }}>Madhesh</option>
-                      <option value="3" {{ $shipping->province == '3' ? 'selected' : '' }}>Bagmati</option>
-                      <option value="4" {{ $shipping->province == '4' ? 'selected' : '' }}>Gandaki</option>
-                      <option value="5" {{ $shipping->province == '5' ? 'selected' : '' }}>Lumbini</option>
-                      <option value="6" {{ $shipping->province == '6' ? 'selected' : '' }}>Karnali</option>
-                      <option value="7" {{ $shipping->province == '7' ? 'selected' : '' }}>Sudurpaschim</option>
+                      @foreach($provinces as $id => $province_name)
+                          <option value="{{ $id }}" {{ $shipping->province == $id ? 'selected' : '' }}>
+                              {{ $province_name }}
+                          </option>
+                      @endforeach
                   </select>
                 </div>
                 

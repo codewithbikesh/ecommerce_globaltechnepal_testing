@@ -20,13 +20,9 @@
                   <label for="inputName5" class="form-label">Province</label>
                   <select class="form-select" name="province" aria-label="Account Type">
                       <option value="" selected disabled>Select</option>
-                      <option value="1">Province 1</option>
-                      <option value="2">Madhesh</option>
-                      <option value="3">Bagmati</option>
-                      <option value="4">Gandaki</option>
-                      <option value="5">Lumbini</option>
-                      <option value="6">Karnali</option>
-                      <option value="7">Sudurpaschim</option>
+                      @foreach($provinces as $province)
+                          <option value="{{ $province->id }}">{{ $province->province_name }}</option>
+                      @endforeach
                   </select>
                 </div>
                 

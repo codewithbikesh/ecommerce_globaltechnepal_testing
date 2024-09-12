@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\ReviewRatingController;
 use App\Http\Controllers\Backend\NewsletterController;
 use App\Http\Controllers\Backend\SetAPIController;
 use App\Http\Controllers\Backend\ShippingController;
+use App\Http\Controllers\Backend\ProvinceController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -81,6 +82,15 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/newsletter-subscribers', [NewsletterController::class, 'index'])->name('backend.newsletters.index');
     Route::post('/newsletter-subscriber/view', [NewsletterController::class, 'view'])->name('backend.newsletters.view');
     Route::delete('/newsletter-subscriber/{id}', [NewsletterController::class, 'delete'])->name('backend.newsletters.delete');
+
+    //Provinces
+    Route::get('/provinces', [ProvinceController::class, 'index'])->name('backend.provinces.index');
+    Route::get('/provinces/add', [ProvinceController::class, 'add'])->name('backend.provinces.add');
+    Route::post('/provinces', [ProvinceController::class, 'store'])->name('backend.provinces.store');
+    Route::post('/provinces/view', [ProvinceController::class, 'view'])->name('backend.provinces.view');
+    Route::post('/provinces/edit', [ProvinceController::class, 'edit'])->name('backend.provinces.edit');
+    Route::post('/provinces/{id}', [ProvinceController::class, 'update'])->name('backend.provinces.update');
+    Route::delete('/provinces/{id}', [ProvinceController::class, 'delete'])->name('backend.provinces.delete');
 
     //Users
     Route::get('/users', [UserController::class, 'index'])->name('backend.users.index');

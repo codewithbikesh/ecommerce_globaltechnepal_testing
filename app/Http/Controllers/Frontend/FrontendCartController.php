@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Shipping;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Province;
 
 class FrontendCartController extends Controller
 {
@@ -17,6 +18,7 @@ class FrontendCartController extends Controller
     public function cart()
     {
         $websitedata = WebsiteData::first();
+        $provinces = Province::all()->pluck('province_name', 'id');
         $selectedCity = null;
         $selectedProvince = null;
         $shippingCost = 0;
@@ -66,7 +68,7 @@ class FrontendCartController extends Controller
     
         }
     
-        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty"));
+        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty", "provinces"));
     }
     
 

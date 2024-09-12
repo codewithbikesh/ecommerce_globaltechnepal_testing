@@ -189,14 +189,14 @@
                                         <div class="u-s-m-b-30">
                                             <label class="gl-label" for="shipping-state">PROVINCE </label>
                                             <select class="select-box select-box--primary-style" name="province">
+
                                                 <option selected value="" disabled>Choose Province</option>
-                                                <option value="1" {{ $selectedProvince == '1' ? 'selected' : '' }}>Province 1</option>
-                                                <option value="2" {{ $selectedProvince == '2' ? 'selected' : '' }}>Madhesh</option>
-                                                <option value="3" {{ $selectedProvince == '3' ? 'selected' : '' }}>Bagmati</option>
-                                                <option value="4" {{ $selectedProvince == '4' ? 'selected' : '' }}>Gandaki</option>
-                                                <option value="5" {{ $selectedProvince == '5' ? 'selected' : '' }}>Lumbini</option>
-                                                <option value="6" {{ $selectedProvince == '6' ? 'selected' : '' }}>Karnali</option>
-                                                <option value="7" {{ $selectedProvince == '7' ? 'selected' : '' }}>Sudurpaschim</option>
+                                                @foreach($provinces as $id => $province_name)
+                                                <option value="{{ $id }}" {{ $selectedProvince == $id ? 'selected' : '' }}>
+                                                    {{ $province_name }}
+                                                </option>
+                                                @endforeach
+                                                
                                             </select>
                                         </div>
 

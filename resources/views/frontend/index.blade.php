@@ -4,7 +4,7 @@
 <div class="app-content">
 
     <!-- crousal  -->
-    <div class="crousalUpper-containerP container">
+    <div class="crousalUpper-containerP container" >
 
         <div class="crousalUpper-slider">
             @if ($carousel->isNotEmpty())
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section__text-wrap">
-                            <h1 class="section__heading u-c-secondary u-s-m-b-12">TOP TRENDING</h1>
+                            <h1 class="section__heading u-c-secondary u-s-m-b-12 headiiing">TOP TRENDING</h1>
 
                             <span class="section__span u-c-silver">CHOOSE CATEGORY</span>
                         </div>
@@ -208,19 +208,19 @@
                                                 <div class="pd-detail__inline">
 
                                                     <span class="pd-detail__price">{{
-                                                                    $product->sell_price }}</span>
+            $product->sell_price }}</span>
                                                     @php
-                                                    $actualPrice = $product->actual_price;
-                                                    $sellPrice = $product->sell_price;
+        $actualPrice = $product->actual_price;
+        $sellPrice = $product->sell_price;
 
 
-                                                    $discountPercentage = $actualPrice > 0
-                                                    ? round(((($actualPrice - $sellPrice) /
-                                                    $actualPrice) * 100), 2)
-                                                    : 0;
+        $discountPercentage = $actualPrice > 0
+            ? round(((($actualPrice - $sellPrice) /
+                $actualPrice) * 100), 2)
+            : 0;
                                                     @endphp
                                                     <span class="pd-detail__discount">({{
-                                                                    $discountPercentage }}% OFF)</span><del
+            $discountPercentage }}% OFF)</span><del
                                                         class="pd-detail__del">{{ $product->actual_price
                                                                                                                                 }}</del>
                                                 </div>
@@ -243,7 +243,7 @@
                                                 <div class="pd-detail__inline">
 
                                                     <span class="pd-detail__stock">{{
-                                                                    $product->stock_quantity }} in stock</span>
+            $product->stock_quantity }} in stock</span>
                                                 </div>
                                             </div>
                                             <div class="u-s-m-b-15">
@@ -309,7 +309,7 @@
                                                 <div class="success__info-wrap">
 
                                                     <span class="success__name">{{
-                                                                    $product->product_name }}</span>
+            $product->product_name }}</span>
 
                                                     <div class="input-counter">
                                                         <span class="input-counter__minus fas fa-minus"></span>
@@ -468,7 +468,7 @@
 
                             <span class="product-o__name">
                                 <a href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">{{
-                                    $newarriveproduct->product_name }}</a></span>
+            $newarriveproduct->product_name }}</a></span>
 
                             <span class="product-o__price">Rs.{{ $newarriveproduct->sell_price }}
 

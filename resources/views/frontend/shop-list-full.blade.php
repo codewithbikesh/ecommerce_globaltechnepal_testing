@@ -12,16 +12,13 @@
                             <div class="shop-p__toolbar u-s-m-b-30">
                                 <div class="shop-p__meta-wrap u-s-m-b-60">
     
-                                    <span class="shop-p__meta-text-1">FOUND 18 RESULTS</span>
+                                        <span>You Searched For:</span>
+                                        
+                                        <a class="gl-tag btn--e-brand-shadow" href="#">chaddi banyan</a>
                                     <div class="shop-p__meta-text-2">
-    
-                                        <span>Related Searches:</span>
-    
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">men's clothing</a>
-    
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">mobiles & tablets</a>
-    
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">books & audible</a>
+
+                                    <span class="shop-p__meta-text-1">FOUND 18 RESULTS</span>
+                                       
                                     </div>
                                 </div>
                                 <div class="shop-p__tool-style">
@@ -778,9 +775,9 @@
                                 </div>
                                 <div class="shop-w__wrap collapse show" id="s-category">
                                     <ul class="shop-w__category-list gl-scroll">
-                                        <li class="has-list">
+                                        <li class="has-list mainCategory">
     
-                                            <a href="#">Electronics</a>
+                                            <a href="#" class="hedingCategory">Electronics</a>
     
                                             <span class="category-list__text u-s-m-l-6">(23)</span>
     
@@ -1025,9 +1022,9 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="has-list">
+                                        <li class="has-list mainCategory">
     
-                                            <a href="#">Women's Clothing</a>
+                                            <a href="#" class="hedingCategory">Women's Clothing</a>
     
                                             <span class="category-list__text u-s-m-l-6">(5)</span>
     
@@ -1227,9 +1224,9 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="has-list">
+                                        <li class="has-list mainCategory">
     
-                                            <a href="#">Men's Clothing</a>
+                                            <a href="#"  class="hedingCategory">Men's Clothing</a>
     
                                             <span class="category-list__text u-s-m-l-6">(5)</span>
     

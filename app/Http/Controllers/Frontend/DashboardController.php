@@ -204,7 +204,10 @@ class DashboardController extends Controller
         }
     }
 
-    // Fetch the filtered products
+    
+    $categories = Product::distinct()->pluck('category_id');
+            // dd($categories);
+  // Fetch the filtered products
     $explores = $productsQuery->get();
     // $explores = Product::get();
     $websitedata = WebsiteData::first();
@@ -220,9 +223,57 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount","explores"));
+        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount","explores","categories"));
     }
 
+    public function filexplore(Request $request){
+     
+        $priceRange = $request->input('price_range');
+    
+        $productsQuery = Product::query();
+    
+        if ($priceRange) {
+            switch ($priceRange) {
+                case '500 to 1K':
+                    $productsQuery->whereBetween('sell_price', [500, 1000]);
+                    break;
+                case '2K to 5K':
+                    $productsQuery->whereBetween('sell_price', [2000, 5000]);
+                    break;
+                case '5K to 10K':
+                    $productsQuery->whereBetween('sell_price', [5000, 10000]);
+                    break;
+                case '10K and Above':
+                    $productsQuery->where('sell_price', '>=', 10000);
+                    break;
+                default:
+                    // Handle default case or no filtering
+                    break;
+            }
+        }
+    
+        
+        $categories = Product::distinct()->pluck('category_id');
+        // dd($categories);
+      // Fetch the filtered products
+        $explores = $productsQuery->get();
+        // $explores = Product::get();
+        $websitedata = WebsiteData::first();
+            $cartItemCount = 0;
+            if (auth('customer')->check()) {
+                $customerId = auth('customer')->id();
+                $cart = Cart::where('customer_id', $customerId)->first();
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                $cart = session()->get('cart', []);
+                $cartItemCount = count($cart); // Count items in the guest cart
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
+            return view("frontend._explore", compact("websitedata", "cart", "cartproducts", "cartItemCount","explores","categories"));
+        }
+    
     // lost-password 
     public function lostPassword(){
         $websitedata = WebsiteData::first();
@@ -397,42 +448,6 @@ class DashboardController extends Controller
         }
         return redirect()->back();
     }
-
-
-    // filter price range wise 
-//     public function filterProducts(Request $request)
-// {
-
-//     $priceRange = $request->input('price_range');
-
-//     $productsQuery = Product::query();
-
-//     if ($priceRange) {
-//         switch ($priceRange) {
-//             case '500 to 1K':
-//                 $productsQuery->whereBetween('sell_price', [500, 1000]);
-//                 break;
-//             case '2K to 5K':
-//                 $productsQuery->whereBetween('sell_price', [2000, 5000]);
-//                 break;
-//             case '5K to 10K':
-//                 $productsQuery->whereBetween('sell_price', [5000, 10000]);
-//                 break;
-//             case '10K and Above':
-//                 $productsQuery->where('sell_price', '>=', 10000);
-//                 break;
-//             default:
-//                 // Handle default case or no filtering
-//                 break;
-//         }
-//     }
-
-//     // Fetch the filtered products
-//     $explores = $productsQuery->get();
-
-//     // Return a view or JSON response
-//     return view('frontend.explore', ['explores' => $explores]);
-// }
 
 
 }

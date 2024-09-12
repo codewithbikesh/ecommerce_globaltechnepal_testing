@@ -37,12 +37,11 @@
             </select>
         </div>
         <div class="filter-group">
-            <select id="" class="filter-title">
-                <option value="" disabled selected>Gender</option>
-                <option value="">For Men</option>
-                <option value="">For Women</option>
-                <option value="">For Babies</option>
-                <option value="">For Teenage</option>
+            <select id="category-filter" class="filter-title">
+                <option value="" disabled selected>Select Category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category }}">{{ $category }}</option>
+                @endforeach
             </select>
         </div>
         <div class="filter-group">
@@ -66,7 +65,7 @@
     </div>
 
     <div class="filter__grid-wrapper u-s-m-t-30" style="position: relative; height: 1173.75px;">
-        <div class="row">
+        <div class="row" id="test">
         @if ($explores->isNotEmpty())
             @foreach ($explores as $explore)
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item" id="product-list-filter"
@@ -293,9 +292,13 @@
             @endif
         </div>
     </div>
+
     @endsection
     @section('costomJs')
     <script>
+
+        // price range wise filter 
+        // price range wise filter 
         $('#price-filter').on('change', function() {
     var selectedValue = $(this).val();
     $.ajax({
@@ -310,6 +313,27 @@
         }
         
     });
+
 });
+
+// category wise filter 
+// category wise filter 
+$('#category-filter').on('change', function() {
+    var selectedCategory = $(this).val();
+    $.ajax({
+        url: "{{ route('frontend._explore') }}", 
+        type: 'GET',
+        data: { category_id: selectedCategory },
+        success: function(response) {
+            $("#product-list-filter").remove();
+            $("#test").append(response);
+            console.log(response);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error occurred: " + status + " " + error);
+        }
+    });
+});
+
         </script>
     @endsection

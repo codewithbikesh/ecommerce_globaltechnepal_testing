@@ -22,8 +22,10 @@
 
             <div class="ecomNav-icons">
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
-                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn"> <span class="cartNum">{{ $cartItemCount }}</span> </div>
-                <div class="fas fa-user" id="ecomNav-login-btn"></div>
+                <div class="ri-heart-3-fill fas" id="" title="WishList"><span class="cartNum wishList">3</span></div>
+                <div class="fas fa-shopping-cart" id="ecomNav-cart-btn" title="Cart"> <span class="cartNum">{{ $cartItemCount }}</span> </div>
+                <div class="fas fa-user" id="ecomNav-login-btn" title="Be Member"></div>
+
                 
             @auth('customer')
                 <a href="{{ route('frontend.account') }}">
@@ -35,7 +37,7 @@
 
             <div class="ecomNav-shopping-cart">
                 @php
-                    $total = 0;
+$total = 0;
                 @endphp
 
                 @foreach($cartproducts as $product)
@@ -56,18 +58,18 @@
                                         <div class="cartItemDets">
 
                                         @php
-                                            if (auth('customer')->check()) {
-                                                // For authenticated users
-                                                $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
-                                                $quantity = $cartItem ? $cartItem->quantity : 0;
-                                                $subtotal = $product->sell_price * $quantity;
-                                                $total += $subtotal;
-                                            } else {
-                                                // For guest users
-                                                $quantity = $cart[$product->product_code];
-                                                $subtotal = $product->sell_price * $quantity;
-                                                $total += $subtotal;
-                                            }
+    if (auth('customer')->check()) {
+        // For authenticated users
+        $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+        $quantity = $cartItem ? $cartItem->quantity : 0;
+        $subtotal = $product->sell_price * $quantity;
+        $total += $subtotal;
+    } else {
+        // For guest users
+        $quantity = $cart[$product->product_code];
+        $subtotal = $product->sell_price * $quantity;
+        $total += $subtotal;
+    }
                                         @endphp
 
                                             <span class="ecomNav-price">{{ $product->sell_price }}</span>

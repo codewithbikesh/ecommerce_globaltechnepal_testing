@@ -1,41 +1,4 @@
-/*
 
-1.0 Base Styles
-2.0 Typography
-3.0 Pre-configured styles
-4.0 Layout Utility Styles
-5.0 Components
-6.0 Header
-  6.1 Primary Nav
-  6.2 Secondary Nav
-7.0 Footer
-  7.1 Outer-Footer
-  7.3 Lower-Footer
-9.0 About-Page
-10.0 Contact-Page
-11.0 Cart-Wishlist-Pages
-12.0 Empty-404-Pages
-13.0 Checkout-Page
-14.0 Signin Signup Lost Password-Page
-15.0 FAQ-Page
-16.0 Dashboard-Pages
-17.0 Blog-Pages
-18.0 Product-Detail-Pages
-19.0 Shop-Pages
-20.0 Vendor Extension Pages
-  20.1 Bootstrap
-  20.2 jquery.shopnav
-  20.3 Owl-Carousel
-  20.4 jquery.scrollUp
-  20.5 Slick Carousel
-
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-1.0 Base Styles
---------------------------------------------------------------*/
-/**
- * Setup box-sizing
- */
 html {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent; }
@@ -6112,6 +6075,13 @@ color: #ff4500;
 }
 .quickvewandAddtocart button i{
 color:whitesmoke !important;
+}
+.ecomNav-logo{
+margin-left: 20px;
+}
+.ecomNav-icons{
+  margin-right: 20px;
+  display: flex;
 }
 @media (max-width: 991px) {
 .pageUl{

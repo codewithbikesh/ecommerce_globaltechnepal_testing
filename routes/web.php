@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     
     //Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('backend.orders.index');
+    Route::get('/order/{id}', [OrderController::class, 'show'])->name('backend.orders.view');
     
     //Reviews and Ratings
     Route::get('/reviews-ratings', [ReviewRatingController::class, 'index'])->name('backend.ratings.index');

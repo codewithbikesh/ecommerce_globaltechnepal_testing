@@ -57,7 +57,7 @@
                                             <div class="product-m__thumb">
     
                                                 <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
+                                                    href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">
     
                                                     <img class="aspect__img" src="data:image/jpeg;base64,{{ $shoplistproduct->primary_image }}"
                                                         alt=""></a>
@@ -79,7 +79,7 @@
                                                 </div>
                                                 <div class="product-m__name">
     
-                                                    <a href="product-detail.html">{{ $shoplistproduct->product_name }}</a>
+                                                    <a href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">{{ $shoplistproduct->product_name }}</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                         class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i

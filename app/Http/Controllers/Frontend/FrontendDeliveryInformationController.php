@@ -131,7 +131,7 @@ class FrontendDeliveryInformationController extends Controller
                 'tax' => $tax_amount,
                 'shipping_cost' => $ordershippingcost,
                 'total_amount' => $total_amount,
-                'order_status' => 'Pending', 
+                'order_status' => 'Processing', 
                 'payment_status' => 'Pending', 
             ]);
 

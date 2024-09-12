@@ -43,7 +43,7 @@
                                     <span class="dash__w-icon dash__w-icon-style-1"><i
                                             class="fas fa-cart-arrow-down"></i></span>
 
-                                    <span class="dash__w-text">4</span>
+                                    <span class="dash__w-text">{{ $orderCount }}</span>
 
                                     <span class="dash__w-name">Orders Placed</span>
                                 </div>
@@ -53,7 +53,7 @@
 
                                     <span class="dash__w-icon dash__w-icon-style-2"><i class="fas fa-times"></i></span>
 
-                                    <span class="dash__w-text">0</span>
+                                    <span class="dash__w-text">{{ $cancelledCount }}</span>
 
                                     <span class="dash__w-name">Cancel Orders</span>
                                 </div>
@@ -84,27 +84,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+    @if($order)
+                @foreach($orderItems as $item)
                                     <tr>
-                                        <td>3054231326</td>
-                                        <td>26/13/2016</td>
+                                        <td>{{ $item->order_id }}</td>
+                                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             <div class="dash__table-img-wrap">
 
-                                                <img class="u-img-fluid" src="images/product/electronic/product3.jpg"
+                                                <img class="u-img-fluid" src="data:image/jpeg;base64,{{$item->product->primary_image}}"
                                                     alt="">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="dash__table-total">
 
-                                                <span>$126.00</span>
+                                                <span>{{ $item->subtotal }}</span>
                                             </div>
                                         </td>
                                     </tr>
+                                    
+                @endforeach
+    @else
+    <p>No recent orders found.</p>
+    @endif
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>

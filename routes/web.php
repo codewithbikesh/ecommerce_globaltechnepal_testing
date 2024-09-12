@@ -137,7 +137,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 Route::middleware('auth:customer')->group(function () {   
     Route::get('/account', [FrontendAccountController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
-    Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
+    Route::get('/dash-my-order', [FrontendAccountController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
  
 });
 

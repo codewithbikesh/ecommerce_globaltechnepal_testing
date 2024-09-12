@@ -12,4 +12,11 @@ class Order extends Model
     protected $fillable = ['order_id','customer_id', 'delivery_information_id', 'shipping_address', 'billing_address', 
                            'payment_method', 'shipping_method', 'subtotal', 'tax', 'shipping_cost', 'discount', 
                            'total_amount', 'order_status', 'payment_status'];
+    
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id', 'order_id');
+    }
+
 }

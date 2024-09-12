@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->decimal('discount', 10, 2)->default(0)->nullable();
             $table->decimal('total_amount', 10, 2)->default(0)->nullable();
-            $table->string('order_status')->default('Pending');
+            $table->string('order_status')->default('Processing');
             $table->string('payment_status')->default('Pending');
             $table->timestamps();
         });

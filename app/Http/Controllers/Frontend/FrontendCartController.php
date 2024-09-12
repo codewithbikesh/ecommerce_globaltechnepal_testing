@@ -14,13 +14,14 @@ class FrontendCartController extends Controller
 {
     
     // cart
-    public function cart(Request $request)
+    public function cart()
     {
         $websitedata = WebsiteData::first();
         $selectedCity = null;
         $selectedProvince = null;
         $shippingCost = 0;
         $cartItemCount = 0;
+        $isCartEmpty = true;
     
         if (auth('customer')->check()) {
             // For authenticated users
@@ -30,7 +31,56 @@ class FrontendCartController extends Controller
             if ($cart) {
                 
             $cartItemCount = $cart->items()->count();
+            $isCartEmpty = $cartItemCount === 0;
                 
+                // Get city, province, and shipping cost from the cart
+                $selectedCity = $cart->city;
+                $selectedProvince = $cart->province;
+                $shippingCost = $cart->shipping_cost;
+            
+                // Retrieve cart items
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Default values if no cart is found
+                $selectedCity = null;
+                $selectedProvince = null;
+                $shippingCostValue = 0;
+                $cartproducts = collect(); // Ensure $cartproducts is always a collection
+            }
+        } else {
+            // For guest users
+            $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
+            $isCartEmpty = $cartItemCount === 0;
+            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            $cartData = [];
+            $checkoutData = session()->get('checkout', [
+                'city' => null,
+                'province' => null,
+                'shipping_cost' => 0
+            ]);
+            $selectedCity = $checkoutData['city'];
+            $selectedProvince = $checkoutData['province'];
+            $shippingCost = $checkoutData['shipping_cost'];
+    
+        }
+    
+        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty"));
+    }
+    
+
+    public function cart_shippingcost(Request $request)
+    {
+        $selectedCity = null;
+        $selectedProvince = null;
+        $shippingCost = 0;
+        
+        if (auth('customer')->check()) {
+                
+            $customerId = auth('customer')->id();
+            $cart = Cart::where('customer_id', $customerId)->first();
+            
             if ($request->has('getshippingcost')) {
                 $request->validate([
                     'province' => 'required',
@@ -54,29 +104,10 @@ class FrontendCartController extends Controller
                     'shipping_cost' => $shippingCostValue
                 ]);
 
-            } else {
-                // Get city, province, and shipping cost from the cart
-                $selectedCity = $cart->city;
-                $selectedProvince = $cart->province;
-                $shippingCost = $cart->shipping_cost;
             }
             
-                // Retrieve cart items
-                $cartData = $cart->items()->get();
-                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
-            } else {
-                // Default values if no cart is found
-                $selectedCity = null;
-                $selectedProvince = null;
-                $shippingCostValue = 0;
-                $cartproducts = collect(); // Ensure $cartproducts is always a collection
-            }
         } else {
             // For guest users
-            $cart = session()->get('cart', []);
-            $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
-            $cartData = [];
     
             if ($request->has('getshippingcost')) {
                 $request->validate([
@@ -87,15 +118,23 @@ class FrontendCartController extends Controller
                 $selectedCity = $request->input('city');
                 $selectedProvince = $request->input('province');
                 $shippingCost = Shipping::where('id', $selectedCity)->first();
+
+                session()->put('checkout', [
+                    'city' => $selectedCity,
+                    'province' => $selectedProvince,
+                    'shipping_cost' => $shippingCost
+                ]);
+
             } else {
+                $selectedCity = null;
+                $selectedProvince = null;
                 $shippingCost = 0;
             }
         }
     
-        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince"));
+        return redirect()->route('frontend.cart')->with('status', 'Shipping cost calculated successfully!');
+        // return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty"));
     }
-    
-
 
 
     
@@ -324,8 +363,7 @@ class FrontendCartController extends Controller
                     $cart->items()->delete(); // Delete all cart items
                     $cart->update([
                         'subtotal' => 0,
-                        'tax' => 0,
-                        'shipping_cost' => 0
+                        'tax' => 0
                     ]);
                 }
             } else {

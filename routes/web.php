@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\FrontendLoginController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendCartController;
 use App\Http\Controllers\Frontend\FrontendAccountController;
+use App\Http\Controllers\Frontend\FrontendDeliveryInformationController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController; 
@@ -106,7 +107,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale'); 
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
-    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
+    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');  
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
     Route::get('/product-details/{product_code}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
@@ -118,13 +119,17 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::post('/newsletter', [DashboardController::class, 'newsletter_store'])->name('frontend.newsletter.store');  
     Route::post('/signup', [DashboardController::class, 'customer_signup'])->name('frontend.customer.signup');
     Route::post('/contact', [DashboardController::class, 'inquiry_store'])->name('frontend.inquiry_store');
- 
+
     Route::get('/cart', [FrontendCartController::class,'cart'])->name('frontend.cart');
     Route::post('/cart-add', [FrontendCartController::class, 'addItem'])->name('cart.add');  
     Route::post('/cart/update', [FrontendCartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/clear', [FrontendCartController::class, 'clear'])->name('cart.clear');
+    Route::post('/cart', [FrontendCartController::class,'cart_shippingcost'])->name('frontend.cart.getshippingcost');
     Route::get('/getCities/{province_id}', [FrontendCartController::class, 'getCities']);
+    
+    Route::post('/delivery-information', [FrontendDeliveryInformationController::class, 'add_delivery_information'])->name('frontend.delivery.information');  
+    Route::post('/place-order', [FrontendDeliveryInformationController::class, 'create_order'])->name('frontend.place.order'); 
     
     Route::post('/signin', [FrontendLoginController::class, 'signin'])->name('customer.signin');
 

@@ -10,6 +10,7 @@ use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Cart;
+use App\Models\DeliveryInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,7 @@ class DashboardController extends Controller
 {
   public  function index(){
     $cartItemCount = 0;
+    $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
@@ -32,13 +34,25 @@ class DashboardController extends Controller
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         // dd($products);
         return view("frontend.index", compact("categories","products","carousel", "websitedata", "cart", "cartproducts", "cartItemCount","newarriveproducts","featureproducts","specialproducts","weeklyproducts","flashproducts"));
@@ -49,17 +63,32 @@ class DashboardController extends Controller
     public function account(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
+
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
+
         return view("frontend.account", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
@@ -67,16 +96,29 @@ class DashboardController extends Controller
     public function about(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.about", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -85,53 +127,99 @@ class DashboardController extends Controller
     public function bestSale(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.bestSale", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
  
 
     // checkout 
-    public function checkout(){
+    public function checkout(Request $request){
         $websitedata = WebsiteData::first();
+        $deliveryInfoId = $request->session()->get('delivery_information_id');
+        $deliveryInformation = DeliveryInformation::where('id', $deliveryInfoId)->first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
+        $shippingCost = 0;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
+            $checkoutData = session()->get('checkout', [
+                'shipping_cost' => 0
+            ]);
+            $shippingCost = $checkoutData['shipping_cost'];
         }
-        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
+        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "deliveryInfoId", "deliveryInformation"));
     }
 
     // contact 
     public function contact(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.contact", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -140,16 +228,29 @@ class DashboardController extends Controller
         public function dashCancellation(){
             $websitedata = WebsiteData::first();
             $cartItemCount = 0;
+            $cartproducts = collect(); // Initialize as an empty collection
             if (auth('customer')->check()) {
                 $customerId = auth('customer')->id();
                 $cart = Cart::where('customer_id', $customerId)->first();
+                
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
                 $cartItemCount = $cart->items()->count();
                 $cartData = $cart->items()->get();
-                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
-            } else {
-                $cart = session()->get('cart', []);
-                $cartItemCount = count($cart); // Count items in the guest cart
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
+        } else {
+            $cart = session()->get('cart', []);
+            $cartItemCount = count($cart); // Count items in the guest cart
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
                 $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
             }
             return  view("frontend.dash-cancellation", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
         }
@@ -158,52 +259,119 @@ class DashboardController extends Controller
     public function dashMyOrder(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.dash-my-order", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
 
     // explore 
-    public function explore(){
-        $websitedata = WebsiteData::first();
+    public function explore(Request $request){
+     
+    $priceRange = $request->input('price_range');
+
+    $productsQuery = Product::query();
+
+    if ($priceRange) {
+        switch ($priceRange) {
+            case '500 to 1K':
+                $productsQuery->whereBetween('sell_price', [500, 1000]);
+                break;
+            case '2K to 5K':
+                $productsQuery->whereBetween('sell_price', [2000, 5000]);
+                break;
+            case '5K to 10K':
+                $productsQuery->whereBetween('sell_price', [5000, 10000]);
+                break;
+            case '10K and Above':
+                $productsQuery->where('sell_price', '>=', 10000);
+                break;
+            default:
+                // Handle default case or no filtering
+                break;
+        }
+    }
+
+    // Fetch the filtered products
+    $explores = $productsQuery->get();
+    // $explores = Product::get();
+    $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
-        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
+        return view("frontend.explore", compact("websitedata", "cart", "cartproducts", "cartItemCount","explores"));
     }
 
     // lost-password 
     public function lostPassword(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.lost-password", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -214,16 +382,29 @@ class DashboardController extends Controller
         $newarriveproducts = Product::limit(25)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.newarrival", compact("websitedata", "cart", "cartproducts","newarriveproducts", "cartItemCount"));
     }
@@ -233,16 +414,29 @@ class DashboardController extends Controller
         $productDetails = Product::where('product_code', $product_code)->first();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.product-detail", compact("websitedata","productDetails", "cart", "cartproducts", "cartItemCount"));
     }
@@ -251,16 +445,29 @@ class DashboardController extends Controller
     public function shopListFull(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -269,16 +476,29 @@ class DashboardController extends Controller
     public function signin(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.signin", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -287,16 +507,29 @@ class DashboardController extends Controller
     public function signup(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
         return view("frontend.signup", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
     }
@@ -304,19 +537,32 @@ class DashboardController extends Controller
     // whatsnew 
     public function whatsnew(){
         $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
-        $whatsnewproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
+        $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->limit(9)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            
+            if ($cart) {
+                // Ensure $cart is not null before accessing its methods
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+
+                // Ensure cartData is not empty
+                if ($cartData->isNotEmpty()) {
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                }
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+
+            if (!empty($cart)) {
+                // Ensure array keys are valid product codes
+                $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            }
         }
          return view("frontend.whatsnew", compact("websitedata", "cart", "cartproducts","newcategories","whatsnewproducts", "cartItemCount"));
     }
@@ -364,5 +610,42 @@ class DashboardController extends Controller
         }
         return redirect()->back();
     }
+
+
+    // filter price range wise 
+//     public function filterProducts(Request $request)
+// {
+
+//     $priceRange = $request->input('price_range');
+
+//     $productsQuery = Product::query();
+
+//     if ($priceRange) {
+//         switch ($priceRange) {
+//             case '500 to 1K':
+//                 $productsQuery->whereBetween('sell_price', [500, 1000]);
+//                 break;
+//             case '2K to 5K':
+//                 $productsQuery->whereBetween('sell_price', [2000, 5000]);
+//                 break;
+//             case '5K to 10K':
+//                 $productsQuery->whereBetween('sell_price', [5000, 10000]);
+//                 break;
+//             case '10K and Above':
+//                 $productsQuery->where('sell_price', '>=', 10000);
+//                 break;
+//             default:
+//                 // Handle default case or no filtering
+//                 break;
+//         }
+//     }
+
+//     // Fetch the filtered products
+//     $explores = $productsQuery->get();
+
+//     // Return a view or JSON response
+//     return view('frontend.explore', ['explores' => $explores]);
+// }
+
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 02:09 PM
+-- Generation Time: Sep 11, 2024 at 07:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -894,7 +894,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `province`, `city`, `session_id`, `tax`, `shipping_cost`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 3, 1, NULL, 0.00, 160.00, 0.00, NULL, '2024-09-10 00:01:26', '2024-09-10 03:24:00');
+(3, 2, NULL, NULL, NULL, 1587.30, 0.00, 12210.00, NULL, '2024-09-11 08:21:45', '2024-09-11 08:21:45'),
+(7, 3, 3, 1, NULL, 78.00, 160.00, 600.00, NULL, '2024-09-11 10:00:19', '2024-09-11 11:54:16');
 
 -- --------------------------------------------------------
 
@@ -911,6 +912,13 @@ CREATE TABLE `cart_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(3, 7, '21', 2, 300.00, '2024-09-11 11:54:16', '2024-09-11 11:54:16');
 
 -- --------------------------------------------------------
 
@@ -937,7 +945,45 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `full_name`, `email`, `password`, `phone`, `street_address`, `city`, `province`, `postal_code`, `created_at`, `updated_at`) VALUES
-(2, 'Milan Devkota', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9871263612', 'Teku', 'Kathmandu', 'Bagmati', NULL, '2024-09-07 23:34:34', '2024-09-07 23:34:34');
+(2, 'Milan Devkota', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9871263612', 'Teku', 'Kathmandu', 'Bagmati', NULL, '2024-09-07 23:34:34', '2024-09-07 23:34:34'),
+(3, 'Dipak Nyaupane', 'dipak@gmail.com', '$2y$12$zYFm77InBevzDOH4flq3aOocCimWWRueYqikDTZYKMbPdlNVgw0uK', '78326478126', 'seshmati', 'Kathmandu', 'Bagmati', NULL, '2024-09-11 08:24:50', '2024-09-11 08:24:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_information`
+--
+
+CREATE TABLE `delivery_information` (
+  `id` bigint(20) NOT NULL,
+  `customer_id` bigint(20) DEFAULT NULL,
+  `default_billing` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `street_address` varchar(255) NOT NULL,
+  `postal_code` varchar(255) DEFAULT NULL,
+  `order_note` varchar(512) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `delivery_information`
+--
+
+INSERT INTO `delivery_information` (`id`, `customer_id`, `default_billing`, `full_name`, `email`, `phone`, `province`, `city`, `street_address`, `postal_code`, `order_note`, `created_at`, `updated_at`) VALUES
+(1, 2, NULL, 'Bikesh Gupta', 'bikesh@gmail.com', '98263541265', '3', 'qhwdabhd', 'jwdhGASJAHDH', '32561', 'Hello Test', '2024-09-11 04:25:02', '2024-09-11 04:25:02'),
+(2, 2, NULL, 'Test', 'test@gmail.com', '87126327165', '4', 'fgdvdsvsd', 'hdjabsdvshshv', '343231', 'dfvfxc', '2024-09-11 04:29:15', '2024-09-11 04:29:15'),
+(3, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Hello', '2024-09-11 05:23:19', '2024-09-11 05:23:19'),
+(4, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Test', '2024-09-11 05:31:29', '2024-09-11 05:31:29'),
+(5, 2, NULL, 'Milan Devkota', 'milan@gmail.com', '9871263612', 'Bagmati', 'Kathmandu', 'Teku', NULL, 'Hello Test', '2024-09-11 08:10:26', '2024-09-11 08:10:26'),
+(6, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Its dipak.', '2024-09-11 08:26:29', '2024-09-11 08:26:29'),
+(7, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, '2024-09-11 09:15:00', '2024-09-11 09:15:00'),
+(8, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Its Dipak and dipak test.', '2024-09-11 09:59:23', '2024-09-11 09:59:23'),
+(9, 3, NULL, 'Dipak Nyaupane', 'dipak@gmail.com', '78326478126', 'Bagmati', 'Kathmandu', 'seshmati', NULL, 'Hello hello hello hello', '2024-09-11 10:37:20', '2024-09-11 10:37:20');
 
 -- --------------------------------------------------------
 
@@ -1046,7 +1092,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2024_09_05_094014_create_inquiries_table', 7),
 (24, '2024_09_05_095429_create_newsletter_subscribers_list_table', 8),
 (25, '2024_09_06_043556_create_api_table', 9),
-(26, '2024_09_09_050631_create_set_shipping_table', 10);
+(26, '2024_09_09_050631_create_set_shipping_table', 10),
+(27, '2024_09_11_092834_create_delivery_information_table', 11);
 
 -- --------------------------------------------------------
 
@@ -1078,23 +1125,34 @@ INSERT INTO `newsletter_subscribers_list` (`id`, `gender`, `email`, `created_at`
 
 CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
   `customer_id` bigint(20) NOT NULL,
-  `checkout_id` bigint(20) NOT NULL,
-  `cart_id` bigint(20) NOT NULL,
-  `shipping_address` varchar(255) NOT NULL,
+  `delivery_information_id` bigint(20) NOT NULL,
+  `shipping_address` varchar(255) DEFAULT NULL,
   `billing_address` varchar(255) DEFAULT NULL,
   `payment_method` varchar(255) DEFAULT NULL,
   `shipping_method` varchar(255) DEFAULT NULL,
   `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
   `tax` decimal(10,2) NOT NULL DEFAULT 0.00,
   `shipping_cost` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `total_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(10,2) DEFAULT 0.00,
+  `total_amount` decimal(10,2) DEFAULT 0.00,
   `order_status` varchar(255) NOT NULL DEFAULT 'Pending',
   `payment_status` varchar(255) NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_id`, `customer_id`, `delivery_information_id`, `shipping_address`, `billing_address`, `payment_method`, `shipping_method`, `subtotal`, `tax`, `shipping_cost`, `discount`, `total_amount`, `order_status`, `payment_status`, `created_at`, `updated_at`) VALUES
+(1, '#ORD-20240911-0001', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:37:32', '2024-09-11 10:37:32'),
+(2, '#ORD-20240911-0002', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:40:07', '2024-09-11 10:40:07'),
+(3, '#ORD-20240911-0003', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:41:25', '2024-09-11 10:41:25'),
+(4, '#ORD-20240911-0004', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:42:04', '2024-09-11 10:42:04'),
+(5, '#ORD-20240911-0005', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Pending', 'Pending', '2024-09-11 10:45:59', '2024-09-11 10:45:59');
 
 -- --------------------------------------------------------
 
@@ -1104,14 +1162,22 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `order_items` (
   `id` bigint(20) NOT NULL,
-  `order_id` bigint(20) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `quantity` bigint(20) NOT NULL DEFAULT 0,
   `price` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `subtotal` decimal(10,2) DEFAULT 0.00,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`, `created_at`, `updated_at`) VALUES
+(1, '#ORD-20240911-0005', 56, 1, 100.50, 100.50, '2024-09-11 10:45:59', '2024-09-11 10:45:59'),
+(2, '#ORD-20240911-0005', 55, 2, 1077.00, 2154.00, '2024-09-11 10:45:59', '2024-09-11 10:45:59');
 
 -- --------------------------------------------------------
 
@@ -1990,6 +2056,12 @@ ALTER TABLE `customers`
   ADD UNIQUE KEY `customers_email_unique` (`email`);
 
 --
+-- Indexes for table `delivery_information`
+--
+ALTER TABLE `delivery_information`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -2108,19 +2180,25 @@ ALTER TABLE `carousel_images`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `delivery_information`
+--
+ALTER TABLE `delivery_information`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2144,7 +2222,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `newsletter_subscribers_list`
@@ -2156,13 +2234,13 @@ ALTER TABLE `newsletter_subscribers_list`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

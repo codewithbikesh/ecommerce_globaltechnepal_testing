@@ -20,7 +20,7 @@ class DashboardController extends Controller
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
-        $products = Product::limit(40)->get();
+        $products = Product::paginate(25);
         $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
         $specialproducts = Product::limit(3)->get();
@@ -191,7 +191,7 @@ class DashboardController extends Controller
     $categories = Product::distinct()->pluck('category_id');
             // dd($categories);
   // Fetch the filtered products
-    $explores = $productsQuery->get();
+  $explores = $productsQuery->paginate(25);
     // $explores = Product::get();
     $websitedata = WebsiteData::first();
         $cartItemCount = 0;
@@ -315,7 +315,14 @@ class DashboardController extends Controller
     }
 
     // shop list full 
-    public function shopListFull(){
+    public function shopListFull(Request $request){
+        $shoplistproducts = Product::latest();
+        if(!empty($request->get('keyword'))){
+            $keyword = $request->get('keyword');
+            $shoplistproducts = $shoplistproducts->where('product_name','like','%'.$keyword.'%')
+            ->orWhere('category_id','like','%'.$keyword.'%');
+        }
+        $shoplistproducts = $shoplistproducts->paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         if (auth('customer')->check()) {
@@ -329,7 +336,7 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
+        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts"));
     }
 
     //  signin

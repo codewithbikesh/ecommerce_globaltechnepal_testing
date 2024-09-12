@@ -107,6 +107,9 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                    @else
+                                    <h1>Search No Result</h1>
+                                    <p>We're sorry. We cannot find any matches for your search term.</p>
                                     @endif
                                 </div>
                             </div>

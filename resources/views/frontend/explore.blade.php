@@ -63,7 +63,7 @@
             </select>
         </div>
     </div>
-
+      <div class="container">
     <div class="filter__grid-wrapper u-s-m-t-30" style="position: relative; height: 1173.75px;">
         <div class="row">
         @if ($explores->isNotEmpty())
@@ -292,7 +292,7 @@
             @endif
         </div>
     </div>
-
+    </div>
     <div style="padding: 10px">
         {{ $explores->links('pagination::bootstrap-5') }}
     </div>

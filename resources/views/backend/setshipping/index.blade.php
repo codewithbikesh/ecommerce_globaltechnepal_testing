@@ -44,7 +44,7 @@
           <tr>
             <th scope="row">{{ $index + 1 }}</th>
             <td>
-              {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown'; }}
+              {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown' }}
             </td>
             <td>{{ $shipping->city }}</td>
             <td>{{ $shipping->shipping_cost }}</td>

@@ -17,6 +17,7 @@ class DashboardController extends Controller
 {
   public  function index(){
     $cartItemCount = 0;
+    $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
@@ -32,9 +33,14 @@ class DashboardController extends Controller
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -50,12 +56,18 @@ class DashboardController extends Controller
     public function about(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -68,12 +80,18 @@ class DashboardController extends Controller
     public function bestSale(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -88,12 +106,18 @@ class DashboardController extends Controller
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $shippingCost = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -110,12 +134,18 @@ class DashboardController extends Controller
     public function contact(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -128,12 +158,18 @@ class DashboardController extends Controller
         public function dashCancellation(){
             $websitedata = WebsiteData::first();
             $cartItemCount = 0;
+            $cartproducts = collect(); // Initialize as an empty collection
             if (auth('customer')->check()) {
                 $customerId = auth('customer')->id();
                 $cart = Cart::where('customer_id', $customerId)->first();
-                $cartItemCount = $cart->items()->count();
-                $cartData = $cart->items()->get();
-                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                if ($cart) {
+                    $cartItemCount = $cart->items()->count();
+                    $cartData = $cart->items()->get();
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                } else {
+                    // Handle the case where no cart is found
+                    $cartData = collect(); // Empty collection
+                }
             } else {
                 $cart = session()->get('cart', []);
                 $cartItemCount = count($cart); // Count items in the guest cart
@@ -177,12 +213,18 @@ class DashboardController extends Controller
     // $explores = Product::get();
     $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -228,9 +270,14 @@ class DashboardController extends Controller
             if (auth('customer')->check()) {
                 $customerId = auth('customer')->id();
                 $cart = Cart::where('customer_id', $customerId)->first();
-                $cartItemCount = $cart->items()->count();
-                $cartData = $cart->items()->get();
-                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                if ($cart) {
+                    $cartItemCount = $cart->items()->count();
+                    $cartData = $cart->items()->get();
+                    $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                } else {
+                    // Handle the case where no cart is found
+                    $cartData = collect(); // Empty collection
+                }
             } else {
                 $cart = session()->get('cart', []);
                 $cartItemCount = count($cart); // Count items in the guest cart
@@ -243,12 +290,18 @@ class DashboardController extends Controller
     public function lostPassword(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -263,12 +316,18 @@ class DashboardController extends Controller
         $newarriveproducts = Product::limit(25)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -282,12 +341,18 @@ class DashboardController extends Controller
         $productDetails = Product::where('product_code', $product_code)->first();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -307,12 +372,18 @@ class DashboardController extends Controller
         $shoplistproducts = $shoplistproducts->paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -325,12 +396,18 @@ class DashboardController extends Controller
     public function signin(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -343,9 +420,18 @@ class DashboardController extends Controller
     public function signup(){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
             $cartItemCount = $cart->items()->count();
             $cartData = $cart->items()->get();
             $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
@@ -363,12 +449,18 @@ class DashboardController extends Controller
         $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->limit(9)->get();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
+        $cartproducts = collect(); // Initialize as an empty collection
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                $cartData = $cart->items()->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+            } else {
+                // Handle the case where no cart is found
+                $cartData = collect(); // Empty collection
+            }
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart

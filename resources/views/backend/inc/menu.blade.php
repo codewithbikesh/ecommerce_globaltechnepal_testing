@@ -161,6 +161,10 @@
   <li>
     <a class="nav-link {{ request()->routeIs('backend.users.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.users.index') }}"><i class="fa fa-user-circle"></i><span>System Users</span></a>
   </li>
+  
+  <li>
+    <a class="nav-link {{ request()->routeIs('backend.provinces.index') ? '' : 'collapsed' }}" style="border:none" href="{{ route('backend.provinces.index') }}"><i class="fa fa-inbox"></i><span>Manage Provinces</span></a>
+  </li>
 
 </ul>
 

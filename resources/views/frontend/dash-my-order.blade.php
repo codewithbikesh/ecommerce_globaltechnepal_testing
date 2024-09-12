@@ -51,10 +51,10 @@
                                     </form>
                                     <div class="m-order__list">
 
+                                        @forelse($orders as $order)
                                         <div class="m-order__get">
                                             
 
-                                            @forelse($orders as $order)
                                             <div class="manage-o__header u-s-m-b-30">
                                                 <div class="dash-l-r">
                                                     <div>
@@ -106,11 +106,11 @@
         @empty
         <p>No items found for this order.</p>
         @endforelse
-        @empty
-            <p>No orders found.</p>
-        @endforelse
                                         </div>
 
+                                        @empty
+                                        <p>No orders found.</p>
+                                    @endforelse
 
                                     </div>
                                 </div>

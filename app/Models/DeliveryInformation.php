@@ -12,4 +12,12 @@ class DeliveryInformation extends Model
     protected $fillable = [
         'customer_id', 'full_name', 'email', 'phone', 'province', 'city', 'street_address', 'postal_code', 'order_note'
     ];
+
+    
+    // Relationship with Order
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    
 }

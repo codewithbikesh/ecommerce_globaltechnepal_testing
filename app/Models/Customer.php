@@ -17,4 +17,12 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    
+    // Relationship with Order
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    
 }

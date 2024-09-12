@@ -27,26 +27,32 @@
         <thead>
           <tr>
             <th scope="col">S.N.</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Order By</th>
+            <th scope="col">Shipping Address</th>
+            <th scope="col">Total Items</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Payment Status</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
+          @foreach($orders as $index => $order)
           <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th scope="row">{{ $index + 1 }}</th>
+            <td><a href="{{ route('backend.orders.view', $order->id) }}">{{ $order->order_id }}</a></td>
+            <td>{{ $order->customer->full_name }}</td>
+            <td>{{ $order->deliveryInformation->province }}, {{ $order->deliveryInformation->city }}, {{ $order->deliveryInformation->street_address }}</td>
+            <td>{{ $order->total_items }}</td>
+            <td>{{ $order->total_amount }}</td>
+            <td>{{ ucfirst($order->order_status) }}</td>
+            <td>{{ ucfirst($order->payment_status) }}</td>
             <td>
               <div style="display: flex; align-items: center;">
-                <form method="post" action="" style="margin-right: 10px;">
+                <form method="get" action="{{ route('backend.orders.view', $order->id) }}" style="margin-right: 10px;">
                 @csrf
-                  <input type="hidden" name="id" value=""></button>
-                  <button style="background-color: transparent; border: none;">
+                  <button style="background-color: transparent; border: none;" type="submit">
                     <i title="View Details" class="fa fa-info-circle" style="font-size:35px;color:#24a0ed"></i>
                   </button>
                 </form>
@@ -55,6 +61,7 @@
               </div>
             </td>
           </tr>
+          @endforeach
 
         </tbody>
       </table>

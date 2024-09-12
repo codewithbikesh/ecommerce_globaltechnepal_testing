@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
-            $table->bigInteger('order_id');
+            $table->string('order_id');
             $table->bigInteger('product_id');
             $table->bigInteger('quantity')->default(0);
             $table->decimal('price', 10, 2)->default(0);

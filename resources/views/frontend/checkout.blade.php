@@ -40,7 +40,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
-                            <form class="checkout-f__delivery">
+                            <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
+                                @csrf
                                 <div class="u-s-m-b-30">
                                     <div class="u-s-m-b-15">
                                     
@@ -48,7 +49,7 @@
                                         <!--====== Check Box ======-->
                                         <div class="check-box">
 
-                                            <input type="checkbox" id="get-address">
+                                            <input type="checkbox" id="get-address" value="Y" name="default_billing">
                                             <div class="check-box__state check-box__state--primary">
 
                                                 <label class="check-box__label" for="get-address">Use default shipping
@@ -66,8 +67,8 @@
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
 
-                                            <input class="input-text input-text--primary-style" type="text"
-                                                id="billing-fname" data-bill="">
+                                            <input class="input-text input-text--primary-style" name="full_name" type="text"
+                                                id="billing-fname" data-bill="" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -78,8 +79,8 @@
 
                                         <label class="gl-label" for="billing-email">E-MAIL *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-email" data-bill="">
+                                        <input class="input-text input-text--primary-style" name="email" type="text"
+                                            id="billing-email" data-bill="" required>
                                     </div>
                                     <!--====== End - E-MAIL ======-->
 
@@ -89,10 +90,44 @@
 
                                         <label class="gl-label" for="billing-phone">PHONE *</label>
 
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-phone" data-bill="">
+                                        <input class="input-text input-text--primary-style" name="phone" type="text"
+                                            id="billing-phone" data-bill="" required>
                                     </div>
                                     <!--====== End - PHONE ======-->
+
+                                    
+
+                                    <!--====== STATE/PROVINCE ======-->
+                                    <div class="u-s-m-b-15">
+
+                                        <!--====== Select Box ======-->
+
+                                        <label class="gl-label" for="billing-state">STATE/PROVINCE *</label><select
+                                            class="select-box select-box--primary-style" name="province" id="billing-state"
+                                            data-bill="" required>
+                                            <option selected value="" disabled>Choose Province</option>
+                                            <option value="1">Province 1</option>
+                                            <option value="2">Madhesh</option>
+                                            <option value="3">Bagmati</option>
+                                            <option value="4">Gandaki</option>
+                                            <option value="5">Lumbini</option>
+                                            <option value="6">Karnali</option>
+                                            <option value="7">Sudurpaschim</option>
+                                        </select>
+                                        <!--====== End - Select Box ======-->
+                                    </div>
+                                    <!--====== End - STATE/PROVINCE ======-->
+
+
+                                    <!--====== Town / City ======-->
+                                    <div class="u-s-m-b-15">
+
+                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
+
+                                        <input class="input-text input-text--primary-style" name="city" type="text"
+                                            id="billing-town-city" data-bill="" required>
+                                    </div>
+                                    <!--====== End - Town / City ======-->
 
 
                                     <!--====== Street Address ======-->
@@ -101,54 +136,17 @@
                                         <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
 
                                         <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street" placeholder="House name and street name" data-bill="">
-                                    </div>
-                                    <div class="u-s-m-b-15">
-
-                                        <label for="billing-street-optional"></label>
-
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street-optional"
-                                            placeholder="Apartment, suite unit etc. (optional)" data-bill="">
+                                            id="billing-street" name="street_address" placeholder="House name and street name" data-bill="" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
-
-
-                                    <!--====== Town / City ======-->
-                                    <div class="u-s-m-b-15">
-
-                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
-
-                                        <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-town-city" data-bill="">
-                                    </div>
-                                    <!--====== End - Town / City ======-->
-
-
-                                    <!--====== STATE/PROVINCE ======-->
-                                    <div class="u-s-m-b-15">
-
-                                        <!--====== Select Box ======-->
-
-                                        <label class="gl-label" for="billing-state">STATE/PROVINCE *</label><select
-                                            class="select-box select-box--primary-style" id="billing-state"
-                                            data-bill="">
-                                            <option selected value="">Choose State/Province</option>
-                                            <option value="al">Alabama</option>
-                                            <option value="al">Alaska</option>
-                                            <option value="ny">New York</option>
-                                        </select>
-                                        <!--====== End - Select Box ======-->
-                                    </div>
-                                    <!--====== End - STATE/PROVINCE ======-->
 
 
                                     <!--====== ZIP/POSTAL ======-->
                                     <div class="u-s-m-b-15">
 
-                                        <label class="gl-label" for="billing-zip">ZIP/POSTAL CODE *</label>
+                                        <label class="gl-label" for="billing-zip">ZIP/POSTAL CODE</label>
 
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-zip"
+                                        <input class="input-text input-text--primary-style" type="text" name="postal_code" id="billing-zip"
                                             placeholder="Zip/Postal Code" data-bill="">
                                     </div>
                                     <!--====== End - ZIP/POSTAL ======-->
@@ -156,7 +154,7 @@
                                     <div class="u-s-m-b-10">
 
                                         <label class="gl-label" for="order-note">ORDER NOTE</label><textarea
-                                            class="text-area text-area--primary-style" id="order-note"></textarea>
+                                            class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
                                     </div>
                                     <div>
 
@@ -212,7 +210,13 @@
                                                 </div>
                                             </div>
 
-                                            <a class="o-card__del far fa-trash-alt"></a>
+                                            <form action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}" method="POST" class="remove-form">
+                                            @csrf
+                                                <button type="submit" class="remove-btn">
+                                                    <a class="o-card__del far fa-trash-alt"></a>
+                                                </button>
+                                            </form>
+
                                         </div>
                                         @endforeach
                                         
@@ -225,12 +229,20 @@
 
                                             <span class="ship-b__text">Ship to:</span>
                                             <div class="ship-b__box u-s-m-b-10">
-                                                <p class="ship-b__p">4247 Ashford Drive Virginia VA-20006 USA (+0)
-                                                    900901904</p>
+                                                @if($deliveryInformation)
+                                                <p class="ship-b__p">{{ $deliveryInformation->province }}<br>
+                                                    {{ $deliveryInformation->city }}, {{ $deliveryInformation->street_address }} {{ $deliveryInformation->postal_code }}</p>
+                                                @else
+                                                <p class="ship-b__p">No delivery information available.</p>
+                                                @endif
                                             </div>
                                             <div class="ship-b__box">
 
+                                                @if($deliveryInformation)
                                                 <span class="ship-b__text">Bill to default billing address</span>
+                                            @else
+                                                <span class="ship-b__text">No billing address available.</span>
+                                            @endif
                                             </div>
                                         </div>
                                     </div>
@@ -308,13 +320,14 @@ if (auth('customer')->check()) {
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
-                                        <form class="checkout-f__payment">
+                                        <form class="checkout-f__payment" method="POST" action="{{ route('frontend.place.order') }}">
+                                            @csrf
                                             <div class="u-s-m-b-10">
 
                                                 <!--====== Radio Box ======-->
                                                 <div class="radio-box">
 
-                                                    <input type="radio" id="cash-on-delivery" name="payment">
+                                                    <input type="radio" id="cash-on-delivery" value="C" name="payment_method">
                                                     <div class="radio-box__state radio-box__state--primary">
 
                                                         <label class="radio-box__label" for="cash-on-delivery">Cash on
@@ -323,94 +336,9 @@ if (auth('customer')->check()) {
                                                 </div>
                                                 <!--====== End - Radio Box ======-->
 
-                                                <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery. (This service
-                                                    is only available for some countries)</span>
+                                                <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery.</span>
                                             </div>
-                                            <div class="u-s-m-b-10">
 
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="direct-bank-transfer" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label"
-                                                            for="direct-bank-transfer">Direct Bank Transfer</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">Make your payment directly into our bank
-                                                    account. Please use your Order ID as the payment reference. Your
-                                                    order will not be shipped until the funds have cleared in our
-                                                    account.</span>
-                                            </div>
-                                            <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-with-check" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-with-check">Pay With
-                                                            Check</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">Please send a check to Store Name, Store
-                                                    Street, Store Town, Store State / County, Store Postcode.</span>
-                                            </div>
-                                            <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-with-card" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-with-card">Pay With
-                                                            Credit / Debit Card</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">International Credit Cards must be
-                                                    eligible for use within the United States.</span>
-                                            </div>
-                                            <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-pal" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-pal">Pay Pal</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">When you click "Place Order" below we'll
-                                                    take you to Paypal's site to set up your billing information.</span>
-                                            </div>
-                                            <div class="u-s-m-b-15">
-
-                                                <!--====== Check Box ======-->
-                                                <div class="check-box">
-
-                                                    <input type="checkbox" id="term-and-condition">
-                                                    <div class="check-box__state check-box__state--primary">
-
-                                                        <label class="check-box__label" for="term-and-condition">I
-                                                            consent to the</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Check Box ======-->
-
-                                                <a class="gl-link">Terms of Service.</a>
-                                            </div>
                                             <div>
 
                                                 <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>

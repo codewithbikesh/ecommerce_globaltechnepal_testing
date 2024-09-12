@@ -37,12 +37,11 @@
             </select>
         </div>
         <div class="filter-group">
-            <select id="" class="filter-title">
-                <option value="" disabled selected>Gender</option>
-                <option value="">For Men</option>
-                <option value="">For Women</option>
-                <option value="">For Babies</option>
-                <option value="">For Teenage</option>
+            <select id="category-filter" class="filter-title">
+                <option value="" disabled selected>Select Category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category }}">{{ $category }}</option>
+                @endforeach
             </select>
         </div>
         <div class="filter-group">
@@ -293,9 +292,16 @@
             @endif
         </div>
     </div>
+
+    <div style="padding: 10px">
+        {{ $explores->links('pagination::bootstrap-5') }}
+    </div>
     @endsection
     @section('costomJs')
     <script>
+
+        // price range wise filter 
+        // price range wise filter 
         $('#price-filter').on('change', function() {
     var selectedValue = $(this).val();
     $.ajax({
@@ -303,13 +309,34 @@
         type: 'GET',
         data: { price_range: selectedValue },
         success: function(response) {
-            $('#product-list-filter').html(response);
+            $('#filterWise').html(response);
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);  
         }
         
     });
+
 });
+
+// category wise filter 
+// category wise filter 
+// $('#category-filter').on('change', function() {
+//     var selectedCategory = $(this).val();
+//     $.ajax({
+//         url: "{{ route('frontend.explore') }}", 
+//         type: 'GET',
+//         data: { category_id: selectedCategory },
+//         success: function(response) {
+//             $("#product-list-filter").remove();
+//             $("#test").append(response);
+//             console.log(response);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error("Error occurred: " + status + " " + error);
+//         }
+//     });
+// });
+
         </script>
     @endsection

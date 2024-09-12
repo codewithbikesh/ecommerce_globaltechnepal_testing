@@ -1,0 +1,25 @@
+/* resources/css/app.css */
+
+/* Custom Pagination Styles */
+.custom-pagination .page-link {
+    background-color: #f8f9fa; /* Light background */
+    color: #495057; /* Dark text */
+    border: 1px solid #dee2e6; /* Light border */
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #ff6600; /* Primary color for active page */
+    color: #fff; /* White text */
+    border-color: #ff6200; /* Border matching the background */
+}
+
+.custom-pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Light grey for disabled state */
+    background-color: #f8f9fa; /* Same as normal state */
+    border-color: #dee2e6; /* Same as normal state */
+}
+
+.custom-pagination .page-link:hover {
+    background-color: #e2e6ea; /* Slightly darker on hover */
+    color: #b34b00; /* Darker text on hover */
+}

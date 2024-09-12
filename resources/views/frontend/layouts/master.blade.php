@@ -3,7 +3,7 @@
 
 @include('frontend.layouts.head')
 
-<body class="config">
+<body class="config"  id="filterWise">
 
 
     @include('frontend.layouts.navbar')

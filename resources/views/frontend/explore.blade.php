@@ -292,10 +292,12 @@
             @endif
         </div>
     </div>
-
+    <div style="padding: 10px">
+        {{ $explores->links('pagination::bootstrap-5') }}
+    </div>
     @endsection
     @section('costomJs')
-    <script>
+    {{-- <script>
 
         // price range wise filter 
         // price range wise filter 
@@ -335,5 +337,5 @@ $('#category-filter').on('change', function() {
     });
 });
 
-        </script>
+        </script> --}}
     @endsection

@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('client-side/css/explore.css') }}">
     <link rel="stylesheet" href="{{ asset('client-side/css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('client-side/css/pagination.css') }}">
     <!-- carousal asset cdn   -->
     <link rel="stylesheet" href="{{ asset('client-side/css/crousal.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />

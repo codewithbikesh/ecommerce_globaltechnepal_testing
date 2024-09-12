@@ -8,7 +8,7 @@
 <div id="app">
 
     <!-- Header section start -->
-    <header class="ecomNav-header">
+    <header class="ecomNav-header" >
         <div class="upperOptionsNav">
             <a href="/" class="ecomNav-logo"><img
                     src="{{ asset('storage/backend/company_logo/' . $websitedata->company_logo_header) }}"

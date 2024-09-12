@@ -19,11 +19,12 @@
     <link rel="stylesheet" href="{{ asset('client-side/css/navbar.css') }}">
     <!-- carousal asset cdn   -->
     <link rel="stylesheet" href="{{ asset('client-side/css/crousal.css') }}">
-    
-    
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <!--====== Vendor Css ======-->
     <link rel="stylesheet" href="{{ asset('client-side/css/vendor.css') }}">
+    
+
+
     
     <!--====== Utility-Spacing ======-->
     <link rel="stylesheet" href="{{ asset('client-side/css/utility.css') }}">

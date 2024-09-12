@@ -63,7 +63,7 @@ body { background-color: #f0f0eb; line-height:1.6;}
     display: inline-block;
     width: 33px;
     height: 3px;
-    background-color: #b7b7b7;
+  background-color: #FF5722;
     border-radius: 3px;
     margin: 0 10px;
     cursor: pointer;
@@ -71,7 +71,7 @@ body { background-color: #f0f0eb; line-height:1.6;}
 
 .crousalUpper-active,
 .crousalUpper-dot:hover {
-    background-color: #FFF;
+    background-color: #ffe709;
     /* blue */
 }
 
@@ -156,7 +156,9 @@ body { background-color: #f0f0eb; line-height:1.6;}
     animation-name: zoomin;
     animation-duration: 40s; */
 /* } */
-
+.bx{
+    color: orangered !important;
+}
 @-webkit-keyframes crousalUpper-zoomin {
     from {
         transform: scale(1, 1);

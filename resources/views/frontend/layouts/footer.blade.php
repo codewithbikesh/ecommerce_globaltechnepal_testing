@@ -224,6 +224,7 @@
 <!--====== Vendor Js ======-->
 <script src="{{ asset('client-side/js/vendor.js') }}"></script>
 
+
 <!--====== jQuery Shopnav plugin ======-->
 <script src="{{ asset('client-side/js/jquery.shopnav.js') }}"></script>
 <script src="{{ asset('client-side/js/crousal.js') }}"></script>

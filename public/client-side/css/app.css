@@ -643,10 +643,15 @@ width: 80%;
 5.0 Components
 --------------------------------------------------------------*/
 /* Breadcrumb Component */
+.breadcrumb{
+      background-color: #00bcd426;
+    border-radius: 22px 0;
+}
 .breadcrumb__wrap {
-  background-color: #fbfbfb;
-  padding: 1.125rem;
-  border-radius: 0.1875rem; }
+    background-color: #00bcd426;
+    padding: 1.125rem;
+    border-radius: 22px 0;
+}
 
 .breadcrumb__list {
   list-style: none;
@@ -656,14 +661,22 @@ width: 80%;
   .breadcrumb__list > li {
     display: inline-block; }
     .breadcrumb__list > li > a {
-      color: #a0a0a0;
-      font-size: 13px;
-      font-weight: 700;
-      transition: color 0.5s; }
-      .breadcrumb__list > li > a:hover {
-        color: #333333; }
+    color: #0b4d93;
+    font-size: 13px;
+    font-weight: 700;
+    transition: color 0.5s;
+    background: #f3f3f3b0;
+    padding: 3px 14px;
+    border-radius: 10px; 
+    
+    }
     .breadcrumb__list > li.is-marked > a {
-      color: #333333; }
+    color: #939393;
+    background: #c5c5c5;
+    padding: 3px 14px;
+    border-radius: 10px;
+    
+    }
     .breadcrumb__list > li.has-separator:after {
       content: '/';
       margin: 0 16px; }
@@ -1000,7 +1013,7 @@ input::-ms-clear {
 padding: 20px;
     padding: 20px;
     margin: 0 6px;
-    border-radius: 50px;
+    border-radius: 14px;
     background: #e8e5e5;
     box-shadow: 3px 6px 4px #bbbbbb, 0px 5px 7px #ffffff;
 }
@@ -5040,9 +5053,19 @@ width: 100%;
         .shop-w__category-list > li ul li a:hover {
           color: #ff4500; }
 
-.has-list {
-  position: relative; }
-
+.mainCategory {
+    position: relative;
+    border: 1px solid orangered;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 14px;
+    margin: 6px 0;
+}
+.hedingCategory{
+      background: #e8e8e8;
+    padding: 2px 37px;
+    border-radius: 12px 0;
+}
 .category-list__text {
   font-size: 10px;
   color: #a0a0a0; }
@@ -5152,8 +5175,10 @@ width: 100%;
 
 .shop-p__meta-wrap {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  border-radius: 0.625rem; }
+  padding: 4px 0 0 30px;
+  border-radius: 0.625rem;
+    margin-bottom: 22px;
+}
 
 .shop-p__meta-text-1 {
   display: block;

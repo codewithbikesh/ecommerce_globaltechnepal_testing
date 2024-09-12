@@ -142,24 +142,6 @@ class DashboardController extends Controller
             return  view("frontend.dash-cancellation", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
         }
 
-    //  dash-my-order 
-    public function dashMyOrder(){
-        $websitedata = WebsiteData::first();
-        $cartItemCount = 0;
-        if (auth('customer')->check()) {
-            $customerId = auth('customer')->id();
-            $cart = Cart::where('customer_id', $customerId)->first();
-            $cartItemCount = $cart->items()->count();
-            $cartData = $cart->items()->get();
-            $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
-        } else {
-            $cart = session()->get('cart', []);
-            $cartItemCount = count($cart); // Count items in the guest cart
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
-        }
-        return view("frontend.dash-my-order", compact("websitedata", "cart", "cartproducts", "cartItemCount"));
-    }
-
     // explore 
     public function explore(Request $request){
      

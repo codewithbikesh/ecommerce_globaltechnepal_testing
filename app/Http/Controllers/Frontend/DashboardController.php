@@ -10,6 +10,7 @@ use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Cart;
+use App\Models\DeliveryInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,11 +103,13 @@ class DashboardController extends Controller
  
 
     // checkout 
-    public function checkout(){
+    public function checkout(Request $request){
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $shippingCost = 0;
         $cartproducts = collect(); // Initialize as an empty collection
+        $deliveryInformationId = $request->session()->get('delivery_information_id');
+        $deliveryInformation = DeliveryInformation::find($deliveryInformationId);
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
             $cart = Cart::where('customer_id', $customerId)->first();
@@ -127,7 +130,7 @@ class DashboardController extends Controller
             ]);
             $shippingCost = $checkoutData['shipping_cost'];
         }
-        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost"));
+        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "deliveryInformation"));
     }
 
     // contact 

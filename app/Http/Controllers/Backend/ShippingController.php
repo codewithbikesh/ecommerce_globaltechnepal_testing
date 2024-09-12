@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shipping;
+use App\Models\Province;
 
 class ShippingController extends Controller
 {
@@ -17,7 +18,8 @@ class ShippingController extends Controller
     
     public function add()
     {
-        return view('backend.setshipping.add');
+        $provinces = Province::all();
+        return view('backend.setshipping.add', compact('provinces'));
     }
     
     public function view(Request $request)

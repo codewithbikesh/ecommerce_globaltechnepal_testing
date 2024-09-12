@@ -1,5 +1,6 @@
 let ecomNavSearchForm = document.querySelector(".ecomNav-search-form");
 let ecomNavHeader = document.querySelector(".ecomNav-header");
+const moreButtons = document.querySelectorAll(".morebtn");
 
 
 
@@ -13,11 +14,19 @@ document.querySelector("#ecomNav-cart-btn").onclick = () => {
 
 let ecomNavLoginForm = document.querySelector(".ecomNav-login-form");
 
-document.querySelector("#ecomNav-login-btn").onclick = () => {
-  ecomNavLoginForm.classList.toggle("active");
-  ecomNavShoppingCart.classList.remove("active");
-  ecomNavNavbar.classList.remove("active");
-};
+// Select all elements with the class 'morebtn'
+
+// Iterate over each element in the NodeList
+moreButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        // Toggle the 'active' class on the ecomNavLoginForm element
+        ecomNavLoginForm.classList.toggle("active");
+        // Remove the 'active' class from ecomNavShoppingCart and ecomNavNavbar elements
+        ecomNavShoppingCart.classList.remove("active");
+        ecomNavNavbar.classList.remove("active");
+    });
+});
+
 
 let ecomNavNavbar = document.querySelector(".ecomNav-navbar");
 

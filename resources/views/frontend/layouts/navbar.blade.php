@@ -20,19 +20,36 @@
                 <a href="{{ route('frontend.whatsnew') }}">WHAT'S NEW?</a>
             </nav>
 
-            <div class="ecomNav-icons">
+            <div class="iconParent">
+                <div class="ecomNav-icons">
                 <div class="fas fa-bars" id="ecomNav-menu-btn"></div>
                 <div class="ri-heart-3-fill fas" id="" title="WishList"><span class="cartNum wishList">3</span></div>
                 <div class="fas fa-shopping-cart" id="ecomNav-cart-btn" title="Cart"> <span class="cartNum">{{ $cartItemCount }}</span> </div>
-                <div class="fas fa-user" id="ecomNav-login-btn" title="Be Member"></div>
+                       
+                <!-- if user is logged in then show user's dashboard otherwise show loging icon -->
+                @auth('customer')
+                    <div>
+                        <a href="{{ route('frontend.account') }}" style="display:flex;">         <!-- show dashboard if logged in  -->
+                            <div class="fas fa-tachometer-alt" id="ecomNav-cart-btn"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="loggedInUserIcon">      
+                            <div class="navAccountName moreOptionUser fas fa-user morebtn" ></div>
+                        </a>
+                        </div>
+                 @else          
+                        <a href="{{ route('frontend.account') }}">         <!-- show login icon if not logged in  -->
+                    <a href="javascript:void(0)">       
+                        <div class="fas fa-user"  title="Be Member"></div>
+                    </a>
+                @endauth
 
-                
-            @auth('customer')
-                <a href="{{ route('frontend.account') }}">
-                    <div class="fas fa-tachometer-alt" id="ecomNav-cart-btn"></div>
-                </a>
-            @endauth
 
+</div>
+    @auth('customer')        <!-- Show user's name if logged in  -->
+        <a href="javascript:void(0)" class="userNameWelcome">
+           <p class="navAccountName morebtn"> <i class="ri-flower-fill"></i> Hi, Dharmendra <i class="ri-arrow-down-s-line"></i></p> 
+        </a>
+    @endauth
             </div>
 
             <div class="ecomNav-shopping-cart">
@@ -86,13 +103,32 @@ $total = 0;
 
             
             @auth('customer')
-            
-            <form action="{{ route('frontend.logout') }}" method="POST" style="display:inline;" class="ecomNav-login-form">
-                @csrf
-                <a href="{{ route('frontend.account') }}">My Account</a>
-                <button type="submit">Logout</button>
-            </form>
-        
+
+                <form action="{{ route('frontend.logout') }}" method="POST" style="display:inline;" class="ecomNav-login-form ecomNav-profile-options">
+                    @csrf
+
+                  <a href="{{ route('frontend.account') }}"><i class="ri-dashboard-line"></i>Manage Account</a>
+
+
+                                <a href="{{ route('frontend.account') }}"><i class="ri-list-ordered"></i>My Orders</a>
+
+
+                                <a href="{{ route('frontend.account') }}"><i class="ri-heart-fill"></i> My Wishlist</a>
+
+
+
+                                <a href="{{ route('frontend.account') }}"><i class="ri-discuss-fill"></i>My Reviews</a>
+
+
+
+                                <a href="{{ route('frontend.account') }}"><i class="ri-arrow-go-back-fill"></i>My Return and Cancellation</a>         
+
+
+
+                                <button type="submit" class="">Logout</button>
+
+                </form>
+
             @else
 
             <form action="" class="ecomNav-login-form">

@@ -20,7 +20,7 @@
                   <div class="row">
                     <div class="col-lg-6 col-md-6 label ">Province</div>
                     <div class="col-lg-6 col-md-6">
-                      {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown'; }}
+                      {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown' }}
                     </div>
                   </div>
 

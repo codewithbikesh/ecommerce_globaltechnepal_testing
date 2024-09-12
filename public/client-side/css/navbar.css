@@ -38,7 +38,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px 0 12px 0;
+    padding: 4px 0 3px 0;
     align-items: center;
     position: fixed;
     top: 0;
@@ -225,9 +225,6 @@ box-shadow: 0px 0px 6px 0px;
     background: var(--orange);
     color: #fff;
 }
-.ecomNav-login-form a{
-    margin: 6px 0;
-}
 .ecomNav-header .ecomNav-login-form {
     width: 35rem;
 background-color: white;
@@ -270,11 +267,27 @@ a button{
     text-decoration: underline;
 }
 .upperOptionsNav{
-        width: 100%;
-    display: flex;
+width: 100%;
+    display: grid;
     justify-content: space-between;
     align-items: center;
+    grid-template-columns: 2fr 3fr 1fr;
 
+}
+.ecomNav-logo{
+margin-left: 20px;
+}
+.ecomNav-icons{
+  margin-right: 20px;
+  display: flex;
+}
+.navAccountName{
+    color: #ffffff;
+    font-size: 22px;
+    margin: 13px 0 0 0;
+}
+.iconParent{
+    height: 40px;
 }
  .ecomNav-quantity, .ecomNav-price{
     font-size: 13px;
@@ -283,6 +296,9 @@ a button{
     width: 31px;
     height: 31px;
     border-radius: 50px
+}
+.moreOptionUser{
+    display: none !important;
 }
 .cartImgHeading{
 gap: 11px;
@@ -312,7 +328,39 @@ gap: 11px;
     height: 26px;
     line-height: 1;
 }
-
+.ecomNav-profile-options{
+      display: flex !important;
+    flex-direction: column !important;
+    width: fit-content !important;
+}
+.ecomNav-profile-options button{
+    color: #ff0000;
+    width: 44%;
+    margin: 0 auto;
+    margin: 12px auto 0 auto;
+    border-radius: 34px;
+    background: #e0e0e0;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+.ecomNav-profile-options button:hover{
+scale: 1.1;
+background-color: rgb(255, 206, 206);
+transition: .2sec ease-in-out;
+}
+.ecomNav-profile-options a{
+    font-size: 1.3rem;
+    text-align: start;
+    color: rgb(255 69 0);
+}
+.ecomNav-profile-options a:hover{
+scale: 1.1;
+background-color: rgb(241, 238, 238);
+}
+.ecomNav-profile-options i{
+    font-size: 1.4rem;
+    margin-right: 7px;
+    color: rgb(255 34 34);
+}
 /* media queries */
 @media (max-width: 991px) {
     html {
@@ -320,6 +368,20 @@ gap: 11px;
     }
     .ecomNav-header {
         padding: 2rem;
+    }
+    .fa-tachometer-alt{
+        display: none !important;
+    }
+    .userNameWelcome{
+        display: none !important;
+    }
+    .moreOptionUser{
+        display: block !important;
+    }
+    .loggedInUserIcon{
+            height: 35px;
+    display: flex;
+    align-items: center;
     }
     section {
         padding: 2rem;
@@ -329,10 +391,11 @@ gap: 11px;
     font-size: 18px !important;
 }
 .ecomNav-header {
-        padding: .7rem 0;
+        padding: .7rem 0 0 0;
     }
     .upperOptionsNav{
         margin-bottom: 12px;
+        display: flex;
 }
 }
 

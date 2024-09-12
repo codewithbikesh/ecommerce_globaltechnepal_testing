@@ -44,23 +44,7 @@
           <tr>
             <th scope="row">{{ $index + 1 }}</th>
             <td>
-              @if ($shipping->province == '1')
-                  Province 1
-              @elseif ($shipping->province == '2')
-                  Madhesh
-              @elseif ($shipping->province == '3')
-                  Bagmati
-              @elseif ($shipping->province == '4')
-                  Gandaki
-              @elseif ($shipping->province == '5')
-                  Lumbini
-              @elseif ($shipping->province == '6')
-                  Karnali
-              @elseif ($shipping->province == '7')
-                  Sudurpaschim
-              @else
-                  Unknown
-              @endif
+              {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown'; }}
             </td>
             <td>{{ $shipping->city }}</td>
             <td>{{ $shipping->shipping_cost }}</td>

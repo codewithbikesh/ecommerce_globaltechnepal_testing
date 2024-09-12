@@ -39,7 +39,7 @@
                  @else          
                         <a href="{{ route('frontend.account') }}">         <!-- show login icon if not logged in  -->
                     <a href="javascript:void(0)">       
-                        <div class="fas fa-user"  title="Be Member"></div>
+                        <div class="fas fa-user morebtn"  title="Be Member"></div>
                     </a>
                 @endauth
 

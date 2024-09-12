@@ -12,8 +12,9 @@ class ShippingController extends Controller
     
     public function index()
     {
+        $provinces = Province::all()->pluck('province_name', 'id'); 
         $shippings = Shipping::all();
-        return view('backend.setshipping.index', compact('shippings'));
+        return view('backend.setshipping.index', compact('shippings', "provinces"));
     } 
     
     public function add()
@@ -24,8 +25,9 @@ class ShippingController extends Controller
     
     public function view(Request $request)
     {    
+        $provinces = Province::all()->pluck('province_name', 'id'); 
         $shipping = Shipping::findOrFail($request->id);
-        return view('backend.setshipping.view', compact('shipping'));
+        return view('backend.setshipping.view', compact('shipping', "provinces"));
     } 
     
     public function store(Request $request)
@@ -50,8 +52,9 @@ class ShippingController extends Controller
     
     public function edit(Request $request)
     {    
+        $provinces = Province::all()->pluck('province_name', 'id');
         $shipping = Shipping::findOrFail($request->id);
-        return view('backend.setshipping.edit', compact('shipping'));
+        return view('backend.setshipping.edit', compact('shipping', 'provinces'));
     } 
     
     public function update(Request $request, $id)

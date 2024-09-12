@@ -20,23 +20,7 @@
                   <div class="row">
                     <div class="col-lg-6 col-md-6 label ">Province</div>
                     <div class="col-lg-6 col-md-6">
-                      @if ($shipping->province == '1')
-                          Province 1
-                      @elseif ($shipping->province == '2')
-                          Madhesh
-                      @elseif ($shipping->province == '3')
-                          Bagmati
-                      @elseif ($shipping->province == '4')
-                          Gandaki
-                      @elseif ($shipping->province == '5')
-                          Lumbini
-                      @elseif ($shipping->province == '6')
-                          Karnali
-                      @elseif ($shipping->province == '7')
-                          Sudurpaschim
-                      @else
-                          Unknown
-                      @endif
+                      {{ $provinceName = $provinces[$shipping->province] ?? 'Unknown'; }}
                     </div>
                   </div>
 

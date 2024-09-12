@@ -65,7 +65,7 @@
     </div>
 
     <div class="filter__grid-wrapper u-s-m-t-30" style="position: relative; height: 1173.75px;">
-        <div class="row" id="test">
+        <div class="row">
         @if ($explores->isNotEmpty())
             @foreach ($explores as $explore)
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item" id="product-list-filter"
@@ -292,12 +292,13 @@
             @endif
         </div>
     </div>
+
     <div style="padding: 10px">
         {{ $explores->links('pagination::bootstrap-5') }}
     </div>
     @endsection
     @section('costomJs')
-    {{-- <script>
+    <script>
 
         // price range wise filter 
         // price range wise filter 
@@ -308,7 +309,7 @@
         type: 'GET',
         data: { price_range: selectedValue },
         success: function(response) {
-            $('#product-list-filter').html(response);
+            $('#filterWise').html(response);
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);  
@@ -320,22 +321,22 @@
 
 // category wise filter 
 // category wise filter 
-$('#category-filter').on('change', function() {
-    var selectedCategory = $(this).val();
-    $.ajax({
-        url: "{{ route('frontend._explore') }}", 
-        type: 'GET',
-        data: { category_id: selectedCategory },
-        success: function(response) {
-            $("#product-list-filter").remove();
-            $("#test").append(response);
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.error("Error occurred: " + status + " " + error);
-        }
-    });
-});
+// $('#category-filter').on('change', function() {
+//     var selectedCategory = $(this).val();
+//     $.ajax({
+//         url: "{{ route('frontend.explore') }}", 
+//         type: 'GET',
+//         data: { category_id: selectedCategory },
+//         success: function(response) {
+//             $("#product-list-filter").remove();
+//             $("#test").append(response);
+//             console.log(response);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error("Error occurred: " + status + " " + error);
+//         }
+//     });
+// });
 
-        </script> --}}
+        </script>
     @endsection

@@ -140,15 +140,17 @@ $total = 0;
             @endauth
         </div>
         <div class="">
+            <form action="{{ route('frontend.shop-list-full') }}" method="get">
             <div class="input-group">
                 <div class="input-group serchParent">
                     <input type="search" class="form-control searchBar rounded"
-                        placeholder="Feel Free to Search here..." aria-label="Search" aria-describedby="search-addon" />
-                       <span class="input-group-text border-0 searchBarIcin" id="search-addon">
+                        placeholder="Feel Free to Search here..." aria-label="Search" name="keyword" value="{{ Request::get('keyword') }}" aria-describedby="search-addon" />
+                       <button type="submit" class="input-group-text border-0 searchBarIcin" id="search-addon">
     <i class="fas fa-search"></i>
-  </span>
+  </button>
                 </div>
             </div>
+        </form>
         </div>
 
     </header>

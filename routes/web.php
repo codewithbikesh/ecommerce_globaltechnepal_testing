@@ -107,7 +107,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/best-sale', [DashboardController::class,'bestSale'])->name('frontend.bestSale'); 
     Route::get('/checkout', [DashboardController::class,'checkout'])->name('frontend.checkout');   
     Route::get('/contact', [DashboardController::class,'contact'])->name('frontend.contact');   
-    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');  
+    Route::get('/explore', [DashboardController::class,'explore'])->name('frontend.explore');   
     Route::get('/lost-password', [DashboardController::class,'lostPassword'])->name('frontend.lost-password');   
     Route::get('/newarrival', [DashboardController::class,'newarrival'])->name('frontend.newarrival');   
     Route::get('/product-details/{product_code}', [DashboardController::class,'productDetails'])->name('frontend.product-detail');   
@@ -135,9 +135,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
 
 Route::middleware('auth:customer')->group(function () {   
-    Route::get('/account', [DashboardController::class,'account'])->name('frontend.account'); 
+    Route::get('/account', [FrontendAccountController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
-    Route::get('/dash-my-order', [DashboardController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
+    Route::get('/dash-my-order', [FrontendAccountController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
  
 });
 

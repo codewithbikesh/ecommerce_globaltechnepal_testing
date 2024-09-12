@@ -47,7 +47,7 @@
 </div>
     @auth('customer')        <!-- Show user's name if logged in  -->
         <a href="javascript:void(0)" class="userNameWelcome">
-           <p class="navAccountName morebtn"> <i class="ri-flower-fill"></i> Hi, {{ Auth::guard('customer')->user()->full_name }}<i class="ri-arrow-down-s-line"></i></p> 
+           <p class="navAccountName morebtn"> <i class="ri-flower-fill"></i> Hi, {{ explode(' ', Auth::guard('customer')->user()->full_name)[0] }}<i class="ri-arrow-down-s-line"></i></p> 
         </a>
     @endauth
             </div>

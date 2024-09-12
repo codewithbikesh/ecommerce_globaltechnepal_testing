@@ -316,7 +316,7 @@ class DashboardController extends Controller
     // newarrival
     public function newarrival(){
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
-        $newarriveproducts = Product::limit(25)->get();
+        $newarriveproducts = Product::paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection
@@ -449,7 +449,7 @@ class DashboardController extends Controller
     // whatsnew 
     public function whatsnew(){
         $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
-        $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->limit(9)->get();
+        $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection
@@ -476,7 +476,8 @@ class DashboardController extends Controller
     public function newsletter_store(Request $request)
     {
         $request->validate([
-            'email' => 'required'
+            'email' => 'required',
+            'gender' => 'required'
         ]);
         $newsletter = new Newsletter();
         $newsletter->gender = $request->gender;

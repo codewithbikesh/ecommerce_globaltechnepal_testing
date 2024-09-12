@@ -87,6 +87,7 @@
                     <div class="outer-footer__content">
 
                         <span class="outer-footer__content-title">Join our Newsletter</span>
+                        @include('frontend.layouts.message');
                         <form class="newsletter" method="POST" action="{{ route('frontend.newsletter.store') }}">
                             @csrf
                             <div class="u-s-m-b-15">
@@ -110,7 +111,7 @@
                                 <label for="newsletter"></label>
 
                                 <input class="input-text input-text--only-white" type="text" id="newsletter"
-                                    placeholder="Enter your Email" name="email">
+                                    placeholder="Enter your Email" name="email" required>
 
                                 <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button>
                             </div>
@@ -231,6 +232,7 @@
 <!--====== App ======-->
 <script src="{{ asset('client-side/js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script>
     function toggleDropdown(id) {
         const dropdown = document.getElementById(id);

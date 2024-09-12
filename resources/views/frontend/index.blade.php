@@ -499,10 +499,7 @@
                             </div>
                         </div>
                     </div>
-
                     <!--======End- Section Content ======-->
-
-
 
                     @endforeach
                     @endif

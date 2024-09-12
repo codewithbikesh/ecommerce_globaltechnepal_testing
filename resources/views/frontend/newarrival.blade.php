@@ -281,11 +281,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    {{-- <div class="col-lg-12">
                         <div class="load-more">
 
                             <button class="btn btn--e-brand" type="button">Load More</button>
                         </div>
+                    </div> --}}
+                    <div style="padding: 10px">
+                        {{ $newarriveproducts->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

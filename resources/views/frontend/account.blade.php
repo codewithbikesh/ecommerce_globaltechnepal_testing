@@ -5,6 +5,8 @@
     <!--====== Section 2 ======-->
     <div class="u-s-p-b-60">
 
+
+
         <!--====== Section Content ======-->
         <div class="section__content">
             <div class="dash">
@@ -12,14 +14,97 @@
                     <div class="row" style="justify-content: center;">
                         <div class="dashboardpageLink">
 
+                            <style>
+                                /* Ensure horizontal alignment for heading and button */
+                                .card-body .d-flex {
+                                    display: flex;
+                                    align-items: center;
+                                    /* Center items vertically */
+                                    justify-content: space-between;
+                                    /* Space out the heading and button */
+                                    width: 100%;
+                                }
+
+                                /* Optional: Add margin for better spacing */
+                                .card-body h2 {
+                                    margin-bottom: 0;
+                                    /* Remove default margin for better alignment */
+                                }
+
+                                .card-body .btn {
+                                    margin-left: auto;
+                                    /* Push the button to the right */
+                                }
+
+                                /* Add spacing between address sections */
+                                .address-section {
+                                    margin-bottom: 1rem;
+                                    /* Adjust as needed */
+                                }
+                            </style>
+                            <div class="row">
+                                <!-- Personal Profile Section -->
+                                <div class="col-xl-4">
+                                    <div class="card">
+                                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
+                                            <div class="d-flex justify-content-between w-100">
+                                                <h2>Personal Profile</h2>
+                                                <button class="btn btn-primary" onclick="editPersonalProfile()">Edit
+                                                    Profile</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Address Book Section -->
+                                <div class="col-xl-8">
+                                    <div class="card">
+                                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
+                                            <div class="d-flex justify-content-between w-100">
+                                                <h2>Address Book</h2>
+                                                <button class="btn btn-primary" onclick="editAddressBook()">Edit Address
+                                                    Book</button>
+                                            </div>
+
+                                            <!-- Address Sections -->
+                                            <div class="mt-4">
+                                                <div class="row">
+                                                    <!-- Shipping Address Section -->
+                                                    <div class="col-md-6">
+                                                        <div class="address-section">
+                                                            <h3>Default Shipping Address</h3>
+                                                            <p id="shipping-address">123 Main Street, Springfield, IL,
+                                                                62701</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Billing Address Section -->
+                                                    <div class="col-md-6">
+                                                        <div class="address-section">
+                                                            <h3>Default Billing Address</h3>
+                                                            <p id="billing-address">456 Elm Street, Springfield, IL,
+                                                                62701</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <!--====== Dashboard Features ======-->
                             <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30 ">
                                 <div class="dash__pad-1 pageLinkParent">
 
-                                    <span class="dash__text u-s-m-b-16 userName">Welcome, {{ Auth::guard('customer')->user()->full_name }}!</span>
+                                    <span class="dash__text u-s-m-b-16 userName">Welcome,
+                                        {{ Auth::guard('customer')->user()->full_name }}!</span>
                                     <ul class="dash__f-list pageUl">
                                         <li>
-                                            <a class="dash-active" href="{{ route('frontend.account') }}">Manage My Account</a>
+                                            <a class="dash-active" href="{{ route('frontend.account') }}">Manage My
+                                                Account</a>
                                         </li>
 
                                         <li>
@@ -27,7 +112,8 @@
                                         </li>
 
                                         <li>
-                                            <a href="{{ route('frontend.dash-cancellation') }}">My Returns & Cancellations</a>
+                                            <a href="{{ route('frontend.dash-cancellation') }}">My Returns &
+                                                Cancellations</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -84,31 +170,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-    @if($order)
-                @foreach($orderItems as $item)
-                                    <tr>
-                                        <td>{{ $item->order_id }}</td>
-                                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                                        <td>
-                                            <div class="dash__table-img-wrap">
 
-                                                <img class="u-img-fluid" src="data:image/jpeg;base64,{{$item->product->primary_image}}"
-                                                    alt="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dash__table-total">
+                                    @if($order)
+                                        @foreach($orderItems as $item)
+                                            <tr>
+                                                <td>{{ $item->order_id }}</td>
+                                                <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                                                <td>
+                                                    <div class="dash__table-img-wrap">
 
-                                                <span>{{ $item->subtotal }}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
-                @endforeach
-    @else
-    <p>No recent orders found.</p>
-    @endif
+                                                        <img class="u-img-fluid"
+                                                            src="data:image/jpeg;base64,{{$item->product->primary_image}}"
+                                                            alt="">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="dash__table-total">
+
+                                                        <span>{{ $item->subtotal }}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                    @else
+                                        <p>No recent orders found.</p>
+                                    @endif
 
                                 </tbody>
                             </table>

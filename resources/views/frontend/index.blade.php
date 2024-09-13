@@ -60,9 +60,7 @@
         </div>
     </div>
     <!-- end crousal  -->
-
-
-
+    
     <!--====== Section 2 ======-->
     <div class="u-s-p-b-60">
 

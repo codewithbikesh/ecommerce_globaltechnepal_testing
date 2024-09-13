@@ -87,20 +87,19 @@
                     <div class="outer-footer__content">
 
                         <span class="outer-footer__content-title">Join our Newsletter</span>
-                        @include('frontend.layouts.message');
                         <form class="newsletter" method="POST" action="{{ route('frontend.newsletter.store') }}">
                             @csrf
                             <div class="u-s-m-b-15">
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" value="M" id="male" name="gender">
+                                    <input type="radio" value="M" id="male" name="gender" required>
                                     <div class="radio-box__state radio-box__state--primary">
                                         <label class="radio-box__label" for="male">Male</label>
                                     </div>
                                 </div>
                                 <div class="radio-box newsletter__radio">
 
-                                    <input type="radio" value="F" id="female" name="gender"> 
+                                    <input type="radio" value="F" id="female" name="gender" required> 
                                     <div class="radio-box__state radio-box__state--primary">
                                         <label class="radio-box__label" for="female">Female</label>
                                     </div>
@@ -246,6 +245,38 @@
         dropdown.style.display = isVisible ? 'none' : 'block';
     }
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if there's an error message in the session
+        @if (Session::has('error'))
+        var errorMessage = "{{ Session::get('error') }}";
+        showModal('Error!', errorMessage, 'danger');
+        @endif
+
+        // Check if there's a success message in the session
+        @if (Session::has('success'))
+        var successMessage = "{{ Session::get('success') }}";
+        showModal('Success!', successMessage, 'success');
+        @endif
+
+        function showModal(title, message, type) {
+            var modalTitle = document.querySelector('#statusModalLabel');
+            var modalBody = document.querySelector('#modalBody');
+            
+            modalTitle.textContent = title;
+            modalBody.innerHTML = `<div class="alert alert-${type} fs-4">${message}</div>`;
+            
+            var statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
+            statusModal.show();
+
+            // Example of manually hiding the modal
+            document.querySelector('.btn-close').addEventListener('click', function() {
+            statusModal.hide();
+    });
+        }
+    });
+    </script>
     @yield('costomJs')
 </body>
 

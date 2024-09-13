@@ -1,7 +1,5 @@
-@extends('frontend.layouts.master')
-@section('content')
-<!--====== App Content ======-->
-<div class="app-content">
+@extends('frontend.layouts.app')
+@section('contents')
 
 
     <!--====== Section 2 ======-->
@@ -27,6 +25,4 @@
         <!--====== End - Section Content ======-->
     </div>
     <!--====== End - Section 2 ======-->
-</div>
-<!--====== End - App Content ======-->
 @endsection

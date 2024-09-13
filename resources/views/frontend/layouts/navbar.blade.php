@@ -123,10 +123,10 @@ $total = 0;
 
                                 <a href="{{ route('frontend.account') }}"><i class="ri-arrow-go-back-fill"></i>My Return and Cancellation</a>         
 
+                                <a type="submit" class="">
+                                    <i class="ri-logout-box-line"></i>Logout</a>
 
 
-                                <button type="submit" class="">
-                            <i class="ri-logout-box-line"></i>Logout</button>
 
                 </form>
 

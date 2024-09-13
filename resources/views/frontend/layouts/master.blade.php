@@ -5,6 +5,7 @@
 
 <body class="config"  id="filterWise">
     @include('frontend.layouts.navbar')
+    @include('frontend.layouts.message')
     <div class="content-page">
         <div class="content">
             @yield('content')

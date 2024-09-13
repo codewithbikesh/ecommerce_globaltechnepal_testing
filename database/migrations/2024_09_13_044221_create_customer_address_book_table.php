@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_information', function (Blueprint $table) {
+        Schema::create('customer_address_book', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
-            $table->bigInteger('customer_id')->nullable();
-            $table->bigInteger('order_id')->nullable();
+            $table->bigInteger('customer_id');
             $table->string('full_name');
-            $table->string('email')->nullable();
             $table->string('phone');
             $table->string('province');
             $table->string('city');
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_information');
+        Schema::dropIfExists('customer_address_book');
     }
 };

@@ -9,21 +9,28 @@
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
                                             <div class="d-flex justify-content-between w-100">
                                                 <h2>Personal Profile</h2>
-                                                <button class="btn btn-primary" onclick="editPersonalProfile()">Edit
+                                                <form method="get" action="{{ route('frontend.profile.edit') }}">
+                                                <button class="btn btn-primary">Edit
                                                     Profile</button>
+                                                </form>
                                             </div>
+                                            <p>{{ $customer_user->full_name }}</p>
+                                            <p>{{ $customer_user->email }}</p>
+                                            <p>{{ $customer_user->phone }}</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                                <!-- Address Book Section -->
+                                <!-- Address Book Section -->
                                 <div class="col-xl-8">
                                     <div class="card">
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
                                             <div class="d-flex justify-content-between w-100">
                                                 <h2>Address Book</h2>
-                                                <button class="btn btn-primary" onclick="editAddressBook()">Edit Address
+                                                <form method="get" action="{{ route('frontend.address.book') }}">
+                                                <button class="btn btn-primary" type="submit">Edit Address
                                                     Book</button>
+                                                </form>
                                             </div>
 
                                             <!-- Address Sections -->

@@ -60,9 +60,7 @@
         </div>
     </div>
     <!-- end crousal  -->
-
-
-
+    
     <!--====== Section 2 ======-->
     <div class="u-s-p-b-60">
 
@@ -367,7 +365,7 @@
 
                 @else
                 <!--====== Newsletter Subscribe Modal ======-->
-                <!-- <div class="modal fade new-l" id="newsletter-modal">
+                {{-- <div class="modal fade new-l" id="newsletter-modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content modal--shadow">
 
@@ -409,7 +407,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div> --}}
                 <!--====== End - Newsletter Subscribe Modal ======-->
                 @endauth
 

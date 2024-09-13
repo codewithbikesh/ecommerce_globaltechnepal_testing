@@ -1,33 +1,13 @@
-@extends('frontend.layouts.master')
-@section('content')
-<!--====== App Content ======-->
-<div class="app-content">
-
-    <!--====== Section 1 ======-->
-    <div class="u-s-p-y-60 headingDashboardoredr">
-
-        <!--====== Section Content ======-->
-        <div class="section__content">
-            <div class="container">
-                <div class="breadcrumb">
-                    <div class="breadcrumb__wrap">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--====== End - Section 1 ======-->
-
+@extends('frontend.layouts.app')
+@section('contents')
 
     <!--====== Section 2 ======-->
     <div class="u-s-p-b-60">
-
         <!--====== Section Content ======-->
         <div class="section__content">
             <div class="dash">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-lg-9 col-md-12 ordersParent">
                             <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
                                 <div class="dash__pad-2">
@@ -123,7 +103,8 @@
         <!--====== End - Section Content ======-->
     </div>
     <!--====== End - Section 2 ======-->
-</div>
+
+
 <!--====== End - App Content ======-->
 
 @endsection

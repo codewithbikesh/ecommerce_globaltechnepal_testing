@@ -211,18 +211,14 @@
 <!--====== End - Modal Section ======-->
 </div>
 <!--====== End - Main App ======-->
-{{--
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
-<script>
-    (function () {
-        const locomotiveScroll = new LocomotiveScroll();
-    })();
-</script> --}}
+
 
 <script src="{{ asset('client-side/js/navbar.js') }}"></script>
 
 <!--====== Vendor Js ======-->
 <script src="{{ asset('client-side/js/vendor.js') }}"></script>
+<!-- custom js  -->
+<script src="{{ asset('client-side/js/custom.js') }}"></script>
 
 
 <!--====== jQuery Shopnav plugin ======-->

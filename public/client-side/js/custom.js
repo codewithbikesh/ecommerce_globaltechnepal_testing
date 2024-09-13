@@ -4,11 +4,12 @@ const handleResize = () => {
 let fltrBtn = document.querySelector(".fltrBtn");
 let body = document.querySelector("body");
 
+let ssllll = document.querySelector(".ssllll");
 let fltrsStatus = 0;
+ssllll.style.display = "none";
 
 // Function to show the filter element
 const showFilter = () => {
-    let ssllll = document.querySelector(".ssllll");
     ssllll.style.display = "flex";
     ssllll.style.position = "fixed";
     ssllll.style.zIndex = "9";
@@ -43,6 +44,13 @@ body.addEventListener("click", (event) => {
     }
 });
     } 
+    else{
+            let ssllll = document.querySelector(".ssllll");
+    ssllll.style.position = "relative";
+    ssllll.style.top = "0px";
+    ssllll.style.display = "block";
+
+    }
 };
 
 

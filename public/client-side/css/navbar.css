@@ -238,7 +238,7 @@ background-color: white;
 }
 .ecomNav-header .ecomNav-login-form.active {
     right: 2rem;
-    transition: .4s linear;
+    transition: .2s ease-in-out;
 }
 a button{
     background-color: transparent;

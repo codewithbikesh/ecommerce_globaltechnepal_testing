@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('client-side/css/pagination.css') }}">
     <!-- carousal asset cdn   -->
     <link rel="stylesheet" href="{{ asset('client-side/css/crousal.css') }}">
+    <!-- account css  -->
+    <link rel="stylesheet" href="{{ asset('client-side/css/account.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <!--====== Vendor Css ======-->
     <link rel="stylesheet" href="{{ asset('client-side/css/vendor.css') }}">

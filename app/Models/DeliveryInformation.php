@@ -10,7 +10,7 @@ class DeliveryInformation extends Model
     use HasFactory;
     protected $table = 'delivery_information'; // Specify the correct table name
     protected $fillable = [
-        'customer_id', 'full_name', 'email', 'phone', 'province', 'city', 'street_address', 'postal_code', 'order_note'
+        'customer_id', 'order_id', 'full_name', 'email', 'phone', 'province', 'city', 'address', 'land_mark', 'address_type', 'default_shipping', 'default_billing'
     ];
 
     

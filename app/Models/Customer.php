@@ -11,7 +11,7 @@ class Customer extends Authenticatable
 
     protected $table = 'customers'; // Specify the correct table name
     protected $fillable = [
-        'full_name', 'email', 'password', 'phone', 'province', 'city', 'street_address', 'postal_code'
+        'full_name', 'email', 'password', 'phone'
     ];
 
     protected $hidden = [

@@ -125,7 +125,8 @@ $total = 0;
 
 
 
-                                <button type="submit" class="">Logout</button>
+                                <button type="submit" class="">
+                            <i class="ri-logout-box-line"></i>Logout</button>
 
                 </form>
 

@@ -372,6 +372,8 @@ class DashboardController extends Controller
             $shoplistproducts = $shoplistproducts->where('product_name','like','%'.$keyword.'%')
             ->orWhere('category_id','like','%'.$keyword.'%');
         }
+        $categoryId = $request->category_id;
+        $categories = Product::distinct()->pluck('category_id',$categoryId);
         $shoplistproducts = $shoplistproducts->paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
@@ -392,7 +394,38 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts"));
+        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts","categories"));
+    }
+
+    //  partials products filter by category wise 
+    //  partials products filter by category wise 
+    public function filterProducts(Request $request)
+    {
+        $categoryId = $request->category_id;
+
+        // Fetch products that belong to the selected category
+        $shoplistproducts = Product::where('category_id', $categoryId)->get();
+
+        // Return the filtered products as HTML
+        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
+    }
+     
+    // partials products filter by price range wise 
+    // partials products filter by price range wise 
+    public function filterProductsByPrice(Request $request)
+    {
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+
+        // Validate price range
+        if ($minPrice === null) $minPrice = 0;
+        if ($maxPrice === null) $maxPrice = PHP_INT_MAX;
+
+        // Fetch products within the price range
+        $shoplistproducts = Product::whereBetween('sell_price', [$minPrice, $maxPrice])->get();
+
+        // Return the filtered products as HTML
+        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
     }
 
     //  signin

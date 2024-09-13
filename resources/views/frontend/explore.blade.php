@@ -299,7 +299,7 @@
     @endsection
     @section('costomJs')
     <script>
-
+        
         // price range wise filter 
         // price range wise filter 
         $('#price-filter').on('change', function() {

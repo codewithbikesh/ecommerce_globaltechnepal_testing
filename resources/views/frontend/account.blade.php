@@ -42,8 +42,77 @@
                                     /* Adjust as needed */
                                 }
                             </style>
-                            <div class="row">
-                                <!-- Personal Profile Section -->
+                    
+
+
+
+                    <div class="gridParent">
+                                    <div class="leftSideBar">
+<aside class="sidebar">
+    <ul class="links">
+        <h4>Main Menu</h4>
+        <li>
+            <span class="material-symbols-outlined">dashboard</span>
+            <a href="#">Dashboard</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">show_chart</span>
+            <a class="dash-active" href="{{ route('frontend.account') }}">Manage My
+                Account</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">flag</span>
+            <a href="{{ route('frontend.dash-my-order') }}">My Orders</a>
+        </li>
+        <hr>
+        <h4>Advanced</h4>
+        <li>
+            <span class="material-symbols-outlined">person</span>
+        <a href="{{ route('frontend.dash-cancellation') }}">My Returns &
+            Cancellations</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">group</span>
+            <a href="#">Developer </a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">ambient_screen</span>
+            <a href="#">Magic Build</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">pacemaker</span>
+            <a href="#">Theme Maker</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">monitoring</span>
+            <a href="#">Analytic</a>
+        </li>
+        <hr>
+        <h4>Account</h4>
+        <li>
+            <span class="material-symbols-outlined">bar_chart</span>
+            <a href="#">Overview</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">mail</span>
+            <a href="#">Message</a>
+        </li>
+        <li>
+            <span class="material-symbols-outlined">settings</span>
+            <a href="#">Settings</a>
+        </li>
+        <li class="logout-link">
+            <span class="material-symbols-outlined">logout</span>
+            <a href="#">Logout</a>
+        </li>
+    </ul>
+</aside>
+                                    </div>
+
+                                    <div class="rightOptions">
+
+                                    <div class="midetailsOfUser d-flex">
+                                   <!-- Personal Profile Section -->
                                 <div class="col-xl-4">
                                     <div class="card">
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
@@ -56,7 +125,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Address Book Section -->
+                                                <!-- Address Book Section -->
                                 <div class="col-xl-8">
                                     <div class="card">
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
@@ -91,37 +160,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                                    </div>
+                                
 
-
-                            <!--====== Dashboard Features ======-->
-                            <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30 ">
-                                <div class="dash__pad-1 pageLinkParent">
-
-                                    <span class="dash__text u-s-m-b-16 userName">Welcome,
-                                        {{ Auth::guard('customer')->user()->full_name }}!</span>
-                                    <ul class="dash__f-list pageUl">
-                                        <li>
-                                            <a class="dash-active" href="{{ route('frontend.account') }}">Manage My
-                                                Account</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="{{ route('frontend.dash-my-order') }}">My Orders</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="{{ route('frontend.dash-cancellation') }}">My Returns &
-                                                Cancellations</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--====== End - Dashboard Features ======-->
-                        </div>
-
-
+                                                      <!-- roound icons number   -->
                         <ul class="dash__w-list  d-flex justify-content-around orderMng">
                             <li>
                                 <div class="dash__w-wrap">
@@ -155,53 +198,54 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
 
-                    <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius bellowAllOrdered ">
-                        <h2 class="dash__h2 u-s-p-xy-20 recOrderHeding">RECENT ORDERS</h2>
-                        <div class="dash__table-wrap gl-scroll dashboardRecentOrder">
-                            <table class="dash__table">
-                                <thead>
-                                    <tr>
-                                        <th>Order #</th>
-                                        <th>Placed On</th>
-                                        <th>Items</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                    @if($order)
-                                        @foreach($orderItems as $item)
-                                            <tr>
-                                                <td>{{ $item->order_id }}</td>
-                                                <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                                                <td>
-                                                    <div class="dash__table-img-wrap">
+                        <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius bellowAllOrdered ">
+                            <h2 class="dash__h2 u-s-p-xy-20 recOrderHeding">RECENT ORDERS</h2>
+                            <div class="dash__table-wrap gl-scroll dashboardRecentOrder">
+                                <table class="dash__table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Placed On</th>
+                                            <th>Items</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                        
+                                        @if($order)
+                                            @foreach($orderItems as $item)
+                                                <tr>
+                                                    <td>{{ $item->order_id }}</td>
+                                                    <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                                                    <td>
+                                                        <div class="dash__table-img-wrap">
 
-                                                        <img class="u-img-fluid"
-                                                            src="data:image/jpeg;base64,{{$item->product->primary_image}}"
-                                                            alt="">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="dash__table-total">
+                                                            <img class="u-img-fluid" src="data:image/jpeg;base64,{{$item->product->primary_image}}"
+                                                                alt="">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dash__table-total">
 
-                                                        <span>{{ $item->subtotal }}</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                            <span>{{ $item->subtotal }}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
-                                        @endforeach
-                                    @else
-                                        <p>No recent orders found.</p>
-                                    @endif
-
-                                </tbody>
-                            </table>
+                                            @endforeach
+                                        @else
+                                            <p>No recent orders found.</p>
+                                        @endif
+                        
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                                    </div>
 
+                    </div>
 
 
                 </div>

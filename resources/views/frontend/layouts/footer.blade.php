@@ -241,7 +241,6 @@
         dropdown.style.display = isVisible ? 'none' : 'block';
     }
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Check if there's an error message in the session

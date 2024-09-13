@@ -497,18 +497,12 @@ class DashboardController extends Controller
             'email' => 'required|email|unique:customers',
             'phone' => 'required',
             'password' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'street_address' => 'required'
         ]);
         $customer = new Customer();
         $customer->full_name = $request->full_name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->password = Hash::make($request->password);
-        $customer->province = $request->province;
-        $customer->city = $request->city;
-        $customer->street_address = $request->street_address;
         if ($customer->save()) {
             session()->flash('success', 'Your Account have been successfully created.');
         } else {
@@ -516,42 +510,4 @@ class DashboardController extends Controller
         }
         return redirect()->back();
     }
-
-
-    // filter price range wise 
-//     public function filterProducts(Request $request)
-// {
-
-//     $priceRange = $request->input('price_range');
-
-//     $productsQuery = Product::query();
-
-//     if ($priceRange) {
-//         switch ($priceRange) {
-//             case '500 to 1K':
-//                 $productsQuery->whereBetween('sell_price', [500, 1000]);
-//                 break;
-//             case '2K to 5K':
-//                 $productsQuery->whereBetween('sell_price', [2000, 5000]);
-//                 break;
-//             case '5K to 10K':
-//                 $productsQuery->whereBetween('sell_price', [5000, 10000]);
-//                 break;
-//             case '10K and Above':
-//                 $productsQuery->where('sell_price', '>=', 10000);
-//                 break;
-//             default:
-//                 // Handle default case or no filtering
-//                 break;
-//         }
-//     }
-
-//     // Fetch the filtered products
-//     $explores = $productsQuery->get();
-
-//     // Return a view or JSON response
-//     return view('frontend.explore', ['explores' => $explores]);
-// }
-
-
 }

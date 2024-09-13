@@ -497,18 +497,12 @@ class DashboardController extends Controller
             'email' => 'required|email|unique:customers',
             'phone' => 'required',
             'password' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'street_address' => 'required'
         ]);
         $customer = new Customer();
         $customer->full_name = $request->full_name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->password = Hash::make($request->password);
-        $customer->province = $request->province;
-        $customer->city = $request->city;
-        $customer->street_address = $request->street_address;
         if ($customer->save()) {
             session()->flash('success', 'Your Account have been successfully created.');
         } else {

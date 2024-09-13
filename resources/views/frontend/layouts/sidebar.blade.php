@@ -13,7 +13,7 @@
             </li>
               <li>
                 <span class="ri-map-pin-line material-symbols-outlined"></span>
-                <a href="#">Address</a>
+                <a href="{{ route('frontend.address.book') }}">Address Book</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">flag</span>
@@ -55,10 +55,6 @@
             <li>
                 <span class="material-symbols-outlined">settings</span>
                 <a href="#">Settings</a>
-            </li>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
             </li>
         </ul>
     </aside>  

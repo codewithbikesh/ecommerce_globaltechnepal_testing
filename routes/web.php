@@ -149,6 +149,11 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/account', [FrontendAccountController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [FrontendAccountController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
+    Route::get('/address-book', [FrontendAccountController::class,'address_book'])->name('frontend.address.book');  
+    Route::get('/profile-update', [FrontendAccountController::class,'profile_edit'])->name('frontend.profile.edit'); 
+    Route::get('/address-add', [FrontendAccountController::class,'address_add'])->name('frontend.address.add'); 
+    Route::post('/address-create', [FrontendAccountController::class,'address_create'])->name('frontend.address.create'); 
+    Route::get('/getCity/{province_id}', [FrontendAccountController::class, 'getCity']);
  
 });
 

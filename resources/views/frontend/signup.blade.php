@@ -61,30 +61,11 @@
                                                  placeholder="Enter Password" required>
                                         </div>
                                         
-                                        <div class="u-s-m-b-30">
-
-                                            <label class="gl-label" for="reg-lname">PROVINCE *</label>
-                                            <input class="input-text input-text--primary-style" name="province" type="text"
-                                                 placeholder="Province" required>
-                                        </div>
-                                        
-                                        <div class="u-s-m-b-30">
-
-                                            <label class="gl-label" for="reg-lname">CITY *</label>
-                                            <input class="input-text input-text--primary-style" name="city" type="text"
-                                                 placeholder="City" required>
-                                        </div>
-                                        
-                                        <div class="u-s-m-b-30">
-
-                                            <label class="gl-label" for="reg-lname">STREET *</label>
-                                            <input class="input-text input-text--primary-style" name="street_address" type="text"
-                                                 placeholder="Street" required>
-                                        </div>
                                         <div class="u-s-m-b-15">
 
                                             <button class="btn btn--e-transparent-brand-b-2"
                                                 type="submit">CREATE ACCOUNT</button>
+                                                <p>By clicking "CREATE ACCOUNT" I agree to <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></p>
                                         </div>
 
                                     </form>

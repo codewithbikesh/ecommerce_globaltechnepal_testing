@@ -238,7 +238,7 @@ background-color: white;
 }
 .ecomNav-header .ecomNav-login-form.active {
     right: 2rem;
-    transition: .2s ease-in-out;
+    transition: .1s ease-in-out;
 }
 a button{
     background-color: transparent;
@@ -342,6 +342,7 @@ gap: 11px;
     border-radius: 34px;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    font-size: 1.7rem;
 }
 .ecomNav-profile-options button:hover{
 scale: 1.1;
@@ -352,6 +353,7 @@ transition: .2sec ease-in-out;
     font-size: 1.3rem;
     text-align: start;
     color: rgb(255 69 0);
+        margin: 7px 0;
 }
 .ecomNav-profile-options a:hover{
 scale: 1.1;

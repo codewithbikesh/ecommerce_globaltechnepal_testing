@@ -207,7 +207,7 @@ class FrontendAccountController extends Controller
         $customer_user->save();
 
         // Redirect with a success message
-        return redirect()->route('frontend.profile.edit')->with('success', 'Profile updated successfully!');
+        return redirect()->route('frontend.account')->with('success', 'Profile updated successfully!');
     }
 
     
@@ -241,7 +241,7 @@ class FrontendAccountController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.address-add", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress"));
+        return view("frontend.address.book", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress"));
     }
 
     

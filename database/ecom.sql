@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2024 at 09:25 AM
+-- Generation Time: Sep 13, 2024 at 01:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -119,7 +119,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `province`, `city`, `session_id`, `tax`, `shipping_cost`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
-(3, 2, NULL, NULL, NULL, 1587.30, 0.00, 12210.00, NULL, '2024-09-11 08:21:45', '2024-09-11 08:21:45'),
+(3, 2, NULL, NULL, NULL, 117.00, 0.00, 900.00, NULL, '2024-09-11 08:21:45', '2024-09-13 05:58:12'),
 (7, 3, 3, 1, NULL, 0.00, 160.00, 0.00, NULL, '2024-09-11 10:00:19', '2024-09-12 04:50:33');
 
 -- --------------------------------------------------------
@@ -137,6 +137,13 @@ CREATE TABLE `cart_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(6, 3, '21', 3, 900.00, '2024-09-13 05:26:11', '2024-09-13 05:58:12');
 
 -- --------------------------------------------------------
 
@@ -159,7 +166,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `full_name`, `email`, `password`, `phone`, `created_at`, `updated_at`) VALUES
-(2, 'Milan Devkota', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9871263612', '2024-09-07 23:34:34', '2024-09-07 23:34:34'),
+(2, 'Janam pandey', 'milan@gmail.com', '$2y$12$3AZKRtdvygy/96SQronDA./9wC27yCUapNm6GbnqFTMeN4wDoUoW.', '9866077949', '2024-09-07 23:34:34', '2024-09-13 05:21:07'),
 (3, 'Dipak Nyaupane', 'dipak@gmail.com', '$2y$12$zYFm77InBevzDOH4flq3aOocCimWWRueYqikDTZYKMbPdlNVgw0uK', '78326478126', '2024-09-11 08:24:50', '2024-09-11 08:24:50'),
 (4, 'Test', 'test@gmail.com', '$2y$12$HXmpb33v3EQchQUYohCdH.zWrPUIHvwtCw.AhlzpXBo3ireLUHH4e', '92871312621', '2024-09-12 23:12:53', '2024-09-12 23:12:53');
 
@@ -174,8 +181,8 @@ CREATE TABLE `customer_address_book` (
   `customer_id` bigint(20) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
-  `province` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `province_id` bigint(20) NOT NULL,
+  `city_id` bigint(20) NOT NULL,
   `address` varchar(255) NOT NULL,
   `landmark` varchar(255) DEFAULT NULL,
   `address_type` varchar(255) DEFAULT NULL,
@@ -189,8 +196,9 @@ CREATE TABLE `customer_address_book` (
 -- Dumping data for table `customer_address_book`
 --
 
-INSERT INTO `customer_address_book` (`id`, `customer_id`, `full_name`, `phone`, `province`, `city`, `address`, `landmark`, `address_type`, `default_shipping`, `default_billing`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Test', '87126327165', '3', '3', 'wedwedx', 'rfsdcsdc', 'H', 'Y', 'Y', '2024-09-13 01:38:10', '2024-09-13 01:38:10');
+INSERT INTO `customer_address_book` (`id`, `customer_id`, `full_name`, `phone`, `province_id`, `city_id`, `address`, `landmark`, `address_type`, `default_shipping`, `default_billing`, `created_at`, `updated_at`) VALUES
+(2, 2, 'Test', '9866077949', 3, 3, 'wedwedx', 'rfsdcsdc', 'H', NULL, 'Y', '2024-09-13 01:38:10', '2024-09-13 04:51:12'),
+(3, 2, 'Janam pandey', '9813074888', 3, 3, 'Lokanthali', 'Durbar square', 'H', 'Y', NULL, '2024-09-13 03:45:14', '2024-09-13 04:50:46');
 
 -- --------------------------------------------------------
 
@@ -1206,7 +1214,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 CREATE TABLE `set_shipping` (
   `id` bigint(20) NOT NULL,
-  `province` bigint(20) NOT NULL,
+  `province_id` bigint(20) NOT NULL,
   `city` varchar(255) NOT NULL,
   `shipping_cost` decimal(10,2) NOT NULL DEFAULT 0.00,
   `remarks` varchar(255) DEFAULT NULL,
@@ -1218,7 +1226,7 @@ CREATE TABLE `set_shipping` (
 -- Dumping data for table `set_shipping`
 --
 
-INSERT INTO `set_shipping` (`id`, `province`, `city`, `shipping_cost`, `remarks`, `created_at`, `updated_at`) VALUES
+INSERT INTO `set_shipping` (`id`, `province_id`, `city`, `shipping_cost`, `remarks`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Kathmandu', 160.00, NULL, '2024-09-08 23:55:39', '2024-09-09 02:24:05'),
 (2, 4, 'Pokhara', 310.00, NULL, '2024-09-08 23:57:08', '2024-09-09 00:10:53'),
 (3, 3, 'Bhaktapur', 140.00, NULL, '2024-09-09 01:22:47', '2024-09-09 01:22:47'),
@@ -1336,7 +1344,10 @@ ALTER TABLE `customers`
 -- Indexes for table `customer_address_book`
 --
 ALTER TABLE `customer_address_book`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `province` (`province_id`),
+  ADD KEY `city` (`city_id`);
 
 --
 -- Indexes for table `delivery_information`
@@ -1434,7 +1445,8 @@ ALTER TABLE `sessions`
 -- Indexes for table `set_shipping`
 --
 ALTER TABLE `set_shipping`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `province` (`province_id`);
 
 --
 -- Indexes for table `users`
@@ -1475,7 +1487,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1487,7 +1499,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `customer_address_book`
 --
 ALTER TABLE `customer_address_book`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `delivery_information`
@@ -1582,6 +1594,20 @@ ALTER TABLE `website_data`
 --
 ALTER TABLE `cart_items`
   ADD CONSTRAINT `cart_items_fk_1` FOREIGN KEY (`product_code`) REFERENCES `products` (`product_code`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `customer_address_book`
+--
+ALTER TABLE `customer_address_book`
+  ADD CONSTRAINT `customer_address_book_fk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `customer_address_book_fk_2` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `customer_address_book_fk_3` FOREIGN KEY (`city_id`) REFERENCES `set_shipping` (`id`) ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `set_shipping`
+--
+ALTER TABLE `set_shipping`
+  ADD CONSTRAINT `set_shipping_fk_1` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

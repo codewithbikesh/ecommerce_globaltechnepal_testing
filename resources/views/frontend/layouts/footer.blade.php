@@ -226,8 +226,8 @@
 <script src="{{ asset('client-side/js/crousal.js') }}"></script>
 <!--====== App ======-->
 <script src="{{ asset('client-side/js/app.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function toggleDropdown(id) {
         const dropdown = document.getElementById(id);
@@ -246,13 +246,13 @@
         // Check if there's an error message in the session
         @if (Session::has('error'))
         var errorMessage = "{{ Session::get('error') }}";
-        showModal('Error!', errorMessage, 'danger');
+        showModal('Error!', errorMessage, 'red');
         @endif
 
         // Check if there's a success message in the session
         @if (Session::has('success'))
         var successMessage = "{{ Session::get('success') }}";
-        showModal('Success!', successMessage, 'success');
+        showModal('Success!', successMessage, 'green');
         @endif
 
         function showModal(title, message, type) {
@@ -260,7 +260,7 @@
             var modalBody = document.querySelector('#modalBody');
             
             modalTitle.textContent = title;
-            modalBody.innerHTML = `<div class="alert alert-${type} fs-4">${message}</div>`;
+            modalBody.innerHTML = `<div class="alert alert-${type} fs-4" style="background-color:white; color:orangered; border:none;">${message}</div>`;
             
             var statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
             statusModal.show();

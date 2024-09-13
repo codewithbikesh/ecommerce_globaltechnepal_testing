@@ -104,8 +104,7 @@ $total = 0;
             
             @auth('customer')
 
-                <form action="{{ route('frontend.logout') }}" method="POST" style="display:inline;" class="ecomNav-login-form ecomNav-profile-options">
-                    @csrf
+                <form action="" style="display:inline;" class="ecomNav-login-form ecomNav-profile-options">
 
                   <a href="{{ route('frontend.account') }}"><i class="ri-dashboard-line"></i>Manage Account</a>
 
@@ -123,10 +122,8 @@ $total = 0;
 
                                 <a href="{{ route('frontend.account') }}"><i class="ri-arrow-go-back-fill"></i>My Return and Cancellation</a>         
 
-                                <a type="submit" class="">
+                                <a href="{{ route('frontend.logout')}}" type="submit" class="">
                                     <i class="ri-logout-box-line"></i>Logout</a>
-
-
 
                 </form>
 

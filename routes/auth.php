@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth:customer')->group(function () {
-    Route::post('logout', [FrontendLoginController::class, 'customer_logout'])
+    Route::get('logout', [FrontendLoginController::class, 'customer_logout'])
                 ->name('frontend.logout');
 
 });

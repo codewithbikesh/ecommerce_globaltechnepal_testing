@@ -40,8 +40,16 @@
                                                     <div class="col-md-6">
                                                         <div class="address-section">
                                                             <h3>Default Shipping Address</h3>
-                                                            <p id="shipping-address">123 Main Street, Springfield, IL,
-                                                                62701</p>
+                                                            <p id="shipping-address">
+                                                                @if($defaultShippingAddress)
+                                                                    {{ $defaultShippingAddress->address }},
+                                                                    {{ $defaultShippingAddress->city ? $defaultShippingAddress->city->city : '' }},
+                                                                    {{ $defaultShippingAddress->province ? $defaultShippingAddress->province->province_name : '' }},
+                                                                    {{ $defaultShippingAddress->phone }}
+                                                                @else
+                                                                    No default shipping address set.
+                                                                @endif
+                                                            </p>
                                                         </div>
                                                     </div>
 
@@ -49,12 +57,22 @@
                                                     <div class="col-md-6">
                                                         <div class="address-section">
                                                             <h3>Default Billing Address</h3>
-                                                            <p id="billing-address">456 Elm Street, Springfield, IL,
-                                                                62701</p>
+                                                            <p id="billing-address">
+                                                                @if($defaultBillingAddress)
+                                                                    {{ $defaultBillingAddress->address }},
+                                                                    {{ $defaultBillingAddress->city ? $defaultBillingAddress->city->city : '' }},
+                                                                    {{ $defaultBillingAddress->province ? $defaultBillingAddress->province->province_name : '' }},
+                                                                    {{ $defaultBillingAddress->phone }}
+                                                                @else
+                                                                    No default billing address set.
+                                                                @endif
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>

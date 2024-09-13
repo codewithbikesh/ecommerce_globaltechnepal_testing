@@ -9,5 +9,12 @@ class Shipping extends Model
 {
     use HasFactory;
     protected $table = 'set_shipping'; // specify the correct table name
-    protected $fillable = ['province', 'city', 'shipping_cost', 'remarks'];
+    protected $fillable = ['province_id', 'city', 'shipping_cost', 'remarks'];
+
+    
+    public function addresses()
+    {
+        return $this->hasMany(CustomerAddressBook::class, 'city_id', 'id'); // Adjust according to actual column names
+    }
+
 }

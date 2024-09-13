@@ -177,6 +177,10 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
                             <div class="row">
+
+
+                                @auth('customer')
+                                @else
                                 <div class="col-lg-6 col-md-6 u-s-m-b-30">
                                     <div class="f-cart__pad-box">
                                         <h1 class="gl-h1">ESTIMATE SHIPPING AND TAXES</h1>
@@ -228,6 +232,7 @@
                                             be apply.</span>
                                     </div>
                                 </div>
+                                @endauth
 
 @php
     // Initialize variables for authenticated users
@@ -239,14 +244,16 @@
             $shipping = $cart->shipping_cost;
             $total = $cart->subtotal;
             $amount_before_tax = $shipping + $total;
-            $tax = 13/100 * $amount_before_tax;
+            $tax = 0;
+            // $tax = 13/100 * $amount_before_tax;
             $grand_total = $amount_before_tax + $tax;
         } else {
             // Default values if cart does not exist
             $shipping = 0;
             $total = 0;
             $amount_before_tax = $shipping + $total;
-            $tax = 13/100 * $amount_before_tax;
+            $tax = 0;
+            // $tax = 13/100 * $amount_before_tax;
             $grand_total = $amount_before_tax + $tax;
         }
     } else {
@@ -267,7 +274,8 @@
         }
         
         $amount_before_tax = $shipping + $total;
-        $tax = 13/100 * $amount_before_tax;
+        $tax = 0;
+        // $tax = 13/100 * $amount_before_tax;
         $grand_total = $amount_before_tax + $tax;
     }
 @endphp

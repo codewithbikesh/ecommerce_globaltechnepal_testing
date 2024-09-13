@@ -14,7 +14,35 @@
                                 <div class="dash__pad-2">
                                     <h1 class="dash__h1 u-s-m-b-14">Edit Profile</h1>
 
-                                    <span class="dash__text">Profile</span>
+                                    <form class="l-f-o__form" method="POST" action="{{ route('frontend.profile.update') }}">
+                                        @csrf
+
+                                        <div class="u-s-m-b-30">
+                                            <label class="gl-label" for="reg-fname">FULL NAME *</label>
+                                            <input class="input-text input-text--primary-style" value="{{ $customer_user->full_name }}" name="full_name" type="text"
+                                                 placeholder="Full Name" required>
+                                        </div>
+                                        <div class="u-s-m-b-30">
+                                            <label class="gl-label" for="reg-lname">PHONE *</label>
+                                            <input class="input-text input-text--primary-style" value="{{ $customer_user->phone }}" name="phone" type="text"
+                                                 placeholder="Phone" required>
+                                        </div>
+
+                                        <div class="u-s-m-b-30">
+                                            <label class="gl-label" for="reg-email">EMAIL *</label>
+                                            <input class="input-text input-text--primary-style" value="{{ $customer_user->email }}" name="email" type="text"
+                                                 placeholder="Enter Email" required>
+                                        </div>
+                                        
+                                        <div class="u-s-m-b-15">
+                                            <input type="hidden" value="{{ $customer_user->id }}" name="customer_id">
+                                            <button class="btn btn--e-transparent-brand-b-2"
+                                                type="submit">UPDATE PROFILE</button>
+                                        </div>
+
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>

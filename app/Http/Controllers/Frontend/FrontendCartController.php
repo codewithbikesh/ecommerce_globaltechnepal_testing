@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\WebsiteData;
 use App\Models\Product;
 use App\Models\Shipping;
@@ -157,6 +158,7 @@ class FrontendCartController extends Controller
     if (auth('customer')->check()) {
         // User is authenticated
         $customerId = auth('customer')->id();
+        $customer_user = Auth::user();
         
         // Find or create a cart for the user
         $cart = Cart::where('customer_id', $customerId)->first();

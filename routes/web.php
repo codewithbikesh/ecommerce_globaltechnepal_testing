@@ -149,10 +149,17 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/account', [FrontendAccountController::class,'account'])->name('frontend.account'); 
     Route::get('/dash-cancellation', [DashboardController::class,'dashCancellation'])->name('frontend.dash-cancellation');   
     Route::get('/dash-my-order', [FrontendAccountController::class,'dashMyOrder'])->name('frontend.dash-my-order');  
+    Route::get('/profile-edit', [FrontendAccountController::class,'profile_edit'])->name('frontend.profile.edit');
+    Route::post('/profile-update', [FrontendAccountController::class,'profile_update'])->name('frontend.profile.update');
+
+    //For address 
     Route::get('/address-book', [FrontendAccountController::class,'address_book'])->name('frontend.address.book');  
-    Route::get('/profile-update', [FrontendAccountController::class,'profile_edit'])->name('frontend.profile.edit'); 
     Route::get('/address-add', [FrontendAccountController::class,'address_add'])->name('frontend.address.add'); 
     Route::post('/address-create', [FrontendAccountController::class,'address_create'])->name('frontend.address.create'); 
+    Route::post('/address-edit/{id}', [FrontendAccountController::class,'address_edit'])->name('frontend.address.edit'); 
+    Route::post('/address-update/{id}', [FrontendAccountController::class,'address_update'])->name('frontend.address.update'); 
+    Route::get('/address/setDefaultShipping/{id}', [FrontendAccountController::class, 'setDefaultShipping'])->name('frontend.address.setDefaultShipping');
+    Route::get('/address/setDefaultBilling/{id}', [FrontendAccountController::class, 'setDefaultBilling'])->name('frontend.address.setDefaultBilling');
     Route::get('/getCity/{province_id}', [FrontendAccountController::class, 'getCity']);
  
 });

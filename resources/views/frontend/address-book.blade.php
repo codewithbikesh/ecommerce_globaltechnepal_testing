@@ -29,13 +29,34 @@
                                         <tbody>
                                             @if($addresses->isNotEmpty())
                                             @foreach ($addresses as $address)
+                                            
                                             <tr>
                                                 <td>{{ $address->full_name }}</td>
                                                 <td>{{ $address->address }}</td>
-                                                <td>{{ $address->province }}</td>
+                                                <td>{{ $address->city->city }}<br>{{ $address->province->province_name }}</td>
                                                 <td>{{ $address->phone }}</td>
-                                                <td>{{ $address->default_shipping }} <br> {{ $address->default_billing }}</td>
-                                                <td>EDIT</td>
+                                                <td>
+                                                        @if ($address->default_shipping === 'Y')
+                                                            Default shipping address
+                                                        @endif
+                                                        @if ($address->default_billing === 'Y')
+                                                            <br> Default billing address
+                                                        @endif
+                                                </td>
+                                                <td>
+                                                <form action="{{ route('frontend.address.edit', $address->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="btn btn-link">EDIT</button><br>
+                                                </form>
+
+                                                    @if ($address->default_shipping !== 'Y')
+                                                        <a href="{{ route('frontend.address.setDefaultShipping', $address->id) }}">Make default shipping address</a><br>
+                                                    @endif
+                                                    @if ($address->default_billing !== 'Y')
+                                                        <a href="{{ route('frontend.address.setDefaultBilling', $address->id) }}">Make default billing address</a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                             @endforeach
                                             @else

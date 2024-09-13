@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('set_shipping', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->autoIncrement();
-            $table->bigInteger('province');
+            $table->bigInteger('province_id')->index();
             $table->string('city');
             $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->string('remarks')->nullable();
             $table->timestamps();
+
+            
+            // Defining the foreign key constraint
+            $table->foreign('province_id')
+                  ->references('id')
+                  ->on('provinces')
+                  ->onDelete('restrict');
         });
     }
 

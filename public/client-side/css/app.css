@@ -5456,8 +5456,9 @@ width: 100%;
   .ecomNav-logo img{
         width: 140px;
     background: #ffffff;
-    border-radius: 36px;
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.6));
+    position: relative;
+    top: 44px;
+        border-radius: 21px 0 23px;
   }
 @media (max-width: 575px) {
   .is-list-active .product-m__thumb {
@@ -6138,6 +6139,10 @@ padding: 0;
         flex-wrap: nowrap;
     -ms-flex-align: end;
         align-items: flex-end; }
+        
+        .ecomNav-logo img {
+    top: 6px;
+}
 }
 
 

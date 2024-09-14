@@ -40,24 +40,25 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
-                            <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
+                            <form class="checkout-f__delivery" method="POST"
+                                action="{{ route('frontend.delivery.information') }}">
                                 @csrf
                                 <div class="u-s-m-b-30">
                                     <div class="u-s-m-b-15">
-                                    
-                                    @auth('customer')
-                                        <!--====== Check Box ======-->
-                                        <div class="check-box">
 
-                                            <input type="checkbox" id="get-address" value="Y" name="default_billing">
-                                            <div class="check-box__state check-box__state--primary">
+                                        @auth('customer')
+                                            <!--====== Check Box ======-->
+                                            <div class="check-box">
 
-                                                <label class="check-box__label" for="get-address">Use default shipping
-                                                    and billing address from account</label>
+                                                <input type="checkbox" id="get-address" value="Y" name="default_billing">
+                                                <div class="check-box__state check-box__state--primary">
+
+                                                    <label class="check-box__label" for="get-address">Use default shipping
+                                                        and billing address from account</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--====== End - Check Box ======-->
-                                    @endauth
+                                            <!--====== End - Check Box ======-->
+                                        @endauth
 
                                     </div>
 
@@ -67,8 +68,8 @@
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
 
-                                            <input class="input-text input-text--primary-style" name="full_name" type="text"
-                                                id="billing-fname" data-bill="" required>
+                                            <input class="input-text input-text--primary-style" name="full_name"
+                                                type="text" id="billing-fname" data-bill="" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -95,7 +96,7 @@
                                     </div>
                                     <!--====== End - PHONE ======-->
 
-                                    
+
 
                                     <!--====== STATE/PROVINCE ======-->
                                     <div class="u-s-m-b-15">
@@ -103,8 +104,8 @@
                                         <!--====== Select Box ======-->
 
                                         <label class="gl-label" for="billing-state">STATE/PROVINCE *</label><select
-                                            class="select-box select-box--primary-style" name="province" id="billing-state"
-                                            data-bill="" required>
+                                            class="select-box select-box--primary-style" name="province"
+                                            id="billing-state" data-bill="" required>
                                             <option selected value="" disabled>Choose Province</option>
                                             <option value="1">Province 1</option>
                                             <option value="2">Madhesh</option>
@@ -136,7 +137,8 @@
                                         <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
 
                                         <input class="input-text input-text--primary-style" type="text"
-                                            id="billing-street" name="street_address" placeholder="House name and street name" data-bill="" required>
+                                            id="billing-street" name="street_address"
+                                            placeholder="House name and street name" data-bill="" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
 
@@ -146,15 +148,17 @@
 
                                         <label class="gl-label" for="billing-zip">ZIP/POSTAL CODE</label>
 
-                                        <input class="input-text input-text--primary-style" type="text" name="postal_code" id="billing-zip"
-                                            placeholder="Zip/Postal Code" data-bill="">
+                                        <input class="input-text input-text--primary-style" type="text"
+                                            name="postal_code" id="billing-zip" placeholder="Zip/Postal Code"
+                                            data-bill="">
                                     </div>
                                     <!--====== End - ZIP/POSTAL ======-->
 
                                     <div class="u-s-m-b-10">
 
                                         <label class="gl-label" for="order-note">ORDER NOTE</label><textarea
-                                            class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
+                                            class="text-area text-area--primary-style" name="order_note"
+                                            id="order-note"></textarea>
                                     </div>
                                     <div>
 
@@ -170,56 +174,60 @@
                             <div class="o-summary">
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__item-wrap gl-scroll">
-                                        
+
                                         @php
                                             $subtotal = 0;
                                             $total = 0;
                                         @endphp
                                         @foreach($cartproducts as $product)
 
-                                        <div class="o-card">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
+                                                                                <div class="o-card">
+                                                                                    <div class="o-card__flex">
+                                                                                        <div class="o-card__img-wrap">
 
-                                                    <img class="u-img-fluid"
-                                                        src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
+                                                                                            <img class="u-img-fluid"
+                                                                                                src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                                                                alt="">
+                                                                                        </div>
+                                                                                        <div class="o-card__info-wrap">
 
-                                                    <span class="o-card__name">
+                                                                                            <span class="o-card__name">
 
-                                                        <a href="product-detail.html">Y{{ $product->product_name }}</a></span>
+                                                                                                <a
+                                                                                                    href="product-detail.html">Y{{ $product->product_name }}</a></span>
 
-                                                        @php
-                                                        if (auth('customer')->check()) {
-                                                            // For authenticated users
-                                                            $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
-                                                            $quantity = $cartItem ? $cartItem->quantity : 0;
-                                                            $subtotal = $product->sell_price * $quantity;
-                                                        } else {
-                                                            // For guest users
-                                                            $quantity = $cart[$product->product_code];
-                                                            $subtotal = $product->sell_price * $quantity;
-                                                            $total += $subtotal;
-                                                        }
-                                                    @endphp
+                                                                                            @php
+                                                                                                if (auth('customer')->check()) {
+                                                                                                    // For authenticated users
+                                                                                                    $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+                                                                                                    $quantity = $cartItem ? $cartItem->quantity : 0;
+                                                                                                    $subtotal = $product->sell_price * $quantity;
+                                                                                                } else {
+                                                                                                    // For guest users
+                                                                                                    $quantity = $cart[$product->product_code];
+                                                                                                    $subtotal = $product->sell_price * $quantity;
+                                                                                                    $total += $subtotal;
+                                                                                                }
+                                                                                            @endphp
 
-                                                    <span class="o-card__quantity">Quantity x {{ $quantity }}</span>
+                                                                                            <span class="o-card__quantity">Quantity x {{ $quantity }}</span>
 
-                                                    <span class="o-card__price">{{ number_format($subtotal, 2) }}</span>
-                                                </div>
-                                            </div>
+                                                                                            <span class="o-card__price">{{ number_format($subtotal, 2) }}</span>
+                                                                                        </div>
+                                                                                    </div>
 
-                                            <form action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}" method="POST" class="remove-form">
-                                            @csrf
-                                                <button type="submit" class="remove-btn">
-                                                    <a class="o-card__del far fa-trash-alt"></a>
-                                                </button>
-                                            </form>
+                                                                                    <form
+                                                                                        action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}"
+                                                                                        method="POST" class="remove-form">
+                                                                                        @csrf
+                                                                                        <button type="submit" class="remove-btn">
+                                                                                            <a class="o-card__del far fa-trash-alt"></a>
+                                                                                        </button>
+                                                                                    </form>
 
-                                        </div>
+                                                                                </div>
                                         @endforeach
-                                        
+
                                     </div>
                                 </div>
                                 <div class="o-summary__section u-s-m-b-30">
@@ -230,68 +238,70 @@
                                             <span class="ship-b__text">Ship to:</span>
                                             <div class="ship-b__box u-s-m-b-10">
                                                 @if($deliveryInformation)
-                                                <p class="ship-b__p">{{ $deliveryInformation->province }}<br>
-                                                    {{ $deliveryInformation->city }}, {{ $deliveryInformation->street_address }} {{ $deliveryInformation->postal_code }}</p>
+                                                    <p class="ship-b__p">{{ $deliveryInformation->province }}<br>
+                                                        {{ $deliveryInformation->city }},
+                                                        {{ $deliveryInformation->street_address }}
+                                                        {{ $deliveryInformation->postal_code }}</p>
                                                 @else
-                                                <p class="ship-b__p">No delivery information available.</p>
+                                                    <p class="ship-b__p">No delivery information available.</p>
                                                 @endif
                                             </div>
                                             <div class="ship-b__box">
 
                                                 @if($deliveryInformation)
-                                                <span class="ship-b__text">Bill to default billing address</span>
-                                            @else
-                                                <span class="ship-b__text">No billing address available.</span>
-                                            @endif
+                                                    <span class="ship-b__text">Bill to default billing address</span>
+                                                @else
+                                                    <span class="ship-b__text">No billing address available.</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                
-@php
-// Initialize variables for authenticated users
-if (auth('customer')->check()) {
-    $customerId = auth('customer')->id();
-    $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
 
-    if ($cart) {
-        $shipping = $cart->shipping_cost;
-        $total = $cart->subtotal;
-        $amount_before_tax = $shipping + $total;
-        $tax = 13/100 * $amount_before_tax;
-        $grand_total = $amount_before_tax + $tax;
-    } else {
-        // Default values if cart does not exist
-        $shipping = 0;
-        $total = 0;
-        $amount_before_tax = $shipping + $total;
-        $tax = 13/100 * $amount_before_tax;
-        $grand_total = $amount_before_tax + $tax;
-    }
-} else {
-    // For guest users, use session values
-    $cart = session()->get('cart', []);
-    $total = 0;
-    foreach ($cart as $productCode => $quantity) {
-        $product = \App\Models\Product::where('product_code', $productCode)->first();
-        if ($product) {
-            $total += $product->sell_price * $quantity;
-        }
-    }
+                                @php
+                                    // Initialize variables for authenticated users
+                                    if (auth('customer')->check()) {
+                                        $customerId = auth('customer')->id();
+                                        $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
 
-    if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
-        $shipping = $shippingCost->shipping_cost;
-    } else {
-        $shipping = 0;
-    }
-    
-    $amount_before_tax = $shipping + $total;
-    $tax = 13/100 * $amount_before_tax;
-    $grand_total = $amount_before_tax + $tax;
-}
-@endphp
+                                        if ($cart) {
+                                            $shipping = $cart->shipping_cost;
+                                            $total = $cart->subtotal;
+                                            $amount_before_tax = $shipping + $total;
+                                            $tax = 13 / 100 * $amount_before_tax;
+                                            $grand_total = $amount_before_tax + $tax;
+                                        } else {
+                                            // Default values if cart does not exist
+                                            $shipping = 0;
+                                            $total = 0;
+                                            $amount_before_tax = $shipping + $total;
+                                            $tax = 13 / 100 * $amount_before_tax;
+                                            $grand_total = $amount_before_tax + $tax;
+                                        }
+                                    } else {
+                                        // For guest users, use session values
+                                        $cart = session()->get('cart', []);
+                                        $total = 0;
+                                        foreach ($cart as $productCode => $quantity) {
+                                            $product = \App\Models\Product::where('product_code', $productCode)->first();
+                                            if ($product) {
+                                                $total += $product->sell_price * $quantity;
+                                            }
+                                        }
+
+                                        if (isset($shippingCost) && isset($shippingCost->shipping_cost)) {
+                                            $shipping = $shippingCost->shipping_cost;
+                                        } else {
+                                            $shipping = 0;
+                                        }
+
+                                        $amount_before_tax = $shipping + $total;
+                                        $tax = 13 / 100 * $amount_before_tax;
+                                        $grand_total = $amount_before_tax + $tax;
+                                    }
+                                @endphp
 
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
@@ -320,14 +330,16 @@ if (auth('customer')->check()) {
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
-                                        <form class="checkout-f__payment" method="POST" action="{{ route('frontend.place.order') }}">
+                                        <form class="checkout-f__payment" method="POST"
+                                            action="{{ route('frontend.place.order') }}">
                                             @csrf
                                             <div class="u-s-m-b-10">
 
                                                 <!--====== Radio Box ======-->
                                                 <div class="radio-box">
 
-                                                    <input type="radio" id="cash-on-delivery" value="C" name="payment_method">
+                                                    <input type="radio" id="cash-on-delivery" value="C"
+                                                        name="payment_method">
                                                     <div class="radio-box__state radio-box__state--primary">
 
                                                         <label class="radio-box__label" for="cash-on-delivery">Cash on

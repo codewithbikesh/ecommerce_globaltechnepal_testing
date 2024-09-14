@@ -539,8 +539,8 @@ class DashboardController extends Controller
         if ($customer->save()) {
             session()->flash('success', 'Your Account have been successfully created.');
         } else {
-            session()->flash('error', 'Error !');
+            session()->flash('error', 'Error while creating account!');
         }
-        return redirect()->back();
+        return redirect()->route('frontend.signin');
     }
 }

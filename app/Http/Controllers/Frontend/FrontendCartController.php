@@ -168,11 +168,12 @@ class FrontendCartController extends Controller
             // Find or create a cart item
             $cartItem = $cart->items()->where('product_code', $productId)->first();
 
-            if ($cartItem) {
+            if ($cartItem) { 
                 // Update quantity if item already exists in the cart
-                $cartItem->quantity += $quantity;
-                $cartItem->price = $cartItem->quantity * $price;
-                $cartItem->save();
+                // $cartItem->quantity += $quantity;
+                // $cartItem->price = $cartItem->quantity * $price;
+                // $cartItem->save();
+                return redirect()->route('frontend.cart')->with('error', 'Item already in cart!');
             } else {
                 // Add new item to the cart
                 $cart->items()->create([
@@ -364,6 +365,7 @@ class FrontendCartController extends Controller
                             if ($quantity <= 0) {
                                 $cartItem->delete();
                             } else {
+                                // $cartItem = new CartItem();
                                 $cartItem->quantity = $quantity;
                                 $cartItem->save();
                             }

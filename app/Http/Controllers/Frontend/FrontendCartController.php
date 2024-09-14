@@ -35,34 +35,17 @@ class FrontendCartController extends Controller
             // For authenticated users
             $customerId = auth('customer')->id();
             
-            //For fetching address of auth users for cart page
-            // Try to fetch the default billing address
-            $address = CustomerAddressBook::where('customer_id', $customerId)
-                ->where('default_billing', 'Y') // Fetch default billing address
-                ->first();
-
-            // If no default billing address found, fetch any available address
-            if (!$address) {
-                $address = CustomerAddressBook::where('customer_id', $customerId)
+            // Fetch all addresses for the authenticated customer where default_shipping = 'Y'
+            $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                                                         ->where('default_shipping', 'Y')
+                                                         ->with(['province', 'city']) // Eager load the province and city relationships
+                                                         ->first();
+            
+            // If no default shipping address found, fetch any available address
+            if (!$default_shipping_addresses) {
+                $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                    ->with(['province', 'city']) // Eager load the province and city relationships
                     ->first();
-            }
-
-            // Default province and city ids
-            $provinceId = $address ? $address->province_id : null;
-            $cityId = $address ? $address->city_id : null;
-
-            // Fetch province name
-            $provinceName = null;
-            if ($provinceId) {
-                $province = Province::find($provinceId);
-                $provinceName = $province ? $province->province_name : null;
-            }
-
-            // Fetch city name
-            $cityName = null;
-            if ($cityId) {
-                $city = Shipping::find($cityId);
-                $cityName = $city ? $city->city : null;
             }
 
             //For cart details
@@ -96,7 +79,7 @@ class FrontendCartController extends Controller
 
         }
 
-        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty", "provinces", "address", "provinceName", "cityName"));
+        return view("frontend.cart", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "selectedCity", "selectedProvince", "isCartEmpty", "provinces", "default_shipping_addresses"));
     }
 
 
@@ -107,7 +90,6 @@ class FrontendCartController extends Controller
         $shippingCost = 0;
 
             // For guest users
-
             if ($request->has('getshippingcost')) {
                 $request->validate([
                     'province' => 'required',
@@ -252,7 +234,6 @@ class FrontendCartController extends Controller
             $provinceId = $address->province_id;
             $cityId = $address->city_id;
         }
-
 
         $cart->update([
             'subtotal' => $subtotal,

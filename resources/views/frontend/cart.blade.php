@@ -246,8 +246,8 @@
                                     <div class="u-s-m-b-30">
                                         <table class="f-cart__table">
                                             @auth('customer')
-                                                <h3>Location</h3>
-                                                <p><span class="ri-map-pin-line material-symbols-outlined"></span> {{ $address->address }}, {{ $cityName }}, {{ $provinceName }}</p>
+                                                <h3>Shipping Address</h3>
+                                                <p><span class="ri-map-pin-line material-symbols-outlined"></span> {{ $default_shipping_addresses->address }}, {{ $default_shipping_addresses->city->city }}, {{ $default_shipping_addresses->province->province_name }}</p>
                                                 <hr>
                                             @endauth
                                             <h2>Order Summary</h2>

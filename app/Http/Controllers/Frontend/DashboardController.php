@@ -11,6 +11,7 @@ use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
+use App\Models\CustomerAddressBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -108,10 +109,37 @@ class DashboardController extends Controller
         $cartItemCount = 0;
         $shippingCost = 0;
         $cartproducts = collect(); // Initialize as an empty collection
-        $deliveryInformationId = $request->session()->get('delivery_information_id');
-        $deliveryInformation = DeliveryInformation::find($deliveryInformationId);
+        $default_shipping_addresses = collect(); // Initialize as an empty collection
+        $default_billing_addresses = collect();
+        $deliveryInformation = null; // Initialize as null
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
+            // Fetch all addresses for the authenticated customer where default_shipping = 'Y'
+            $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                                                         ->where('default_shipping', 'Y')
+                                                         ->with(['province', 'city']) // Eager load the province and city relationships
+                                                         ->first();
+                                                         
+            // If no default shipping address found, fetch any available address
+            if (!$default_shipping_addresses) {
+                $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                                            ->with(['province', 'city']) // Eager load the province and city relationships
+                                            ->first();
+            }
+
+            // Fetch all addresses for the authenticated customer where default_billing = 'Y'
+            $default_billing_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                                                         ->where('default_billing', 'Y')
+                                                         ->with(['province', 'city']) // Eager load the province and city relationships
+                                                         ->first();
+                                                         
+            // If no default shipping address found, fetch any available address
+            if (!$default_billing_addresses) {
+                $default_billing_addresses = CustomerAddressBook::where('customer_id', $customerId)
+                                            ->with(['province', 'city']) // Eager load the province and city relationships
+                                            ->first();
+            }
+
             $cart = Cart::where('customer_id', $customerId)->first();
             if ($cart) {
                 $cartItemCount = $cart->items()->count();
@@ -121,6 +149,7 @@ class DashboardController extends Controller
                 // Handle the case where no cart is found
                 $cartData = collect(); // Empty collection
             }
+            
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
@@ -129,8 +158,23 @@ class DashboardController extends Controller
                 'shipping_cost' => 0
             ]);
             $shippingCost = $checkoutData['shipping_cost'];
+            $deliveryInformationId = $request->session()->get('delivery_information_id');
+            if ($deliveryInformationId) {
+                $deliveryInformation = DeliveryInformation::find($deliveryInformationId);
+            }
+            
         }
-        return view("frontend.checkout", compact("websitedata", "cart", "cartproducts", "cartItemCount", "shippingCost", "deliveryInformation"));
+        // Return the checkout view with necessary data
+        return view("frontend.checkout", [
+            "websitedata" => $websitedata,
+            "cart" => $cart ?? null,
+            "cartproducts" => $cartproducts,
+            "cartItemCount" => $cartItemCount,
+            "shippingCost" => $shippingCost,
+            "deliveryInformation" => $deliveryInformation,
+            "default_shipping_addresses" => $default_shipping_addresses,
+            "default_billing_addresses" => $default_billing_addresses
+        ]);
     }
 
     // contact 

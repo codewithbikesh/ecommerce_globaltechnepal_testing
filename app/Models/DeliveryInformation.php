@@ -20,4 +20,13 @@ class DeliveryInformation extends Model
         return $this->hasMany(Order::class);
     }
     
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Shipping::class);
+    }
 }

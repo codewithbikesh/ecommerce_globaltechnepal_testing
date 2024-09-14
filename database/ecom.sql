@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2024 at 01:53 PM
+-- Generation Time: Sep 14, 2024 at 07:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -103,11 +103,12 @@ INSERT INTO `carousel_images` (`id`, `image_1`, `image_2`, `image_3`, `created_a
 CREATE TABLE `cart` (
   `id` bigint(20) NOT NULL,
   `customer_id` bigint(20) DEFAULT NULL,
-  `province` bigint(20) DEFAULT NULL,
-  `city` bigint(20) DEFAULT NULL,
+  `province_id` bigint(20) DEFAULT NULL,
+  `city_id` bigint(20) DEFAULT NULL,
   `session_id` varchar(255) DEFAULT NULL,
   `tax` decimal(10,2) DEFAULT NULL,
   `shipping_cost` decimal(10,2) DEFAULT NULL,
+  `shipping_cost_total` decimal(10,2) NOT NULL DEFAULT 0.00,
   `subtotal` decimal(10,2) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -118,9 +119,8 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `customer_id`, `province`, `city`, `session_id`, `tax`, `shipping_cost`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
-(3, 2, NULL, NULL, NULL, 117.00, 0.00, 900.00, NULL, '2024-09-11 08:21:45', '2024-09-13 05:58:12'),
-(7, 3, 3, 1, NULL, 0.00, 160.00, 0.00, NULL, '2024-09-11 10:00:19', '2024-09-12 04:50:33');
+INSERT INTO `cart` (`id`, `customer_id`, `province_id`, `city_id`, `session_id`, `tax`, `shipping_cost`, `shipping_cost_total`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 3, 3, NULL, 0.00, 140.00, 140.00, 1200.00, NULL, '2024-09-13 11:01:01', '2024-09-14 11:37:16');
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(6, 3, '21', 3, 900.00, '2024-09-13 05:26:11', '2024-09-13 05:58:12');
+(5, 1, '21', 4, 1200.00, '2024-09-13 11:58:26', '2024-09-14 06:37:06');
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,8 @@ CREATE TABLE `customer_address_book` (
 
 INSERT INTO `customer_address_book` (`id`, `customer_id`, `full_name`, `phone`, `province_id`, `city_id`, `address`, `landmark`, `address_type`, `default_shipping`, `default_billing`, `created_at`, `updated_at`) VALUES
 (2, 2, 'Test', '9866077949', 3, 3, 'wedwedx', 'rfsdcsdc', 'H', NULL, 'Y', '2024-09-13 01:38:10', '2024-09-13 04:51:12'),
-(3, 2, 'Janam pandey', '9813074888', 3, 3, 'Lokanthali', 'Durbar square', 'H', 'Y', NULL, '2024-09-13 03:45:14', '2024-09-13 04:50:46');
+(3, 2, 'Janam pandey', '9813074888', 6, 4, 'Lokanthali', 'Durbar square', 'H', NULL, NULL, '2024-09-13 03:45:14', '2024-09-14 07:21:50'),
+(4, 2, 'Dipak Nyaupane', '9866077948', 6, 4, 'seshmati pul', 'seshmati', 'O', 'Y', 'N', '2024-09-14 07:21:39', '2024-09-14 07:21:50');
 
 -- --------------------------------------------------------
 
@@ -1324,7 +1325,10 @@ ALTER TABLE `carousel_images`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `province_id` (`province_id`),
+  ADD KEY `city_id` (`city_id`);
 
 --
 -- Indexes for table `cart_items`
@@ -1481,13 +1485,13 @@ ALTER TABLE `carousel_images`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1499,7 +1503,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `customer_address_book`
 --
 ALTER TABLE `customer_address_book`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `delivery_information`

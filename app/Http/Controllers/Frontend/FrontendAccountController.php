@@ -241,7 +241,8 @@ class FrontendAccountController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.address.book", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress"));
+        return view("frontend.address-add", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress"))->with('success', 'Address added successfully.');
+        
     }
 
     
@@ -287,7 +288,20 @@ class FrontendAccountController extends Controller
         ]);
 
         $address = CustomerAddressBook::findOrFail($id);
-        $address->update($request->all());
+        $provinceId = $request->input('province');
+        $cityId = $request->input('city');
+
+        $address->update([
+            'full_name' => $request->input('full_name'),
+            'phone' => $request->input('phone'),
+            'province_id' => $provinceId, // Set the province_id
+            'city_id' => $cityId, // Set the city_id
+            'address' => $request->input('address'),
+            'landmark' => $request->input('landmark'),
+            'address_type' => $request->input('address_type'),
+        ]);
+
+        // $address->update($request->all());
 
         return redirect()->route('frontend.address.book')->with('success', 'Address updated successfully');
     }
@@ -341,12 +355,12 @@ class FrontendAccountController extends Controller
         $addressbook->address_type = $request->address_type;
         $default_shipping = $request->default_shipping;
         $default_billing = $request->default_billing;
-        if ($default_shipping = "on"){
+        if ($default_shipping === "on"){
             $addressbook->default_shipping = 'Y';
         } else {
             $addressbook->default_shipping = 'N';
         }
-        if ($default_billing = "on"){
+        if ($default_billing === "on"){
             $addressbook->default_billing = 'Y';
         } else {
             $addressbook->default_billing = 'N';

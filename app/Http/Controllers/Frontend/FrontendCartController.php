@@ -30,6 +30,7 @@ class FrontendCartController extends Controller
         $address = null; // Initialize address for both authenticated and guest users
         $provinceName = null; // Initialize provinceName
         $cityName = null; // Initialize cityName
+        $default_shipping_addresses = null;
 
         if (auth('customer')->check()) {
             // For authenticated users

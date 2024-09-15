@@ -1,6 +1,4 @@
-/* .sidebar:hover {
-    width: 260px;
-} */
+
 .sidebar .logo {
     color: #000;
     display: flex;
@@ -60,15 +58,26 @@
 }
 .links li a {
     padding: 10px;
-    color: #000;
-    /* display: none; */
     font-weight: 500;
     white-space: nowrap;
     text-decoration: none;
+    font-size: 1.6rem;
 }
-/* .sidebar:hover .links li a {
-    display: block;
-} */
+
 .links .logout-link {
     margin-top: 20px;
+}
+
+.dashboardpageLink .card{
+border-radius: 9px;
+background: #e0e0e0;
+box-shadow: inset 14px 14px 27px #bebebe,
+            inset -14px -14px 27px #ffffff;
+            border: none;
+}
+.dashboardpageLink .col-xl-4{
+padding: 0 3px !important;
+}
+.dashboardpageLink .col-xl-8{
+padding: 0 3px !important;
 }

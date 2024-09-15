@@ -53,7 +53,7 @@
                         <!-- ALL PRODUCT BOXES  -->
 
                         <div class="shop-p__collection productParentParent">
-                            <div class="ssllll">
+                            <div class="ssllll sliderHide">
                                 <div class="shop-a" id="side-filter">
                                     <div class="shop-a__wrap">
                                         <div class="shop-a__inner gl-scroll">
@@ -459,7 +459,7 @@
 
                                                 <a
                                                     href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">{{
-                                                    $shoplistproduct->product_name }}</a>
+            $shoplistproduct->product_name }}</a>
                                             </div>
                                             <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                     class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
@@ -553,28 +553,28 @@
                                                             <div>
 
                                                                 <span class="pd-detail__name">{{
-                                                                    $shoplistproduct->product_name
+            $shoplistproduct->product_name
                                                                     }}</span>
                                                             </div>
                                                             <div>
                                                                 <div class="pd-detail__inline">
 
                                                                     <span class="pd-detail__price">{{
-                                                                        $shoplistproduct->sell_price }}</span>
+            $shoplistproduct->sell_price }}</span>
                                                                     @php
-                                                                    $actualPrice = $shoplistproduct->actual_price;
-                                                                    $sellPrice = $shoplistproduct->sell_price;
+        $actualPrice = $shoplistproduct->actual_price;
+        $sellPrice = $shoplistproduct->sell_price;
 
 
-                                                                    $discountPercentage = $actualPrice > 0
-                                                                    ? round(((($actualPrice - $sellPrice) /
-                                                                    $actualPrice) * 100), 2)
-                                                                    : 0;
+        $discountPercentage = $actualPrice > 0
+            ? round(((($actualPrice - $sellPrice) /
+                $actualPrice) * 100), 2)
+            : 0;
                                                                     @endphp
                                                                     <span class="pd-detail__discount">({{
-                                                                        $discountPercentage }}%
+            $discountPercentage }}%
                                                                         OFF)</span><del class="pd-detail__del">{{
-                                                                        $shoplistproduct->actual_price
+            $shoplistproduct->actual_price
                                                                         }}</del>
                                                                 </div>
                                                             </div>
@@ -596,7 +596,7 @@
                                                                 <div class="pd-detail__inline">
 
                                                                     <span class="pd-detail__stock">{{
-                                                                        $shoplistproduct->stock_quantity }}
+            $shoplistproduct->stock_quantity }}
                                                                         in
                                                                         stock</span>
                                                                 </div>
@@ -671,7 +671,7 @@
                                                                 <div class="success__info-wrap">
 
                                                                     <span class="success__name">{{
-                                                                        $shoplistproduct->product_name }}</span>
+            $shoplistproduct->product_name }}</span>
 
                                                                     <div class="input-counter">
                                                                         <span
@@ -684,7 +684,7 @@
                                                                             class="input-counter__plus fas fa-plus"></span>
                                                                     </div>
                                                                     <span class="success__price">{{
-                                                                        $shoplistproduct->sell_price
+            $shoplistproduct->sell_price
                                                                         }}</span>
                                                                 </div>
                                                             </div>

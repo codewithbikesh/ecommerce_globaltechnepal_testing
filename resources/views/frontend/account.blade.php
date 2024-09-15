@@ -1,22 +1,32 @@
 @extends('frontend.layouts.app')
 @section('contents')
-                                    <div class="rightOptions">
 
+
+
+                                    <div class="rightOptions">
                                     <div class="midetailsOfUser d-flex">
                                    <!-- Personal Profile Section -->
                                 <div class="col-xl-4">
                                     <div class="card">
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
                                             <div class="d-flex justify-content-between w-100">
-                                                <h2>Personal Profile</h2>
+                                                <h2 class="fa section__heading">Personal Profile</h2>
                                                 <form method="get" action="{{ route('frontend.profile.edit') }}">
-                                                <button class="btn btn-primary">Edit
-                                                    Profile</button>
+                                                    <button class="btn btn-primary">Edit
+                                        
                                                 </form>
                                             </div>
+                                  
                                             <p>{{ $customer_user->full_name }}</p>
                                             <p>{{ $customer_user->email }}</p>
                                             <p>{{ $customer_user->phone }}</p>
+
+                                            <div class="moreAccountBtn">
+                                                            <button class="btn btn-primary moreActionBtnButton">Account Menu</button>
+       
+                                            </div>
+
+                                      
                                         </div>
                                     </div>
                                 </div>
@@ -26,7 +36,7 @@
                                     <div class="card">
                                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
                                             <div class="d-flex justify-content-between w-100">
-                                                <h2>Address Book</h2>
+                                                <h2 class="fa section__heading">Address Book</h2>
                                                 <form method="get" action="{{ route('frontend.address.book') }}">
                                                 <button class="btn btn-primary" type="submit">Edit Address
                                                     Book</button>
@@ -117,7 +127,7 @@
 
 
                         <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius bellowAllOrdered ">
-                            <h2 class="dash__h2 u-s-p-xy-20 recOrderHeding">RECENT ORDERS</h2>
+                            <h2 class="dash__h2 section__heading u-s-p-xy-20 recOrderHeding fa centerBlockText">RECENT ORDERS</h2>
                             <div class="dash__table-wrap gl-scroll dashboardRecentOrder">
                                 <table class="dash__table">
                                     <thead>
@@ -152,7 +162,7 @@
 
                                             @endforeach
                                         @else
-                                            <p>No recent orders found.</p>
+                                            <p class="centerBlockText">No recent orders found.</p>
                                         @endif
                         
                                     </tbody>

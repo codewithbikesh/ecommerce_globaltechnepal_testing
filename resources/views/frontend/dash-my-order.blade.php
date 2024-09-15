@@ -10,12 +10,12 @@
                     <div class="row">
                         <div class="col-lg-9 col-md-12 ordersParent">
                             <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
-                                <div class="dash__pad-2">
-                                    <h1 class="dash__h1 u-s-m-b-14">My Orders</h1>
+                                <div class="dash__pad-2 dashmyorders-parent">
+                                    <h1 class="dash__h1 u-s-m-b-14 d-block text-center fa">My Orders</h1>
 
-                                    <span class="dash__text u-s-m-b-30">Here you can see all products that have been
+                                    <span class="dash__text u-s-m-b-30 text-center">Here you can see all products that have been
                                         delivered.</span>
-                                    <form class="m-order u-s-m-b-30">
+                                    <form class="m-order u-s-m-b-30 d-flex justify-content-center align-items-center">
                                         <div class="m-order__select-wrapper">
 
                                             <label class="u-s-m-r-8" for="my-order-sort">Show:</label><select
@@ -89,7 +89,7 @@
                                         </div>
 
                                         @empty
-                                        <p>No orders found.</p>
+                                        <p class="text-center">No orders found.</p>
                                     @endforelse
 
                                     </div>
@@ -100,6 +100,9 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex flex"> 
+                                                                    <button class="btn btn-primary moreActionBtnButton mx-auto">Account Menu</button>
+</div>
         <!--====== End - Section Content ======-->
     </div>
     <!--====== End - Section 2 ======-->

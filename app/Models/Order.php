@@ -28,7 +28,7 @@ class Order extends Model
     // Relationship with DeliveryInformation
     public function deliveryInformation()
     {
-        return $this->belongsTo(DeliveryInformation::class, 'delivery_information_id', 'id');
+        return $this->belongsTo(DeliveryInformation::class, 'shipping_delivery_information_id', 'id');
     }
 
 }

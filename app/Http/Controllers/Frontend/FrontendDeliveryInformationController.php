@@ -8,6 +8,7 @@ use App\Models\DeliveryInformation;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Shipping;
 use App\Models\Cart;
 use App\Models\CustomerAddressBook;
 
@@ -15,32 +16,26 @@ class FrontendDeliveryInformationController extends Controller
 {
     public function add_delivery_information(Request $request)
     {
-            // Save delivery information
-            $deliveryInfo = DeliveryInformation::create([
-                'order_id' => null,
-                'customer_id' => null,
-                'full_name' => $request->input('full_name'),
-                'invoice_email' => $request->input('email'),
-                'phone' => $request->input('phone'),
-                'province_id' => $request->input('province'),
-                'city_id' => $request->input('city'),
-                'landmark' => $request->input('landmark'),
-                'address' => $request->input('street_address'),
-                'type' => 'shipping'
-            ]);
 
+            $full_name = $request->input('full_name');
+            $invoice_email = $request->input('invoice_email');
+            $phone = $request->input('phone');
             $selectedCity = $request->input('city');
             $selectedProvince = $request->input('province');
+            $landmark = $request->input('landmark');
+            $address = $request->input('street_address');
             $shippingCost = Shipping::where('id', $selectedCity)->first();
 
             session()->put('checkout', [
+                'full_name' => $full_name,
+                'invoice_email' => $invoice_email,
+                'phone' => $phone,
                 'city' => $selectedCity,
                 'province' => $selectedProvince,
+                'landmark' => $landmark,
+                'address' => $address,
                 'shipping_cost' => $shippingCost
             ]);
-
-        // Store the delivery information ID in the session
-        $request->session()->put('delivery_information_id', $deliveryInfo->id);
 
         // Redirect or handle as needed
         return redirect()->route('frontend.checkout')->with('success', 'Shipping Address set successfully.'); // Example route

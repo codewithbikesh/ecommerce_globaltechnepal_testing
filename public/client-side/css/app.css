@@ -283,7 +283,10 @@ body {
 
 .s-fb--color-hover:hover {
   color: #4267b2; }
-
+.form-row{
+  display: flex;
+    flex-wrap: wrap;
+}
 .s-fb--color {
   color: #4267b2; }
 
@@ -5106,6 +5109,10 @@ width: 100%;
   color: #333333;
   margin-right: 2px; }
 
+.editOptionParetn label, .editOptionParetn input{
+      font-size: 2rem;
+}
+
 .rating__check:hover .rating__check-star-wrap > i {
   color: #ff9600; }
 
@@ -5984,9 +5991,7 @@ background: #efefef;
   text-align: center;
 }
 .ordersParent{
-  min-width: 100%;
-  box-shadow:  20px 20px 60px #bebebe,
-             -20px -20px 60px #ffffff;
+
 }
 
 #newsletter-modal .modal-content  {
@@ -6066,6 +6071,48 @@ color:whitesmoke !important;
   display: block;
   text-align: center;
 }
+.table-striped th{
+background-color: #ff3d00;
+} 
+.table-striped td{
+    line-height: 1;
+    background: lightgrey;
+    position: relative;
+    vertical-align: middle;
+    margin-top: 12px;
+    font-size: 1.2rem;
+}
+.table-striped td form{
+display: block !important;
+margin: 0 auto;
+background-color: #b3b3b3;
+padding: 1px 6px;
+width: fit-content;
+}
+ /* Base styles for the table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Make the table scrollable */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+
+/* Ensure the table is wide enough to trigger scrolling */
+.table {
+    min-width: 800px; /* Adjust based on your content */
+}
+
+/* Ensure table headers and cells are styled for readability */
+.table th, .table td {
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
 
 @keyframes moveRight {
     0% {
@@ -6113,6 +6160,16 @@ background: orangered !important;
  flex-direction: column;
     align-items: center;
 }
+    .table-wrapper {
+        /* Ensure full-width scrollable container */
+        width: 100vw;
+    }
+    .table-striped td{
+    font-size: 2rem;
+}
+    .table-striped th{
+    font-size: 2rem;
+}
 .container{
   margin: 0;
 }
@@ -6121,6 +6178,7 @@ padding: 0;
 }
 .sliderHide{
   opacity: 0;
+          pointer-events: none;
 }
 
 .pageLinkParent{
@@ -6157,7 +6215,7 @@ padding: 0;
         position: fixed;
         z-index: 990;
         background: white;
-        top: 100px;
+        top: 114px;
                 left: 0;
 }
 .ssllll h1 {
@@ -6213,7 +6271,9 @@ background: #ffffff;
 .dash__table{
     margin-top: 13px;
 }
-
+.dashmyorders-parent{
+  width: 100vw;
+}
 .moreAccountBtn{
       width: 100%;
     display: flex;
@@ -6230,6 +6290,24 @@ box-shadow: none;
 }
 a{
   font-size: 2rem !important;
+}
+.alert {
+  font-size: 2rem !important;
+}
+.addres-add-parentrow{
+  width: 100vw;
+}
+.addres-add-parentrow input, .addres-add-parentrow label {
+ font-size: 2rem;
+}
+.dash__pad-2 {
+    padding:0;
+}
+.ecomNav-profile-options i {
+    font-size: 2.5rem;
+}
+.shop-p__meta-wrap span{
+  font-size: 2rem;
 }
 }
 

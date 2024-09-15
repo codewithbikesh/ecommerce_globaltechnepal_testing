@@ -43,7 +43,7 @@
             <th scope="row">{{ $index + 1 }}</th>
             <td><a href="{{ route('backend.orders.view', $order->id) }}">{{ $order->order_id }}</a></td>
             <td>{{ $order->customer->full_name }}</td>
-            <td>{{ $order->deliveryInformation->province }}, {{ $order->deliveryInformation->city }}, {{ $order->deliveryInformation->street_address }}</td>
+            <td>{{ $order->deliveryInformation->address }}, {{ $order->deliveryInformation->city->city }}, {{ $order->deliveryInformation->province->province_name }}</td>
             <td>{{ $order->total_items }}</td>
             <td>{{ $order->total_amount }}</td>
             <td>{{ ucfirst($order->order_status) }}</td>

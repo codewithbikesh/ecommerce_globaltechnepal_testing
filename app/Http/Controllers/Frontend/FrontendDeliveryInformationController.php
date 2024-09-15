@@ -16,54 +16,64 @@ class FrontendDeliveryInformationController extends Controller
 {
     public function add_delivery_information(Request $request)
     {
-        $deliveryInformationId = $request->session()->get('delivery_information_id');
-        if ($deliveryInformationId) {
-            // Update the existing record
-            $deliveryInfo = DeliveryInformation::find($deliveryInformationId);
+        // $deliveryInformationId = $request->session()->get('delivery_information_id');
+        // if ($deliveryInformationId) {
+        //     // Update the existing record
+        //     $deliveryInfo = DeliveryInformation::find($deliveryInformationId);
         
-            if ($deliveryInfo) {
-                // Update fields
-                $deliveryInfo->update([
-                    'full_name' => $request->input('full_name'),
-                    'invoice_email' => $request->input('email'),
-                    'phone' => $request->input('phone'),
-                    'province_id' => $request->input('province'),
-                    'city_id' => $request->input('city'),
-                    'landmark' => $request->input('landmark'),
-                    'address' => $request->input('street_address')
-                ]);
-            } else {
-                // Handle the case where the record does not exist
-                return response()->json(['message' => 'Delivery information not found'], 404);
-            }
-        } else {
-            // Save delivery information
-            $deliveryInfo = DeliveryInformation::create([
-                'order_id' => null,
-                'customer_id' => null,
-                'full_name' => $request->input('full_name'),
-                'invoice_email' => $request->input('email'),
-                'phone' => $request->input('phone'),
-                'province_id' => $request->input('province'),
-                'city_id' => $request->input('city'),
-                'landmark' => $request->input('landmark'),
-                'address' => $request->input('street_address'),
-                'type' => 'shipping'
-            ]);
-        }
+        //     if ($deliveryInfo) {
+        //         // Update fields
+        //         $deliveryInfo->update([
+        //             'full_name' => $request->input('full_name'),
+        //             'invoice_email' => $request->input('email'),
+        //             'phone' => $request->input('phone'),
+        //             'province_id' => $request->input('province'),
+        //             'city_id' => $request->input('city'),
+        //             'landmark' => $request->input('landmark'),
+        //             'address' => $request->input('street_address')
+        //         ]);
+        //     } else {
+        //         // Handle the case where the record does not exist
+        //         return response()->json(['message' => 'Delivery information not found'], 404);
+        //     }
+        // } else {
+        //     // Save delivery information
+        //     $deliveryInfo = DeliveryInformation::create([
+        //         'order_id' => null,
+        //         'customer_id' => null,
+        //         'full_name' => $request->input('full_name'),
+        //         'invoice_email' => $request->input('email'),
+        //         'phone' => $request->input('phone'),
+        //         'province_id' => $request->input('province'),
+        //         'city_id' => $request->input('city'),
+        //         'landmark' => $request->input('landmark'),
+        //         'address' => $request->input('street_address'),
+        //         'type' => 'shipping'
+        //     ]);
+        // }
 
+            $full_name = $request->input('full_name');
+            $invoice_email = $request->input('invoice_email');
+            $phone = $request->input('phone');
             $selectedCity = $request->input('city');
             $selectedProvince = $request->input('province');
+            $landmark = $request->input('landmark');
+            $address = $request->input('street_address');
             $shippingCost = Shipping::where('id', $selectedCity)->first();
 
             session()->put('checkout', [
+                'full_name' => $full_name,
+                'invoice_email' => $invoice_email,
+                'phone' => $phone,
                 'city' => $selectedCity,
                 'province' => $selectedProvince,
+                'landmark' => $landmark,
+                'address' => $address,
                 'shipping_cost' => $shippingCost
             ]);
 
         // Store the delivery information ID in the session
-        $request->session()->put('delivery_information_id', $deliveryInfo->id);
+        // $request->session()->put('delivery_information_id', $deliveryInfo->id);
 
         // Redirect or handle as needed
         return redirect()->route('frontend.checkout')->with('success', 'Shipping Address set successfully.'); // Example route

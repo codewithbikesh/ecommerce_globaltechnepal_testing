@@ -16,4 +16,11 @@ class Province extends Model
     {
         return $this->hasMany(CustomerAddressBook::class, 'province_id', 'id'); // Adjust according to actual column names
     }
+    
+    // Define relationship with City
+    public function cities()
+    {
+        return $this->hasMany(Shipping::class);
+    }
+
 }

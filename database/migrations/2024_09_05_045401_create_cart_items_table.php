@@ -23,8 +23,7 @@ return new class extends Migration
             // Defining the foreign key constraint
             $table->foreign('product_code')
                   ->references('product_code')
-                  ->on('products')
-                  ->onDelete('cascade');
+                  ->on('products');
         });
     }
 

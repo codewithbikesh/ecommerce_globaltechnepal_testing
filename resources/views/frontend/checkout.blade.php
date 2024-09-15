@@ -51,7 +51,7 @@
                                     <div class="gl-inline">
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
-                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation->full_name }}" type="text" id="billing-fname" required>
+                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation['full_name'] ?? '' }}" type="text" id="billing-fname" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -59,14 +59,14 @@
                                     <!--====== E-MAIL ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-email">E-MAIL *</label>
-                                        <input class="input-text input-text--primary-style" name="email" value="{{ $deliveryInformation->invoice_email }}" type="text" id="billing-email" required>
+                                        <input class="input-text input-text--primary-style" name="invoice_email" value="{{ $deliveryInformation['invoice_email'] ?? '' }}" type="text" id="billing-email" required>
                                     </div>
                                     <!--====== End - E-MAIL ======-->
 
                                     <!--====== PHONE ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-phone">PHONE *</label>
-                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation->phone }}" type="text" id="billing-phone" required>
+                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation['phone'] ?? '' }}" type="text" id="billing-phone" required>
                                     </div>
                                     <!--====== End - PHONE ======-->
 
@@ -95,13 +95,13 @@
 
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-street">LANDMARK (OPTIONAL) *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation->landmark }}" placeholder="Famous Place near you">
+                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation['landmark'] ?? '' }}" placeholder="Famous Place near you">
                                     </div>
 
                                     <!--====== Street Address ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-street">STREET ADDRESS/ LOCAL AREA *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation->address }}" placeholder="House name and street name" required>
+                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation['address'] ?? '' }}" placeholder="House name and street name" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
 
@@ -185,12 +185,29 @@
                                                     @endif
                                                 @else
                                                     @if($deliveryInformation)
-                                                        <p class="ship-b__p">{{ $deliveryInformation->address }},
-                                                            {{ $deliveryInformation->city->city }},
-                                                            {{ $deliveryInformation->province->province_name }}
+                                                        @php
+                                                            // Extract variables for easier readability
+                                                            $address = $deliveryInformation['address'] ?? '';
+                                                            $cityName = $deliveryInformation['city_name'] ?? '';
+                                                            $provinceName = $deliveryInformation['province_name'] ?? '';
+                                            
+                                                            // Check if any of the values are missing
+                                                            $hasMissingValues = empty($address) || empty($cityName) || empty($provinceName);
+                                                        @endphp
+                                            
+                                                        @if($hasMissingValues)
+                                                            <p class="ship-b__p">Incomplete delivery information. Please provide all required details.</p>
+                                                        @else
+                                                            <p class="ship-b__p">
+                                                                {{ $address }},
+                                                                {{ $cityName->city }},
+                                                                {{ $provinceName->province_name }}
+                                                            </p>
+                                                        @endif
                                                     @else
-                                                        <p class="ship-b__p">No delivery information available.</p>
+                                                    <p class="ship-b__p">No delivery information available.</p>
                                                     @endif
+                                            
                                                 @endauth
                                             </div>
                                         </div>
@@ -207,8 +224,8 @@
                                                 @auth('customer')
                                                         <p><span class="ri-mail-line material-symbols-outlined"></span> {{ $customerEmail }}</p>
                                                 @else             
-                                                    @if($deliveryInformation)
-                                                        <span class="ship-b__p">{{ $deliveryInformation->invoice_email }}</span>
+                                                    @if($deliveryInformation['invoice_email'])
+                                                        <span class="ship-b__p">{{ $deliveryInformation['invoice_email'] ?? '' }}</span>
                                                     @else
                                                         <p class="ship-b__p">No invoice email available.</>
                                                     @endif

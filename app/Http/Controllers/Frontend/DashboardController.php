@@ -10,6 +10,7 @@ use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Province;
+use App\Models\Shipping;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
@@ -166,19 +167,41 @@ class DashboardController extends Controller
             $isCartEmpty = $cartItemCount === 0;
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             $checkoutData = session()->get('checkout', [
+                'full_name' => null,
+                'invoice_email' => null,
+                'phone' => null,
                 'city' => null,
                 'province' => null,
+                'landmark' => null,
+                'address' => null,
                 'shipping_cost' => 0
             ]);
-            $selectedCity = $checkoutData['city'];
+
             $selectedProvince = $checkoutData['province'];
+            $selectedCity = $checkoutData['city'];
+            
+            $selectedProvinceName = Province::find($selectedProvince);
+            $selectedCityName = Shipping::find($selectedCity);
+
             $shippingCost = $checkoutData['shipping_cost'];
-            $deliveryInformationId = $request->session()->get('delivery_information_id');
-            if ($deliveryInformationId) {
-                $deliveryInformation = DeliveryInformation::find($deliveryInformationId)
-                                        ->with(['province', 'city']) // Eager load the province and city relationships
-                                        ->first();;
-            }
+
+            $deliveryInformation = [
+                'full_name' => $checkoutData['full_name'] ?? null,
+                'invoice_email' => $checkoutData['invoice_email'] ?? null,
+                'phone' => $checkoutData['phone'] ?? null,
+                'landmark' => $checkoutData['landmark'] ?? null,
+                'address' => $checkoutData['address'] ?? null,
+                'shipping_cost' => $checkoutData['shipping_cost'] ?? null,
+                'city_name' => $selectedCityName,
+                'province_name' => $selectedProvinceName
+            ];
+
+            // $deliveryInformationId = $request->session()->get('delivery_information_id');
+            // if ($deliveryInformationId) {
+            //     $deliveryInformation = DeliveryInformation::find($deliveryInformationId)
+            //                             ->with(['province', 'city']) // Eager load the province and city relationships
+            //                             ->first();;
+            // }
             
         }
         // Return the checkout view with necessary data

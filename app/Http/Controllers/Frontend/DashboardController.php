@@ -112,6 +112,7 @@ class DashboardController extends Controller
         $provinces = Province::all()->pluck('province_name', 'id');
         $cartItemCount = 0;
         $shippingCost = 0;
+        $isCartEmpty = true;
         $cartproducts = collect(); // Initialize as an empty collection
         $selectedCity = null;
         $selectedProvince = null;
@@ -151,6 +152,7 @@ class DashboardController extends Controller
             $cart = Cart::where('customer_id', $customerId)->first();
             if ($cart) {
                 $cartItemCount = $cart->items()->count();
+                $isCartEmpty = $cartItemCount === 0;
                 $cartData = $cart->items()->get();
                 $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
             } else {
@@ -161,6 +163,7 @@ class DashboardController extends Controller
         } else {
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
+            $isCartEmpty = $cartItemCount === 0;
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             $checkoutData = session()->get('checkout', [
                 'city' => null,
@@ -172,7 +175,9 @@ class DashboardController extends Controller
             $shippingCost = $checkoutData['shipping_cost'];
             $deliveryInformationId = $request->session()->get('delivery_information_id');
             if ($deliveryInformationId) {
-                $deliveryInformation = DeliveryInformation::find($deliveryInformationId);
+                $deliveryInformation = DeliveryInformation::find($deliveryInformationId)
+                                        ->with(['province', 'city']) // Eager load the province and city relationships
+                                        ->first();;
             }
             
         }
@@ -189,7 +194,8 @@ class DashboardController extends Controller
             "customerEmail" => $customerEmail,
             "provinces" => $provinces,
             "selectedCity" => $selectedCity,
-            "selectedProvince" => $selectedProvince
+            "selectedProvince" => $selectedProvince,
+            "isCartEmpty" => $isCartEmpty
         ]);
     }
 

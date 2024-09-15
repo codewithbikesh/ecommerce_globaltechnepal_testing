@@ -98,7 +98,7 @@ $total = 0;
                 @endforeach
 
                 <div class="ecomNav-total">Total: {{ number_format($total, 2)}}</div>
-                <a href="{{ route('frontend.cart') }}" class="ecomNav-btn">Cart Page</a>
+                <a href="{{ route('frontend.checkout') }}" class="ecomNav-btn">Checkout</a>
             </div>
 
             

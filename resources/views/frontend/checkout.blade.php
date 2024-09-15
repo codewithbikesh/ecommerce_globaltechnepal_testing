@@ -51,7 +51,7 @@
                                     <div class="gl-inline">
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
-                                            <input class="input-text input-text--primary-style" name="full_name" type="text" id="billing-fname" required>
+                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation->full_name }}" type="text" id="billing-fname" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -59,14 +59,14 @@
                                     <!--====== E-MAIL ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-email">E-MAIL *</label>
-                                        <input class="input-text input-text--primary-style" name="email" type="text" id="billing-email" required>
+                                        <input class="input-text input-text--primary-style" name="email" value="{{ $deliveryInformation->invoice_email }}" type="text" id="billing-email" required>
                                     </div>
                                     <!--====== End - E-MAIL ======-->
 
                                     <!--====== PHONE ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-phone">PHONE *</label>
-                                        <input class="input-text input-text--primary-style" name="phone" type="text" id="billing-phone" required>
+                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation->phone }}" type="text" id="billing-phone" required>
                                     </div>
                                     <!--====== End - PHONE ======-->
 
@@ -95,13 +95,13 @@
 
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-street">LANDMARK (OPTIONAL) *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" placeholder="Famous Place near you">
+                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation->landmark }}" placeholder="Famous Place near you">
                                     </div>
 
                                     <!--====== Street Address ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-street">STREET ADDRESS/ LOCAL AREA *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" placeholder="House name and street name" required>
+                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation->address }}" placeholder="House name and street name" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
 
@@ -185,10 +185,9 @@
                                                     @endif
                                                 @else
                                                     @if($deliveryInformation)
-                                                        <p class="ship-b__p">{{ $deliveryInformation->province }}<br>
-                                                            {{ $deliveryInformation->city }},
-                                                            {{ $deliveryInformation->street_address }}
-                                                            {{ $deliveryInformation->postal_code }}</p>
+                                                        <p class="ship-b__p">{{ $deliveryInformation->address }},
+                                                            {{ $deliveryInformation->city->city }},
+                                                            {{ $deliveryInformation->province->province_name }}
                                                     @else
                                                         <p class="ship-b__p">No delivery information available.</p>
                                                     @endif
@@ -209,7 +208,7 @@
                                                         <p><span class="ri-mail-line material-symbols-outlined"></span> {{ $customerEmail }}</p>
                                                 @else             
                                                     @if($deliveryInformation)
-                                                        <span class="ship-b__text">No invoice email available.</span>
+                                                        <span class="ship-b__p">{{ $deliveryInformation->invoice_email }}</span>
                                                     @else
                                                         <p class="ship-b__p">No invoice email available.</>
                                                     @endif
@@ -228,7 +227,7 @@
                                                     @endif
                                                 @else             
                                                     @if($deliveryInformation)
-                                                        <span class="ship-b__text">Bill to default billing address</span>
+                                                        <span class="ship-b__p">Bill to shipping address</span>
                                                     @else
                                                         <p class="ship-b__p">No billing address available.</>
                                                     @endif
@@ -318,7 +317,7 @@
                                                 <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery.</span>
                                             </div>
                                             <div>
-                                                <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>
+                                                <button class="btn btn--e-brand-b-2" type="submit" {{ $isCartEmpty ? 'disabled' : '' }}>PLACE ORDER</button>
                                             </div>
                                         </form>
                                     </div>

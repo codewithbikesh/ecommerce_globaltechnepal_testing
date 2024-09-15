@@ -85,19 +85,15 @@
         <h3>Shipping Address</h3>
         <div class="mb-3">
             <strong>Province:</strong>
-            <p>{{ $order->deliveryInformation->province }}</p>
+            <p>{{ $order->deliveryInformation->province->province_name }}</p>
         </div>
         <div class="mb-3">
             <strong>City:</strong>
-            <p>{{ $order->deliveryInformation->city }}</p>
+            <p>{{ $order->deliveryInformation->city->city }}</p>
         </div>
         <div class="mb-3">
             <strong>Street Address:</strong>
-            <p>{{ $order->deliveryInformation->street_address }}</p>
-        </div>
-        <div class="mb-3">
-            <strong>Postal Code:</strong>
-            <p>{{ $order->deliveryInformation->postal_code }}</p>
+            <p>{{ $order->deliveryInformation->address }}</p>
         </div>
     </div>
     

@@ -17,8 +17,8 @@ class ProductController extends Controller
     
     public function view(Request $request)
     {    
-        $product = Product::findOrFail($request->product_code);
-        
+        // Fetch the product using the 'product_code' column
+        $product = Product::where('product_code', $request->input('product_code'))->first();
         if (!$product) {
             abort(404, 'Product not found');
         }

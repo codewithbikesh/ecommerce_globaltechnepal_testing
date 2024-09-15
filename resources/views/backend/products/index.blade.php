@@ -42,7 +42,7 @@
             <th scope="row">{{ $index + 1 }}</th>
             <td>{{ $product->product_code }}</td>
             <td>{{ $product->product_name }}</td>
-            <td>{{ $product->category_id }}</td>
+            <td>{{ $product->category_name }}</td>
             <td>{{ $product->actual_price }}</td>
             <td>{{ $product->sell_price }}</td>
             <td>{{ $product->stock_quantity }}</td>

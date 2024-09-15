@@ -28,8 +28,18 @@
                   </div>
                   
                   <div class="row">
+                    <div class="col-lg-6 col-md-6 label">Product Description</div>
+                    <div class="col-lg-6 col-md-6">{{ $product->product_description }}</div>
+                  </div>
+                  
+                  <div class="row">
                     <div class="col-lg-6 col-md-6 label">Category</div>
-                    <div class="col-lg-6 col-md-6">{{ $product->category_id }}</div>
+                    <div class="col-lg-6 col-md-6">{{ $product->category_name }}</div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 label">Sub Category</div>
+                    <div class="col-lg-6 col-md-6">{{ $product->subcategory_name }}</div>
                   </div>
                   
                   <div class="row">
@@ -43,8 +53,18 @@
                   </div>
                   
                   <div class="row">
+                    <div class="col-lg-6 col-md-6 label">Available Quantity</div>
+                    <div class="col-lg-6 col-md-6">{{ $product->available_quantity }}</div>
+                  </div>
+
+                  <div class="row">
                     <div class="col-lg-6 col-md-6 label">Stock Quantity</div>
                     <div class="col-lg-6 col-md-6">{{ $product->stock_quantity }}</div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 label">Brand Name</div>
+                    <div class="col-lg-6 col-md-6">{{ $product->brand_name }}</div>
                   </div>
                                     
                   <div class="row">

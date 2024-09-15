@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2024 at 07:54 PM
+-- Generation Time: Sep 15, 2024 at 12:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -120,7 +120,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `province_id`, `city_id`, `session_id`, `tax`, `shipping_cost`, `shipping_cost_total`, `subtotal`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 3, 3, NULL, 0.00, 140.00, 140.00, 1200.00, NULL, '2024-09-13 11:01:01', '2024-09-14 11:37:16');
+(1, 2, 6, 4, NULL, 0.00, 300.00, 300.00, 200.10, NULL, '2024-09-13 11:01:01', '2024-09-15 02:55:23');
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_code`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(5, 1, '21', 4, 1200.00, '2024-09-13 11:58:26', '2024-09-14 06:37:06');
+(9, 1, '33', 1, 200.10, '2024-09-15 02:55:23', '2024-09-15 02:55:23');
 
 -- --------------------------------------------------------
 
@@ -197,9 +197,9 @@ CREATE TABLE `customer_address_book` (
 --
 
 INSERT INTO `customer_address_book` (`id`, `customer_id`, `full_name`, `phone`, `province_id`, `city_id`, `address`, `landmark`, `address_type`, `default_shipping`, `default_billing`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Test', '9866077949', 3, 3, 'wedwedx', 'rfsdcsdc', 'H', NULL, 'Y', '2024-09-13 01:38:10', '2024-09-13 04:51:12'),
+(2, 2, 'Test', '9866077949', 3, 3, 'wedwedx', 'rfsdcsdc', 'H', NULL, NULL, '2024-09-13 01:38:10', '2024-09-14 23:45:10'),
 (3, 2, 'Janam pandey', '9813074888', 6, 4, 'Lokanthali', 'Durbar square', 'H', NULL, NULL, '2024-09-13 03:45:14', '2024-09-14 07:21:50'),
-(4, 2, 'Dipak Nyaupane', '9866077948', 6, 4, 'seshmati pul', 'seshmati', 'O', 'Y', 'N', '2024-09-14 07:21:39', '2024-09-14 07:21:50');
+(4, 2, 'Dipak Nyaupane', '9866077948', 6, 4, 'seshmati pul', 'seshmati', 'O', 'Y', 'Y', '2024-09-14 07:21:39', '2024-09-14 23:45:10');
 
 -- --------------------------------------------------------
 
@@ -210,17 +210,16 @@ INSERT INTO `customer_address_book` (`id`, `customer_id`, `full_name`, `phone`, 
 CREATE TABLE `delivery_information` (
   `id` bigint(20) NOT NULL,
   `customer_id` bigint(20) DEFAULT NULL,
-  `order_id` varchar(255) NOT NULL,
+  `order_id` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `province` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `invoice_email` varchar(255) DEFAULT NULL,
+  `province_id` bigint(20) NOT NULL,
+  `city_id` bigint(20) NOT NULL,
   `address` varchar(255) NOT NULL,
   `landmark` varchar(255) DEFAULT NULL,
   `address_type` varchar(255) DEFAULT NULL,
-  `default_shipping` varchar(255) DEFAULT NULL,
-  `default_billing` varchar(255) DEFAULT NULL,
+  `type` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -229,18 +228,11 @@ CREATE TABLE `delivery_information` (
 -- Dumping data for table `delivery_information`
 --
 
-INSERT INTO `delivery_information` (`id`, `customer_id`, `order_id`, `full_name`, `phone`, `email`, `province`, `city`, `address`, `landmark`, `address_type`, `default_shipping`, `default_billing`, `created_at`, `updated_at`) VALUES
-(1, 2, '', 'Bikesh Gupta', '98263541265', NULL, '3', 'qhwdabhd', 'jwdhGASJAHDH', NULL, NULL, NULL, NULL, '2024-09-11 04:25:02', '2024-09-11 04:25:02'),
-(2, 2, '', 'Test', '87126327165', NULL, '4', 'fgdvdsvsd', 'hdjabsdvshshv', NULL, NULL, NULL, NULL, '2024-09-11 04:29:15', '2024-09-11 04:29:15'),
-(3, 2, '', 'Milan Devkota', '9871263612', NULL, 'Bagmati', 'Kathmandu', 'Teku', NULL, NULL, NULL, NULL, '2024-09-11 05:23:19', '2024-09-11 05:23:19'),
-(4, 2, '', 'Milan Devkota', '9871263612', NULL, 'Bagmati', 'Kathmandu', 'Teku', NULL, NULL, NULL, NULL, '2024-09-11 05:31:29', '2024-09-11 05:31:29'),
-(5, 2, '', 'Milan Devkota', '9871263612', NULL, 'Bagmati', 'Kathmandu', 'Teku', NULL, NULL, NULL, NULL, '2024-09-11 08:10:26', '2024-09-11 08:10:26'),
-(6, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-11 08:26:29', '2024-09-11 08:26:29'),
-(7, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-11 09:15:00', '2024-09-11 09:15:00'),
-(8, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-11 09:59:23', '2024-09-11 09:59:23'),
-(9, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-11 10:37:20', '2024-09-11 10:37:20'),
-(10, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-12 01:52:08', '2024-09-12 01:52:08'),
-(11, 3, '', 'Dipak Nyaupane', '78326478126', NULL, 'Bagmati', 'Kathmandu', 'seshmati', NULL, NULL, NULL, NULL, '2024-09-12 04:45:22', '2024-09-12 04:45:22');
+INSERT INTO `delivery_information` (`id`, `customer_id`, `order_id`, `full_name`, `phone`, `invoice_email`, `province_id`, `city_id`, `address`, `landmark`, `address_type`, `type`, `created_at`, `updated_at`) VALUES
+(1, 2, '#ORD-20240915-0001', 'Dipak Nyaupane', '9866077948', 'milan@gmail.com', 6, 4, 'seshmati pul', NULL, 'O', '', '2024-09-15 01:24:40', '2024-09-15 01:24:40'),
+(2, 2, '#ORD-20240915-0001', 'Dipak Nyaupane', '9866077948', 'milan@gmail.com', 6, 4, 'seshmati pul', NULL, 'O', '', '2024-09-15 01:24:40', '2024-09-15 01:24:40'),
+(3, NULL, NULL, 'Janam pandey', '9813074888', 'hello@gmail.com', 6, 4, 'Ilam Tea Garden', NULL, NULL, 'shipping', '2024-09-15 02:15:30', '2024-09-15 02:15:30'),
+(4, NULL, NULL, 'Janam pandey', '9813074888', 'hello@gmail.com', 6, 4, 'Ilam Tea Garden', 'Tea Garden', NULL, 'shipping', '2024-09-15 02:15:51', '2024-09-15 02:30:36');
 
 -- --------------------------------------------------------
 
@@ -386,9 +378,8 @@ CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
   `order_id` varchar(255) NOT NULL,
   `customer_id` bigint(20) NOT NULL,
-  `delivery_information_id` bigint(20) NOT NULL,
-  `shipping_address` varchar(255) DEFAULT NULL,
-  `billing_address` varchar(255) DEFAULT NULL,
+  `shipping_delivery_information_id` bigint(20) NOT NULL,
+  `billing_delivery_information_id` bigint(20) NOT NULL,
   `payment_method` varchar(255) DEFAULT NULL,
   `shipping_method` varchar(255) DEFAULT NULL,
   `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -406,10 +397,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_id`, `customer_id`, `delivery_information_id`, `shipping_address`, `billing_address`, `payment_method`, `shipping_method`, `subtotal`, `tax`, `shipping_cost`, `discount`, `total_amount`, `order_status`, `payment_status`, `created_at`, `updated_at`) VALUES
-(5, '#ORD-20240911-0005', 3, 9, NULL, NULL, 'C', NULL, 2254.50, 313.89, 160.00, 0.00, 2728.39, 'Processing', 'Pending', '2024-09-11 10:45:59', '2024-09-11 10:45:59'),
-(6, '#ORD-20240912-0001', 3, 10, NULL, NULL, 'C', NULL, 600.00, 98.80, 160.00, 0.00, 858.80, 'Processing', 'Pending', '2024-09-12 01:52:14', '2024-09-12 01:52:14'),
-(7, '#ORD-20240912-0002', 3, 11, NULL, NULL, 'C', NULL, 200.10, 46.81, 160.00, 0.00, 406.91, 'Processing', 'Pending', '2024-09-12 04:45:30', '2024-09-12 04:45:30');
+INSERT INTO `orders` (`id`, `order_id`, `customer_id`, `shipping_delivery_information_id`, `billing_delivery_information_id`, `payment_method`, `shipping_method`, `subtotal`, `tax`, `shipping_cost`, `discount`, `total_amount`, `order_status`, `payment_status`, `created_at`, `updated_at`) VALUES
+(1, '#ORD-20240915-0001', 2, 2, 1, 'C', NULL, 1650.00, 0.00, 300.00, 0.00, 1950.00, 'Processing', 'Pending', '2024-09-15 01:24:40', '2024-09-15 01:24:40');
 
 -- --------------------------------------------------------
 
@@ -433,10 +422,7 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, '#ORD-20240911-0005', 56, 1, 100.50, 100.50, '2024-09-11 10:45:59', '2024-09-11 10:45:59'),
-(2, '#ORD-20240911-0005', 55, 2, 1077.00, 2154.00, '2024-09-11 10:45:59', '2024-09-11 10:45:59'),
-(3, '#ORD-20240912-0001', 21, 2, 300.00, 600.00, '2024-09-12 01:52:14', '2024-09-12 01:52:14'),
-(4, '#ORD-20240912-0002', 33, 1, 200.10, 200.10, '2024-09-12 04:45:30', '2024-09-12 04:45:30');
+(1, '#ORD-20240915-0001', 11, 2, 825.00, 1650.00, '2024-09-15 01:24:40', '2024-09-15 01:24:40');
 
 -- --------------------------------------------------------
 
@@ -1491,7 +1477,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1509,7 +1495,7 @@ ALTER TABLE `customer_address_book`
 -- AUTO_INCREMENT for table `delivery_information`
 --
 ALTER TABLE `delivery_information`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1545,13 +1531,13 @@ ALTER TABLE `newsletter_subscribers_list`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1597,7 +1583,7 @@ ALTER TABLE `website_data`
 -- Constraints for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  ADD CONSTRAINT `cart_items_fk_1` FOREIGN KEY (`product_code`) REFERENCES `products` (`product_code`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cart_items_fk_1` FOREIGN KEY (`product_code`) REFERENCES `products` (`product_code`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `customer_address_book`

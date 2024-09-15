@@ -1,4 +1,4 @@
-<div class="leftSideBar">
+<div class="leftSideBar sliderHide">
     <aside class="sidebar">
         <ul class="links">
             <h4>Main Menu</h4>
@@ -7,54 +7,54 @@
                 <a href="#">Dashboard</a>
             </li> --}}
             <li>
-                <span class="material-symbols-outlined">show_chart</span>
-                <a class="dash-active" href="{{ route('frontend.account') }}">Manage My
+                <span class="material-symbols-outlined fa">show_chart</span>
+                <a class="dash-active fa" href="{{ route('frontend.account') }}">Manage My
                     Account</a>
             </li>
               <li>
-                <span class="ri-map-pin-line material-symbols-outlined"></span>
-                <a href="{{ route('frontend.address.book') }}">Address Book</a>
+                <span class="fa ri-map-pin-line material-symbols-outlined fa"></span>
+                <a class="fa" href="{{ route('frontend.address.book') }}">Address Book</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">flag</span>
-                <a href="{{ route('frontend.dash-my-order') }}">My Orders</a>
+                <span class="fa material-symbols-outlined">flag</span>
+                <a class="fa" href="{{ route('frontend.dash-my-order') }}">My Orders</a>
             </li>
             <hr>
             <h4>Advanced</h4>
             <li>
-                <span class="material-symbols-outlined">person</span>
-            <a href="{{ route('frontend.dash-cancellation') }}">My Returns &
+                <span class="fa material-symbols-outlined">person</span>
+            <a class="fa" href="{{ route('frontend.dash-cancellation') }}">My Returns &
                 Cancellations</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">group</span>
-                <a href="#">Developer </a>
+                <span class="fa material-symbols-outlined">group</span>
+                <a href="#" class="fa">Developer </a>
             </li>
             <li>
-                <span class="material-symbols-outlined">ambient_screen</span>
-                <a href="#">Magic Build</a>
+                <span class="fa material-symbols-outlined">ambient_screen</span>
+                <a href="#" class="fa">Magic Build</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">pacemaker</span>
-                <a href="#">Theme Maker</a>
+                <span class="fa material-symbols-outlined">pacemaker</span>
+                <a href="#" class="fa">Theme Maker</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">monitoring</span>
-                <a href="#">Analytic</a>
+                <span class="fa material-symbols-outlined">monitoring</span>
+                <a href="#" class="fa">Analytic</a>
             </li>
             <hr>
             <h4>Account</h4>
             <li>
-                <span class="material-symbols-outlined">bar_chart</span>
-                <a href="#">Overview</a>
+                <span class="fa material-symbols-outlined">bar_chart</span>
+                <a href="#" class="fa">Overview</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">mail</span>
-                <a href="#">Message</a>
+                <span class="fa material-symbols-outlined">mail</span>
+                <a href="#" class="fa">Message</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">settings</span>
-                <a href="#">Settings</a>
+                <span class="fa material-symbols-outlined">settings</span>
+                <a href="#" class="fa">Settings</a>
             </li>
         </ul>
     </aside>  

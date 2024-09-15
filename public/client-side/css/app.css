@@ -6061,6 +6061,38 @@ color:whitesmoke !important;
     grid-template-columns: 1fr 5fr;
 
 }
+.centerBlockText{
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+@keyframes moveRight {
+    0% {
+        left: -50%;
+    }
+    33.33% {
+        left: -25%;
+    }
+    66.66% {
+        left: 0;
+    }
+    100% {
+        left: 0;
+    }
+}
+.sliderShow{
+  animation: moveRight .2s steps(3) forwards; 
+}
+.btn-primary{
+background: orangered !important;
+    border: none !important;
+}
+@media (min-width: 992px) {
+    .moreActionBtnButton {
+        display: none;
+    }
+}
 @media (max-width: 767px) {
   .table-p td {
     min-width: 200px; }
@@ -6081,9 +6113,16 @@ color:whitesmoke !important;
  flex-direction: column;
     align-items: center;
 }
+.container{
+  margin: 0;
+}
 .pageUl li{
 padding: 0;
 }
+.sliderHide{
+  opacity: 0;
+}
+
 .pageLinkParent{
   padding: 0;
 }
@@ -6115,7 +6154,16 @@ padding: 0;
     grid-template-columns: 1fr !important;
 }
 .ssllll {
-  display: none ;
+        position: fixed;
+        z-index: 990;
+        background: white;
+        top: 100px;
+                left: 0;
+}
+.ssllll h1 {
+padding: 0;
+margin: 0;
+
 }
   .productParent {
     grid-template-columns: 1fr 1fr !important;
@@ -6149,7 +6197,6 @@ padding: 0;
 background: #ffffff;
     height: 100vh;
     top: 16%;
-    display: none;
 }
 
 .midetailsOfUser{
@@ -6166,9 +6213,23 @@ background: #ffffff;
 .dash__table{
     margin-top: 13px;
 }
-.btn-primary{
-background: orangered;
-    border: none;
+
+.moreAccountBtn{
+      width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.editOptionParetn, .rowParentProfileEdit{
+  width: 100vw;
+}
+.dashboardpageLink .card{
+border-radius: 9px;
+background: white;
+box-shadow: none;
+            border: none;
+}
+a{
+  font-size: 2rem !important;
 }
 }
 

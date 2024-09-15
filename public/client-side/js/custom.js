@@ -1,60 +1,35 @@
 
-const handleResize = () => {
-    if (window.innerWidth <= 991) {
-let fltrBtn = document.querySelector(".fltrBtn");
-let body = document.querySelector("body");
 
-let ssllll = document.querySelector(".ssllll");
-let fltrsStatus = 0;
-ssllll.style.display = "none";
+let moreActionBtnButton = document.querySelector(".moreActionBtnButton")
 
-// Function to show the filter element
-const showFilter = () => {
-    ssllll.style.display = "flex";
-    ssllll.style.position = "fixed";
-    ssllll.style.zIndex = "9";
-    ssllll.style.background = "#f0eeed";
-    ssllll.style.top = "101px";
-    console.log("Filter shown");
-};
-
-// Function to hide the filter element
-const hideFilter = () => {
-    let ssllll = document.querySelector(".ssllll");
-    ssllll.style.display = "none";
-};
+// Account page sidebar hide show | when click on "Account Menu" toogle sidebar opacity
+moreActionBtnButton.addEventListener("click", ()=>{
+    let leftSideBar = document.querySelector(".leftSideBar")
+    leftSideBar.classList.toggle("sliderHide")
+    leftSideBar.classList.toggle("sliderShow")
+    
+})
 
 
-fltrBtn.addEventListener("click", (event) => {
-    if (fltrsStatus === 0) {
-        fltrsStatus = 1;
-        event.stopPropagation();
-        showFilter();
-    } else {
-        hideFilter();
-        fltrsStatus = 0;
-    }
-});
 
 
-body.addEventListener("click", (event) => {
-    if (event.target.tagName === "SPAN") {
-    } else {
-        hideFilter();
-    }
-});
-    } 
-    else{
-            let ssllll = document.querySelector(".ssllll");
-    ssllll.style.position = "relative";
-    ssllll.style.top = "0px";
-    ssllll.style.display = "block";
+    // Hide sidebar when clicking anywhere in the document except it's own area
+    document.addEventListener('click', (event) => {
+    let leftSideBar = document.querySelector(".leftSideBar")
+        if (!leftSideBar.contains(event.target) && event.target.tagName!=="BUTTON") {
+              leftSideBar.classList.add("sliderHide")
 
-    }
-};
+        }
+    });
+
+    // Prevent hiding sidebar when clicking inside it
+    leftSideBar.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent the click from reaching the document
+    });
 
 
-handleResize();
 
 
-window.addEventListener("resize", handleResize);
+
+
+

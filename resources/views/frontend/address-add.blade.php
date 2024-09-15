@@ -9,11 +9,11 @@
     <div class="section__content">
         <div class="dash">
             <div class="container">
-                <div class="row">
+                <div class="row addres-add-parentrow">
                     <div class="col-lg-9 col-md-12">
                         <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
                             <div class="dash__pad-2">
-                                <h1 class="dash__h1 u-s-m-b-14">Add New Address</h1>
+                                <h1 class="dash__h1 u-s-m-b-14 fa d-block text-center">Add New Address</h1>
 
                                 <!-- Form Start -->
                                 <form action="{{ route('frontend.address.create') }}" method="POST">
@@ -95,7 +95,11 @@
                                     @endif
                                     
                                     <!-- Submit Button -->
+                                     <div class="d-flex justify-evenly align-items-center">
                                     <button type="submit" class="btn btn-primary mt-3">Add Address</button>
+                                                                    <button class="btn btn-primary moreActionBtnButton" type="button">Account Menu</button>
+
+                                                                    </div>
                                 </form>
                                 <!-- Form End -->
 

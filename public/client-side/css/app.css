@@ -6215,7 +6215,7 @@ padding: 0;
         position: fixed;
         z-index: 990;
         background: white;
-        top: 100px;
+        top: 114px;
                 left: 0;
 }
 .ssllll h1 {
@@ -6291,7 +6291,24 @@ box-shadow: none;
 a{
   font-size: 2rem !important;
 }
-
+.alert {
+  font-size: 2rem !important;
+}
+.addres-add-parentrow{
+  width: 100vw;
+}
+.addres-add-parentrow input, .addres-add-parentrow label {
+ font-size: 2rem;
+}
+.dash__pad-2 {
+    padding:0;
+}
+.ecomNav-profile-options i {
+    font-size: 2.5rem;
+}
+.shop-p__meta-wrap span{
+  font-size: 2rem;
+}
 }
 
 

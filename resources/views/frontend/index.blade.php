@@ -94,19 +94,20 @@
                             </div>
                             @foreach ($categories as $category)
                             <div class="filter__category-wrapper">
-                                <button class="btn filter__btn filter__btn--style-1" type="button"
-                                    data-filter=".{{ $category }}">{{ $category }}</button>
+                                <button class="btn filter__btn filter__btn--style-1 topTrending" type="button"
+                                    data-filter="{{ $category }}">{{ $category }}</button>
                             </div>
                             @endforeach
                         </div>
                         @endif
-                        <div class="filter__grid-wrapper u-s-m-t-30">
+                        <div tyle="hidden" id="partials-filter-top-trending">
+                        <div class="filter__grid-wrapper u-s-m-t-30"> 
                             <div class="row">
                                 @if($products->isNotEmpty())
                                 @foreach ($products as $product)
 
                                 <div
-                                    class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item {{ $product->category_id }}">
+                                    class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item">
                                     <a class="product-o-link"
                                         href="{{ route('frontend.product-detail', $product->product_code) }}">
                                         <div class="product-o product-o--hover-on product-o--radius">
@@ -357,60 +358,12 @@
                             @endif
                         </div>
                     </div>
-                </div>
-
-
-
-                @auth('customer')
-
-                @else
-                <!--====== Newsletter Subscribe Modal ======-->
-                {{-- <div class="modal fade new-l" id="newsletter-modal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal--shadow">
-
-                    <button class="btn new-l__dismiss fas" type="button" data-dismiss="modal">X</button>
-                    <div class="modal-body popup">
-                        <div class="row u-s-m-x-0">
-                            <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
-
-                                <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
-
-                                    <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a>
-                            </div>
-                            <div class="col-lg-6 new-l__col-2">
-                                <div class="new-l__section u-s-m-t-30">
-                                    <div class="u-s-m-b-8 new-l--center">
-                                        <h3 class="new-l__h3">Explore More Product</h3>
-                                    </div>
-                                    <div class="u-s-m-b-30 new-l--center">
-                                        <p class="new-l__p1">Be Our Member by Signing In righ now. </p>
-                                    </div>
-                                    <form class="new-l__form" action="{{ route('frontend.signin') }}">
-                                        <div class="u-s-m-b-15">
-                                            <div class="u-s-m-b-15">
-                                                <button class="btn btn--e-brand-b-2" type="submit">Sign In!</button>
-                                            </div>
-                                    </form>
-                                    <div class="u-s-m-b-15 new-l--center">
-                                        <p class="new-l__p2">By Signing up, you agree to receive Reshop
-                                            offers,<br />promotions and other commercial messages. You may unsubscribe at
-                                            any time.</p>
-                                    </div>
-                                    <div class="u-s-m-b-15 new-l--center">
-
-                                        <a class="new-l__link" data-dismiss="modal">No Thanks</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div> --}}
+                @auth('customer')
+                @else
                 <!--====== End - Newsletter Subscribe Modal ======-->
                 @endauth
-
                 {{-- <div class="col-lg-12">
                     <div class="load-more">
                         <button class="btn btn--e-brand" type="button">Load More</button>
@@ -469,7 +422,7 @@
                             </a>
                             <span class="product-o__category">
 
-                                <a href="shop-side-version-2.html">{{ $newarriveproduct->category_id }}</a></span>
+                                <a href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">{{ $newarriveproduct->category_id }}</a></span>
 
                             <span class="product-o__name">
                                 <a href="{{ route('frontend.product-detail', $newarriveproduct->product_code) }}">{{
@@ -1075,5 +1028,44 @@
 <!--====== End - Section 12 ======-->
 </div>
 <!--====== End - App Content ======-->
+
+@endsection
+@section('costomJs')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach event listener to category buttons
+        var categoryButtons = document.querySelectorAll('.topTrending');
+
+        categoryButtons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Get the category ID from the data-filter attribute
+                var categoryId = this.getAttribute('data-filter');
+
+                // Perform AJAX request to filter products by category
+                fetch("{{ route('frontend.partials-filter.top-trending-filter') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        category_id: categoryId
+                    })
+                })
+                .then(function(response) {
+                    return response.text(); // Get the HTML response as text
+                })
+                .then(function(responseText) {
+                    document.getElementById('partials-filter-top-trending').innerHTML = responseText;
+                })
+                .catch(function(error) {
+                    console.error("Error occurred: ", error);
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

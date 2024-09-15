@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-  public  function index(){
+  public  function index(Request $request){
     $cartItemCount = 0;
     $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
+        // $categoryId = $request->category_id;
+        // $categories = Product::distinct()->pluck('category_id',$categoryId);
         $products = Product::paginate(25);
         $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
@@ -446,20 +448,30 @@ class DashboardController extends Controller
     public function filterProducts(Request $request)
     {
         $categoryId = $request->category_id;
+        
+        // Store the selected category ID in the session
+        $request->session()->put('filter_category_id', $categoryId);
 
         // Fetch products that belong to the selected category
         $shoplistproducts = Product::where('category_id', $categoryId)->get();
 
         // Return the filtered products as HTML
-        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
+        return view('frontend.partials-filter.filtered-products', compact('shoplistproducts'))->render();
     }
-     
+
+
+
     // partials products filter by price range wise 
     // partials products filter by price range wise 
     public function filterProductsByPrice(Request $request)
     {
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
+    
+   // Store the price range in the session
+   $request->session()->put('filter_min_price', $minPrice);
+   $request->session()->put('filter_max_price', $maxPrice);
+
 
         // Validate price range
         if ($minPrice === null) $minPrice = 0;
@@ -469,9 +481,26 @@ class DashboardController extends Controller
         $shoplistproducts = Product::whereBetween('sell_price', [$minPrice, $maxPrice])->get();
 
         // Return the filtered products as HTML
-        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
+        return view('frontend.partials-filter.filtered-products', compact('shoplistproducts'))->render();
     }
 
+
+    //  partials products filter by category wise 
+    //  partials products filter by category wise 
+    public function topTrendingFilterProducts(Request $request)
+    {
+        $categoryId = $request->category_id;
+        
+        // Store the selected category ID in the session
+        // $request->session()->put('filter_category_id', $categoryId);
+
+        // Fetch products that belong to the selected category
+        $products  = Product::where('category_id', $categoryId)->get();
+
+        // Return the filtered products as HTML
+        return view('frontend.partials-filter.top-trending-filter', compact('products'))->render();
+    }
+    
     //  signin
     public function signin(){
         $websitedata = WebsiteData::first();

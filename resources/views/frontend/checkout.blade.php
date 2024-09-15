@@ -1,5 +1,8 @@
 @extends('frontend.layouts.master')
 @section('content')
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--====== App Content ======-->
 <div class="app-content">
 
@@ -48,7 +51,7 @@
                                     <div class="gl-inline">
                                         <div class="u-s-m-b-15">
                                             <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
-                                            <input class="input-text input-text--primary-style" name="full_name" type="text" id="billing-fname" required>
+                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation->full_name }}" type="text" id="billing-fname" required>
                                         </div>
                                     </div>
                                     <!--====== End - First Name, Last Name ======-->
@@ -56,14 +59,14 @@
                                     <!--====== E-MAIL ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-email">E-MAIL *</label>
-                                        <input class="input-text input-text--primary-style" name="email" type="text" id="billing-email" required>
+                                        <input class="input-text input-text--primary-style" name="email" value="{{ $deliveryInformation->invoice_email }}" type="text" id="billing-email" required>
                                     </div>
                                     <!--====== End - E-MAIL ======-->
 
                                     <!--====== PHONE ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-phone">PHONE *</label>
-                                        <input class="input-text input-text--primary-style" name="phone" type="text" id="billing-phone" required>
+                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation->phone }}" type="text" id="billing-phone" required>
                                     </div>
                                     <!--====== End - PHONE ======-->
 
@@ -72,13 +75,11 @@
                                         <label class="gl-label" for="billing-state">STATE/PROVINCE *</label>
                                         <select class="select-box select-box--primary-style" name="province" id="billing-state" required>
                                             <option selected value="" disabled>Choose Province</option>
-                                            <option value="1">Province 1</option>
-                                            <option value="2">Madhesh</option>
-                                            <option value="3">Bagmati</option>
-                                            <option value="4">Gandaki</option>
-                                            <option value="5">Lumbini</option>
-                                            <option value="6">Karnali</option>
-                                            <option value="7">Sudurpaschim</option>
+                                            @foreach($provinces as $id => $province_name)
+                                                <option value="{{ $id }}" {{ $selectedProvince == $id ? 'selected' : '' }}>
+                                                    {{ $province_name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <!--====== End - STATE/PROVINCE ======-->
@@ -86,28 +87,29 @@
                                     <!--====== Town / City ======-->
                                     <div class="u-s-m-b-15">
                                         <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
-                                        <input class="input-text input-text--primary-style" name="city" type="text" id="billing-town-city" required>
+                                        <select class="select-box select-box--primary-style" id="city" name="city">
+                                            <option selected value="" disabled>Choose City</option>
+                                        </select>
                                     </div>
                                     <!--====== End - Town / City ======-->
 
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-street">LANDMARK (OPTIONAL) *</label>
+                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation->landmark }}" placeholder="Famous Place near you">
+                                    </div>
+
                                     <!--====== Street Address ======-->
                                     <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" placeholder="House name and street name" required>
+                                        <label class="gl-label" for="billing-street">STREET ADDRESS/ LOCAL AREA *</label>
+                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation->address }}" placeholder="House name and street name" required>
                                     </div>
                                     <!--====== End - Street Address ======-->
 
-                                    <!--====== ZIP/POSTAL ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-zip">ZIP/POSTAL CODE</label>
-                                        <input class="input-text input-text--primary-style" type="text" name="postal_code" id="billing-zip" placeholder="Zip/Postal Code">
-                                    </div>
-                                    <!--====== End - ZIP/POSTAL ======-->
-
-                                    <div class="u-s-m-b-10">
+                                    {{-- <div class="u-s-m-b-10">
                                         <label class="gl-label" for="order-note">ORDER NOTE</label>
                                         <textarea class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
-                                    </div>
+                                    </div> --}}
+
                                     <div>
                                         <button class="btn btn--e-transparent-brand-b-2" type="submit">SAVE</button>
                                     </div>
@@ -168,9 +170,10 @@
 
                                     </div>
                                 </div>
+
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
-                                        <h1 class="checkout-f__h1">SHIPPING & BILLING</h1>
+                                        <h1 class="checkout-f__h1">SHIPPING ADDRESS</h1>
                                         <div class="ship-b">
                                             <span class="ship-b__text">Ship to:</span>
                                             <div class="ship-b__box u-s-m-b-10">
@@ -182,16 +185,39 @@
                                                     @endif
                                                 @else
                                                     @if($deliveryInformation)
-                                                        <p class="ship-b__p">{{ $deliveryInformation->province }}<br>
-                                                            {{ $deliveryInformation->city }},
-                                                            {{ $deliveryInformation->street_address }}
-                                                            {{ $deliveryInformation->postal_code }}</p>
+                                                        <p class="ship-b__p">{{ $deliveryInformation->address }},
+                                                            {{ $deliveryInformation->city->city }},
+                                                            {{ $deliveryInformation->province->province_name }}
                                                     @else
                                                         <p class="ship-b__p">No delivery information available.</p>
                                                     @endif
                                                 @endauth
                                             </div>
-                                            <span class="ship-b__text">Bill to:</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="o-summary__section u-s-m-b-30">
+                                    <div class="o-summary__box">
+                                        <h1 class="checkout-f__h1">INVOICE & BILLING</h1>
+                                        
+                                        <div class="ship-b">
+                                            <span class="ship-b__text">Invoice Email</span>
+                                            <div class="ship-b__box">
+                                                @auth('customer')
+                                                        <p><span class="ri-mail-line material-symbols-outlined"></span> {{ $customerEmail }}</p>
+                                                @else             
+                                                    @if($deliveryInformation)
+                                                        <span class="ship-b__p">{{ $deliveryInformation->invoice_email }}</span>
+                                                    @else
+                                                        <p class="ship-b__p">No invoice email available.</>
+                                                    @endif
+                                                @endauth
+                                            </div>
+                                        </div>
+
+                                        <div class="ship-b">
+                                            <span class="ship-b__text">Billing Address</span>
                                             <div class="ship-b__box">
                                                 @auth('customer')
                                                     @if($default_billing_addresses)
@@ -201,7 +227,7 @@
                                                     @endif
                                                 @else             
                                                     @if($deliveryInformation)
-                                                        <span class="ship-b__text">Bill to default billing address</span>
+                                                        <span class="ship-b__p">Bill to shipping address</span>
                                                     @else
                                                         <p class="ship-b__p">No billing address available.</>
                                                     @endif
@@ -210,6 +236,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 @php
                                     // Initialize variables for authenticated users
@@ -290,7 +317,7 @@
                                                 <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery.</span>
                                             </div>
                                             <div>
-                                                <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>
+                                                <button class="btn btn--e-brand-b-2" type="submit" {{ $isCartEmpty ? 'disabled' : '' }}>PLACE ORDER</button>
                                             </div>
                                         </form>
                                     </div>
@@ -307,4 +334,46 @@
     <!--====== End - Section 3 ======-->
 </div>
 <!--====== End - App Content ======-->
+
+
+<script>
+    $(document).ready(function() {
+        var selectedCity = @json($selectedCity); // Get the selected city from Blade
+
+        // Function to update city options based on province
+        $('select[name="province"]').on('change', function() {
+            var province_id = $(this).val();
+            if (province_id) {
+                $.ajax({
+                    url: "/getCities/" + province_id, // Use relative URL
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("Cities data:", data);
+                        var $citySelect = $('select[name="city"]');
+                        $citySelect.empty();
+
+                        // Populate city options
+                        $.each(data, function(key, value) {
+                            var isSelected = (key === selectedCity) ? ' selected' : ''; // Check if this city should be selected
+                            $citySelect.append('<option value="' + key + '"' + isSelected + '>' + value + '</option>');
+                        });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX Error: ", textStatus, errorThrown);
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
+
+        // Trigger change event on load to populate cities based on initially selected province
+        var initialProvince = $('select[name="province"]').val();
+        if (initialProvince) {
+            $('select[name="province"]').trigger('change');
+        }
+    });
+</script>
+
 @endsection

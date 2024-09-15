@@ -123,8 +123,9 @@ Route::get('/lost-password', [DashboardController::class, 'lostPassword'])->name
 Route::get('/newarrival', [DashboardController::class, 'newarrival'])->name('frontend.newarrival');
 Route::get('/product-details/{product_code}', [DashboardController::class, 'productDetails'])->name('frontend.product-detail');
 Route::get('/shop-list-full', [DashboardController::class, 'shopListFull'])->name('frontend.shop-list-full');
-Route::post('/filter-products', [DashboardController::class, 'filterProducts'])->name('frontend.filter-products');
-Route::post('/filter-products-by-price', [DashboardController::class, 'filterProductsByPrice'])->name('frontend.filter-products-price');
+Route::post('/filter-products', [DashboardController::class, 'filterProducts'])->name('frontend.partials-filter.filter-products');
+Route::post('/filter-products-by-price', [DashboardController::class, 'filterProductsByPrice'])->name('frontend.partials-filter.filter-products-price');
+Route::post('/filter-products-by-category', [DashboardController::class, 'topTrendingFilterProducts'])->name('frontend.partials-filter.top-trending-filter');
 Route::get('/signin', [DashboardController::class, 'signin'])->name('frontend.signin');
 Route::get('/signup', [DashboardController::class, 'signup'])->name('frontend.signup');
 Route::get('/whatsnew', [DashboardController::class, 'whatsnew'])->name('frontend.whatsnew');

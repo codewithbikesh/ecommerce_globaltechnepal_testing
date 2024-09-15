@@ -8,6 +8,7 @@ use App\Models\DeliveryInformation;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Shipping;
 use App\Models\Cart;
 use App\Models\CustomerAddressBook;
 

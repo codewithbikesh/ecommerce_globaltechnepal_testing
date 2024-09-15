@@ -353,18 +353,8 @@ class FrontendAccountController extends Controller
         $addressbook->landmark = $request->landmark;
         $addressbook->address = $request->address;
         $addressbook->address_type = $request->address_type;
-        $default_shipping = $request->default_shipping;
-        $default_billing = $request->default_billing;
-        if ($default_shipping === "on"){
-            $addressbook->default_shipping = 'Y';
-        } else {
-            $addressbook->default_shipping = 'N';
-        }
-        if ($default_billing === "on"){
-            $addressbook->default_billing = 'Y';
-        } else {
-            $addressbook->default_billing = 'N';
-        }
+        $addressbook->default_shipping = $request->default_shipping;
+        $addressbook->default_billing = $request->default_billing;
 
         if ($addressbook->save()) {
             session()->flash('success', 'Address have been successfully created.');

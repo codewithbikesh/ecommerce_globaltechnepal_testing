@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
-use App\Models\Province;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
@@ -18,14 +17,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-  public  function index(Request $request){
+  public  function index(){
     $cartItemCount = 0;
     $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id');
         // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $categories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 7')->pluck('category_id');
-        // $categoryId = $request->category_id;
-        // $categories = Product::distinct()->pluck('category_id',$categoryId);
         $products = Product::paginate(25);
         $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
@@ -109,19 +106,14 @@ class DashboardController extends Controller
     // checkout 
     public function checkout(Request $request){
         $websitedata = WebsiteData::first();
-        $provinces = Province::all()->pluck('province_name', 'id');
         $cartItemCount = 0;
         $shippingCost = 0;
         $cartproducts = collect(); // Initialize as an empty collection
-        $selectedCity = null;
-        $selectedProvince = null;
         $default_shipping_addresses = collect(); // Initialize as an empty collection
         $default_billing_addresses = collect();
         $deliveryInformation = null; // Initialize as null
-        $customerEmail = null;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
-            $customerEmail = auth('customer')->user()->email;
             // Fetch all addresses for the authenticated customer where default_shipping = 'Y'
             $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
                                                          ->where('default_shipping', 'Y')
@@ -163,12 +155,8 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             $checkoutData = session()->get('checkout', [
-                'city' => null,
-                'province' => null,
                 'shipping_cost' => 0
             ]);
-            $selectedCity = $checkoutData['city'];
-            $selectedProvince = $checkoutData['province'];
             $shippingCost = $checkoutData['shipping_cost'];
             $deliveryInformationId = $request->session()->get('delivery_information_id');
             if ($deliveryInformationId) {
@@ -185,11 +173,7 @@ class DashboardController extends Controller
             "shippingCost" => $shippingCost,
             "deliveryInformation" => $deliveryInformation,
             "default_shipping_addresses" => $default_shipping_addresses,
-            "default_billing_addresses" => $default_billing_addresses,
-            "customerEmail" => $customerEmail,
-            "provinces" => $provinces,
-            "selectedCity" => $selectedCity,
-            "selectedProvince" => $selectedProvince
+            "default_billing_addresses" => $default_billing_addresses
         ]);
     }
 
@@ -462,30 +446,20 @@ class DashboardController extends Controller
     public function filterProducts(Request $request)
     {
         $categoryId = $request->category_id;
-        
-        // Store the selected category ID in the session
-        $request->session()->put('filter_category_id', $categoryId);
 
         // Fetch products that belong to the selected category
         $shoplistproducts = Product::where('category_id', $categoryId)->get();
 
         // Return the filtered products as HTML
-        return view('frontend.partials-filter.filtered-products', compact('shoplistproducts'))->render();
+        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
     }
-
-
-
+     
     // partials products filter by price range wise 
     // partials products filter by price range wise 
     public function filterProductsByPrice(Request $request)
     {
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
-    
-   // Store the price range in the session
-   $request->session()->put('filter_min_price', $minPrice);
-   $request->session()->put('filter_max_price', $maxPrice);
-
 
         // Validate price range
         if ($minPrice === null) $minPrice = 0;
@@ -495,26 +469,9 @@ class DashboardController extends Controller
         $shoplistproducts = Product::whereBetween('sell_price', [$minPrice, $maxPrice])->get();
 
         // Return the filtered products as HTML
-        return view('frontend.partials-filter.filtered-products', compact('shoplistproducts'))->render();
+        return view('frontend.filtered-products', compact('shoplistproducts'))->render();
     }
 
-
-    //  partials products filter by category wise 
-    //  partials products filter by category wise 
-    public function topTrendingFilterProducts(Request $request)
-    {
-        $categoryId = $request->category_id;
-        
-        // Store the selected category ID in the session
-        // $request->session()->put('filter_category_id', $categoryId);
-
-        // Fetch products that belong to the selected category
-        $products  = Product::where('category_id', $categoryId)->get();
-
-        // Return the filtered products as HTML
-        return view('frontend.partials-filter.top-trending-filter', compact('products'))->render();
-    }
-    
     //  signin
     public function signin(){
         $websitedata = WebsiteData::first();

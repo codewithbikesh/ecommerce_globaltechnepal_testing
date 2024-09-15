@@ -195,13 +195,6 @@ class DashboardController extends Controller
                 'city_name' => $selectedCityName,
                 'province_name' => $selectedProvinceName
             ];
-
-            // $deliveryInformationId = $request->session()->get('delivery_information_id');
-            // if ($deliveryInformationId) {
-            //     $deliveryInformation = DeliveryInformation::find($deliveryInformationId)
-            //                             ->with(['province', 'city']) // Eager load the province and city relationships
-            //                             ->first();;
-            // }
             
         }
         // Return the checkout view with necessary data

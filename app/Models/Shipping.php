@@ -16,5 +16,11 @@ class Shipping extends Model
     {
         return $this->hasMany(CustomerAddressBook::class, 'city_id', 'id'); // Adjust according to actual column names
     }
+    
+    // Define inverse relationship with Province
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 
 }

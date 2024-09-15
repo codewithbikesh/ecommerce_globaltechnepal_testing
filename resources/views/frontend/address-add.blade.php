@@ -85,11 +85,13 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="default_shipping">Default Shipping</label>
-                                            <input type="checkbox" name="default_shipping">
+                                            <input type="hidden" name="default_shipping" value="Y">
+                                            <input type="checkbox" name="default_shipping" checked disabled>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="default_billing">Default Billing</label>
-                                            <input type="checkbox" name="default_billing">
+                                            <input type="hidden" name="default_billing" value="Y">
+                                            <input type="checkbox" name="default_billing" checked disabled>
                                         </div>
                                     </div>
                                     @endif

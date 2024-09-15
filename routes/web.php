@@ -126,6 +126,7 @@ Route::get('/shop-list-full', [DashboardController::class, 'shopListFull'])->nam
 Route::post('/filter-products', [DashboardController::class, 'filterProducts'])->name('frontend.partials-filter.filter-products');
 Route::post('/filter-products-by-price', [DashboardController::class, 'filterProductsByPrice'])->name('frontend.partials-filter.filter-products-price');
 Route::post('/filter-products-by-category', [DashboardController::class, 'topTrendingFilterProducts'])->name('frontend.partials-filter.top-trending-filter');
+Route::post('/clear-session', [DashboardController::class, 'clearSession'])->name('frontend.partials-filter.clear-session');
 Route::get('/signin', [DashboardController::class, 'signin'])->name('frontend.signin');
 Route::get('/signup', [DashboardController::class, 'signup'])->name('frontend.signup');
 Route::get('/whatsnew', [DashboardController::class, 'whatsnew'])->name('frontend.whatsnew');

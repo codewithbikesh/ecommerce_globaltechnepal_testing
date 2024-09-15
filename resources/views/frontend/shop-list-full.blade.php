@@ -770,46 +770,92 @@
 @endsection
 @section('costomJs')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+   document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve the selected category from sessionStorage
+    var selectedCategoryId = sessionStorage.getItem('selectedCategoryId');
+
     // Attach event listener to category links
     var categoryLinks = document.querySelectorAll('.hedingCategory');
 
     categoryLinks.forEach(function(link) {
+        // Highlight the previously selected category on page load
+        if (link.getAttribute('data-id') === selectedCategoryId) {
+            link.classList.add('selected');
+            link.style.color = 'green';
+        }
+
         link.addEventListener('click', function(e) {
             e.preventDefault();
-               // Reset the color for all category links
-            categoryLinks.forEach(function(l) {
-                l.style.color = ''; // Remove any inline color style
-            });
 
-            // Set the color of the clicked category to green
-            this.style.color = 'green';
             // Get the category ID from data-id attribute
             var categoryId = this.getAttribute('data-id');
 
-            // Perform AJAX request to filter products by category
-            fetch("{{ route('frontend.partials-filter.filter-products') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    category_id: categoryId
-                })
-            })
-            .then(function(response) {
-                return response.text(); // Get the HTML response as text
-            })
-            .then(function(responseText) {
-                document.getElementById('appendProducts').innerHTML = responseText;
-            })
-            .catch(function(error) {
-                console.error("Error occurred: ", error);
+            // Check if the clicked category is already selected
+            var currentlySelected = document.querySelector('.hedingCategory.selected');
+            var isSameCategory = currentlySelected && currentlySelected.getAttribute('data-id') === categoryId;
+
+            // Reset the color for all category links
+            categoryLinks.forEach(function(l) {
+                l.classList.remove('selected');
+                l.style.color = ''; // Remove any inline color style
             });
+
+            if (isSameCategory) {
+                // If the same category is clicked again, clear the session and reset the product list
+                fetch("{{ route('frontend.partials-filter.clear-session') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(function(response) {
+                    return response.text(); // Optionally handle response if needed
+                })
+                .then(function(responseText) {
+                    document.getElementById('appendProducts').innerHTML = responseText; // Clear the product list
+                })
+                .catch(function(error) {
+                    console.error("Error occurred: ", error);
+                });
+
+                // Clear the selected category from sessionStorage
+                sessionStorage.removeItem('selectedCategoryId');
+            } else {
+                // Set the color of the clicked category to green
+                this.classList.add('selected');
+                this.style.color = 'green';
+
+                // Save the selected category ID to sessionStorage
+                sessionStorage.setItem('selectedCategoryId', categoryId);
+
+                // Perform AJAX request to filter products by category
+                fetch("{{ route('frontend.partials-filter.filter-products') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        category_id: categoryId
+                    })
+                })
+                .then(function(response) {
+                    return response.text(); // Get the HTML response as text
+                })
+                .then(function(responseText) {
+                    document.getElementById('appendProducts').innerHTML = responseText;
+                })
+                .catch(function(error) {
+                    console.error("Error occurred: ", error);
+                });
+            }
         });
     });
 });
+    </script>
+    
+<script>
 
 // filter products price range wise 
 // filter products price range wise 

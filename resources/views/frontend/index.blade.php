@@ -88,10 +88,10 @@
                     <div class="col-lg-12">
                         @if ($categories->isNotEmpty())
                         <div class="filter-category-container">
-                            <div class="filter__category-wrapper">
+                            {{-- <div class="filter__category-wrapper">
                                 <button class="btn filter__btn filter__btn--style-1 js-checked" type="button"
                                     data-filter="*">ALL</button>
-                            </div>
+                            </div> --}}
                             @foreach ($categories as $category)
                             <div class="filter__category-wrapper">
                                 <button class="btn filter__btn filter__btn--style-1 topTrending" type="button"

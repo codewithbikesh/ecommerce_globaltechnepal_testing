@@ -447,16 +447,24 @@ class DashboardController extends Controller
     }
 
     // shop list full 
-    public function shopListFull(Request $request){
+      // shop list full 
+      public function shopListFull(Request $request){
         $shoplistproducts = Product::latest();
         if(!empty($request->get('keyword'))){
             $keyword = $request->get('keyword');
             $shoplistproducts = $shoplistproducts->where('product_name','like','%'.$keyword.'%')
             ->orWhere('category_id','like','%'.$keyword.'%');
         }
+        
         $categoryId = $request->category_id;
         $categories = Product::distinct()->pluck('category_id',$categoryId);
-        $shoplistproducts = $shoplistproducts->paginate(25);
+        $selectedCategory = session('selected_category');
+        if($selectedCategory){
+            $shoplistproducts = $shoplistproducts->where('category_id', $selectedCategory)->paginate(25);
+        }else{
+             
+            $shoplistproducts = $shoplistproducts->paginate(25);
+        }
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection
@@ -479,14 +487,15 @@ class DashboardController extends Controller
         return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts","categories"));
     }
 
-    //  partials products filter by category wise 
+
+     //  partials products filter by category wise 
     //  partials products filter by category wise 
     public function filterProducts(Request $request)
     {
         $categoryId = $request->category_id;
         
         // Store the selected category ID in the session
-        $request->session()->put('filter_category_id', $categoryId);
+        session(['selected_category' => $categoryId]);
 
         // Fetch products that belong to the selected category
         $shoplistproducts = Product::where('category_id', $categoryId)->get();
@@ -494,6 +503,19 @@ class DashboardController extends Controller
         // Return the filtered products as HTML
         return view('frontend.partials-filter.filtered-products', compact('shoplistproducts'))->render();
     }
+    
+
+    // Session forget SelectedCategory
+    // Session forget SelectedCategory
+    public function clearSession(Request $request)
+{
+    $request->session()->forget('selected_category');
+    $shoplistproducts = Product::latest();
+    $shoplistproducts = $shoplistproducts->paginate(25);
+
+     return view('frontend.partials-filter.clear-session', compact('shoplistproducts'))->render();
+}
+
 
 
 

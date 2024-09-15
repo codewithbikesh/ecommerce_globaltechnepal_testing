@@ -247,7 +247,11 @@
                                         <table class="f-cart__table">
                                             @auth('customer')
                                                 <h3>Shipping Address</h3>
+                                                @if($default_shipping_addresses)
                                                 <p><span class="ri-map-pin-line material-symbols-outlined"></span> {{ $default_shipping_addresses->address }}, {{ $default_shipping_addresses->city->city }}, {{ $default_shipping_addresses->province->province_name }}</p>
+                                                @else
+                                                <p><span class="ri-map-pin-line material-symbols-outlined"></span>No Shipping Address Available.</p>
+                                                @endif
                                                 <hr>
                                             @endauth
                                             <h2>Order Summary</h2>

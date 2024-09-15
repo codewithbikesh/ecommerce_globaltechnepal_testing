@@ -6143,6 +6143,34 @@ padding: 0;
         .ecomNav-logo img {
     top: 6px;
 }
+
+/* Account Page  */
+.leftSideBar{
+    position: fixed;
+    z-index: 9999;
+    background: red;
+    height: 100vh;
+    top: 16%;
+}
+
+.midetailsOfUser{
+    flex-direction: column;
+    gap: 9px;
+}
+.rightOptions{
+    width: 100vw;
+}
+.dash__w-list{
+    flex-direction: row;
+    margin-top: 22px;
+}
+.dash__table{
+    margin-top: 13px;
+}
+.btn-primary{
+background: orangered;
+    border: none;
+}
 }
 
 

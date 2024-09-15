@@ -15,9 +15,8 @@ return new class extends Migration
             $table->bigInteger('id')->primary()->autoIncrement();
             $table->string('order_id');
             $table->bigInteger('customer_id');
-            $table->bigInteger('delivery_information_id');
-            $table->string('shipping_address')->nullable();
-            $table->string('billing_address')->nullable();
+            $table->bigInteger('shipping_delivery_information_id');
+            $table->bigInteger('billing_delivery_information_id');
             $table->string('payment_method')->nullable();
             $table->string('shipping_method')->nullable();  //Standard, Express
             $table->decimal('subtotal', 10, 2)->default(0);

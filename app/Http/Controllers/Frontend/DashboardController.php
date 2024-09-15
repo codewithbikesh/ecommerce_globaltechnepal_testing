@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\WebsiteData;
 use App\Models\Newsletter;
 use App\Models\Customer;
+use App\Models\Province;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
@@ -108,14 +109,19 @@ class DashboardController extends Controller
     // checkout 
     public function checkout(Request $request){
         $websitedata = WebsiteData::first();
+        $provinces = Province::all()->pluck('province_name', 'id');
         $cartItemCount = 0;
         $shippingCost = 0;
         $cartproducts = collect(); // Initialize as an empty collection
+        $selectedCity = null;
+        $selectedProvince = null;
         $default_shipping_addresses = collect(); // Initialize as an empty collection
         $default_billing_addresses = collect();
         $deliveryInformation = null; // Initialize as null
+        $customerEmail = null;
         if (auth('customer')->check()) {
             $customerId = auth('customer')->id();
+            $customerEmail = auth('customer')->user()->email;
             // Fetch all addresses for the authenticated customer where default_shipping = 'Y'
             $default_shipping_addresses = CustomerAddressBook::where('customer_id', $customerId)
                                                          ->where('default_shipping', 'Y')
@@ -157,8 +163,12 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
             $checkoutData = session()->get('checkout', [
+                'city' => null,
+                'province' => null,
                 'shipping_cost' => 0
             ]);
+            $selectedCity = $checkoutData['city'];
+            $selectedProvince = $checkoutData['province'];
             $shippingCost = $checkoutData['shipping_cost'];
             $deliveryInformationId = $request->session()->get('delivery_information_id');
             if ($deliveryInformationId) {
@@ -175,7 +185,11 @@ class DashboardController extends Controller
             "shippingCost" => $shippingCost,
             "deliveryInformation" => $deliveryInformation,
             "default_shipping_addresses" => $default_shipping_addresses,
-            "default_billing_addresses" => $default_billing_addresses
+            "default_billing_addresses" => $default_billing_addresses,
+            "customerEmail" => $customerEmail,
+            "provinces" => $provinces,
+            "selectedCity" => $selectedCity,
+            "selectedProvince" => $selectedProvince
         ]);
     }
 

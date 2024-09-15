@@ -16,15 +16,14 @@ return new class extends Migration
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('order_id')->nullable();
             $table->string('full_name');
-            $table->string('email')->nullable();
+            $table->string('invoice_email')->nullable();
             $table->string('phone');
-            $table->string('province');
-            $table->string('city');
+            $table->bigInteger('province_id');
+            $table->bigInteger('city_id');
             $table->string('address');
             $table->string('landmark')->nullable();
             $table->string('address_type')->nullable();
-            $table->string('default_shipping')->nullable();
-            $table->string('default_billing')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

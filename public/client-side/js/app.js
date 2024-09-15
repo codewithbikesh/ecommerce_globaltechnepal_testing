@@ -685,3 +685,19 @@
         RESHOP.shopSideFilter();
 })(jQuery);
 
+let fltrBtn  = document.querySelector(".fltrBtn")
+// ShopList-full  page filterSidebar hide show | when click on "Filter" toogle filterSidebar opacity
+fltrBtn.addEventListener("click", ()=>{
+    let ssllll = document.querySelector(".ssllll")
+ssllll.classList.toggle("sliderHide")
+})
+
+
+    // Hide sidebar when clicking anywhere in the document except it's own area
+    document.addEventListener('click', (event) => {
+          let ssllll = document.querySelector(".ssllll")
+        if (!ssllll.contains(event.target) && event.target.tagName!=="BUTTON") {
+              ssllll.classList.add("sliderHide")
+
+        }
+    });

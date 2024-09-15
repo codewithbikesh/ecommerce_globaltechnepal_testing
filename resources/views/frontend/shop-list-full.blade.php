@@ -788,7 +788,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var categoryId = this.getAttribute('data-id');
 
             // Perform AJAX request to filter products by category
-            fetch("{{ route('frontend.filter-products') }}", {
+            fetch("{{ route('frontend.partials-filter.filter-products') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var maxPrice = document.getElementById('price-max').value;
 
         // Perform AJAX request to filter products by price
-        fetch("{{ route('frontend.filter-products-price') }}", {
+        fetch("{{ route('frontend.partials-filter.filter-products-price') }}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

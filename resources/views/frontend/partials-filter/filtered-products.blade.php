@@ -33,7 +33,7 @@
                 <span class="product-m__review">(23)</span>
             </div>
             <div>
-                product-m__price<span class="product-o__price">{{ $shoplistproduct->actual_price }}<span
+                {{ $shoplistproduct->category_id }}<span class="product-o__price">{{ $shoplistproduct->actual_price }}<span
                         class="product-o__discount">{{ $shoplistproduct->sell_price }}</span></span>
             </div>
             <div class="product-m__hover">
@@ -49,7 +49,7 @@
 
                 <div class="product-m__quick-look">
                     <a class="fas fa-search" data-modal="modal"
-                        data-modal-id="#quick-look{{ $shoplistproduct->product_code }}"
+                        data-modal-id="#quick-look-{{ $shoplistproduct->product_code }}"
                         value="{{ $shoplistproduct->product_code }}"
                         data-tooltip="tooltip" data-placement="top" title="Quick Look"
                         style="color:white; font-size:1.2rem;"></a>
@@ -64,15 +64,16 @@
                 style="width:100%;">
 
                 <a class="btn--e-brand" data-modal="modal"
-                    data-modal-id="#add-to-cart{{ $shoplistproduct->product_code }}"
+                    data-modal-id="#add-to-cart-{{ $shoplistproduct->product_code }}"
                     value="{{ $shoplistproduct->product_code }}">Add to Cart</a>
             </div>
         </div>
-    </div>
+    </div>  
 </div>
+
 <!-- ---------------------------------------- -->
 <!--====== Quick Look Modal ======-->
-<div class="modal fade" id="quick-look{{ $shoplistproduct->product_code }}">
+<div class="modal fade" id="quick-look-{{ $shoplistproduct->product_code }}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal--shadow">
 
@@ -212,7 +213,7 @@
 <!--====== End - Quick Look Modal ======-->
 
 <!--====== Add to Cart Modal ======-->
-<div class="modal fade" id="add-to-cart{{ $shoplistproduct->product_code }}">
+<div class="modal fade" id="add-to-cart-{{ $shoplistproduct->product_code }}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal-radius modal-shadow">
 

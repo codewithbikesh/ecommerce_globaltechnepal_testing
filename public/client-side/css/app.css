@@ -6112,8 +6112,15 @@ width: fit-content;
     text-align: left;
     white-space: nowrap;
 }
-
-
+.address-section h3, .accountDashboardName {
+color: #757575;
+}
+.card h2{
+  color: #757575;
+}
+.greycolor{
+  color: #5a5a5a;
+}
 @keyframes moveRight {
     0% {
         left: -50%;
@@ -6310,6 +6317,3 @@ a{
   font-size: 2rem;
 }
 }
-
-
-

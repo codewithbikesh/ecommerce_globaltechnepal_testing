@@ -7,54 +7,54 @@
                 <a href="#">Dashboard</a>
             </li> --}}
             <li>
-                <span class="material-symbols-outlined fa">show_chart</span>
-                <a class="dash-active fa" href="{{ route('frontend.account') }}">Manage My
+                <span class="material-symbols-outlined greycolor">show_chart</span>
+                <a class="dash-active greycolor" href="{{ route('frontend.account') }}">Manage My
                     Account</a>
             </li>
               <li>
-                <span class="fa ri-map-pin-line material-symbols-outlined fa"></span>
-                <a class="fa" href="{{ route('frontend.address.book') }}">Address Book</a>
+                <span class="greycolor ri-map-pin-line material-symbols-outlined greycolor"></span>
+                <a class="greycolor" href="{{ route('frontend.address.book') }}">Address Book</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">flag</span>
-                <a class="fa" href="{{ route('frontend.dash-my-order') }}">My Orders</a>
+                <span class="greycolor material-symbols-outlined">flag</span>
+                <a class="greycolor" href="{{ route('frontend.dash-my-order') }}">My Orders</a>
             </li>
             <hr>
             <h4>Advanced</h4>
             <li>
-                <span class="fa material-symbols-outlined">person</span>
-            <a class="fa" href="{{ route('frontend.dash-cancellation') }}">My Returns &
+                <span class="greycolor material-symbols-outlined">person</span>
+            <a class="greycolor" href="{{ route('frontend.dash-cancellation') }}">My Returns &
                 Cancellations</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">group</span>
-                <a href="#" class="fa">Developer </a>
+                <span class="greycolor material-symbols-outlined">group</span>
+                <a href="#" class="greycolor">Developer </a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">ambient_screen</span>
-                <a href="#" class="fa">Magic Build</a>
+                <span class="greycolor material-symbols-outlined">ambient_screen</span>
+                <a href="#" class="greycolor">Magic Build</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">pacemaker</span>
-                <a href="#" class="fa">Theme Maker</a>
+                <span class="greycolor material-symbols-outlined">pacemaker</span>
+                <a href="#" class="greycolor">Theme Maker</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">monitoring</span>
-                <a href="#" class="fa">Analytic</a>
+                <span class="greycolor material-symbols-outlined">monitoring</span>
+                <a href="#" class="greycolor">Analytic</a>
             </li>
             <hr>
             <h4>Account</h4>
             <li>
-                <span class="fa material-symbols-outlined">bar_chart</span>
-                <a href="#" class="fa">Overview</a>
+                <span class="greycolor material-symbols-outlined">bar_chart</span>
+                <a href="#" class="greycolor">Overview</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">mail</span>
-                <a href="#" class="fa">Message</a>
+                <span class="greycolor material-symbols-outlined">mail</span>
+                <a href="#" class="greycolor">Message</a>
             </li>
             <li>
-                <span class="fa material-symbols-outlined">settings</span>
-                <a href="#" class="fa">Settings</a>
+                <span class="greycolor material-symbols-outlined">settings</span>
+                <a href="#" class="greycolor">Settings</a>
             </li>
         </ul>
     </aside>  

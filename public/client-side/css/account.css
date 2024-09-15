@@ -63,21 +63,42 @@
     text-decoration: none;
     font-size: 1.6rem;
 }
+.midetailsOfUser {
+justify-content: space-between;
+    gap: 5px;
+}
+.midetailsOfUser .card{
+   min-width: 300px;
+   min-height: 150px;
+}
 
 .links .logout-link {
     margin-top: 20px;
 }
 
 .dashboardpageLink .card{
-border-radius: 9px;
-background: #e0e0e0;
-box-shadow: inset 14px 14px 27px #bebebe,
-            inset -14px -14px 27px #ffffff;
+background: #ffffff;
             border: none;
+    padding: 2px 15px;
 }
 .dashboardpageLink .col-xl-4{
 padding: 0 3px !important;
 }
 .dashboardpageLink .col-xl-8{
 padding: 0 3px !important;
+}
+
+.deff{
+       color: #757575;
+}
+.editBtnAccocut{
+    padding: 0 !important;
+    color: #1a9cb7 !important;
+}
+.pipeSign{
+        margin-left: 5px;
+
+}
+#filterWise{
+    background-color: #eff0f4;
 }

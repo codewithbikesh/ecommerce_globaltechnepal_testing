@@ -6,18 +6,17 @@
                                     <div class="rightOptions">
                                     <div class="midetailsOfUser d-flex">
                                    <!-- Personal Profile Section -->
-                                <div class="col-xl-4">
+                            
                                     <div class="card">
-                                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
-                                            <div class="d-flex justify-content-between w-100">
-                                                <h2 class="fa section__heading">Personal Profile</h2>
+                            
+                                            <div class="d-flex">
+                                                <p class="">Personal Profile</p>
                                                 <form method="get" action="{{ route('frontend.profile.edit') }}">
-                                                    <button class="btn btn-primary">Edit
-                                        
+                                                 <span class="pipeSign">|</span>  <button class="btn editBtnAccocut">Edit</button>
                                                 </form>
                                             </div>
                                   
-                                            <p>{{ $customer_user->full_name }}</p>
+                                            <p class="accountDashboardName">{{ $customer_user->full_name }}</p>
                                             <p>{{ $customer_user->email }}</p>
                                             <p>{{ $customer_user->phone }}</p>
 
@@ -25,30 +24,25 @@
                                                             <button class="btn btn-primary moreActionBtnButton">Account Menu</button>
                                             </div>
 
-                                      
-                                        </div>
+                                
                                     </div>
-                                </div>
+                         
 
                                 <!-- Address Book Section -->
-                                <div class="col-xl-8">
+                    
                                     <div class="card">
-                                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-start">
-                                            <div class="d-flex justify-content-between w-100">
-                                                <h2 class="fa section__heading">Address Book</h2>
+                                      
+                                            <div class="d-flex">
+                                                <p class="">Address Book</p>
                                                 <form method="get" action="{{ route('frontend.address.book') }}">
-                                                <button class="btn btn-primary" type="submit">Edit Address
-                                                    Book</button>
+                                                <span class="pipeSign">|</span>    <button class="btn editBtnAccocut" type="submit">Edit</button>
                                                 </form>
                                             </div>
 
                                             <!-- Address Sections -->
-                                            <div class="mt-4">
-                                                <div class="row">
                                                     <!-- Shipping Address Section -->
-                                                    <div class="col-md-6">
                                                         <div class="address-section">
-                                                            <h3>Default Shipping Address</h3>
+                                                            <p class="deff">Default Shipping Address</p>
                                                             <p id="shipping-address">
                                                                 @if($defaultShippingAddress)
                                                                     {{ $defaultShippingAddress->address }},
@@ -60,12 +54,14 @@
                                                                 @endif
                                                             </p>
                                                         </div>
-                                                    </div>
+                            
 
-                                                    <!-- Billing Address Section -->
-                                                    <div class="col-md-6">
+                                    </div>
+                 
+                                                                                  <!-- Billing Address Section -->
+                                                    <div class="card">
                                                         <div class="address-section">
-                                                            <h3>Default Billing Address</h3>
+                                                            <p class="deff">Default Billing Address</p>
                                                             <p id="billing-address">
                                                                 @if($defaultBillingAddress)
                                                                     {{ $defaultBillingAddress->address }},
@@ -78,13 +74,6 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
 
                                     </div>
                                 

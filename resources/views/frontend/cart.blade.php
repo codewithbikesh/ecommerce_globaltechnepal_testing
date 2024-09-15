@@ -73,7 +73,7 @@
                                                                 <a href="">{{ $product->product_name }}</a>
                                                             </span>
                                                             <span class="table-p__category">
-                                                                <a href="">{{ $product->category_id }}</a>
+                                                                <a href="">{{ $product->category_name }}</a>
                                                             </span>
                                                         </div>
                                                     </div>

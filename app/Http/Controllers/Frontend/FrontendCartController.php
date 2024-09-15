@@ -115,13 +115,9 @@ class FrontendCartController extends Controller
 
     public function addItem(Request $request)
     {
-        $validatedData = $request->validate([
-            'product_code' => 'required|integer|exists:products,product_code',
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $productId = $validatedData['product_code'];
-        $quantity = $validatedData['quantity'];
+        // Retrieve the product code and quantity
+        $productId = $request->input('product_code');
+        $quantity = $request->input('quantity');
 
         // Retrieve the product and its price
         $product = Product::where('product_code', $productId)->firstOrFail();

@@ -23,7 +23,7 @@ class DashboardController extends Controller
     $cartItemCount = 0;
     $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id');
-        // $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
+        $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         // $categoryId = $request->category_id;
         // $categories = Product::distinct()->pluck('category_id',$categoryId);
         $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();

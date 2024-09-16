@@ -610,11 +610,11 @@ width: 80%;
 --------------------------------------------------------------*/
 /* Breadcrumb Component */
 .breadcrumb{
-      background-color: #00bcd426;
+      background-color:#e8e8e8;
     border-radius: 22px 0;
 }
 .breadcrumb__wrap {
-    background-color: #00bcd426;
+    background-color: #e8e8e8;
     padding: 1.125rem;
     border-radius: 22px 0;
 }
@@ -6121,6 +6121,16 @@ color: #757575;
 .greycolor{
   color: #5a5a5a;
 }
+
+.checkoutSubContainerParent{
+  display: grid;
+      grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.width100vw{
+  width: 100vw !important;
+}
+
 @keyframes moveRight {
     0% {
         left: -50%;

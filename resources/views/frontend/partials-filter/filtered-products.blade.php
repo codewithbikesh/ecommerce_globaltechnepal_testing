@@ -65,7 +65,7 @@
 
                 <a class="btn--e-brand" data-modal="modal"
                     data-modal-id="#add-to-cart-{{ $shoplistproduct->product_code }}"
-                    value="{{ $shoplistproduct->product_code }}">Add to Cart</a>
+                    value="{{ $shoplistproduct->product_code }}" id="triggerAddToCart">Add to Cart</a>
             </div>
         </div>
     </div>  

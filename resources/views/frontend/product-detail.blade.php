@@ -21,7 +21,10 @@
                                     </div>
                                 @endforeach
                             @else
-                                <p>No images available for this product.</p>
+                            <div class="pd-o-img-wrap" data-src="{{ asset('client-side/images/no-image.png') }}">
+                                <img class="u-img-fluid" src="{{ asset('client-side/images/no-image.png') }}"
+                                     data-zoom-image="{{ asset('client-side/images/no-image.png') }}" alt="">
+                            </div>
                             @endif
 
 
@@ -93,75 +96,9 @@
 
                             <span class="pd-detail__preview-desc">{{ $productDetails->product_description }}</span>
                         </div>
-
-                        {{-- <div class="u-s-m-b-15">
-                            <ul class="pd-social-list">
-                                <li>
-
-                                    <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a>
-                                </li>
-                                <li>
-
-                                    <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-
-                                    <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-
-                                    <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a>
-                                </li>
-                                <li>
-
-                                    <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a>
-                                </li>
-                            </ul>
-                        </div> --}}
                         <div class="u-s-m-b-15">
                                 <form class="pd-detail__form" method="POST" action="{{ route('cart.add') }}">
                                     @csrf
-                                <div class="u-s-m-b-15">
-                                    <span class="pd-detail__label u-s-m-b-8">Size:</span>
-                                    <div class="pd-detail__size">
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="xs" name="size" checked>
-
-                                            <label class="size__radio-label" for="xs">XS</label>
-                                        </div>
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="small" name="size">
-
-                                            <label class="size__radio-label" for="xxl">Small</label>
-                                        </div>
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="medium" name="size">
-
-                                            <label class="size__radio-label" for="medium">Medium</label>
-                                        </div>
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="large" name="size">
-
-                                            <label class="size__radio-label" for="xxl">Large</label>
-                                        </div>
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="xl" name="size">
-
-                                            <label class="size__radio-label" for="xl">XL</label>
-                                        </div>
-                                        <div class="size__radio">
-
-                                            <input type="radio" id="xxl" name="size">
-
-                                            <label class="size__radio-label" for="xxl">XXL</label>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="pd-detail-inline-2">
                                     <div class="u-s-m-b-15">
 

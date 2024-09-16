@@ -11,7 +11,6 @@ use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Province;
 use App\Models\Shipping;
-use App\Models\ProductImages;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
@@ -26,7 +25,7 @@ class DashboardController extends Controller
     $cartproducts = collect(); // Initialize as an empty collection
         // $categories = Product::distinct()->pluck('category_id',$categoryId);
         $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
-        $products = Product::paginate(25);
+        $products = Product::with('images')->paginate(25);
         $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
         $specialproducts = Product::limit(3)->get();
@@ -422,7 +421,7 @@ class DashboardController extends Controller
 
     // product-detail 
     public function productDetails($product_code){
-        $productDetails = Product::where('product_code', $product_code)->with('images')->first();
+        $productDetails = Product::where('product_code', $product_code)->first();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection
@@ -468,8 +467,10 @@ class DashboardController extends Controller
         $selectedCategory = session('selected_category');
         if($selectedCategory){
             $shoplistproducts = $shoplistproducts->where('category_id', $selectedCategory)->paginate(25);
+        }else{
+             
+            $shoplistproducts = $shoplistproducts->paginate(25);
         }
-        
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection

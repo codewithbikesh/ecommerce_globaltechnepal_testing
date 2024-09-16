@@ -1117,7 +1117,13 @@ z-index: 0;
     font-size: 12px; }
     .product-o__category > a:hover {
       color: #ff4500; }
-
+.product-o__name{
+      overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 .product-o__name > a {
   color: #333333;
   font-size: 14px;

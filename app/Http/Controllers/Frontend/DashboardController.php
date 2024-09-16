@@ -467,10 +467,8 @@ class DashboardController extends Controller
         $selectedCategory = session('selected_category');
         if($selectedCategory){
             $shoplistproducts = $shoplistproducts->where('category_id', $selectedCategory)->paginate(25);
-        }else{
-             
-            $shoplistproducts = $shoplistproducts->paginate(25);
         }
+        
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection

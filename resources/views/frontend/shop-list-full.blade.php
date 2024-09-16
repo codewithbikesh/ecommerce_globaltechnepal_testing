@@ -96,6 +96,38 @@
                                                             </div>
                                                             <div class="shop-w__wrap collapse show" id="s-category">
                                                                 <ul class="shop-w__category-list gl-scroll">
+
+                                                                <!-- ------------------------------  -->
+                                       
+                                                                
+                                                                        <li class="has-list pd-wrap">
+                                                                
+                                                                            <a href="#">Home Audio &amp; Video</a>
+                                                                            <span class="js-shop-category-span fas fa-plus u-s-m-l-6"></span>
+                                                                            <ul>
+                                                                                <li>
+                                                                
+                                                                                    <a href="#">TV Boxes</a>
+                                                                                </li>
+                                                                                <li>
+                                                                
+                                                                                    <a href="#">TV Receiver &amp; Accessories</a>
+                                                                                </li>
+                                                                                <li>
+                                                                
+                                                                                    <a href="#">3d Printing Accessories</a>
+                                                                                </li>
+                                                                                <li>
+                                                                
+                                                                                    <a href="#">3d Printer Module Board</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    
+                                                       
+                                                                <!-- ------------------------------  -->
+
+
                                                                     @foreach($categories as $category)
                                                                     <li class="has-list mainCategory">
                                                                         <a href="#" class="hedingCategory" id="hedingGetValue"  data-id="{{ $category->category_id }}">{{ $category->category_name}}</a>

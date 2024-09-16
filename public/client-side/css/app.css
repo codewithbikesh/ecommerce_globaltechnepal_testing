@@ -4390,6 +4390,13 @@ backdrop-filter: blur(29px);
     .respond__group div:last-child {
       margin-right: 0; }
 
+      .js-shop-category-span{
+        position: absolute;
+    width: 100%;
+    top: 5px;
+text-align: right;
+    padding: 6px 11px 0px 0;
+      }
 @media (max-width: 991px) {
   .blog-m__element {
     width: 50%; }
@@ -5014,7 +5021,7 @@ width: 100%;
     border-radius: 14px;
 }
 .hedingCategory{
-border-bottom: 1px solid;
+border-bottom:1px solid #d3d3d3;
     padding: 2px 37px;
 }
 .category-list__text {

@@ -53,9 +53,17 @@
           <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.loadproductsapi.index') ? 'active' : '' }}" href="{{ route('backend.loadproductsapi.index') }}"><i class="fa fa-refresh"></i>Load Products</a>
         </li>
   
-          <li>
-            <hr class="dropdown-divider">
-          </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        
+        <li>
+          <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.uploadproductimages.index') ? 'active' : '' }}" href="{{ route('backend.uploadproductimages.index') }}"><i class="fa fa-file-excel-o"></i>Upload Product Images</a>
+        </li>
+    
+        <li>
+          <hr class="dropdown-divider">
+        </li>
         
         <li>
         <a type="submit" class="dropdown-item d-flex align-items-center {{ request()->routeIs('backend.website.setting') ? 'active' : '' }}" href="{{ route('backend.website.setting') }}"><i class="fa fa-cog"></i>Ecommerce Settings</a>

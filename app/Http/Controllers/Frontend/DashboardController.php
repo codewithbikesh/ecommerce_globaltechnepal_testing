@@ -11,6 +11,7 @@ use App\Models\Newsletter;
 use App\Models\Customer;
 use App\Models\Province;
 use App\Models\Shipping;
+use App\Models\ProductImages;
 use App\Models\Cart;
 use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
@@ -421,7 +422,7 @@ class DashboardController extends Controller
 
     // product-detail 
     public function productDetails($product_code){
-        $productDetails = Product::where('product_code', $product_code)->first();
+        $productDetails = Product::where('product_code', $product_code)->with('images')->first();
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection

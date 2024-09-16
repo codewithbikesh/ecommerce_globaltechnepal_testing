@@ -13,4 +13,10 @@ class Product extends Model
                             'subcategory_name', 'delivery_target_days', 'discount', 'actual_price', 
                             'sell_price', 'available_quantity', 'stock_quantity', 'brand_id', 
                             'brand_name'];
+                            
+    // Define the relationship with ProductImages
+    public function images()
+    {
+        return $this->hasMany(ProductImages::class, 'product_code', 'product_code');
+    }
 }

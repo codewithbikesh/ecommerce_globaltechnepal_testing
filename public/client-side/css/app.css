@@ -6152,10 +6152,14 @@ color: #757575;
 background: orangered !important;
     border: none !important;
 }
+.checkoutSubContainerParent .input-text--primary-style{
+  border: 1px solid black;
+}
 @media (min-width: 992px) {
     .moreActionBtnButton {
         display: none;
     }
+
 }
 @media (max-width: 767px) {
   .table-p td {
@@ -6176,6 +6180,9 @@ background: orangered !important;
 .pageUl{
  flex-direction: column;
     align-items: center;
+}
+    .checkoutSubContainerParent {
+    grid-template-columns: 1fr;
 }
     .table-wrapper {
         /* Ensure full-width scrollable container */

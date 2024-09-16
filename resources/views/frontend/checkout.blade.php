@@ -38,104 +38,13 @@
                 <div class="checkout-f">
                     <div class="row checkoutROw width100vw">
 
-
-                    
-                        @auth('customer')
-                        @else
-                        <!-- For Authenticated Users -->
-                        <div class="col-lg-6">
-                            <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
-                            <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
-                                @csrf
-                                <div class="u-s-m-b-30">
-
-                                    <!--====== First Name, Last Name ======-->
-                                    <div class="gl-inline">
-                                        <div class="u-s-m-b-15">
-                                            <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
-                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation['full_name'] ?? '' }}" type="text" id="billing-fname" required>
-                                        </div>
-                                    </div>
-                                    <!--====== End - First Name, Last Name ======-->
-
-                                    <!--====== E-MAIL ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-email">E-MAIL *</label>
-                                        <input class="input-text input-text--primary-style" name="invoice_email" value="{{ $deliveryInformation['invoice_email'] ?? '' }}" type="text" id="billing-email" required>
-                                    </div>
-                                    <!--====== End - E-MAIL ======-->
-
-                                    <!--====== PHONE ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-phone">PHONE *</label>
-                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation['phone'] ?? '' }}" type="text" id="billing-phone" required>
-                                    </div>
-                                    <!--====== End - PHONE ======-->
-
-                                    <!--====== STATE/PROVINCE ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-state">STATE/PROVINCE *</label>
-                                        <select class="select-box select-box--primary-style" name="province" id="billing-state" required>
-                                            <option selected value="" disabled>Choose Province</option>
-                                            @foreach($provinces as $id => $province_name)
-                                                <option value="{{ $id }}" {{ $selectedProvince == $id ? 'selected' : '' }}>
-                                                    {{ $province_name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!--====== End - STATE/PROVINCE ======-->
-
-                                    <!--====== Town / City ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
-                                        <select class="select-box select-box--primary-style" id="city" name="city">
-                                            <option selected value="" disabled>Choose City</option>
-                                        </select>
-                                    </div>
-                                    <!--====== End - Town / City ======-->
-
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-street">LANDMARK (OPTIONAL) *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation['landmark'] ?? '' }}" placeholder="Famous Place near you">
-                                    </div>
-
-                                    <!--====== Street Address ======-->
-                                    <div class="u-s-m-b-15">
-                                        <label class="gl-label" for="billing-street">STREET ADDRESS/ LOCAL AREA *</label>
-                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation['address'] ?? '' }}" placeholder="House name and street name" required>
-                                    </div>
-                                    <!--====== End - Street Address ======-->
-
-                                    {{-- <div class="u-s-m-b-10">
-                                        <label class="gl-label" for="order-note">ORDER NOTE</label>
-                                        <textarea class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
-                                    </div> --}}
-
-                                    <div>
-                                        <button class="btn btn--e-transparent-brand-b-2" type="submit">SAVE</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        @endauth
-
-
-
-
-
-
-
-
-
-
                         <!-- For Non-Authenticated Users -->
                         <div class="col-lg-10">
-                            <h1 class="checkout-f__h1">ORDER SUMMARY</h1>
+                            <h1 class="checkout-f__h1 text-center fa d-block">ORDER SUMMARY</h1>
 
                             <!--====== Order Summary ======-->
                             <div class="o-summary checkoutSubContainerParent">
-                                    <div class="shippingAndCartItemParent">
+                                    <div class="shippingAndCartItemParent ">
                                                              <!-- SHIPPING ADDRESS  -->
 
                                                                     <div class="o-summary__section u-s-m-b-30">
@@ -230,6 +139,87 @@ $total = 0;
                                                                     
                                                                         </div>
                                                                     </div>
+
+                                                                                        
+                        @auth('customer')
+                        @else
+                        <!-- For Authenticated Users -->
+                        <div class="col-lg-12">
+                            <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
+                            <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
+                                @csrf
+                                <div class="u-s-m-b-30">
+
+                                    <!--====== First Name, Last Name ======-->
+                                    <div class="gl-inline">
+                                        <div class="u-s-m-b-15">
+                                            <label class="gl-label" for="billing-fname">YOUR FULL NAME *</label>
+                                            <input class="input-text input-text--primary-style" name="full_name" value="{{ $deliveryInformation['full_name'] ?? '' }}" type="text" id="billing-fname" required>
+                                        </div>
+                                    </div>
+                                    <!--====== End - First Name, Last Name ======-->
+
+                                    <!--====== E-MAIL ======-->
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-email">E-MAIL *</label>
+                                        <input class="input-text input-text--primary-style" name="invoice_email" value="{{ $deliveryInformation['invoice_email'] ?? '' }}" type="text" id="billing-email" required>
+                                    </div>
+                                    <!--====== End - E-MAIL ======-->
+
+                                    <!--====== PHONE ======-->
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-phone">PHONE *</label>
+                                        <input class="input-text input-text--primary-style" name="phone" value="{{ $deliveryInformation['phone'] ?? '' }}" type="text" id="billing-phone" required>
+                                    </div>
+                                    <!--====== End - PHONE ======-->
+
+                                    <!--====== STATE/PROVINCE ======-->
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-state">STATE/PROVINCE *</label>
+                                        <select class="select-box select-box--primary-style" name="province" id="billing-state" required>
+                                            <option selected value="" disabled>Choose Province</option>
+                                            @foreach($provinces as $id => $province_name)
+                                                <option value="{{ $id }}" {{ $selectedProvince == $id ? 'selected' : '' }}>
+                                                    {{ $province_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!--====== End - STATE/PROVINCE ======-->
+
+                                    <!--====== Town / City ======-->
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-town-city">TOWN/CITY *</label>
+                                        <select class="select-box select-box--primary-style" id="city" name="city">
+                                            <option selected value="" disabled>Choose City</option>
+                                        </select>
+                                    </div>
+                                    <!--====== End - Town / City ======-->
+
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-street">LANDMARK (OPTIONAL) *</label>
+                                        <input class="input-text input-text--primary-style" type="text" id="landmark" name="landmark" value="{{ $deliveryInformation['landmark'] ?? '' }}" placeholder="Famous Place near you">
+                                    </div>
+
+                                    <!--====== Street Address ======-->
+                                    <div class="u-s-m-b-15">
+                                        <label class="gl-label" for="billing-street">STREET ADDRESS/ LOCAL AREA *</label>
+                                        <input class="input-text input-text--primary-style" type="text" id="billing-street" name="street_address" value="{{ $deliveryInformation['address'] ?? '' }}" placeholder="House name and street name" required>
+                                    </div>
+                                    <!--====== End - Street Address ======-->
+
+                                    {{-- <div class="u-s-m-b-10">
+                                        <label class="gl-label" for="order-note">ORDER NOTE</label>
+                                        <textarea class="text-area text-area--primary-style" name="order_note" id="order-note"></textarea>
+                                    </div> --}}
+
+                                    <div>
+                                        <button class="btn btn--e-transparent-brand-b-2" type="submit">SAVE</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        @endauth
                                                
                                     </div>
 

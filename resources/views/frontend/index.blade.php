@@ -95,7 +95,7 @@
                             @foreach ($categories as $category)
                             <div class="filter__category-wrapper">
                                 <button class="btn filter__btn filter__btn--style-1 topTrending" type="button"
-                                    data-filter="{{ $category }}">{{ $category }}</button>
+                                    data-filter="{{ $category->category_id }}">{{ $category->category_name }}</button>
                             </div>
                             @endforeach
                         </div>

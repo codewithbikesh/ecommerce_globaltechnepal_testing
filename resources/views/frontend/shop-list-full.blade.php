@@ -98,7 +98,7 @@
                                                                 <ul class="shop-w__category-list gl-scroll">
                                                                     @foreach($categories as $category)
                                                                     <li class="has-list mainCategory">
-                                                                        <a href="#" class="hedingCategory" id="hedingGetValue"  data-id="{{ $category }}">{{ $category}}</a>
+                                                                        <a href="#" class="hedingCategory" id="hedingGetValue"  data-id="{{ $category->category_id }}">{{ $category->category_name}}</a>
                                                                     </li>
                                                                     @endforeach
                                                                 </ul>
@@ -174,7 +174,7 @@
                                                     <div class="u-s-m-b-30">
                                                         <div class="shop-w">
                                                             <div class="shop-w__intro-wrap">
-                                                                <h1 class="shop-w__h">MANUFACTURER</h1>
+                                                                <h1 class="shop-w__h">Brand</h1>
 
                                                                 <span class="fas fa-minus shop-w__toggle"
                                                                     data-target="#s-manufacturer"
@@ -182,246 +182,16 @@
                                                             </div>
                                                             <div class="shop-w__wrap collapse show" id="s-manufacturer">
                                                                 <ul class="shop-w__list-2">
-                                                                    <li>
-                                                                        <div class="list__content">
-
-                                                                            <input type="checkbox" checked>
-
-                                                                            <span>Calvin Klein</span>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(23)</span>
-                                                                    </li>
+                                                                  @foreach ($brands as $brand)
                                                                     <li>
                                                                         <div class="list__content">
 
                                                                             <input type="checkbox">
 
-                                                                            <span>Diesel</span>
+                                                                            <span brand-data-id="{{ $brand->brand_id }}">{{ $brand->brand_name }}</span>
                                                                         </div>
-
-                                                                        <span class="shop-w__total-text">(2)</span>
                                                                     </li>
-                                                                    <li>
-                                                                        <div class="list__content">
-
-                                                                            <input type="checkbox">
-
-                                                                            <span>Polo</span>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(2)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="list__content">
-
-                                                                            <input type="checkbox">
-
-                                                                            <span>Tommy Hilfiger</span>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(9)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="list__content">
-
-                                                                            <input type="checkbox">
-
-                                                                            <span>Ndoge</span>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(3)</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="u-s-m-b-30">
-                                                        <div class="shop-w">
-                                                            <div class="shop-w__intro-wrap">
-                                                                <h1 class="shop-w__h">COLOR</h1>
-
-                                                                <span class="fas fa-minus shop-w__toggle"
-                                                                    data-target="#s-color"
-                                                                    data-toggle="collapse"></span>
-                                                            </div>
-                                                            <div class="shop-w__wrap collapse show" id="s-color">
-                                                                <ul class="shop-w__list gl-scroll">
-                                                                    <li>
-                                                                        <div class="color__check">
-
-                                                                            <input type="checkbox" id="jet">
-
-                                                                            <label class="color__check-label" for="jet"
-                                                                                style="background-color: #333333"></label>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(2)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="color__check">
-
-                                                                            <input type="checkbox" id="folly">
-
-                                                                            <label class="color__check-label"
-                                                                                for="folly"
-                                                                                style="background-color: #FF0055"></label>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(4)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="color__check">
-
-                                                                            <input type="checkbox" id="yellow">
-
-                                                                            <label class="color__check-label"
-                                                                                for="yellow"
-                                                                                style="background-color: #FFFF00"></label>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(6)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="color__check">
-
-                                                                            <input type="checkbox" id="granite-gray">
-
-                                                                            <label class="color__check-label"
-                                                                                for="granite-gray"
-                                                                                style="background-color: #605F5E"></label>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(8)</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="color__check">
-
-                                                                            <input type="checkbox" id="space-cadet">
-
-                                                                            <label class="color__check-label"
-                                                                                for="space-cadet"
-                                                                                style="background-color: #1D3461"></label>
-                                                                        </div>
-
-                                                                        <span class="shop-w__total-text">(10)</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="u-s-m-b-30">
-                                                        <div class="shop-w">
-                                                            <div class="shop-w__intro-wrap">
-                                                                <h1 class="shop-w__h">SIZE</h1>
-
-                                                                <span class="fas fa-minus collapsed shop-w__toggle"
-                                                                    data-target="#s-size" data-toggle="collapse"></span>
-                                                            </div>
-                                                            <div class="shop-w__wrap collapse" id="s-size">
-                                                                <ul class="shop-w__list gl-scroll">
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="xs">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="xs">XS</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(2)</span>
-                                                                    </li>
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="small">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="small">Small</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(4)</span>
-                                                                    </li>
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="medium">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="medium">Medium</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(6)</span>
-                                                                    </li>
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="large">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="large">Large</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(8)</span>
-                                                                    </li>
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="xl">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="xl">XL</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(10)</span>
-                                                                    </li>
-                                                                    <li>
-
-                                                                        <!--====== Check Box ======-->
-                                                                        <div class="check-box">
-
-                                                                            <input type="checkbox" id="xxl">
-                                                                            <div
-                                                                                class="check-box__state check-box__state--primary">
-
-                                                                                <label class="check-box__label"
-                                                                                    for="xxl">XXL</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--====== End - Check Box ======-->
-
-                                                                        <span class="shop-w__total-text">(12)</span>
-                                                                    </li>
+                                                                    @endforeach
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -469,8 +239,8 @@
                                             </div>
                                             <!-- <div class="product-m__price">{{ $shoplistproduct->sell_price }}</div> -->
                                             <div>
-                                                product-m__price<span class="product-o__price">{{ $shoplistproduct->actual_price }}<span
-                                                        class="product-o__discount">{{ $shoplistproduct->sell_price }}</span></span>
+                                                product-m__price<span class="product-o__price">{{ $shoplistproduct->sell_price }}<span
+                                                        class="product-o__discount">{{ $shoplistproduct->actual_price }}</span></span>
                                             </div>
                                             <div class="product-m__hover">
 

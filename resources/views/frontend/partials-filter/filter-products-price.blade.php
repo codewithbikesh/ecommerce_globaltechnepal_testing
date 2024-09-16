@@ -33,8 +33,8 @@
                 <span class="product-m__review">(23)</span>
             </div>
             <div>
-                product-m__price<span class="product-o__price">{{ $shoplistproduct->actual_price }}<span
-                        class="product-o__discount">{{ $shoplistproduct->sell_price }}</span></span>
+                product-m__price<span class="product-o__price">{{ $shoplistproduct->sell_price }}<span
+                        class="product-o__discount">{{ $shoplistproduct->actual_price }}</span></span>
             </div>
             <div class="product-m__hover">
 

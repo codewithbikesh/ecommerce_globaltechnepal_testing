@@ -22,17 +22,14 @@ class DashboardController extends Controller
   public  function index(Request $request){
     $cartItemCount = 0;
     $cartproducts = collect(); // Initialize as an empty collection
-        // $categories = Product::distinct()->pluck('category_id');
-        $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
-        // $categoryId = $request->category_id;
         // $categories = Product::distinct()->pluck('category_id',$categoryId);
         $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
         $products = Product::paginate(25);
-        $newarriveproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(9)->get();
+        $newarriveproducts = Product::orderBy('created_at', 'desc')->limit(9)->get();
         $featureproducts = Product::limit(4)->get();
         $specialproducts = Product::limit(3)->get();
-        $weeklyproducts = Product::orderBy('created_at', 'desc')->whereNotNull('primary_image')->limit(3)->get();
-        $flashproducts = Product::whereNotNull('primary_image')->inRandomOrder()->limit(3)->get();
+        $weeklyproducts = Product::orderBy('created_at', 'desc')->limit(3)->get();
+        $flashproducts = Product::inRandomOrder()->limit(3)->get();
         $carousel = Carousel::all();
         $websitedata = WebsiteData::first();
         
@@ -446,7 +443,7 @@ class DashboardController extends Controller
         return view("frontend.product-detail", compact("websitedata","productDetails", "cart", "cartproducts", "cartItemCount"));
     }
 
-    // shop list full 
+       // shop list full 
       // shop list full 
       public function shopListFull(Request $request){
         $shoplistproducts = Product::latest();
@@ -455,9 +452,10 @@ class DashboardController extends Controller
             $shoplistproducts = $shoplistproducts->where('product_name','like','%'.$keyword.'%')
             ->orWhere('category_id','like','%'.$keyword.'%');
         }
-        
-        $categoryId = $request->category_id;
-        $categories = Product::distinct()->pluck('category_id',$categoryId);
+        // $categoryId = $request->category_id;
+        // $categories = Product::distinct()->pluck('category_id',$categoryId);
+        $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
+        $brands = Product::select('products')->select('brand_id', 'brand_name')->groupBy('brand_id', 'brand_name')->get();
         $selectedCategory = session('selected_category');
         if($selectedCategory){
             $shoplistproducts = $shoplistproducts->where('category_id', $selectedCategory)->paginate(25);
@@ -484,7 +482,7 @@ class DashboardController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts","categories"));
+        return view("frontend.shop-list-full", compact("websitedata", "cart", "cartproducts", "cartItemCount","shoplistproducts","categories","brands"));
     }
 
 

@@ -163,8 +163,8 @@
                                                                             <label for="price-max"></label>
                                                                             <input class="input-text input-text--primary-style" type="text" id="price-max" placeholder="Max">
                                                                         </div>
-                                                                        <div>
-                                                                            <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="submit">Apply</button>
+                                                                        <div class="d-flex justify-content-center w-100">
+                                                                            <button class="btn  fa" type="submit">Apply</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>

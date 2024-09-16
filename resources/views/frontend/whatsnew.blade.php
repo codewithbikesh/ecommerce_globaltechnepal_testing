@@ -39,7 +39,7 @@
                             <div class="filter__category-wrapper">
 
                                 <button class="btn filter__btn filter__btn--style-2" type="button"
-                                    data-filter=".{{ $category }}">{{ $category }}</button>
+                                    data-filter=".{{ $category->category_id }}">{{ $category->category_name }}</button>
                             </div>
                             @endforeach
                         </div>
@@ -63,14 +63,14 @@
                                         </a>
                                         <span class="product-o__category">
 
-                                            <a href="shop-side-version-2.html">{{ $whatsnewproduct->product_name
+                                            <a href="{{ route('frontend.product-detail',$whatsnewproduct->product_code) }}">{{ $whatsnewproduct->category_name
                                                 }}</a></span>
 
                                         <span class="product-o__name">
 
                                             <a
                                                 href="{{ route('frontend.product-detail',$whatsnewproduct->product_code) }}">{{
-                                                $whatsnewproduct->product_name }}</a></span>
+                                               Str::limit($whatsnewproduct->product_name, 29, '...') }}</a></span>
                                         <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                 class="fas fa-star"></i><i class="fas fa-star"></i><i
                                                 class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -78,9 +78,9 @@
                                             <span class="product-o__review">(23)</span>
                                         </div>
 
-                                        <span class="product-o__price">{{ $whatsnewproduct->actual_price }}
+                                        <span class="product-o__price">{{ $whatsnewproduct->sell_price }}
 
-                                            <span class="product-o__discount">{{ $whatsnewproduct->sell_price
+                                            <span class="product-o__discount">{{ $whatsnewproduct->actual_price
                                                 }}</span></span>
                                         <div class="quickvewandAddtocart">
                                             <!-- quick view button    -->

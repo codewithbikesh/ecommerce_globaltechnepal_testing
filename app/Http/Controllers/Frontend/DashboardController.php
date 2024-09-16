@@ -16,6 +16,7 @@ use App\Models\DeliveryInformation;
 use App\Models\CustomerAddressBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -450,11 +451,18 @@ class DashboardController extends Controller
         if(!empty($request->get('keyword'))){
             $keyword = $request->get('keyword');
             $shoplistproducts = $shoplistproducts->where('product_name','like','%'.$keyword.'%')
-            ->orWhere('category_id','like','%'.$keyword.'%');
+            ->orWhere('category_name','like','%'.$keyword.'%')
+            ->orWhere('brand_name','like','%'.$keyword.'%');
         }
         // $categoryId = $request->category_id;
         // $categories = Product::distinct()->pluck('category_id',$categoryId);
-        $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
+        // $categories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
+         $categories = Product::select('category_id', 'category_name', 
+         DB::raw('MIN(subcategory_id) as subcategory_id'), 
+         DB::raw('MIN(subcategory_name) as subcategory_name'))
+         ->groupBy('category_id', 'category_name')
+         ->get();
+  
         $brands = Product::select('products')->select('brand_id', 'brand_name')->groupBy('brand_id', 'brand_name')->get();
         $selectedCategory = session('selected_category');
         if($selectedCategory){
@@ -610,8 +618,8 @@ class DashboardController extends Controller
 
     // whatsnew 
     public function whatsnew(){
-        $newcategories = Product::select('category_id')->groupBy('category_id')->havingRaw('COUNT(*) > 5')->pluck('category_id');
-        $whatsnewproducts = Product::whereNotNull('primary_image')->orderBy('created_at', 'desc')->paginate(25);
+        $newcategories = Product::select('products')->select('category_id', 'category_name')->groupBy('category_id', 'category_name')->havingRaw('COUNT(*) > 7')->get();
+        $whatsnewproducts = Product::orderBy('created_at', 'desc')->paginate(25);
         $websitedata = WebsiteData::first();
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection

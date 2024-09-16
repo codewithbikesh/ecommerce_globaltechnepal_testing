@@ -47,7 +47,7 @@
                                         </a>
                                         <span class="product-o__category">
 
-                                            <a href="shop-side-version-2.html">{{ $newarriveproduct->product_name
+                                            <a href="{{ route('frontend.product-detail',$newarriveproduct->product_code) }}">{{ $newarriveproduct->category_name
                                                 }}</a></span>
 
                                         <span class="product-o__name">

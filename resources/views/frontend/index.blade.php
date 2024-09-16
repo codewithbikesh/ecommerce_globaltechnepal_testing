@@ -130,8 +130,8 @@
                                             class="fas fa-star-half-alt"></i>
                                         <span class="product-o__review">(23)</span>
                                     </div>
-                                    <span class="product-o__price">{{ $product->actual_price }} <span
-                                            class="product-o__discount">{{ $product->sell_price }}</span></span>
+                                    <span class="product-o__price">{{ $product->sell_price }} <span
+                                            class="product-o__discount">{{ $product->actual_price }}</span></span>
                                     <div class="quickvewandAddtocart">
                                         <!-- quick view button    -->
                                         <button id="quick-view-link" class="Productoption quickViewBtnHompepage"

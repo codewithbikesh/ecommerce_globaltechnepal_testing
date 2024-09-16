@@ -214,6 +214,7 @@ class FrontendAccountController extends Controller
     // address-add page
     public function address_add(){
         $websitedata = WebsiteData::first();
+        $customer_user = Auth::user();
         $provinces = Province::all()->pluck('province_name', 'id');
         $cartItemCount = 0;
         $cartproducts = collect(); // Initialize as an empty collection
@@ -241,7 +242,7 @@ class FrontendAccountController extends Controller
             $cartItemCount = count($cart); // Count items in the guest cart
             $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
         }
-        return view("frontend.address-add", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress"))->with('success', 'Address added successfully.');
+        return view("frontend.address-add", compact("websitedata", "cart", "cartproducts", "cartItemCount", "provinces", "hasDefaultAddress", "customer_user"))->with('success', 'Address added successfully.');
         
     }
 

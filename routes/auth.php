@@ -37,6 +37,8 @@ Route::middleware('guest')->group(function () {
     //Frontend-Customer
     Route::get('signin', [DashboardController::class, 'signin'])
                 ->name('frontend.signin');
+    Route::get('login', [DashboardController::class, 'signin'])
+                ->name('frontend.signin');
 });
 
 Route::middleware('auth')->group(function () {

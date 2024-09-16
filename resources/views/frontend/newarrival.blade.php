@@ -62,9 +62,9 @@
                                             <span class="product-o__review">(23)</span>
                                         </div>
 
-                                        <span class="product-o__price">{{ $newarriveproduct->actual_price }}
+                                        <span class="product-o__price">{{ $newarriveproduct->sell_price }}
 
-                                            <span class="product-o__discount">{{ $newarriveproduct->sell_price
+                                            <span class="product-o__discount">{{ $newarriveproduct->actual_price
                                                 }}</span></span>
                                         <div class="quickvewandAddtocart">
                                             <!-- quick view button    -->

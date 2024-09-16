@@ -23,11 +23,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="full_name">Full Name</label>
-                                            <input type="text" name="full_name" class="form-control" required>
+                                            <input type="text" name="full_name" value="{{ $hasDefaultAddress ? '' : $customer_user->full_name }}" class="form-control" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="phone">Phone</label>
-                                            <input type="text" name="phone" class="form-control" required>
+                                            <input type="text" name="phone" value="{{ $hasDefaultAddress ? '' : $customer_user->phone }}" class="form-control" required>
                                         </div>
                                     </div>
 

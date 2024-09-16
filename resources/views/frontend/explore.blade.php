@@ -92,9 +92,9 @@
                         <span class="product-o__review">(23)</span>
                     </div>
 
-                    <span class="product-o__price">Rs.{{ $explore->actual_price }}
+                    <span class="product-o__price">Rs.{{ $explore->sell_price }}
 
-                        <span class="product-o__discount">Rs.{{ $explore->sell_price }}</span></span>
+                        <span class="product-o__discount">Rs.{{ $explore->actual_price }}</span></span>
                         <div class="quickvewandAddtocart">
                             <!-- quick view button    -->
                             <button id="quick-view-link" class="Productoption quickViewBtnHompepage"

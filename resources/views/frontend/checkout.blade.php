@@ -36,12 +36,115 @@
         <div class="section__content">
             <div class="container">
                 <div class="checkout-f">
-                    <div class="row">
+                    <div class="row checkoutROw width100vw">
 
+                        <!-- For Non-Authenticated Users -->
+                        <div class="col-lg-10">
+                            <h1 class="checkout-f__h1 text-center fa d-block">ORDER SUMMARY</h1>
+
+                            <!--====== Order Summary ======-->
+                            <div class="o-summary checkoutSubContainerParent">
+                                    <div class="shippingAndCartItemParent ">
+                                                             <!-- SHIPPING ADDRESS  -->
+
+                                                                    <div class="o-summary__section u-s-m-b-30">
+                                                                        <div class="o-summary__box">
+                                                                            <h1 class="checkout-f__h1">SHIPPING ADDRESS</h1>
+                                                                            <div class="ship-b">
+                                                                                <span class="ship-b__text">Ship to:</span>
+                                                                                <div class="ship-b__box u-s-m-b-10">
+                                                                                    @auth('customer')
+                                                                                        @if($default_shipping_addresses)
+                                                                                            <p><span class="ri-map-pin-line material-symbols-outlined"></span>
+                                                                                                {{ $default_shipping_addresses->address }}, {{ $default_shipping_addresses->city->city }},
+                                                                                                {{ $default_shipping_addresses->province->province_name }}</p>
+                                                                                        @else
+                                                                                            <p class="ship-b__p">No Shipping Address available.</p>
+                                                                                        @endif
+                                                                                    @else
+                                                                                                                                                                    @if($deliveryInformation)
+                                                                                                                                                                                                                                                    @php
+        // Extract variables for easier readability
+        $address = $deliveryInformation['address'] ?? '';
+        $cityName = $deliveryInformation['city_name'] ?? '';
+        $provinceName = $deliveryInformation['province_name'] ?? '';
+
+        // Check if any of the values are missing
+        $hasMissingValues = empty($address) || empty($cityName) || empty($provinceName);
+                                                                                                                                                                                                                                                    @endphp
+
+                                                                                                                                                                                                                                                    @if($hasMissingValues)
+                                                                                                                                                                                                                                                        <p class="ship-b__p">Incomplete delivery information. Please provide all required details.</p>
+                                                                                                                                                                                                                                                    @else
+                                                                                                                                                                                                                                                        <p class="ship-b__p">
+                                                                                                                                                                                                                                                            {{ $address }},
+                                                                                                                                                                                                                                                            {{ $cityName->city }},
+                                                                                                                                                                                                                                                            {{ $provinceName->province_name }}
+                                                                                                                                                                                                                                                        </p>
+                                                                                                                                                                                                                                                    @endif
+                                                                                                                                                                    @else
+                                                                                                                                                                        <p class="ship-b__p">No delivery information available.</p>
+                                                                                                                                                                    @endif
+
+                                                                                    @endauth
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- CART ITEMS  -->
+                                                                    <div class="o-summary__section u-s-m-b-30">
+                                                                        <div class="o-summary__item-wrap gl-scroll">
+                                                                    
+                                                                            @php
+$subtotal = 0;
+$total = 0;
+                                                                            @endphp
+                                                                            @foreach($cartproducts as $product)
+                                                                                                                                                        <div class="o-card">
+                                                                                                                                                            <div class="o-card__flex">
+                                                                                                                                                                <div class="o-card__img-wrap">
+                                                                                                                                                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
+                                                                                                                                                                </div>
+                                                                                                                                                                <div class="o-card__info-wrap">
+                                                                                                                                                                    <span class="o-card__name">
+                                                                                                                                                                        <a href="product-detail.html">{{ $product->product_name }}</a>
+                                                                                                                                                                    </span>
+                                                                                                                                                                    @php
+    if (auth('customer')->check()) {
+        // For authenticated users
+        $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
+        $quantity = $cartItem ? $cartItem->quantity : 0;
+        $subtotal = $product->sell_price * $quantity;
+    } else {
+        // For guest users
+        $quantity = $cart[$product->product_code];
+        $subtotal = $product->sell_price * $quantity;
+        $total += $subtotal;
+    }
+                                                                                                                                                                    @endphp
+                                                                                                                                                                    <span class="o-card__quantity">Quantity x {{ $quantity }}</span>
+                                                                                                                                                                    <span class="o-card__price">{{ number_format($subtotal, 2) }}</span>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+
+                                                                                                                                                            <form action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}" method="POST"
+                                                                                                                                                                class="remove-form">
+                                                                                                                                                                @csrf
+                                                                                                                                                                <button type="submit" class="remove-btn">
+                                                                                                                                                                    <a class="o-card__del far fa-trash-alt"></a>
+                                                                                                                                                                </button>
+                                                                                                                                                            </form>
+                                                                                                                                                        </div>
+                                                                            @endforeach
+                                                                    
+                                                                        </div>
+                                                                    </div>
+
+                                                                                        
                         @auth('customer')
                         @else
                         <!-- For Authenticated Users -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
                             <form class="checkout-f__delivery" method="POST" action="{{ route('frontend.delivery.information') }}">
                                 @csrf
@@ -117,103 +220,11 @@
                             </form>
                         </div>
                         @endauth
-
-                        <!-- For Non-Authenticated Users -->
-                        <div class="col-lg-6">
-                            <h1 class="checkout-f__h1">ORDER SUMMARY</h1>
-
-                            <!--====== Order Summary ======-->
-                            <div class="o-summary">
-                                <div class="o-summary__section u-s-m-b-30">
-                                    <div class="o-summary__item-wrap gl-scroll">
-
-                                        @php
-                                            $subtotal = 0;
-                                            $total = 0;
-                                        @endphp
-                                        @foreach($cartproducts as $product)
-                                        <div class="o-card">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
-                                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-                                                    <span class="o-card__name">
-                                                        <a href="product-detail.html">{{ $product->product_name }}</a>
-                                                    </span>
-                                                    @php
-                                                        if (auth('customer')->check()) {
-                                                            // For authenticated users
-                                                            $cartItem = $cart->items()->where('product_code', $product->product_code)->first();
-                                                            $quantity = $cartItem ? $cartItem->quantity : 0;
-                                                            $subtotal = $product->sell_price * $quantity;
-                                                        } else {
-                                                            // For guest users
-                                                            $quantity = $cart[$product->product_code];
-                                                            $subtotal = $product->sell_price * $quantity;
-                                                            $total += $subtotal;
-                                                        }
-                                                    @endphp
-                                                    <span class="o-card__quantity">Quantity x {{ $quantity }}</span>
-                                                    <span class="o-card__price">{{ number_format($subtotal, 2) }}</span>
-                                                </div>
-                                            </div>
-
-                                            <form action="{{ route('cart.remove', ['product_code' => $product->product_code]) }}" method="POST" class="remove-form">
-                                                @csrf
-                                                <button type="submit" class="remove-btn">
-                                                    <a class="o-card__del far fa-trash-alt"></a>
-                                                </button>
-                                            </form>
-                                        </div>
-                                        @endforeach
-
+                                               
                                     </div>
-                                </div>
 
-                                <div class="o-summary__section u-s-m-b-30">
-                                    <div class="o-summary__box">
-                                        <h1 class="checkout-f__h1">SHIPPING ADDRESS</h1>
-                                        <div class="ship-b">
-                                            <span class="ship-b__text">Ship to:</span>
-                                            <div class="ship-b__box u-s-m-b-10">
-                                                @auth('customer')
-                                                    @if($default_shipping_addresses)
-                                                        <p><span class="ri-map-pin-line material-symbols-outlined"></span> {{ $default_shipping_addresses->address }}, {{ $default_shipping_addresses->city->city }}, {{ $default_shipping_addresses->province->province_name }}</p>
-                                                    @else
-                                                        <p class="ship-b__p">No Shipping Address available.</p>
-                                                    @endif
-                                                @else
-                                                    @if($deliveryInformation)
-                                                        @php
-                                                            // Extract variables for easier readability
-                                                            $address = $deliveryInformation['address'] ?? '';
-                                                            $cityName = $deliveryInformation['city_name'] ?? '';
-                                                            $provinceName = $deliveryInformation['province_name'] ?? '';
-                                            
-                                                            // Check if any of the values are missing
-                                                            $hasMissingValues = empty($address) || empty($cityName) || empty($provinceName);
-                                                        @endphp
-                                            
-                                                        @if($hasMissingValues)
-                                                            <p class="ship-b__p">Incomplete delivery information. Please provide all required details.</p>
-                                                        @else
-                                                            <p class="ship-b__p">
-                                                                {{ $address }},
-                                                                {{ $cityName->city }},
-                                                                {{ $provinceName->province_name }}
-                                                            </p>
-                                                        @endif
-                                                    @else
-                                                    <p class="ship-b__p">No delivery information available.</p>
-                                                    @endif
-                                            
-                                                @endauth
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                    <div class="invoicingandOther">
+                                        <!-- invoice and billing  -->
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <h1 class="checkout-f__h1">INVOICE & BILLING</h1>
@@ -227,7 +238,7 @@
                                                     @if($deliveryInformation['invoice_email'])
                                                         <span class="ship-b__p">{{ $deliveryInformation['invoice_email'] ?? '' }}</span>
                                                     @else
-                                                        <p class="ship-b__p">No invoice email available.</>
+                                                        <p class="ship-b__p">No invoice email available.</d>
                                                     @endif
                                                 @endauth
                                             </div>
@@ -246,7 +257,7 @@
                                                     @if($deliveryInformation)
                                                         <span class="ship-b__p">Bill to shipping address</span>
                                                     @else
-                                                        <p class="ship-b__p">No billing address available.</>
+                                                        <p class="ship-b__p">No billing address available.</d>
                                                     @endif
                                                 @endauth
                                             </div>
@@ -256,43 +267,43 @@
 
 
                                 @php
-                                    // Initialize variables for authenticated users
-                                    if (auth('customer')->check()) {
-                                        $customerId = auth('customer')->id();
-                                        $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
+// Initialize variables for authenticated users
+if (auth('customer')->check()) {
+    $customerId = auth('customer')->id();
+    $cart = \App\Models\Cart::where('customer_id', auth('customer')->id())->first();
 
-                                        if ($cart) {
-                                            $shipping = $cart->shipping_cost_total;
-                                            $total = $cart->subtotal;
-                                        } else {
-                                            $shipping = 0;
-                                            $total = 0;
-                                        }
-                                        $amount_before_tax = $shipping + $total;
-                                        $tax = 0;
-                                        $grand_total = $amount_before_tax + $tax;
+    if ($cart) {
+        $shipping = $cart->shipping_cost_total;
+        $total = $cart->subtotal;
+    } else {
+        $shipping = 0;
+        $total = 0;
+    }
+    $amount_before_tax = $shipping + $total;
+    $tax = 0;
+    $grand_total = $amount_before_tax + $tax;
 
-                                    } else {
-                                        // For guest users, use session values
-                                        $cart = session()->get('cart', []);
-                                        $itemCount = count($cart); // Count the number of unique items in the cart
-                                        $total = 0;
-                                        foreach ($cart as $productCode => $quantity) {
-                                            $product = \App\Models\Product::where('product_code', $productCode)->first();
-                                            if ($product) {
-                                                $total += $product->sell_price * $quantity;
-                                            }
-                                        }
+} else {
+    // For guest users, use session values
+    $cart = session()->get('cart', []);
+    $itemCount = count($cart); // Count the number of unique items in the cart
+    $total = 0;
+    foreach ($cart as $productCode => $quantity) {
+        $product = \App\Models\Product::where('product_code', $productCode)->first();
+        if ($product) {
+            $total += $product->sell_price * $quantity;
+        }
+    }
 
-                                        $shipping = isset($shippingCost) && isset($shippingCost->shipping_cost) ? $shippingCost->shipping_cost : 0;
-                                        $shipping = $shipping * $itemCount;
-                                        $amount_before_tax = $shipping + $total;
-                                        //$tax = 13 / 100 * $amount_before_tax;
-                                        $tax = 0;
-                                        $grand_total = $amount_before_tax + $tax;
-                                    }
+    $shipping = isset($shippingCost) && isset($shippingCost->shipping_cost) ? $shippingCost->shipping_cost : 0;
+    $shipping = $shipping * $itemCount;
+    $amount_before_tax = $shipping + $total;
+    //$tax = 13 / 100 * $amount_before_tax;
+    $tax = 0;
+    $grand_total = $amount_before_tax + $tax;
+}
                                 @endphp
-
+<!-- shipping -->
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <table class="o-summary__table">
@@ -338,6 +349,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                             <!--====== End - Order Summary ======-->

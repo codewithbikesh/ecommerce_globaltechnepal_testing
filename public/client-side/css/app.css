@@ -5014,7 +5014,7 @@ width: 100%;
     border-radius: 14px;
 }
 .hedingCategory{
-border-bottom: 1px solid;
+border-bottom:1px solid #d3d3d3;
     padding: 2px 37px;
 }
 .category-list__text {

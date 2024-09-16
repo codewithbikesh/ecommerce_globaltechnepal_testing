@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\NewsletterController;
 use App\Http\Controllers\Backend\SetAPIController;
 use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Backend\ProvinceController;
+use App\Http\Controllers\Backend\ProductImagesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -73,6 +74,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
     //Load Prodicts from OMS API
     Route::get('/load-products-api', [LoadProductsAPIController::class, 'index'])->name('backend.loadproductsapi.index');
+
+    //Upload product image from local system or url
+    Route::get('/upload-product-images', [ProductImagesController::class, 'index'])->name('backend.uploadproductimages.index');
+    Route::post('/upload-now', [ProductImagesController::class, 'import_image'])->name('backend.uploadnow.index');
 
     //Inquiries
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('backend.inquiries.index');

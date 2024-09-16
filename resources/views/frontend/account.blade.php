@@ -136,7 +136,7 @@
                                                     <td>
                                                         <div class="dash__table-img-wrap">
 
-                                                            <img class="u-img-fluid" src="data:image/jpeg;base64,{{$item->product->primary_image}}"
+                                                            <img class="u-img-fluid" src="{{ asset($item->image_path) }}"
                                                                 alt="">
                                                         </div>
                                                     </td>

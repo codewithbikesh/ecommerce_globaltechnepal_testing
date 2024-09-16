@@ -103,7 +103,7 @@ $total = 0;
                                                                                                                                                         <div class="o-card">
                                                                                                                                                             <div class="o-card__flex">
                                                                                                                                                                 <div class="o-card__img-wrap">
-                                                                                                                                                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $product->primary_image }}" alt="">
+                                                                                                                                                                    <img class="u-img-fluid" src="{{ asset($product->image_path) }}" alt="">
                                                                                                                                                                 </div>
                                                                                                                                                                 <div class="o-card__info-wrap">
                                                                                                                                                                     <span class="o-card__name">

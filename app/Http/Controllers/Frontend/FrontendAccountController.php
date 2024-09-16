@@ -53,8 +53,14 @@ class FrontendAccountController extends Controller
             if ($order) {
                 // Fetch the items associated with the recent order
                 $orderItems = OrderItem::where('order_id', $order->order_id)
-                                           ->with('product')
+                                           ->with('product.images')
                                            ->get();
+                                           
+                // Prepare each product with the path of the first image
+                foreach ($orderItems as $item) {
+                    $firstImage = $item->product->images->first();
+                    $item->image_path = $firstImage ? asset($firstImage->image_path) : null; // Set image path or null if no image
+                }
                     
             } else {
                 $orderItems = []; // No items if no order found

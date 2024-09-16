@@ -57,7 +57,15 @@ class FrontendCartController extends Controller
 
                 // Retrieve cart items
                 $cartData = $cart->items()->get();
-                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))->get();
+                $cartproducts = Product::whereIn('product_code', $cartData->pluck('product_code'))
+                                       ->with('images') // Eager load images
+                                       ->get();
+                          
+                // Prepare each product with the path of the first image
+                foreach ($cartproducts as $product) {
+                    $firstImage = $product->images->first();
+                    $product->image_path = $firstImage ? asset($firstImage->image_path) : null; // Set image path or null if no image
+                }
             }
 
         } else {
@@ -65,7 +73,14 @@ class FrontendCartController extends Controller
             $cart = session()->get('cart', []);
             $cartItemCount = count($cart); // Count items in the guest cart
             $isCartEmpty = $cartItemCount === 0;
-            $cartproducts = Product::whereIn('product_code', array_keys($cart))->get();
+            $cartproducts = Product::whereIn('product_code', array_keys($cart))->with('images')->get();
+            
+                // Prepare each product with the path of the first image
+                foreach ($cartproducts as $product) {
+                    $firstImage = $product->images->first();
+                    $product->image_path = $firstImage ? asset($firstImage->image_path) : null; // Set image path or null if no image
+                }
+                
             $cartData = [];
             $checkoutData = session()->get('checkout', [
                 'city' => null,

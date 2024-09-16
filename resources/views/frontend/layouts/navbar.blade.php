@@ -69,7 +69,7 @@ $total = 0;
                                     <img src="{{ asset('client-side/photos/cart-img-1.png') }}" alt="">
                                     <div class="ecomNav-content">
                                         <div class="cartImgHeading">
-                                            <img src="data:image/jpeg;base64,{{ $product->primary_image }}" class="cartImg" alt="">
+                                            <img src="{{ asset($product->image_path) }}" class="cartImg" alt="">
                                             <h3>{{ $product->product_name }}</h3>
                                         </div>
                                         <div class="cartItemDets">

@@ -65,7 +65,7 @@
                                                     <div class="table-p__box">
                                                         <div class="table-p__img-wrap">
                                                             <img class="u-img-fluid"
-                                                                src="data:image/jpeg;base64,{{ $product->primary_image }}"
+                                                                src="{{ asset($product->image_path) }}"
                                                                 alt="">
                                                         </div>
                                                         <div class="table-p__info">

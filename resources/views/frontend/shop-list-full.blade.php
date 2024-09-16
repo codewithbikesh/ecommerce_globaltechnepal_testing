@@ -66,27 +66,6 @@
                                                 </h1>
                                                 <div class="shop-w-master__sidebar">
                                                     <div class="u-s-m-b-30">
-                                                        {{-- <div class="shop-w">
-                                                            <div class="shop-w__intro-wrap">
-                                                                <h1 class="shop-w__h">CATEGORY</h1>
-
-                                                                <span class="fas fa-minus shop-w__toggle"
-                                                                    data-target="#s-category"
-                                                                    data-toggle="collapse"></span>
-                                                            </div>
-                                                            <div class="shop-w__wrap collapse show" id="s-category">
-                                                                <ul class="shop-w__category-list gl-scroll">
-                                                                    <li class="has-list mainCategory">
-
-                                                                        <a href="#"
-                                                                            class="hedingCategory">Electronics</a>
-
-                                                                        <span
-                                                                            class="category-list__text u-s-m-l-6">(23)</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div> --}}
                                                         <div class="shop-w">
                                                             <div class="shop-w__intro-wrap">
                                                                 <h1 class="shop-w__h">CATEGORY</h1>
@@ -96,41 +75,20 @@
                                                             </div>
                                                             <div class="shop-w__wrap collapse show" id="s-category">
                                                                 <ul class="shop-w__category-list gl-scroll">
-
-                                                                <!-- ------------------------------  -->
-                                       
-                                                                
-                                                                        <li class="has-list pd-wrap">
-                                                                
-                                                                            <a href="#">Home Audio &amp; Video</a>
-                                                                            <span class="js-shop-category-span fas fa-plus u-s-m-l-6"></span>
-                                                                            <ul>
-                                                                                <li>
-                                                                
-                                                                                    <a href="#">TV Boxes</a>
-                                                                                </li>
-                                                                                <li>
-                                                                
-                                                                                    <a href="#">TV Receiver &amp; Accessories</a>
-                                                                                </li>
-                                                                                <li>
-                                                                
-                                                                                    <a href="#">3d Printing Accessories</a>
-                                                                                </li>
-                                                                                <li>
-                                                                
-                                                                                    <a href="#">3d Printer Module Board</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    
-                                                       
-                                                                <!-- ------------------------------  -->
-
-
                                                                     @foreach($categories as $category)
-                                                                    <li class="has-list mainCategory">
-                                                                        <a href="#" class="hedingCategory" id="hedingGetValue"  data-id="{{ $category->category_id }}">{{ $category->category_name}}</a>
+                                                                    <li class="has-list pd-wrap">
+                                                                        <a href="#" class="hedingCategory"
+                                                                            id="hedingGetValue"
+                                                                            data-id="{{ $category->category_id }}">{{
+                                                                            $category->category_name}}</a>
+                                                                        {{-- <span class="js-shop-category-span fas fa-plus u-s-m-l-6"></span>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="#"  data-id="{{ $category->subcategory_id }}">
+                                                                                    {{ $category->subcategory_name }}
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul> --}}
                                                                     </li>
                                                                     @endforeach
                                                                 </ul>
@@ -140,63 +98,34 @@
 
 
                                                     <div class="u-s-m-b-30">
-                                                        {{-- <div class="shop-w">
-                                                            <div class="shop-w__intro-wrap">
-                                                                <h1 class="shop-w__h">PRICE</h1>
-
-                                                                <span class="fas fa-minus shop-w__toggle"
-                                                                    data-target="#s-price"
-                                                                    data-toggle="collapse"></span>
-                                                            </div>
-                                                            <div class="shop-w__wrap collapse show" id="s-price">
-                                                                <form class="shop-w__form-p">
-                                                                    <div class="shop-w__form-p-wrap">
-                                                                        <div>
-
-                                                                            <label for="price-min"></label>
-
-                                                                            <input
-                                                                                class="input-text input-text--primary-style"
-                                                                                type="text" id="price-min"
-                                                                                placeholder="Min">
-                                                                        </div>
-                                                                        <div>
-
-                                                                            <label for="price-max"></label>
-
-                                                                            <input
-                                                                                class="input-text input-text--primary-style"
-                                                                                type="text" id="price-max"
-                                                                                placeholder="Max">
-                                                                        </div>
-                                                                        <div>
-
-                                                                            <button
-                                                                                class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2"
-                                                                                type="submit"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div> --}}
                                                         <div class="shop-w">
                                                             <div class="shop-w__intro-wrap">
                                                                 <h1 class="shop-w__h">PRICE</h1>
-                                                                <span class="fas fa-minus shop-w__toggle" data-target="#s-price" data-toggle="collapse"></span>
+                                                                <span class="fas fa-minus shop-w__toggle"
+                                                                    data-target="#s-price"
+                                                                    data-toggle="collapse"></span>
                                                             </div>
                                                             <div class="shop-w__wrap collapse show" id="s-price">
                                                                 <form id="priceFilterForm" class="shop-w__form-p">
                                                                     <div class="shop-w__form-p-wrap">
                                                                         <div>
                                                                             <label for="price-min"></label>
-                                                                            <input class="input-text input-text--primary-style" type="text" id="price-min" placeholder="Min">
+                                                                            <input
+                                                                                class="input-text input-text--primary-style"
+                                                                                type="text" id="price-min"
+                                                                                placeholder="Min">
                                                                         </div>
                                                                         <div>
                                                                             <label for="price-max"></label>
-                                                                            <input class="input-text input-text--primary-style" type="text" id="price-max" placeholder="Max">
+                                                                            <input
+                                                                                class="input-text input-text--primary-style"
+                                                                                type="text" id="price-max"
+                                                                                placeholder="Max">
                                                                         </div>
-                                                                        <div class="d-flex justify-content-center w-100">
-                                                                            <button class="btn  fa" type="submit">Apply</button>
+                                                                        <div
+                                                                            class="d-flex justify-content-center w-100">
+                                                                            <button class="btn  fa"
+                                                                                type="submit">Apply</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -214,13 +143,15 @@
                                                             </div>
                                                             <div class="shop-w__wrap collapse show" id="s-manufacturer">
                                                                 <ul class="shop-w__list-2">
-                                                                  @foreach ($brands as $brand)
+                                                                    @foreach ($brands as $brand)
                                                                     <li>
                                                                         <div class="list__content">
 
                                                                             <input type="checkbox">
 
-                                                                            <span brand-data-id="{{ $brand->brand_id }}">{{ $brand->brand_name }}</span>
+                                                                            <span
+                                                                                brand-data-id="{{ $brand->brand_id }}">{{
+                                                                                $brand->brand_name }}</span>
                                                                         </div>
                                                                     </li>
                                                                     @endforeach
@@ -254,14 +185,16 @@
 
                                             <div class="product-m__category text-center product-o__name productName">
 
-                                                <a href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">{{ $shoplistproduct->category_id
+                                                <a
+                                                    href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">{{
+                                                    $shoplistproduct->category_id
                                                     }}</a>
                                             </div>
                                             <div class="product-m__name text-center product-o__name productName">
 
                                                 <a
                                                     href="{{ route('frontend.product-detail', $shoplistproduct->product_code) }}">{{
-            $shoplistproduct->product_name }}</a>
+                                                    $shoplistproduct->product_name }}</a>
                                             </div>
                                             <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i
                                                     class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
@@ -271,8 +204,9 @@
                                             </div>
                                             <!-- <div class="product-m__price">{{ $shoplistproduct->sell_price }}</div> -->
                                             <div>
-                                                product-m__price<span class="product-o__price">{{ $shoplistproduct->sell_price }}<span
-                                                        class="product-o__discount">{{ $shoplistproduct->actual_price }}</span></span>
+                                                {{ $shoplistproduct->category_name }}<span class="product-o__price">{{
+                                                    $shoplistproduct->sell_price }}<span class="product-o__discount">{{
+                                                        $shoplistproduct->actual_price }}</span></span>
                                             </div>
                                             <div class="product-m__hover">
 
@@ -355,28 +289,28 @@
                                                             <div>
 
                                                                 <span class="pd-detail__name">{{
-            $shoplistproduct->product_name
+                                                                    $shoplistproduct->product_name
                                                                     }}</span>
                                                             </div>
                                                             <div>
                                                                 <div class="pd-detail__inline">
 
                                                                     <span class="pd-detail__price">{{
-            $shoplistproduct->sell_price }}</span>
+                                                                        $shoplistproduct->sell_price }}</span>
                                                                     @php
-        $actualPrice = $shoplistproduct->actual_price;
-        $sellPrice = $shoplistproduct->sell_price;
+                                                                    $actualPrice = $shoplistproduct->actual_price;
+                                                                    $sellPrice = $shoplistproduct->sell_price;
 
 
-        $discountPercentage = $actualPrice > 0
-            ? round(((($actualPrice - $sellPrice) /
-                $actualPrice) * 100), 2)
-            : 0;
+                                                                    $discountPercentage = $actualPrice > 0
+                                                                    ? round(((($actualPrice - $sellPrice) /
+                                                                    $actualPrice) * 100), 2)
+                                                                    : 0;
                                                                     @endphp
                                                                     <span class="pd-detail__discount">({{
-            $discountPercentage }}%
+                                                                        $discountPercentage }}%
                                                                         OFF)</span><del class="pd-detail__del">{{
-            $shoplistproduct->actual_price
+                                                                        $shoplistproduct->actual_price
                                                                         }}</del>
                                                                 </div>
                                                             </div>
@@ -398,7 +332,7 @@
                                                                 <div class="pd-detail__inline">
 
                                                                     <span class="pd-detail__stock">{{
-            $shoplistproduct->stock_quantity }}
+                                                                        $shoplistproduct->stock_quantity }}
                                                                         in
                                                                         stock</span>
                                                                 </div>
@@ -473,7 +407,7 @@
                                                                 <div class="success__info-wrap">
 
                                                                     <span class="success__name">{{
-            $shoplistproduct->product_name }}</span>
+                                                                        $shoplistproduct->product_name }}</span>
 
                                                                     <div class="input-counter">
                                                                         <span
@@ -486,7 +420,7 @@
                                                                             class="input-counter__plus fas fa-plus"></span>
                                                                     </div>
                                                                     <span class="success__price">{{
-            $shoplistproduct->sell_price
+                                                                        $shoplistproduct->sell_price
                                                                         }}</span>
                                                                 </div>
                                                             </div>
@@ -572,128 +506,128 @@
 @endsection
 @section('costomJs')
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    // Retrieve the selected category from sessionStorage
-    var selectedCategoryId = sessionStorage.getItem('selectedCategoryId');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve the selected category from sessionStorage
+        var selectedCategoryId = sessionStorage.getItem('selectedCategoryId');
 
-    // Attach event listener to category links
-    var categoryLinks = document.querySelectorAll('.hedingCategory');
+        // Attach event listener to category links
+        var categoryLinks = document.querySelectorAll('.hedingCategory');
 
-    categoryLinks.forEach(function(link) {
-        // Highlight the previously selected category on page load
-        if (link.getAttribute('data-id') === selectedCategoryId) {
-            link.classList.add('selected');
-            link.style.color = 'green';
-        }
-
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            // Get the category ID from data-id attribute
-            var categoryId = this.getAttribute('data-id');
-
-            // Check if the clicked category is already selected
-            var currentlySelected = document.querySelector('.hedingCategory.selected');
-            var isSameCategory = currentlySelected && currentlySelected.getAttribute('data-id') === categoryId;
-
-            // Reset the color for all category links
-            categoryLinks.forEach(function(l) {
-                l.classList.remove('selected');
-                l.style.color = ''; // Remove any inline color style
-            });
-
-            if (isSameCategory) {
-                // If the same category is clicked again, clear the session and reset the product list
-                fetch("{{ route('frontend.partials-filter.clear-session') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(function(response) {
-                    return response.text(); // Optionally handle response if needed
-                })
-                .then(function(responseText) {
-                    document.getElementById('appendProducts').innerHTML = responseText; // Clear the product list
-                })
-                .catch(function(error) {
-                    console.error("Error occurred: ", error);
-                });
-
-                // Clear the selected category from sessionStorage
-                sessionStorage.removeItem('selectedCategoryId');
-            } else {
-                // Set the color of the clicked category to green
-                this.classList.add('selected');
-                this.style.color = 'green';
-
-                // Save the selected category ID to sessionStorage
-                sessionStorage.setItem('selectedCategoryId', categoryId);
-
-                // Perform AJAX request to filter products by category
-                fetch("{{ route('frontend.partials-filter.filter-products') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        category_id: categoryId
-                    })
-                })
-                .then(function(response) {
-                    return response.text(); // Get the HTML response as text
-                })
-                .then(function(responseText) {
-                    document.getElementById('appendProducts').innerHTML = responseText;
-                })
-                .catch(function(error) {
-                    console.error("Error occurred: ", error);
-                });
+        categoryLinks.forEach(function (link) {
+            // Highlight the previously selected category on page load
+            if (link.getAttribute('data-id') === selectedCategoryId) {
+                link.classList.add('selected');
+                link.style.color = 'green';
             }
+
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Get the category ID from data-id attribute
+                var categoryId = this.getAttribute('data-id');
+
+                // Check if the clicked category is already selected
+                var currentlySelected = document.querySelector('.hedingCategory.selected');
+                var isSameCategory = currentlySelected && currentlySelected.getAttribute('data-id') === categoryId;
+
+                // Reset the color for all category links
+                categoryLinks.forEach(function (l) {
+                    l.classList.remove('selected');
+                    l.style.color = ''; // Remove any inline color style
+                });
+
+                if (isSameCategory) {
+                    // If the same category is clicked again, clear the session and reset the product list
+                    fetch("{{ route('frontend.partials-filter.clear-session') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                        .then(function (response) {
+                            return response.text(); // Optionally handle response if needed
+                        })
+                        .then(function (responseText) {
+                            document.getElementById('appendProducts').innerHTML = responseText; // Clear the product list
+                        })
+                        .catch(function (error) {
+                            console.error("Error occurred: ", error);
+                        });
+
+                    // Clear the selected category from sessionStorage
+                    sessionStorage.removeItem('selectedCategoryId');
+                } else {
+                    // Set the color of the clicked category to green
+                    this.classList.add('selected');
+                    this.style.color = 'green';
+
+                    // Save the selected category ID to sessionStorage
+                    sessionStorage.setItem('selectedCategoryId', categoryId);
+
+                    // Perform AJAX request to filter products by category
+                    fetch("{{ route('frontend.partials-filter.filter-products') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            category_id: categoryId
+                        })
+                    })
+                        .then(function (response) {
+                            return response.text(); // Get the HTML response as text
+                        })
+                        .then(function (responseText) {
+                            document.getElementById('appendProducts').innerHTML = responseText;
+                        })
+                        .catch(function (error) {
+                            console.error("Error occurred: ", error);
+                        });
+                }
+            });
         });
     });
-});
-    </script>
-    
+</script>
+
 <script>
 
-// filter products price range wise 
-// filter products price range wise 
-document.addEventListener('DOMContentLoaded', function() {
-    // Attach event listener to the price filter form
-    var priceFilterForm = document.getElementById('priceFilterForm');
+    // filter products price range wise 
+    // filter products price range wise 
+    document.addEventListener('DOMContentLoaded', function () {
+        // Attach event listener to the price filter form
+        var priceFilterForm = document.getElementById('priceFilterForm');
 
-    priceFilterForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent form submission
+        priceFilterForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
 
-        // Get min and max price values
-        var minPrice = document.getElementById('price-min').value;
-        var maxPrice = document.getElementById('price-max').value;
+            // Get min and max price values
+            var minPrice = document.getElementById('price-min').value;
+            var maxPrice = document.getElementById('price-max').value;
 
-        // Perform AJAX request to filter products by price
-        fetch("{{ route('frontend.partials-filter.filter-products-price') }}", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-                min_price: minPrice,
-                max_price: maxPrice
+            // Perform AJAX request to filter products by price
+            fetch("{{ route('frontend.partials-filter.filter-products-price') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    min_price: minPrice,
+                    max_price: maxPrice
+                })
             })
-        })
-        .then(function(response) {
-            return response.text(); // Get the HTML response as text
-        })
-        .then(function(responseText) {
-            document.getElementById('appendProducts').innerHTML = responseText;
-        })
-        .catch(function(error) {
-            console.error("Error occurred: ", error);
+                .then(function (response) {
+                    return response.text(); // Get the HTML response as text
+                })
+                .then(function (responseText) {
+                    document.getElementById('appendProducts').innerHTML = responseText;
+                })
+                .catch(function (error) {
+                    console.error("Error occurred: ", error);
+                });
         });
     });
-});
 </script>
 @endsection

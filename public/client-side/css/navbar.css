@@ -318,7 +318,7 @@ gap: 11px;
 .cartNum{
 position: absolute;
     top: -1px;
-    right: 21px;
+    right: 0;
     color: #ffffff;
     font-size: 15px;
     opacity: 80%;

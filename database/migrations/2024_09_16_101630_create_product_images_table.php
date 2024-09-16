@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('product_code');
             $table->string('image_path', 512)->nullable();
             $table->timestamps();
+            
+            // Defining the foreign key constraint
+            $table->foreign('product_code')
+                  ->references('product_code')
+                  ->on('products');
         });
     }
 

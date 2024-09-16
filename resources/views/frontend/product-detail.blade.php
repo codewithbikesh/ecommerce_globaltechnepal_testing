@@ -12,21 +12,18 @@
                     <div class="pd u-s-m-b-30">
                         <div class="slider-fouc pd-wrap">
                             <div id="pd-o-initiate">
-                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
 
-                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
-                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
-                                </div>
-                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
+                            @if($productDetails && $productDetails->images->isNotEmpty())
+                                @foreach($productDetails->images as $image)
+                                    <div class="pd-o-img-wrap" data-src="{{ asset($image->image_path) }}">
+                                        <img class="u-img-fluid" src="{{ asset($image->image_path) }}"
+                                             data-zoom-image="{{ asset($image->image_path) }}" alt="">
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>No images available for this product.</p>
+                            @endif
 
-                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
-                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
-                                </div>
-                                <div class="pd-o-img-wrap" data-src="data:image/jpeg;base64,{{ $productDetails->primary_image }}">
-
-                                    <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}"
-                                        data-zoom-image="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
-                                </div>
 
                             </div>
 
@@ -35,18 +32,13 @@
                         <div class="u-s-m-t-15">
                             <div class="slider-fouc">
                                 <div id="pd-o-thumbnail">
-                                    <div>
 
-                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
-                                    </div>
+                                    @foreach($productDetails->images as $image)
                                     <div>
-
-                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
+                                        <img class="u-img-fluid" src="{{ asset($image->image_path) }}" alt="">
                                     </div>
-                                    <div>
+                                    @endforeach
 
-                                        <img class="u-img-fluid" src="data:image/jpeg;base64,{{ $productDetails->primary_image }}" alt="">
-                                    </div>
 
                                 </div>
                             </div>
